@@ -95,29 +95,23 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\RingConverter.cs" />
+    <Compile Include="HeatMap\HeatMapFunctions.cs" />
+    <Compile Include="HeatMap\HeatPoint.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\OpenPrototypePage.xaml.cs">
-      <DependentUpon>OpenPrototypePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\WebPrototypeViewPage.xaml.cs">
-      <DependentUpon>WebPrototypeViewPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\WelcomePage.xaml.cs">
-      <DependentUpon>WelcomePage.xaml</DependentUpon>
+    <Compile Include="Model\ReviewPrototypeModel.cs" />
+    <Compile Include="Pages\ReviewPrototypePage.xaml.cs">
+      <DependentUpon>ReviewPrototypePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SwipeableSplitViewControl_Folder\Extensions.cs" />
-    <Compile Include="SwipeableSplitViewControl_Folder\Presentation\Command.cs" />
-    <Compile Include="SwipeableSplitViewControl_Folder\Presentation\MenuItem.cs" />
-    <Compile Include="SwipeableSplitViewControl_Folder\Presentation\NotifyPropertyChanged.cs" />
-    <Compile Include="SwipeableSplitViewControl_Folder\Presentation\ObjectToMenuItemConverter.cs" />
-    <Compile Include="SwipeableSplitViewControl_Folder\Presentation\ShellViewModel.cs" />
-    <Compile Include="SwipeableSplitViewControl_Folder\Shell.xaml.cs">
-      <DependentUpon>Shell.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Extensions_Folder\Extensions.cs" />
+    <Compile Include="ViewModel\Command.cs" />
+    <Compile Include="ViewModel\NotifyPropertyChanged.cs" />
     <Compile Include="SwipeableSplitViewControl_Folder\SwipeableSplitView.cs" />
+    <Compile Include="ViewModel\ReviewPrototypeViewModel.cs" />
+    <Compile Include="Extensions_Folder\WebViewExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -144,31 +138,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\OpenPrototypePage.xaml">
+    <Page Include="Pages\ReviewPrototypePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\WebPrototypeViewPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\WelcomePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SwipeableSplitViewControl_Folder\Shell.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <None Include="SwipeableSplitViewControl_Folder\Theme_SwipeableSV\Generic.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0">
-      <Name>Behaviors SDK %28XAML%29</Name>
-    </SDKReference>
     <SDKReference Include="WindowsMobile, Version=10.0.14393.0">
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>

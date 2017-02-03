@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace CourseWork_2.SwipeableSplitViewControl_Folder.Presentation
+namespace CourseWork_2.ViewModel
 {
     public class Command : ICommand
     {

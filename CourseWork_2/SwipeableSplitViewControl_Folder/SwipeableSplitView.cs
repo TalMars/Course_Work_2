@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseWork_2.Extensions_Folder;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
@@ -24,12 +25,13 @@ namespace CourseWork_2.SwipeableSplitViewControl_Folder
         Storyboard _openSwipeablePane;
         Storyboard _closeSwipeablePane;
 
-        Selector _menuHost;
-        IList<SelectorItem> _menuItems = new List<SelectorItem>();
-        int _toBeSelectedIndex;
-        static double TOTAL_PANNING_DISTANCE = 160d;
-        double _distancePerItem;
-        double _startingDistance;
+        //Вдруг решу добавить -_('')_- | УДАЛИТЬ ЗАКОММЕНТЧЕННЫЙ КОД!!!
+        //Selector _menuHost;
+        //IList<SelectorItem> _menuItems = new List<SelectorItem>();
+        //int _toBeSelectedIndex;
+        //static double TOTAL_PANNING_DISTANCE = 160d;
+        //double _distancePerItem;
+        //double _startingDistance;
 
         #endregion
 
@@ -48,7 +50,7 @@ namespace CourseWork_2.SwipeableSplitViewControl_Folder
             {
                 if (_paneRoot != null)
                 {
-                    _paneRoot.Loaded -= OnPaneRootLoaded;
+                    //_paneRoot.Loaded -= OnPaneRootLoaded;
                     _paneRoot.ManipulationStarted -= OnManipulationStarted;
                     _paneRoot.ManipulationDelta -= OnManipulationDelta;
                     _paneRoot.ManipulationCompleted -= OnManipulationCompleted;
@@ -58,7 +60,7 @@ namespace CourseWork_2.SwipeableSplitViewControl_Folder
 
                 if (_paneRoot != null)
                 {
-                    _paneRoot.Loaded += OnPaneRootLoaded;
+                    //_paneRoot.Loaded += OnPaneRootLoaded;
                     _paneRoot.ManipulationStarted += OnManipulationStarted;
                     _paneRoot.ManipulationDelta += OnManipulationDelta;
                     _paneRoot.ManipulationCompleted += OnManipulationCompleted;
@@ -203,7 +205,7 @@ namespace CourseWork_2.SwipeableSplitViewControl_Folder
         }
 
         public static readonly DependencyProperty PanAreaThresholdProperty =
-            DependencyProperty.Register(nameof(PanAreaThreshold), typeof(double), typeof(SwipeableSplitView), new PropertyMetadata(36d));
+            DependencyProperty.Register(nameof(PanAreaThreshold), typeof(double), typeof(SwipeableSplitView), new PropertyMetadata(10d));
 
 
         /// <summary>
@@ -211,14 +213,14 @@ namespace CourseWork_2.SwipeableSplitViewControl_Folder
         /// this could be particularly helpful when holding large phones since users don't need to stretch their fingers to
         /// reach the top part of the screen to select a different menu item.
         /// </summary>
-        public bool IsPanSelectorEnabled
-        {
-            get { return (bool)GetValue(IsPanSelectorEnabledProperty); }
-            set { SetValue(IsPanSelectorEnabledProperty, value); }
-        }
+        //public bool IsPanSelectorEnabled
+        //{
+        //    get { return (bool)GetValue(IsPanSelectorEnabledProperty); }
+        //    set { SetValue(IsPanSelectorEnabledProperty, value); }
+        //}
 
-        public static readonly DependencyProperty IsPanSelectorEnabledProperty =
-            DependencyProperty.Register(nameof(IsPanSelectorEnabled), typeof(bool), typeof(SwipeableSplitView), new PropertyMetadata(true));
+        //public static readonly DependencyProperty IsPanSelectorEnabledProperty =
+        //    DependencyProperty.Register(nameof(IsPanSelectorEnabled), typeof(bool), typeof(SwipeableSplitView), new PropertyMetadata(true));
 
         #endregion
 
@@ -242,10 +244,10 @@ namespace CourseWork_2.SwipeableSplitViewControl_Folder
             RegisterPropertyChangedCallback(DisplayModeProperty, OnDisplayModeChanged);
 
             // disable ScrollViewer as it will prevent finger from panning
-            if (Pane is ListView || Pane is ListBox)
-            {
-                ScrollViewer.SetVerticalScrollMode(Pane, ScrollMode.Disabled);
-            }
+            //if (Pane is ListView || Pane is ListBox)
+            //{
+            //    ScrollViewer.SetVerticalScrollMode(Pane, ScrollMode.Disabled);
+            //}
         }
 
         #region native property change handlers
@@ -264,6 +266,7 @@ namespace CourseWork_2.SwipeableSplitViewControl_Folder
                 case SplitViewDisplayMode.Overlay:
                     PanAreaInitialTranslateX = OpenPaneLength * -1;
                     _overlayRoot.Visibility = Visibility.Visible;
+                    DismissLayer.Visibility = Visibility.Collapsed;
                     break;
             }
 
@@ -290,31 +293,31 @@ namespace CourseWork_2.SwipeableSplitViewControl_Folder
             // while we are panning the PanArea on X axis, let's sync the PaneRoot's position X too
             _paneRootTransform.TranslateX = _panAreaTransform.TranslateX = x;
 
-            if (sender == _paneRoot && this.IsPanSelectorEnabled)
-            {
-                // un-highlight everything first
-                foreach (var item in _menuItems)
-                {
-                    VisualStateManager.GoToState(item, "Normal", true);
-                }
+            //if (sender == _paneRoot && this.IsPanSelectorEnabled)
+            //{
+            //    // un-highlight everything first
+            //    foreach (var item in _menuItems)
+            //    {
+            //        VisualStateManager.GoToState(item, "Normal", true);
+            //    }
 
-                _toBeSelectedIndex = (int)Math.Round((e.Cumulative.Translation.Y + _startingDistance) / _distancePerItem, MidpointRounding.AwayFromZero);
-                if (_toBeSelectedIndex < 0)
-                {
-                    _toBeSelectedIndex = 0;
-                }
-                else if (_toBeSelectedIndex >= _menuItems.Count)
-                {
-                    _toBeSelectedIndex = _menuItems.Count - 1;
-                }
+            //    _toBeSelectedIndex = (int)Math.Round((e.Cumulative.Translation.Y + _startingDistance) / _distancePerItem, MidpointRounding.AwayFromZero);
+            //    if (_toBeSelectedIndex < 0)
+            //    {
+            //        _toBeSelectedIndex = 0;
+            //    }
+            //    else if (_toBeSelectedIndex >= _menuItems.Count)
+            //    {
+            //        _toBeSelectedIndex = _menuItems.Count - 1;
+            //    }
 
-                // highlight the item that's going to be selected
-                var itemContainer = _menuItems[_toBeSelectedIndex];
-                VisualStateManager.GoToState(itemContainer, "PointerOver", true);
-            }
+            //    // highlight the item that's going to be selected
+            //    var itemContainer = _menuItems[_toBeSelectedIndex];
+            //    VisualStateManager.GoToState(itemContainer, "PointerOver", true);
+            //}
         }
 
-        async void OnManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        void OnManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
             var x = e.Velocities.Linear.X;
 
@@ -339,43 +342,43 @@ namespace CourseWork_2.SwipeableSplitViewControl_Folder
                 OpenSwipeablePane();
             }
 
-            if (this.IsPanSelectorEnabled)
-            {
-                if (sender == _paneRoot)
-                {
-                    // if it's a flick, meaning the user wants to cancel the action, so we remove all the highlights;
-                    // or it's intended to be a horizontal gesture, we also remove all the highlights
-                    if (Math.Abs(e.Velocities.Linear.Y) >= 2 ||
-                        Math.Abs(e.Cumulative.Translation.X) > Math.Abs(e.Cumulative.Translation.Y))
-                    {
-                        foreach (var item in _menuItems)
-                        {
-                            VisualStateManager.GoToState(item, "Normal", true);
-                        }
+            //if (this.IsPanSelectorEnabled)
+            //{
+            //    if (sender == _paneRoot)
+            //    {
+            //        // if it's a flick, meaning the user wants to cancel the action, so we remove all the highlights;
+            //        // or it's intended to be a horizontal gesture, we also remove all the highlights
+            //        if (Math.Abs(e.Velocities.Linear.Y) >= 2 ||
+            //            Math.Abs(e.Cumulative.Translation.X) > Math.Abs(e.Cumulative.Translation.Y))
+            //        {
+            //            foreach (var item in _menuItems)
+            //            {
+            //                VisualStateManager.GoToState(item, "Normal", true);
+            //            }
 
-                        return;
-                    }
+            //            return;
+            //        }
 
-                    // un-highlight everything first
-                    foreach (var item in _menuItems)
-                    {
-                        VisualStateManager.GoToState(item, "Unselected", true);
-                    }
+            //        // un-highlight everything first
+            //        foreach (var item in _menuItems)
+            //        {
+            //            VisualStateManager.GoToState(item, "Unselected", true);
+            //        }
 
-                    // highlight the item that's going to be selected
-                    var itemContainer = _menuItems[_toBeSelectedIndex];
-                    VisualStateManager.GoToState(itemContainer, "Selected", true);
+            //        // highlight the item that's going to be selected
+            //        var itemContainer = _menuItems[_toBeSelectedIndex];
+            //        VisualStateManager.GoToState(itemContainer, "Selected", true);
 
-                    // do a selection after a short delay to allow visual effect takes place first
-                    await Task.Delay(250);
-                    _menuHost.SelectedIndex = _toBeSelectedIndex;
-                }
-                else
-                {
-                    // recalculate the starting distance
-                    _startingDistance = _distancePerItem * _menuHost.SelectedIndex;
-                }
-            }
+            //        // do a selection after a short delay to allow visual effect takes place first
+            //        await Task.Delay(250);
+            //        _menuHost.SelectedIndex = _toBeSelectedIndex;
+            //    }
+            //    else
+            //    {
+            //        // recalculate the starting distance
+            //        _startingDistance = _distancePerItem * _menuHost.SelectedIndex;
+            //    }
+            //}
         }
 
         #endregion
@@ -403,30 +406,30 @@ namespace CourseWork_2.SwipeableSplitViewControl_Folder
 
         #endregion
 
-        #region loaded event handlers
+        //#region loaded event handlers
 
-        void OnPaneRootLoaded(object sender, RoutedEventArgs e)
-        {
-            // fill the local menu items collection for later use
-            if (this.IsPanSelectorEnabled)
-            {
-                var border = (Border)this.PaneRoot.Children[0];
-                _menuHost = border.GetChild<Selector>("For the bottom panning to work, the Pane's Child needs to be of type Selector.");
+        ////void OnPaneRootLoaded(object sender, RoutedEventArgs e)
+        ////{
+        ////    // fill the local menu items collection for later use
+        ////    if (this.IsPanSelectorEnabled)
+        ////    {
+        ////        var border = (Border)this.PaneRoot.Children[0];
+        ////        _menuHost = border.GetChild<Selector>("For the bottom panning to work, the Pane's Child needs to be of type Selector.");
 
-                foreach (var item in _menuHost.Items)
-                {
-                    var container = (SelectorItem)_menuHost.ContainerFromItem(item);
-                    _menuItems.Add(container);
-                }
+        ////        foreach (var item in _menuHost.Items)
+        ////        {
+        ////            var container = (SelectorItem)_menuHost.ContainerFromItem(item);
+        ////            _menuItems.Add(container);
+        ////        }
 
-                _distancePerItem = TOTAL_PANNING_DISTANCE / _menuItems.Count;
+        ////        _distancePerItem = TOTAL_PANNING_DISTANCE / _menuItems.Count;
 
-                // calculate the initial starting distance
-                _startingDistance = _distancePerItem * _menuHost.SelectedIndex;
-            }
-        }
+        ////        // calculate the initial starting distance
+        ////        _startingDistance = _distancePerItem * _menuHost.SelectedIndex;
+        ////    }
+        ////}
 
-        #endregion
+        //#endregion
 
         #region private methods
 

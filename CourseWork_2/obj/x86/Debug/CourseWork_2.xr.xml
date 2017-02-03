@@ -7,12 +7,8 @@
     <RootPropertyPathName Name="PanAreaInitialTranslateX" />
     <RootPropertyPathName Name="TemplateSettings" />
     <RootPropertyPathName Name="OpenPaneGridLength" />
-    <RootPropertyPathName Name="OpenPaneLengthMinusCompactLength" />
-    <RootPropertyPathName Name="CompactPaneGridLength" />
-    <RootPropertyPathName Name="NegativeOpenPaneLengthMinusCompactLength" />
-    <RootPropertyPathName Name="NegativeOpenPaneLength" />
-    <RootPropertyPathName Name="OpenPaneLength" />
     <RootPropertyPathName Name="PanAreaThreshold" />
+    <RootPropertyPathName Name="OpenPaneLength" />
     <RootPropertyPathName Name="RenderTransform" />
     <RootPropertyPathName Name="TranslateX" />
   </Roots.PropertyPathNames>
@@ -28,9 +24,6 @@
       <RootProperty Name="FontSize" />
       <RootProperty Name="TextAlignment" />
       <RootProperty Name="Text" />
-      <RootProperty Name="Style" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="Inlines" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.FrameworkElement">
       <RootProperty Name="Margin" />
@@ -41,29 +34,23 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Button">
       <RootProperty Name="Content" />
-      <RootProperty Name="Command" />
-      <RootProperty Name="Style" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="HorizontalAlignment" />
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Control">
       <RootProperty Name="FontFamily" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="Padding" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="TabNavigation" />
       <RootProperty Name="HorizontalContentAlignment" />
-      <RootProperty Name="Template" />
       <RootProperty Name="VerticalContentAlignment" />
+      <RootProperty Name="Template" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
-      <RootProperty Name="Style" />
-      <RootProperty Name="Content" />
-    </RootType>
-    <RootType FullName="CourseWork_2.SwipeableSplitViewControl_Folder.Presentation.ObjectToMenuItemConverter" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer" />
     <RootType FullName="Windows.UI.Xaml.Setter">
       <RootProperty Name="Property" />
       <RootProperty Name="Value" />
-      <RootProperty Name="Target" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.StaticResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.Page">
@@ -80,25 +67,15 @@
       <RootProperty Name="Width" />
       <RootProperty Name="Clip" />
       <RootProperty Name="RenderTransform" />
-      <RootProperty Name="RowDefinitions" />
       <RootMethod Name="GetColumnSpan" />
       <RootMethod Name="SetColumnSpan" />
       <RootMethod Name="GetColumn" />
       <RootMethod Name="SetColumn" />
-      <RootMethod Name="GetRow" />
-      <RootMethod Name="SetRow" />
-      <RootMethod Name="GetRowSpan" />
-      <RootMethod Name="SetRowSpan" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.ThemeResourceExtension" />
     <RootType FullName="CourseWork_2.MainPage" />
-    <RootType FullName="Windows.UI.Xaml.Controls.ListBoxItem" />
     <RootType FullName="CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView">
-      <RootProperty Name="IsPanSelectorEnabled" />
-      <RootProperty Name="DisplayMode" />
       <RootProperty Name="OpenPaneLength" />
-      <RootProperty Name="CompactPaneLength" />
-      <RootProperty Name="Style" />
       <RootProperty Name="IsSwipeablePaneOpen" />
       <RootProperty Name="Pane" />
       <RootProperty Name="Content" />
@@ -108,12 +85,10 @@
       <RootProperty Name="CompactPaneLength" />
       <RootProperty Name="PaneBackground" />
     </RootType>
+    <RootType FullName="CourseWork_2.Converters.RingConverter" />
     <RootType FullName="Windows.UI.Xaml.Controls.ControlTemplate">
       <RootProperty Name="TargetType" />
       <RootProperty Name="Template" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.VisualStateManager">
-      <RootMethod Name="GetVisualStateGroups" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.TemplateBindingExtension" />
     <RootType FullName="Windows.UI.Xaml.Media.Animation.Storyboard">
@@ -123,6 +98,9 @@
       <RootMethod Name="GetTargetName" />
       <RootMethod Name="SetTargetName" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Media.Animation.ObjectAnimationUsingKeyFrames">
+      <RootProperty Name="KeyFrames" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Media.Animation.DoubleAnimation">
       <RootProperty Name="Duration" />
       <RootProperty Name="To" />
@@ -131,50 +109,21 @@
     <RootType FullName="Windows.UI.Xaml.Media.Animation.ExponentialEase">
       <RootProperty Name="EasingMode" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Media.Animation.DiscreteObjectKeyFrame">
+      <RootProperty Name="KeyTime" />
+      <RootProperty Name="Value" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
       <RootProperty Name="RelativeSource" />
       <RootProperty Name="FallbackValue" />
       <RootProperty Name="ElementName" />
+      <RootProperty Name="Path" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.RelativeSource">
       <RootProperty Name="Mode" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
       <RootProperty Name="Width" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.VisualStateGroup">
-      <RootProperty Name="Transitions" />
-      <RootProperty Name="States" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.VisualTransition">
-      <RootProperty Name="From" />
-      <RootProperty Name="To" />
-      <RootProperty Name="Storyboard" />
-      <RootProperty Name="GeneratedDuration" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Media.Animation.ObjectAnimationUsingKeyFrames">
-      <RootProperty Name="KeyFrames" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Media.Animation.DoubleAnimationUsingKeyFrames">
-      <RootProperty Name="KeyFrames" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Media.Animation.DiscreteDoubleKeyFrame">
-      <RootProperty Name="KeyTime" />
-      <RootProperty Name="Value" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Media.Animation.SplineDoubleKeyFrame">
-      <RootProperty Name="KeySpline" />
-      <RootProperty Name="KeyTime" />
-      <RootProperty Name="Value" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Media.Animation.DiscreteObjectKeyFrame">
-      <RootProperty Name="KeyTime" />
-      <RootProperty Name="Value" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.VisualState">
-      <RootProperty Name="Storyboard" />
-      <RootProperty Name="StateTriggers" />
-      <RootProperty Name="Setters" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Shapes.Rectangle">
       <RootProperty Name="Fill" />
@@ -184,11 +133,6 @@
       <RootProperty Name="IsHitTestVisible" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Visibility" />
-      <RootProperty Name="Opacity" />
-      <RootProperty Name="Stroke" />
-      <RootProperty Name="StrokeEndLineCap" />
-      <RootProperty Name="StrokeDashArray" />
-      <RootProperty Name="StrokeDashOffset" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Media.CompositeTransform">
       <RootProperty Name="TranslateX" />
@@ -198,85 +142,35 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Border">
       <RootProperty Name="Child" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="BorderBrush" />
-      <RootProperty Name="BorderThickness" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Media.Animation.ColorAnimation">
-      <RootProperty Name="To" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ContentPresenter">
-      <RootProperty Name="Content" />
-      <RootProperty Name="ContentTransitions" />
-      <RootProperty Name="ContentTemplate" />
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.BindExtension">
       <RootProperty Name="Mode" />
       <RootProperty Name="Converter" />
+      <RootProperty Name="ConverterParameter" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Children" />
-      <RootProperty Name="Orientation" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="Height" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.AppBarButton">
-      <RootProperty Name="Icon" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="HorizontalAlignment" />
+    <RootType FullName="Windows.UI.Xaml.Controls.SymbolIcon">
+      <RootProperty Name="Symbol" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.WebView">
-      <RootProperty Name="Name" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Visibility" />
+      <RootEvent Name="ScriptNotify" />
+      <RootEvent Name="NavigationStarting" />
+      <RootEvent Name="NavigationCompleted" />
+    </RootType>
+    <RootType FullName="CourseWork_2.Extensions_Folder.WebViewExtensions">
+      <RootMethod Name="GetUriSource" />
+      <RootMethod Name="SetUriSource" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
+      <RootProperty Name="Visibility" />
+      <RootProperty Name="IsActive" />
       <RootProperty Name="Width" />
       <RootProperty Name="Height" />
-      <RootProperty Name="Name" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="VerticalAlignment" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.AdaptiveTrigger">
-      <RootProperty Name="MinWindowWidth" />
-    </RootType>
-    <RootType FullName="CourseWork_2.Pages.OpenPrototypePage" />
-    <RootType FullName="CourseWork_2.Pages.WebPrototypeViewPage" />
-    <RootType FullName="Windows.UI.Xaml.Documents.Run">
-      <RootProperty Name="Text" />
-      <RootProperty Name="FontSize" />
-      <RootProperty Name="FontWeight" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Documents.LineBreak" />
-    <RootType FullName="Windows.UI.Xaml.Documents.Hyperlink">
-      <RootProperty Name="NavigateUri" />
-      <RootProperty Name="Inlines" />
-    </RootType>
-    <RootType FullName="CourseWork_2.Pages.WelcomePage" />
-    <RootType FullName="Windows.UI.Xaml.Controls.UserControl">
-      <RootProperty Name="Resources" />
-      <RootProperty Name="Content" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.RowDefinition">
-      <RootProperty Name="Height" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ListBox">
-      <RootProperty Name="ItemsSource" />
-      <RootProperty Name="SelectedItem" />
-      <RootProperty Name="ItemContainerStyle" />
-      <RootProperty Name="ItemTemplate" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.DataTemplate">
-      <RootProperty Name="Template" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.Frame">
-      <RootProperty Name="SourcePageType" />
-    </RootType>
-    <RootType FullName="CourseWork_2.SwipeableSplitViewControl_Folder.Shell" />
+    <RootType FullName="CourseWork_2.Pages.ReviewPrototypePage" />
   </Roots.RootTypes>
 </Roots>

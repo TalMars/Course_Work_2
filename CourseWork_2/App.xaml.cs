@@ -139,23 +139,23 @@ namespace CourseWork_2
         // handle hardware back button press
         void OnBackPressed(object sender, BackPressedEventArgs e)
         {
-            var shell = (Shell)Window.Current.Content;
-            if (shell.RootFrame.CanGoBack)
-            {
-                e.Handled = true;
-                shell.RootFrame.GoBack();
-            }
+            //var shell = (Shell)Window.Current.Content;
+            //if (shell.RootFrame.CanGoBack)
+            //{
+            //    e.Handled = true;
+            //    shell.RootFrame.GoBack();
+            //}
         }
 
         // handle software back button press
         void OnBackRequested(object sender, BackRequestedEventArgs e)
         {
-            var shell = (Shell)Window.Current.Content;
-            if (shell.RootFrame.CanGoBack)
-            {
-                e.Handled = true;
-                shell.RootFrame.GoBack();
-            }
+            //var shell = (Shell)Window.Current.Content;
+            //if (shell.RootFrame.CanGoBack)
+            //{
+            //    e.Handled = true;
+            //    shell.RootFrame.GoBack();
+            //}
         }
 
         void OnNavigated(object sender, NavigationEventArgs e)
@@ -165,15 +165,15 @@ namespace CourseWork_2
 
         private void UpdateBackButtonVisibility()
         {
-            var shell = (Shell)Window.Current.Content;
+            //var shell = (Shell)Window.Current.Content;
 
-            var visibility = AppViewBackButtonVisibility.Collapsed;
-            if (shell.RootFrame.CanGoBack)
-            {
-                visibility = AppViewBackButtonVisibility.Visible;
-            }
+            //var visibility = AppViewBackButtonVisibility.Collapsed;
+            //if (shell.RootFrame.CanGoBack)
+            //{
+            //    visibility = AppViewBackButtonVisibility.Visible;
+            //}
 
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = visibility;
+            //SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = visibility;
         }
 
 

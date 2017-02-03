@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CourseWork_2.SwipeableSplitViewControl_Folder.Presentation
+namespace CourseWork_2.ViewModel
 {
     public abstract class NotifyPropertyChanged : INotifyPropertyChanged
     {
@@ -16,6 +16,17 @@ namespace CourseWork_2.SwipeableSplitViewControl_Folder.Presentation
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        //public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        //protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        //{
+
+        //    if (PropertyChanged != null)
+        //    {
+        //        PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        //    }
+        //}
 
         public bool Set<T>(ref T storage, T value, [CallerMemberName()]string propertyName = null)
         {

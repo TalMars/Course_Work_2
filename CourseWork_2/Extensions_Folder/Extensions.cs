@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 
-namespace CourseWork_2.SwipeableSplitViewControl_Folder
+namespace CourseWork_2.Extensions_Folder
 {
     public static class Extensions
     {
@@ -52,22 +52,22 @@ namespace CourseWork_2.SwipeableSplitViewControl_Folder
             return parent;
         }
 
-        public static T GetChild<T>(this Border element, string message = null) where T : DependencyObject
-        {
-            var child = element.Child as T;
+        //public static T GetChild<T>(this Border element, string message = null) where T : DependencyObject
+        //{
+        //    var child = element.Child as T;
 
-            if (child == null)
-            {
-                if (message == null)
-                {
-                    message = $"{nameof(Border)}'s child should not be null! Check the default Generic.xaml.";
-                }
+        //    if (child == null)
+        //    {
+        //        if (message == null)
+        //        {
+        //            message = $"{nameof(Border)}'s child should not be null! Check the default Generic.xaml.";
+        //        }
 
-                throw new NullReferenceException(message);
-            }
+        //        throw new NullReferenceException(message);
+        //    }
 
-            return child;
-        }
+        //    return child;
+        //}
 
         public static Storyboard GetStoryboard(this FrameworkElement element, string name, string message = null)
         {

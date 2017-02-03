@@ -30,7 +30,7 @@ namespace CourseWork_2
 
         private void NavigatePrototypeView_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(OpenPrototypePage));
+            Frame.Navigate(typeof(ReviewPrototypePage));
         }
     }
 }
