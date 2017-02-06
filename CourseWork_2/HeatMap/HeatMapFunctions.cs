@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.UI;
 using Windows.UI.Xaml.Media.Imaging;
 
@@ -27,7 +29,7 @@ namespace CourseWork_2.HeatMap
             whiteBitmap.Clear(Colors.Transparent);
 
             Uri heatPoint1 = new Uri("ms-appx:///Resources/HeatPointIntensive.png");
-            Uri heatPoint2 = new Uri("ms-appx:///Resources/HeatPointIntensity.png");
+            //Uri heatPoint2 = new Uri("ms-appx:///Resources/HeatPointIntensity.png");
 
             WriteableBitmap heatDot = await BitmapFactory.New(0, 0).FromContent(heatPoint1);
             var file = await StorageFile.GetFileFromApplicationUriAsync(heatPoint1);
@@ -195,154 +197,7 @@ namespace CourseWork_2.HeatMap
             return source;
         }
 
-        #region RemapTableCreationWithMatrix NOT USES!
-        //private static Color[][] RemapTableCreation()
-        //{
-        //    Color[][] remapTable = new Color[2][];
-        //    remapTable[0] = new Color[256];
-        //    remapTable[1] = new Color[256];
-
-        //    for (int i = 0; i < 75; i++)
-        //    {
-        //        remapTable[0][i] = Color.FromArgb((byte)i, 0, 0, 0);
-        //        remapTable[1][i] = Color.FromArgb(255, (byte)(255 - i), 0, 0);
-        //    }
-
-        //    for (int i = 75; i < 200; i++)
-        //    {
-        //        remapTable[0][i] = Color.FromArgb((byte)i, 0, 0, 0);
-        //        remapTable[1][i] = Color.FromArgb(255, 0, (byte)(255 - i), 0);
-        //    }
-
-        //    for (int i = 200; i < 255; i++)
-        //    {
-        //        remapTable[0][i] = Color.FromArgb((byte)i, 0, 0, 0);
-        //        remapTable[1][i] = Color.FromArgb(255, 0, 0, (byte)(i - 100));
-        //    }
-
-        //    return remapTable;
-        //}
-        #endregion
-
-        #region GradientCirclesWithAlgoritms NOT USES!
-        //private static WriteableBitmap DrawGradientBlackCircles(WriteableBitmap wrBitmap, List<HeatPoint> heatPoints)
-        //{
-        //    WriteableBitmap whiteBitmap = new WriteableBitmap(wrBitmap.PixelWidth, wrBitmap.PixelHeight);
-        //    whiteBitmap.Clear(Colors.White);
-
-        //    int radius = wrBitmap.PixelHeight / wrBitmap.PixelWidth * 30;
-
-        //    foreach (HeatPoint point in heatPoints)
-        //    {
-        //        int alphaIncrement = 255 / radius;
-        //        int alphaCurrent = 0;
-        //        Color color = Colors.Black;
-
-        //        #region Midpoint algorithm
-        //        for (int fill = radius; fill >= 0; fill--)
-        //        {
-        //            //Bresenham's (also 'Midpoint') circle algorithm
-        //            int x = fill;
-        //            int y = 0;
-        //            int err = 0;
-
-        //            while (x >= y)
-        //            {
-        //                //whiteBitmap.SetPixel(point.X + x, point.Y + y, (byte)alphaCurrent, color);
-        //                //whiteBitmap.SetPixel(point.X + y, point.Y + x, (byte)alphaCurrent, color);
-        //                //whiteBitmap.SetPixel(point.X - y, point.Y + x, (byte)alphaCurrent, color);
-        //                //whiteBitmap.SetPixel(point.X - x, point.Y + y, (byte)alphaCurrent, color);
-        //                //whiteBitmap.SetPixel(point.X - x, point.Y - y, (byte)alphaCurrent, color);
-        //                //whiteBitmap.SetPixel(point.X - y, point.Y - x, (byte)alphaCurrent, color);
-        //                //whiteBitmap.SetPixel(point.X + y, point.Y - x, (byte)alphaCurrent, color);
-        //                //whiteBitmap.SetPixel(point.X + x, point.Y - y, (byte)alphaCurrent, color);
-
-        //                whiteBitmap.SetPixel(point.X + x, point.Y + y, (byte)alphaCurrent, color);
-        //                whiteBitmap.SetPixel(point.X - x, point.Y + y, (byte)alphaCurrent, color);
-
-        //                whiteBitmap.SetPixel(point.X + y, point.Y + x, (byte)alphaCurrent, color);
-        //                whiteBitmap.SetPixel(point.X - y, point.Y + x, (byte)alphaCurrent, color);
-
-        //                whiteBitmap.SetPixel(point.X + y, point.Y - x, (byte)alphaCurrent, color);
-        //                whiteBitmap.SetPixel(point.X - y, point.Y - x, (byte)alphaCurrent, color);
-
-        //                whiteBitmap.SetPixel(point.X + x, point.Y - y, (byte)alphaCurrent, color);
-        //                whiteBitmap.SetPixel(point.X - x, point.Y - y, (byte)alphaCurrent, color);
-
-        //                if (err <= 0)
-        //                {
-        //                    y += 1;
-        //                    err += 2 * y + 1;
-        //                }
-        //                if (err > 0)
-        //                {
-        //                    x -= 1;
-        //                    err -= 2 * x + 1;
-        //                }
-        //            }
-
-        //            alphaCurrent += alphaIncrement;
-        //        }
-        //        #endregion
-
-        //        #region brutforce algorithm
-        //        //for (int y = -radius; y <= radius; y++)
-        //        //{
-        //        //    for (int x = -radius; x <= radius; x++)
-        //        //    {
-        //        //        if (x * x + y * y <= radius * radius)
-        //        //        {
-        //        //            whiteBitmap.SetPixel(point.X + x, point.Y + y, (byte)alphaCurrent, Colors.Black);
-        //        //        }
-        //        //    }
-        //        //    alphaCurrent += alphaIncrement;
-        //        //}
-        //        #endregion
-
-        //        #region More algorithm!
-        //        //int x = radius;
-        //        //int y = 0;
-        //        //int xChange = 1 - (radius << 1);
-        //        //int yChange = 0;
-        //        //int radiusError = 0;
-        //        //int x0 = point.X;
-        //        //int y0 = point.Y;
-
-
-        //        //while (x >= y)
-        //        //{
-        //        //    for (int i = x0 - x; i <= x0 + x; i++)
-        //        //    {
-        //        //        whiteBitmap.SetPixel(i, y0 + y, (byte)alphaCurrent, color);
-        //        //        whiteBitmap.SetPixel(i, y0 - y, (byte)alphaCurrent, color);
-        //        //    }
-        //        //    for (int i = x0 - y; i <= x0 + y; i++)
-        //        //    {
-        //        //        whiteBitmap.SetPixel(i, y0 + x, (byte)alphaCurrent, color);
-        //        //        whiteBitmap.SetPixel(i, y0 - x, (byte)alphaCurrent, color);
-        //        //    }
-
-        //        //    y++;
-        //        //    radiusError += yChange;
-        //        //    yChange += 2;
-        //        //    if (((radiusError << 1) + xChange) > 0)
-        //        //    {
-        //        //        x--;
-        //        //        radiusError += xChange;
-        //        //        xChange += 2;
-        //        //    }
-
-        //        //    alphaCurrent += alphaIncrement;
-        //        //}
-        //        #endregion
-        //    }
-
-
-        //    return whiteBitmap;
-        //}
-        #endregion
-
-        public async static Task<WriteableBitmap> Resize(int width, int height, Windows.Storage.Streams.IRandomAccessStream source)
+        public async static Task<WriteableBitmap> Resize(int width, int height, IRandomAccessStream source)
         {
             WriteableBitmap small = new WriteableBitmap(width, height);
             BitmapDecoder decoder = await BitmapDecoder.CreateAsync(source);
@@ -357,6 +212,47 @@ namespace CourseWork_2.HeatMap
                 ColorManagementMode.DoNotColorManage);
             pixelData.DetachPixelData().CopyTo(small.PixelBuffer);
             return small;
+        }
+
+        public async static Task<WriteableBitmap> ResizeWritableBitmap(WriteableBitmap baseWriteBitmap, uint width, uint height)
+        {
+            // Get the pixel buffer of the writable bitmap in bytes
+            Stream stream = baseWriteBitmap.PixelBuffer.AsStream();
+            byte[] pixels = new byte[(uint)stream.Length];
+            await stream.ReadAsync(pixels, 0, pixels.Length);
+            //Encoding the data of the PixelBuffer we have from the writable bitmap
+            var inMemoryRandomStream = new InMemoryRandomAccessStream();
+            var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, inMemoryRandomStream);
+            encoder.SetPixelData(BitmapPixelFormat.Rgba8, BitmapAlphaMode.Ignore, width, height, 96, 96, pixels);
+            await encoder.FlushAsync();
+            // At this point we have an encoded image in inMemoryRandomStream
+            // We apply the transform and decode
+            var transform = new BitmapTransform
+            {
+                ScaledWidth = width,
+                ScaledHeight = height
+            };
+            inMemoryRandomStream.Seek(0);
+            var decoder = await BitmapDecoder.CreateAsync(inMemoryRandomStream);
+            var pixelData = await decoder.GetPixelDataAsync(
+                            BitmapPixelFormat.Rgba8,
+                            BitmapAlphaMode.Straight,
+                            transform,
+                            ExifOrientationMode.IgnoreExifOrientation,
+                            ColorManagementMode.DoNotColorManage);
+            //An array containing the decoded image data
+            var sourceDecodedPixels = pixelData.DetachPixelData();
+            // Approach 1 : Encoding the image buffer again:
+            //Encoding data
+            var inMemoryRandomStream2 = new InMemoryRandomAccessStream();
+            var encoder2 = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, inMemoryRandomStream2);
+            encoder2.SetPixelData(BitmapPixelFormat.Rgba8, BitmapAlphaMode.Ignore, width, height, 96, 96, sourceDecodedPixels);
+            await encoder2.FlushAsync();
+            inMemoryRandomStream2.Seek(0);
+            // finally the resized writablebitmap
+            var bitmap = new WriteableBitmap((int)width, (int)height);
+            await bitmap.SetSourceAsync(inMemoryRandomStream2);
+            return bitmap;
         }
     }
 }

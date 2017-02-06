@@ -243,6 +243,7 @@ namespace CourseWork_2.SwipeableSplitViewControl_Folder
 
             RegisterPropertyChangedCallback(DisplayModeProperty, OnDisplayModeChanged);
 
+            IsSwipeablePaneOpen = true;
             // disable ScrollViewer as it will prevent finger from panning
             //if (Pane is ListView || Pane is ListBox)
             //{

@@ -9,7 +9,7 @@
     xmlns:webviewExts="using:CourseWork_2.Extensions_Folder"
     xmlns:convertersFolder="using:CourseWork_2.Converters"
     mc:Ignorable="d">
-    
+
     <Page.Resources>
         <Style TargetType="swipeableSV:SwipeableSplitView">
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -452,7 +452,8 @@
                             <!--a new layer here to handle all the gestures -->
                             <Grid x:Name="OverlayRoot" Grid.ColumnSpan="2">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="{Binding TemplateSettings.OpenPaneGridLength, RelativeSource={RelativeSource Mode=TemplatedParent}}" /> <!-- {Binding TemplateSettings.OpenPaneGridLength, RelativeSource={RelativeSource Mode=TemplatedParent}}  -->
+                                    <ColumnDefinition Width="{Binding TemplateSettings.OpenPaneGridLength, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                    <!-- {Binding TemplateSettings.OpenPaneGridLength, RelativeSource={RelativeSource Mode=TemplatedParent}}  -->
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
@@ -472,17 +473,23 @@
         </Style>
 
         <convertersFolder:RingConverter x:Key="ringConverter" />
+        <convertersFolder:IconStartStopConverter x:Key="iconConverter" />
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <swipeableSV:SwipeableSplitView x:ConnectionId='2' x:Name="SplitView" OpenPaneLength="60"                                                                          > <!-- {x:Bind ViewModel.IsSplitViewPaneOpen, Mode=TwoWay} -->
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"> <!-- {x:Bind ViewModel.IsSplitViewPaneOpen, Mode=TwoWay} -->
+        <swipeableSV:SwipeableSplitView x:ConnectionId='2' x:Name="SplitView" OpenPaneLength="60"                                                                          
+                                                                                                                                                                                >
+            <!-- {x:Bind ViewModel.IsSplitViewPaneOpen, Mode=TwoWay} -->
             <SplitView.Pane>
                 <StackPanel VerticalAlignment="Center">
                     <!--<AppBarButton Icon="Play" Command="{x:Bind ViewModel.StartStopButtonCommand}" Width="Auto" HorizontalAlignment="Stretch" IsCompact="True" />-->
-                    <Button x:ConnectionId='3'                                            Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
-                        <SymbolIcon x:ConnectionId='4'                                                        />
+                    <Button x:ConnectionId='4'                                            Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
+                        <StackPanel>
+                            <SymbolIcon x:ConnectionId='5'                                                                                              />
+                            <TextBlock x:ConnectionId='6'                                                  TextAlignment="Center" FontSize="10" />
+                        </StackPanel>
                     </Button>
-                    <TextBlock Text="Time" TextAlignment="Center" FontSize="20" />
+                    <!--<TextBlock Text="{x:Bind ViewModel.TimerText, Mode=OneWay}" TextAlignment="Center" FontSize="15" />-->
                     <Button Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
                         <SymbolIcon Symbol="Cancel" />
                     </Button>
@@ -491,17 +498,16 @@
             </SplitView.Pane>
             <SplitView.Content>
                 <Grid>
-                    <WebView x:ConnectionId='5'                                                                                        
+                    <WebView x:ConnectionId='7'                                                                                        
                                                                                                 
                                                                                                             
                                                                                                               
-                                                                                                                                                                    
                              />
-                    <ProgressRing x:ConnectionId='6'                                                                                                            
-                                                                                                  Width="50" Height="50" />
                 </Grid>
             </SplitView.Content>
         </swipeableSV:SwipeableSplitView>
+        <ProgressRing x:ConnectionId='3'                                                                                                             
+                                                                                                   Width="50" Height="50" />
 
         <!--<VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowStates">

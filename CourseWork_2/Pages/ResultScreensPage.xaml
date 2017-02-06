@@ -1,0 +1,47 @@
+﻿<Page
+    x:Class="CourseWork_2.Pages.ResultScreensPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CourseWork_2.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters_Folder="using:CourseWork_2.Converters"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <converters_Folder:RingConverter x:Key="ringConverter" />
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Background="#FFE7E8E8">
+            <TextBlock Text="RESULT SCREENS" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       FontSize="18" />
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Image Source="{x:Bind ViewModel.SelectedScreen, Mode=OneWay}" Height="Auto" Width="Auto"
+                   Visibility="{x:Bind ViewModel.SelectVisibility, Mode=OneWay, Converter={StaticResource ringConverter}}"
+                   DoubleTapped="{x:Bind ViewModel.SelectScreen_DoubleTapped, Mode=OneWay}" />
+            <GridView ItemsSource="{x:Bind ViewModel.Screens, Mode=OneWay}" Visibility="{x:Bind ViewModel.SelectVisibility, Mode=OneWay, Converter={StaticResource ringConverter}, ConverterParameter=content}" 
+                      SelectionChanged="{x:Bind ViewModel.GridView_SelectionChanged, Mode=OneWay}">
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding HeatMapScreen}"
+                               Width="{Binding WidthImage}"  Height="{Binding HeightImage}" />
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+                <GridView.ItemContainerStyle>
+                    <Style TargetType="FrameworkElement">
+                        <Setter Property="Margin" Value="0 0 0 0"/>
+                    </Style>
+                </GridView.ItemContainerStyle>
+            </GridView>
+            <ProgressRing Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"
+                          Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource ringConverter}}"
+                                  IsActive="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay}"/>
+        </Grid>
+    </Grid>
+</Page>

@@ -9,7 +9,7 @@
     xmlns:webviewExts="using:CourseWork_2.Extensions_Folder"
     xmlns:convertersFolder="using:CourseWork_2.Converters"
     mc:Ignorable="d">
-    
+
     <Page.Resources>
         <Style TargetType="swipeableSV:SwipeableSplitView">
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -452,7 +452,8 @@
                             <!--a new layer here to handle all the gestures -->
                             <Grid x:Name="OverlayRoot" Grid.ColumnSpan="2">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="{Binding TemplateSettings.OpenPaneGridLength, RelativeSource={RelativeSource Mode=TemplatedParent}}" /> <!-- {Binding TemplateSettings.OpenPaneGridLength, RelativeSource={RelativeSource Mode=TemplatedParent}}  -->
+                                    <ColumnDefinition Width="{Binding TemplateSettings.OpenPaneGridLength, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                    <!-- {Binding TemplateSettings.OpenPaneGridLength, RelativeSource={RelativeSource Mode=TemplatedParent}}  -->
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
@@ -472,17 +473,23 @@
         </Style>
 
         <convertersFolder:RingConverter x:Key="ringConverter" />
+        <convertersFolder:IconStartStopConverter x:Key="iconConverter" />
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <swipeableSV:SwipeableSplitView x:Name="SplitView" OpenPaneLength="60" IsSwipeablePaneOpen="{x:Bind ViewModel.IsSplitViewPaneOpen, Mode=TwoWay}"> <!-- {x:Bind ViewModel.IsSplitViewPaneOpen, Mode=TwoWay} -->
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"> <!-- {x:Bind ViewModel.IsSplitViewPaneOpen, Mode=TwoWay} -->
+        <swipeableSV:SwipeableSplitView x:Name="SplitView" OpenPaneLength="60" IsSwipeablePaneOpen="{x:Bind ViewModel.IsSplitViewPaneOpen, Mode=TwoWay}"
+                                        Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource ringConverter}, ConverterParameter=content}">
+            <!-- {x:Bind ViewModel.IsSplitViewPaneOpen, Mode=TwoWay} -->
             <SplitView.Pane>
                 <StackPanel VerticalAlignment="Center">
                     <!--<AppBarButton Icon="Play" Command="{x:Bind ViewModel.StartStopButtonCommand}" Width="Auto" HorizontalAlignment="Stretch" IsCompact="True" />-->
                     <Button Click="{x:Bind ViewModel.StartStop_Click}" Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
-                        <SymbolIcon Symbol="{x:Bind ViewModel.StartStopIcon, Mode=OneWay}" />
+                        <StackPanel>
+                            <SymbolIcon Symbol="{x:Bind ViewModel.IsOnStart, Mode=OneWay, Converter={StaticResource iconConverter}}" />
+                            <TextBlock Text="{x:Bind ViewModel.TimerText, Mode=OneWay}" TextAlignment="Center" FontSize="10" />
+                        </StackPanel>
                     </Button>
-                    <TextBlock Text="Time" TextAlignment="Center" FontSize="20" />
+                    <!--<TextBlock Text="{x:Bind ViewModel.TimerText, Mode=OneWay}" TextAlignment="Center" FontSize="15" />-->
                     <Button Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
                         <SymbolIcon Symbol="Cancel" />
                     </Button>
@@ -495,13 +502,12 @@
                              ScriptNotify="{x:Bind ViewModel.WebView_ScriptNotify, Mode=OneWay}"
                              NavigationStarting="{x:Bind ViewModel.WebView_NavigationStarting, Mode=OneWay}"
                              NavigationCompleted="{x:Bind ViewModel.WebView_NavigationCompleted, Mode=OneWay}"
-                             Visibility="{x:Bind ViewModel.RingActiveVisibility, Mode=OneWay, Converter={StaticResource ringConverter}, ConverterParameter=content}"
                              />
-                    <ProgressRing Visibility="{x:Bind ViewModel.RingActiveVisibility, Mode=OneWay, Converter={StaticResource ringConverter}}"
-                                  IsActive="{x:Bind ViewModel.RingActiveVisibility, Mode=OneWay}" Width="50" Height="50" />
                 </Grid>
             </SplitView.Content>
         </swipeableSV:SwipeableSplitView>
+        <ProgressRing Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource ringConverter}}"
+                                  IsActive="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay}" Width="50" Height="50" />
 
         <!--<VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowStates">

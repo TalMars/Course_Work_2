@@ -51,94 +51,20 @@ namespace CourseWork_2.Pages
         //private string ios = "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1";
         //#endregion
 
-        //#region ChangeUSerAgent
-        //[DllImport("urlmon.dll", CharSet = CharSet.Ansi)]
-        //private static extern int UrlMkSetSessionOption(int dwOption, string pBuffer, int dwBufferLength, int dwReserved);
-
-        //const int URLMON_OPTION_USERAGENT = 0x10000001;
-        //public void ChangeUserAgent(string Agent)
-        //{
-        //    UrlMkSetSessionOption(URLMON_OPTION_USERAGENT, Agent, Agent.Length, 0);
-        //}
-        //#endregion
-
         public ReviewPrototypePage()
         {
             this.InitializeComponent();
 
             var vm = new ReviewPrototypeViewModel();
             this.ViewModel = vm;
-            
+        }
 
-            // add entry animations
-            //var transitions = new TransitionCollection { };
-            //var transition = new NavigationThemeTransition { };
-            //transitions.Add(transition);
-            //this.Frame.ContentTransitions = transitions;
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            await Windows.UI.ViewManagement.StatusBar.GetForCurrentView().HideAsync();
+            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
         }
 
         public ReviewPrototypeViewModel ViewModel { get; private set; }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            //ChangeUserAgent(androidASUS);
-
-            //PrototypeView.Settings.IsIndexedDBEnabled = true;
-            //PrototypeView.Settings.IsJavaScriptEnabled = true;
-            //PrototypeView.NavigationStarting += PrototypeView_NavigationStarting;
-            //PrototypeView.NavigationCompleted += PrototypeView_NavigationCompleted;
-            //PrototypeView.ScriptNotify += PrototypeView_ScriptNotify;
-            
-            //PrototypeView.Navigate(uri7_2);
-        }
-
-        //private void PrototypeView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
-        //{
-        //    PrototypeView.Visibility = Visibility.Collapsed;
-        //    PrototypeRing.IsActive = true;
-        //    PrototypeRing.Visibility = Visibility.Visible;
-        //}
-
-        private async void PrototypeView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
-        {
-            string docClickScript = @"if (document.addEventListener) {" +
-                    "document.addEventListener(\"click\", PageClicked, false);" +
-                "} else {" +
-                    "document.attachEvent('onclick', PageClicked);" +
-                "}  " +
-                "function PageClicked(event){" +
-                    "var pointX = event.clientX;" +
-                    "var pointY = event.clientY;" +
-                    " window.external.notify('tapClick:' + pointX + ':' + pointY);" +
-                 "}";
-            //await PrototypeView.InvokeScriptAsync("eval", new string[] { docClickScript });
-
-            //string SetBodyOverFlowHiddenString = @"function SetBodyOverFlowHidden()
-            //{
-            //    document.body.style.overflow = 'hidden';
-            //    return 'Set Style to hidden';
-            //}
-
-            //// now call the function!
-
-            //SetBodyOverFlowHidden();";
-
-            //string returnStr = await PrototypeView.InvokeScriptAsync("eval", new string[] { SetBodyOverFlowHiddenString });
-            
-            //PrototypeRing.Visibility = Visibility.Collapsed;
-            //PrototypeRing.IsActive = false;
-            //PrototypeView.Visibility = Visibility.Visible;
-
-            //string userAgentDetect = "document.head.innerHTML += '<!-- ' + navigator.userAgent + '____ ' + navigator.platform + ' -->'";
-            //string scale = "document.getElementsByName('viewport')[0].setAttribute('content', 'width=device-width, height=device-height, initial-scale=1.5, maximum-scale=1, user-scalable=no, shrink-to-fit=no');";
-            //string zoom = "document.body.style.zoom = '150%';";
-            //if (args.IsSuccess)
-            //{
-            //    await PrototypeView.InvokeScriptAsync("eval", new string[] { userAgentDetect });
-            //    await PrototypeView.InvokeScriptAsync("eval", new string[] { scale });
-            //    string html = await PrototypeView.InvokeScriptAsync("eval", new string[] { "document.documentElement.outerHTML;" });
-            //    System.Diagnostics.Debug.WriteLine(html);
-            //}
-        }
     }
 }

@@ -1,13 +1,19 @@
 ﻿using CourseWork_2.Extensions_Folder;
+using CourseWork_2.HeatMap;
+using CourseWork_2.Model;
+using CourseWork_2.Pages;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace CourseWork_2.ViewModel
 {
@@ -18,10 +24,14 @@ namespace CourseWork_2.ViewModel
 
         private bool isSplitViewPaneOpen;
         private string _sourceWebView = null;
-        private Symbol _startStopIcon;
-        private bool _ringActiveVisibility;
-        private bool _contentVisibility;
+        private bool _isOnStart;
+        private bool _ringContentVisibility;
 
+        private DispatcherTimer timer;
+        private string _timerText;
+        private int timerSeconds;
+
+        private ObservableCollection<ReviewPrototypeModel> _screens;
 
         #region ChangeUSerAgent
         private string androidASUS = "Mozilla/5.0 (Linux; Android 6.0.1; ASUS_Z00ED Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.68 Mobile Safari/537.36";
@@ -41,79 +51,84 @@ namespace CourseWork_2.ViewModel
         {
             ChangeUserAgent(androidASUS);
 
-            StartStopIcon = Symbol.Play;
-            //StartStopButtonCommand = new Command(() =>
-            //{
-            //    if (isPlayIcon)
-            //    {
-            //        SourceWebView = uri7_2;
-            //        IsSplitViewPaneOpen = false;
-            //    }
-
-            //    isPlayIcon = false;
-            //});
+            _screens = new ObservableCollection<ReviewPrototypeModel>();
+            IsOnStart = true;
         }
-        //public ICommand StartStopButtonCommand
-        //{
-        //    get; private set;
-        //}
 
         #region properties
         public string SourceWebView
         {
-            get
-            {
-                return _sourceWebView;
-            }
-            set
-            {
-                _sourceWebView = value;
-                OnPropertyChanged("SourceWebView");
-            }
+            get { return _sourceWebView; }
+            set { Set(ref _sourceWebView, value); }
         }
 
 
         public bool IsSplitViewPaneOpen
         {
-            get { return this.isSplitViewPaneOpen; }
-            set { Set(ref this.isSplitViewPaneOpen, value); }
+            get { return isSplitViewPaneOpen; }
+            set { Set(ref isSplitViewPaneOpen, value); }
         }
 
-        public Symbol StartStopIcon
+        public bool IsOnStart
         {
-            get { return _startStopIcon; }
-            set { _startStopIcon = value; OnPropertyChanged("StartStopIcon"); }
+            get { return _isOnStart; }
+            set { Set(ref _isOnStart, value); }
         }
 
-        public bool RingActiveVisibility
+        public bool RingContentVisibility
         {
-            get { return _ringActiveVisibility; }
-            set { _ringActiveVisibility = value; OnPropertyChanged("RingActiveVisibility"); }
+            get { return _ringContentVisibility; }
+            set { Set(ref _ringContentVisibility, value); }
         }
 
-        public bool ContentVisibility
+        public string TimerText
         {
-            get { return _contentVisibility; }
-            set { _contentVisibility = value; OnPropertyChanged("ContentVisibility"); }
+            get { return _timerText; }
+            set { Set(ref _timerText, value); }
         }
         #endregion
 
         #region pane controls events
         public void StartStop_Click(object sender, RoutedEventArgs e)
         {
-            if (_startStopIcon.ToString().Equals("Play"))
+            if (_isOnStart)
             {
                 SourceWebView = uri7_2;
-                StartStopIcon = Symbol.Stop;
+                IsOnStart = false;
                 IsSplitViewPaneOpen = false;
             }
+            else
+            {
+                timer.Stop();
+                ((Frame)Window.Current.Content).Navigate(typeof(ResultScreensPage), _screens);
+            }
+        }
+        #endregion
+
+        #region Timer Events
+        private void TimerInit()
+        {
+            timer = new DispatcherTimer();
+            timer.Tick += Timer_Tick;
+            timer.Interval = new TimeSpan(0, 0, 1);
+            timer.Start();
+        }
+
+        private void Timer_Tick(object sender, object e)
+        {
+            string hours = (timerSeconds / 3600).ToString();
+            string minutes = ((timerSeconds % 3600) / 60).ToString();
+            string seconds = (timerSeconds % 60).ToString();
+
+            TimerText = hours + ":" + minutes + ":" + seconds;
+            timerSeconds++;
         }
         #endregion
 
         #region WebView events
         public void WebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
         {
-            RingActiveVisibility = true;
+            RingContentVisibility = true;
         }
 
         public async void WebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
@@ -126,17 +141,110 @@ namespace CourseWork_2.ViewModel
                 "function PageClicked(event){" +
                     "var pointX = event.clientX;" +
                     "var pointY = event.clientY;" +
-                    " window.external.notify('tapClick:' + pointX + ':' + pointY);" +
+                    " window.external.notify('tap:' + pointX + ':' + pointY);" +
                  "}";
             await sender.InvokeScriptAsync("eval", new string[] { docClickScript });
 
-            RingActiveVisibility = false;
+            RingContentVisibility = false;
+
+            TimerInit();
         }
 
-        public void WebView_ScriptNotify(object sender, NotifyEventArgs e)
+        public async void WebView_ScriptNotify(object sender, NotifyEventArgs e)
         {
+            if (e.Value.Contains("tap"))
+            {
+                WebView webView = (WebView)sender;
 
+                float x;
+                float y;
+                string[] arr = e.Value.Replace('.', ',').Split(new char[] { ':' });
+
+                if (!float.TryParse(arr[1], out x))
+                {
+                    System.Diagnostics.Debug.WriteLine("ErrorX");
+                }
+
+                if (!float.TryParse(arr[2], out y))
+                {
+                    System.Diagnostics.Debug.WriteLine("ErrorY");
+                }
+
+                int iX = (int)Math.Round(x);
+                int iY = (int)Math.Round(y);
+
+                System.Diagnostics.Debug.WriteLine(e.CallingUri.AbsoluteUri);
+                System.Diagnostics.Debug.WriteLine(iX + "   " + iY);
+
+                HeatPoint hp = new HeatPoint(iX, iY);
+
+                int indexUri;
+                bool isFindIndex = false;
+                for (indexUri = 0; !isFindIndex && indexUri < _screens.Count; indexUri++)
+                {
+                    if (_screens[indexUri].UriPage.Equals(webView.Source.AbsoluteUri))
+                    {
+                        isFindIndex = true;
+                    }
+                }
+
+                if (isFindIndex)
+                {
+                    _screens[indexUri - 1].ListPoints.Add(hp);
+                }
+                else
+                {
+                    //screenshot
+                    await DoCaptureWebView(webView, hp);
+                }
+            }
         }
+
+        private async Task<bool> DoCaptureWebView(WebView webview, HeatPoint hp)
+        {
+            bool isOk = true;
+
+            RingContentVisibility = true;
+
+            #region comments maybe help
+            //string scrollHeight = await PrototypeView.InvokeScriptAsync("eval", new string[] { "screen.height.toString();" });
+            //string scrollWidth = await PrototypeView.InvokeScriptAsync("eval", new string[] { "screen.width.toString();" });
+            //float height;
+            //float width;
+            //if(!float.TryParse(scrollWidth, out width))
+            //{
+            //    System.Diagnostics.Debug.WriteLine("ErrorWidth");
+            //    isOk = false;
+            //}
+            //if (!float.TryParse(scrollHeight, out height))
+            //{
+            //    System.Diagnostics.Debug.WriteLine("ErrorHeight");
+            //    isOk = false;
+            //}
+            //MainGrid.RowDefinitions[0].Height = new GridLength(0);
+            //MainGrid.RowDefinitions[0].Height = new GridLength(0.1, GridUnitType.Star);
+            //double originalHeight = PrototypeView.ActualHeight;
+            //double originalWidth = PrototypeView.ActualWidth;
+            //int screenHeight = (int)Math.Round(originalHeight);
+            //int screenWidth = (int)Math.Round(originalWidth);
+            #endregion
+
+            int screenHeight = (int)webview.ActualHeight;
+            int screenWidth = (int)webview.ActualWidth;
+
+            InMemoryRandomAccessStream ms = new InMemoryRandomAccessStream();
+            await webview.CapturePreviewToStreamAsync(ms);
+
+            WriteableBitmap wb = await HeatMapFunctions.Resize(screenWidth, screenHeight, ms);
+
+            _screens.Add(new ReviewPrototypeModel(webview.Source.AbsoluteUri, wb));
+            _screens[_screens.Count - 1].ListPoints.Add(hp);
+
+            RingContentVisibility = false;
+
+            return isOk;
+        }
+
         #endregion
     }
 }
