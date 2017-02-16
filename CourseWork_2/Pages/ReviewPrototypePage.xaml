@@ -479,21 +479,17 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"> <!-- {x:Bind ViewModel.IsSplitViewPaneOpen, Mode=TwoWay} -->
         <swipeableSV:SwipeableSplitView x:Name="SplitView" OpenPaneLength="60" IsSwipeablePaneOpen="{x:Bind ViewModel.IsSplitViewPaneOpen, Mode=TwoWay}"
                                         Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource ringConverter}, ConverterParameter=content}">
-            <!-- {x:Bind ViewModel.IsSplitViewPaneOpen, Mode=TwoWay} -->
             <SplitView.Pane>
                 <StackPanel VerticalAlignment="Center">
-                    <!--<AppBarButton Icon="Play" Command="{x:Bind ViewModel.StartStopButtonCommand}" Width="Auto" HorizontalAlignment="Stretch" IsCompact="True" />-->
                     <Button Click="{x:Bind ViewModel.StartStop_Click}" Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
                         <StackPanel>
                             <SymbolIcon Symbol="{x:Bind ViewModel.IsOnStart, Mode=OneWay, Converter={StaticResource iconConverter}}" />
                             <TextBlock Text="{x:Bind ViewModel.TimerText, Mode=OneWay}" TextAlignment="Center" FontSize="10" />
                         </StackPanel>
                     </Button>
-                    <!--<TextBlock Text="{x:Bind ViewModel.TimerText, Mode=OneWay}" TextAlignment="Center" FontSize="15" />-->
                     <Button Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
                         <SymbolIcon Symbol="Cancel" />
                     </Button>
-                    <!--<AppBarButton Icon="Cancel" Width="Auto" HorizontalAlignment="Stretch" IsCompact="True" />-->
                 </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>

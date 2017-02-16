@@ -11,9 +11,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Storage.Streams;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Imaging;
 
 namespace CourseWork_2.ViewModel
 {
@@ -27,7 +24,7 @@ namespace CourseWork_2.ViewModel
         private bool _isOnStart;
         private bool _ringContentVisibility;
 
-        private DispatcherTimer timer;
+        private Windows.UI.Xaml.DispatcherTimer timer;
         private string _timerText;
         private int timerSeconds;
 
@@ -89,7 +86,7 @@ namespace CourseWork_2.ViewModel
         #endregion
 
         #region pane controls events
-        public void StartStop_Click(object sender, RoutedEventArgs e)
+        public void StartStop_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             if (_isOnStart)
             {
@@ -100,7 +97,7 @@ namespace CourseWork_2.ViewModel
             else
             {
                 timer.Stop();
-                ((Frame)Window.Current.Content).Navigate(typeof(ResultScreensPage), _screens);
+                ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(ResultScreensPage), _screens);
             }
         }
         #endregion
@@ -108,7 +105,7 @@ namespace CourseWork_2.ViewModel
         #region Timer Events
         private void TimerInit()
         {
-            timer = new DispatcherTimer();
+            timer = new Windows.UI.Xaml.DispatcherTimer();
             timer.Tick += Timer_Tick;
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.Start();
@@ -126,12 +123,12 @@ namespace CourseWork_2.ViewModel
         #endregion
 
         #region WebView events
-        public void WebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
+        public void WebView_NavigationStarting(Windows.UI.Xaml.Controls.WebView sender, Windows.UI.Xaml.Controls.WebViewNavigationStartingEventArgs args)
         {
             RingContentVisibility = true;
         }
 
-        public async void WebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        public async void WebView_NavigationCompleted(Windows.UI.Xaml.Controls.WebView sender, Windows.UI.Xaml.Controls.WebViewNavigationCompletedEventArgs args)
         {
             string docClickScript = @"if (document.addEventListener) {" +
                     "document.addEventListener(\"click\", PageClicked, false);" +
@@ -150,11 +147,11 @@ namespace CourseWork_2.ViewModel
             TimerInit();
         }
 
-        public async void WebView_ScriptNotify(object sender, NotifyEventArgs e)
+        public async void WebView_ScriptNotify(object sender, Windows.UI.Xaml.Controls.NotifyEventArgs e)
         {
             if (e.Value.Contains("tap"))
             {
-                WebView webView = (WebView)sender;
+                Windows.UI.Xaml.Controls.WebView webView = (Windows.UI.Xaml.Controls.WebView)sender;
 
                 float x;
                 float y;
@@ -200,18 +197,20 @@ namespace CourseWork_2.ViewModel
             }
         }
 
-        private async Task<bool> DoCaptureWebView(WebView webview, HeatPoint hp)
+        private async Task<bool> DoCaptureWebView(Windows.UI.Xaml.Controls.WebView webview, HeatPoint hp)
         {
             bool isOk = true;
 
             RingContentVisibility = true;
 
             #region comments maybe help
-            //string scrollHeight = await PrototypeView.InvokeScriptAsync("eval", new string[] { "screen.height.toString();" });
-            //string scrollWidth = await PrototypeView.InvokeScriptAsync("eval", new string[] { "screen.width.toString();" });
+            //string scrollHeight = await webview.InvokeScriptAsync("eval", new string[] { "screen.height.toString();" });
+            //string scrollWidth = await webview.InvokeScriptAsync("eval", new string[] { "screen.width.toString();" });
+            //string scrollHeight = await webview.InvokeScriptAsync("eval", new string[] { "document.body.scrollHeight.toString();" });
+            //string scrollWidth = await webview.InvokeScriptAsync("eval", new string[] { "document.body.scrollWidth.toString();" });
             //float height;
             //float width;
-            //if(!float.TryParse(scrollWidth, out width))
+            //if (!float.TryParse(scrollWidth, out width))
             //{
             //    System.Diagnostics.Debug.WriteLine("ErrorWidth");
             //    isOk = false;
@@ -221,21 +220,18 @@ namespace CourseWork_2.ViewModel
             //    System.Diagnostics.Debug.WriteLine("ErrorHeight");
             //    isOk = false;
             //}
-            //MainGrid.RowDefinitions[0].Height = new GridLength(0);
-            //MainGrid.RowDefinitions[0].Height = new GridLength(0.1, GridUnitType.Star);
-            //double originalHeight = PrototypeView.ActualHeight;
-            //double originalWidth = PrototypeView.ActualWidth;
-            //int screenHeight = (int)Math.Round(originalHeight);
-            //int screenWidth = (int)Math.Round(originalWidth);
+
+            //int screenHeight = (int)height;
+            //int screenWidth = (int)width;
             #endregion
 
             int screenHeight = (int)webview.ActualHeight;
             int screenWidth = (int)webview.ActualWidth;
-
+            
             InMemoryRandomAccessStream ms = new InMemoryRandomAccessStream();
             await webview.CapturePreviewToStreamAsync(ms);
 
-            WriteableBitmap wb = await HeatMapFunctions.Resize(screenWidth, screenHeight, ms);
+            Windows.UI.Xaml.Media.Imaging.WriteableBitmap wb = await HeatMapFunctions.Resize(screenWidth, screenHeight, ms);
 
             _screens.Add(new ReviewPrototypeModel(webview.Source.AbsoluteUri, wb));
             _screens[_screens.Count - 1].ListPoints.Add(hp);

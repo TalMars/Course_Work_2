@@ -1,0 +1,40 @@
+﻿<Page
+    x:Class="CourseWork_2.Pages.PrototypesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CourseWork_2.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="#2b3346">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Border BorderThickness="0,0,0,1" BorderBrush="Gray">
+            <Grid>
+                <TextBlock Text="Prototypes" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       FontSize="20" Foreground="White" FontWeight="Medium" />
+                <Button Background="Transparent" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+                    <SymbolIcon Symbol="Add" />
+                </Button>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <ListView ItemsSource="{Binding}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding}" />
+                            <TextBlock Text="{Binding}" />
+                            <TextBlock Text="{Binding}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Grid>
+</Page>

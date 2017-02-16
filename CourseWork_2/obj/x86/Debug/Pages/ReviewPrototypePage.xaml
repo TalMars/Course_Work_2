@@ -479,21 +479,17 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"> <!-- {x:Bind ViewModel.IsSplitViewPaneOpen, Mode=TwoWay} -->
         <swipeableSV:SwipeableSplitView x:ConnectionId='2' x:Name="SplitView" OpenPaneLength="60"                                                                          
                                                                                                                                                                                 >
-            <!-- {x:Bind ViewModel.IsSplitViewPaneOpen, Mode=TwoWay} -->
             <SplitView.Pane>
                 <StackPanel VerticalAlignment="Center">
-                    <!--<AppBarButton Icon="Play" Command="{x:Bind ViewModel.StartStopButtonCommand}" Width="Auto" HorizontalAlignment="Stretch" IsCompact="True" />-->
                     <Button x:ConnectionId='4'                                            Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
                         <StackPanel>
                             <SymbolIcon x:ConnectionId='5'                                                                                              />
                             <TextBlock x:ConnectionId='6'                                                  TextAlignment="Center" FontSize="10" />
                         </StackPanel>
                     </Button>
-                    <!--<TextBlock Text="{x:Bind ViewModel.TimerText, Mode=OneWay}" TextAlignment="Center" FontSize="15" />-->
                     <Button Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
                         <SymbolIcon Symbol="Cancel" />
                     </Button>
-                    <!--<AppBarButton Icon="Cancel" Width="Auto" HorizontalAlignment="Stretch" IsCompact="True" />-->
                 </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>

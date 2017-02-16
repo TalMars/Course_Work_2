@@ -51,6 +51,7 @@ namespace CourseWork_2.Pages
         //private string ios = "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1";
         //#endregion
 
+        
         public ReviewPrototypePage()
         {
             this.InitializeComponent();
@@ -59,10 +60,10 @@ namespace CourseWork_2.Pages
             this.ViewModel = vm;
         }
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            await Windows.UI.ViewManagement.StatusBar.GetForCurrentView().HideAsync();
-            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
+            //await Windows.UI.ViewManagement.StatusBar.GetForCurrentView().HideAsync();
+           Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
         }
 
         public ReviewPrototypeViewModel ViewModel { get; private set; }

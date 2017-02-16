@@ -10,21 +10,24 @@
     <Page.Resources>
         <converters_Folder:RingConverter x:Key="ringConverter" />
     </Page.Resources>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="#2b3346">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Grid Background="#FFE7E8E8">
-            <TextBlock Text="RESULT SCREENS" VerticalAlignment="Center" HorizontalAlignment="Center"
-                       FontSize="18" />
-        </Grid>
+        <Border BorderThickness="0,0,0,1" BorderBrush="Gray">
+            <Grid>
+                <TextBlock Text="Result Screens" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       FontSize="20" Foreground="White" FontWeight="Medium" />
+            </Grid>
+        </Border>
 
         <Grid Grid.Row="1">
             <Image Source="{x:Bind ViewModel.SelectedScreen, Mode=OneWay}" Height="Auto" Width="Auto"
                    Visibility="{x:Bind ViewModel.SelectVisibility, Mode=OneWay, Converter={StaticResource ringConverter}}"
                    DoubleTapped="{x:Bind ViewModel.SelectScreen_DoubleTapped, Mode=OneWay}" />
+
             <GridView ItemsSource="{x:Bind ViewModel.Screens, Mode=OneWay}" Visibility="{x:Bind ViewModel.SelectVisibility, Mode=OneWay, Converter={StaticResource ringConverter}, ConverterParameter=content}" 
                       SelectionChanged="{x:Bind ViewModel.GridView_SelectionChanged, Mode=OneWay}">
                 <GridView.ItemTemplate>
@@ -39,6 +42,7 @@
                     </Style>
                 </GridView.ItemContainerStyle>
             </GridView>
+
             <ProgressRing Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"
                           Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource ringConverter}}"
                                   IsActive="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay}"/>

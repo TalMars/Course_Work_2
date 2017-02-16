@@ -18,30 +18,27 @@ namespace CourseWork_2.HeatMap
         {
             WriteableBitmap intensityBitmap = await DrawPictureHeatDot(source.PixelWidth, source.PixelHeight, heatPoints);
             WriteableBitmap colorizeBitmap = await Colorize(intensityBitmap);
-            WriteableBitmap blitBitmap = BlitBitmaps(source, colorizeBitmap);
+            WriteableBitmap blitBitmap = BlitBitmaps(source, colorizeBitmap); //merge screen and heatMap(transparent)
 
             return blitBitmap;
         }
 
         private static async Task<WriteableBitmap> DrawPictureHeatDot(int width, int height, List<HeatPoint> heatPoints)
         {
-            WriteableBitmap whiteBitmap = new WriteableBitmap(width, height);
+            WriteableBitmap whiteBitmap = new WriteableBitmap(width, height); //creating transparent bitmap
             whiteBitmap.Clear(Colors.Transparent);
 
             Uri heatPoint1 = new Uri("ms-appx:///Resources/HeatPointIntensive.png");
-            //Uri heatPoint2 = new Uri("ms-appx:///Resources/HeatPointIntensity.png");
 
             WriteableBitmap heatDot = await BitmapFactory.New(0, 0).FromContent(heatPoint1);
             var file = await StorageFile.GetFileFromApplicationUriAsync(heatPoint1);
             var streamFile = await file.OpenReadAsync();
             double scale = 1.5;
-            WriteableBitmap scaleHeatDot = await Resize((int)(heatDot.PixelWidth * scale), (int)(heatDot.PixelHeight * scale), streamFile);
+            WriteableBitmap scaleHeatDot = await Resize((int)(heatDot.PixelWidth * scale), (int)(heatDot.PixelHeight * scale), streamFile); //get heatDot from picture in "Resource" folder
 
             foreach (HeatPoint point in heatPoints)
             {
-                //whiteBitmap.Blit(new Windows.Foundation.Rect(point.X, point.Y, scaleHeatDot.PixelWidth, scaleHeatDot.PixelHeight),
-                //    scaleHeatDot, new Windows.Foundation.Rect(0, 0, scaleHeatDot.PixelWidth, scaleHeatDot.PixelHeight), WriteableBitmapExtensions.BlendMode.Additive); //work: Additive
-                whiteBitmap = await BlitHeatPoints(point.X, point.Y, whiteBitmap, scaleHeatDot);
+                whiteBitmap = await BlitHeatPoints(point.X, point.Y, whiteBitmap, scaleHeatDot); //drawing heatDots
             }
 
             return whiteBitmap;
@@ -49,9 +46,9 @@ namespace CourseWork_2.HeatMap
 
         private static async Task<WriteableBitmap> Colorize(WriteableBitmap wrBitmap)
         {
-            WriteableBitmap colorMask = await BitmapFactory.New(0, 0).FromContent(new Uri("ms-appx:///Resources/intensity-mask.jpg"));
+            WriteableBitmap colorMask = await BitmapFactory.New(0, 0).FromContent(new Uri("ms-appx:///Resources/intensity-mask.jpg")); //get mask colors from picture in "Resource" folder
 
-            Color[][] remapTable = RemapTableCreation(colorMask);
+            Color[][] remapTable = RemapTableCreation(colorMask); //creating remap table based on mask colors(every shade of black is associated with a different color)
 
             int width = wrBitmap.PixelWidth;
             int height = wrBitmap.PixelHeight;
@@ -61,6 +58,7 @@ namespace CourseWork_2.HeatMap
                 byte[] pixels = new byte[4 * width * height];
                 buffer.Read(pixels, 0, pixels.Length);
 
+                //Colorize bitmap with heatDots based on remap table
                 for (int index = 0; index < pixels.Length; index += 4)
                 {
                     byte a = pixels[index + 3];
@@ -93,7 +91,7 @@ namespace CourseWork_2.HeatMap
         {
             bitmap1.Blit(new Windows.Foundation.Rect(0, 0, bitmap1.PixelWidth, bitmap1.PixelHeight), bitmap2,
                 new Windows.Foundation.Rect(0, 0, bitmap2.PixelWidth, bitmap2.PixelHeight));
-
+            //merge 2 bitmaps
             return bitmap1;
         }
 
@@ -160,9 +158,9 @@ namespace CourseWork_2.HeatMap
                     bool rightBorder = (xCenter + heatDot.PixelWidth / 2) <= width;
                     if (topBorder && leftBorder && bottomBorder && rightBorder)
                     {
-                        iBuffer = iBuffer - (width * heatDot.PixelWidth / 2 - heatDot.PixelWidth / 2) * 4;
+                        iBuffer = iBuffer - (width * heatDot.PixelWidth / 2 + heatDot.PixelWidth / 2) * 4; //change start point on left top corner
                     }
-                    else
+                    else  //replace start point if out from border
                     {
                         if (!bottomBorder)
                             iBuffer = iBuffer - (width * heatDot.PixelHeight) * 4;
@@ -180,9 +178,9 @@ namespace CourseWork_2.HeatMap
 
                             //additive mode
                             if ((aScreen + aHeatDot) > 255)
-                                pixels[iBuffer + 3] = 254; //changing:not transparent pixel, because 256 and 0 bits it's transparent:(
+                                pixels[iBuffer + 3] = 254; //changing:not transparent pixel, because 255 and 0 bits it's transparent:(
                             else
-                                pixels[iBuffer + 3] = (byte)(aHeatDot * 0.9 + aScreen); //sum bits for add intensive |  "/2" for not strong intensive
+                                pixels[iBuffer + 3] = (byte)(aHeatDot * 0.9 + aScreen); //sum bits for add intensive |  "0.9" for not strong intensive
 
                             iBuffer += 4;
                         }
@@ -197,7 +195,7 @@ namespace CourseWork_2.HeatMap
             return source;
         }
 
-        public async static Task<WriteableBitmap> Resize(int width, int height, IRandomAccessStream source)
+        public async static Task<WriteableBitmap> Resize(int width, int height, IRandomAccessStream source) //create bitmap with specified width and height
         {
             WriteableBitmap small = new WriteableBitmap(width, height);
             BitmapDecoder decoder = await BitmapDecoder.CreateAsync(source);
@@ -212,47 +210,6 @@ namespace CourseWork_2.HeatMap
                 ColorManagementMode.DoNotColorManage);
             pixelData.DetachPixelData().CopyTo(small.PixelBuffer);
             return small;
-        }
-
-        public async static Task<WriteableBitmap> ResizeWritableBitmap(WriteableBitmap baseWriteBitmap, uint width, uint height)
-        {
-            // Get the pixel buffer of the writable bitmap in bytes
-            Stream stream = baseWriteBitmap.PixelBuffer.AsStream();
-            byte[] pixels = new byte[(uint)stream.Length];
-            await stream.ReadAsync(pixels, 0, pixels.Length);
-            //Encoding the data of the PixelBuffer we have from the writable bitmap
-            var inMemoryRandomStream = new InMemoryRandomAccessStream();
-            var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, inMemoryRandomStream);
-            encoder.SetPixelData(BitmapPixelFormat.Rgba8, BitmapAlphaMode.Ignore, width, height, 96, 96, pixels);
-            await encoder.FlushAsync();
-            // At this point we have an encoded image in inMemoryRandomStream
-            // We apply the transform and decode
-            var transform = new BitmapTransform
-            {
-                ScaledWidth = width,
-                ScaledHeight = height
-            };
-            inMemoryRandomStream.Seek(0);
-            var decoder = await BitmapDecoder.CreateAsync(inMemoryRandomStream);
-            var pixelData = await decoder.GetPixelDataAsync(
-                            BitmapPixelFormat.Rgba8,
-                            BitmapAlphaMode.Straight,
-                            transform,
-                            ExifOrientationMode.IgnoreExifOrientation,
-                            ColorManagementMode.DoNotColorManage);
-            //An array containing the decoded image data
-            var sourceDecodedPixels = pixelData.DetachPixelData();
-            // Approach 1 : Encoding the image buffer again:
-            //Encoding data
-            var inMemoryRandomStream2 = new InMemoryRandomAccessStream();
-            var encoder2 = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, inMemoryRandomStream2);
-            encoder2.SetPixelData(BitmapPixelFormat.Rgba8, BitmapAlphaMode.Ignore, width, height, 96, 96, sourceDecodedPixels);
-            await encoder2.FlushAsync();
-            inMemoryRandomStream2.Seek(0);
-            // finally the resized writablebitmap
-            var bitmap = new WriteableBitmap((int)width, (int)height);
-            await bitmap.SetSourceAsync(inMemoryRandomStream2);
-            return bitmap;
         }
     }
 }

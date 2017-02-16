@@ -1,4 +1,6 @@
-﻿using CourseWork_2.SwipeableSplitViewControl_Folder;
+﻿using CourseWork_2.DataBase;
+using CourseWork_2.SwipeableSplitViewControl_Folder;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -34,6 +36,11 @@ namespace CourseWork_2
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            using(var db = new PrototypingContext())
+            {
+                db.Database.Migrate();
+            }
         }
 
         /// <summary>
