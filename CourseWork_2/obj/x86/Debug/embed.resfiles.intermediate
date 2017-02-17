@@ -1,5 +1,10 @@
 App.xbf
 MainPage.xbf
+Pages\AddPrototypePage.xbf
+Pages\AddSettingsPage.xbf
+Pages\AddUserPage.xbf
+Pages\DetailsPrototypePage.xbf
+Pages\DetailsUserPage.xbf
 Pages\PrototypesPage.xbf
 Pages\ResultScreensPage.xbf
 Pages\ReviewPrototypePage.xbf

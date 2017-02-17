@@ -13,25 +13,25 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Border BorderThickness="0,0,0,1" BorderBrush="Gray">
+        <Border BorderThickness="0,0,0,1" BorderBrush="DarkGray">
             <Grid>
                 <Button Background="Transparent" Content="Cancel" Foreground="White"
-                        FontSize="18" Margin="10,0,0,0" FontWeight="Medium" />
+                        FontSize="18" Margin="0,0,0,0" FontWeight="Medium" Command="{x:Bind ViewModel.CancelCommand}" />
                 <TextBlock Text="Add Prototype" FontSize="20" FontWeight="Medium"
                            Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 <Button Background="Transparent" Content="Create" Foreground="White" FontWeight="Medium"
-                        FontSize="18" HorizontalAlignment="Right" />
+                        FontSize="18" HorizontalAlignment="Right" Command="{x:Bind ViewModel.CreateCommand}" />
             </Grid>
         </Border>
 
         <Grid Grid.Row="1">
             <StackPanel>
-                <TextBox PlaceholderText="Url" Foreground="White" Background="Transparent"
-                         Margin="0,10,0,0" BorderThickness="0,1" />
-                <TextBox PlaceholderText="Name" Background="Transparent" 
-                         Margin="0,10,0,0" BorderThickness="0,1" />
-                <TextBox PlaceholderText="Description" Height="Auto" 
-                         Background="Transparent" Margin="0,10,0,0" BorderThickness="0,1" />
+                <TextBox PlaceholderText="Url" Foreground="White" Background="Transparent" BorderBrush="DarkGray"
+                         Margin="0,10,0,0" BorderThickness="0,1" Text="{x:Bind ViewModel.UrlText, Mode=TwoWay}" />
+                <TextBox PlaceholderText="Name" Background="Transparent"  Foreground="White" BorderBrush="DarkGray"
+                         Margin="0,10,0,0" BorderThickness="0,1" Text="{x:Bind ViewModel.NameText, Mode=TwoWay}" />
+                <TextBox PlaceholderText="Description" Height="Auto" Text="{x:Bind ViewModel.DescriptionText, Mode=TwoWay}"
+                         Background="Transparent" Margin="0,10,0,0" BorderThickness="0,1" Foreground="White" BorderBrush="DarkGray" />
             </StackPanel>
         </Grid>
     </Grid>

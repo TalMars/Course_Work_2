@@ -96,7 +96,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\CountUsersRecordsToStringConverter.cs" />
+    <Compile Include="Converters\Created_LastRecord_DateTimeToStringConverter.cs" />
+    <Compile Include="Converters\DatesVisibilityConverter.cs" />
     <Compile Include="Converters\IconStartStopConverter.cs" />
+    <Compile Include="Converters\ObjectToPrototypeConverter.cs" />
     <Compile Include="Converters\RingConverter.cs" />
     <Compile Include="DataBase\PrototypingContext.cs" />
     <Compile Include="DataBase\DBModels\Prototype.cs" />
@@ -114,6 +118,21 @@
     </Compile>
     <Compile Include="Migrations\PrototypingContextModelSnapshot.cs" />
     <Compile Include="Model\ReviewPrototypeModel.cs" />
+    <Compile Include="Pages\AddPrototypePage.xaml.cs">
+      <DependentUpon>AddPrototypePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddSettingsPage.xaml.cs">
+      <DependentUpon>AddSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddUserPage.xaml.cs">
+      <DependentUpon>AddUserPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DetailsPrototypePage.xaml.cs">
+      <DependentUpon>DetailsPrototypePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DetailsUserPage.xaml.cs">
+      <DependentUpon>DetailsUserPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PrototypesPage.xaml.cs">
       <DependentUpon>PrototypesPage.xaml</DependentUpon>
     </Compile>
@@ -125,7 +144,10 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions_Folder\Extensions.cs" />
+    <Compile Include="ViewModel\AddPrototypeViewModel.cs" />
+    <Compile Include="ViewModel\AddUserViewModel.cs" />
     <Compile Include="ViewModel\Command.cs" />
+    <Compile Include="ViewModel\DetailsPrototypeViewModel.cs" />
     <Compile Include="ViewModel\NotifyPropertyChanged.cs" />
     <Compile Include="SwipeableSplitViewControl_Folder\SwipeableSplitView.cs" />
     <Compile Include="ViewModel\PrototypesViewModel.cs" />
@@ -159,6 +181,26 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\AddPrototypePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AddSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AddUserPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DetailsPrototypePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DetailsUserPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\PrototypesPage.xaml">
       <SubType>Designer</SubType>

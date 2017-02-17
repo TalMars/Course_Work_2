@@ -1,4 +1,5 @@
 ﻿using CourseWork_2.DataBase;
+using CourseWork_2.Pages;
 using CourseWork_2.SwipeableSplitViewControl_Folder;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -97,7 +98,7 @@ namespace CourseWork_2
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    rootFrame.Navigate(typeof(PrototypesPage), e.Arguments);
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();

@@ -5,35 +5,73 @@
     xmlns:local="using:CourseWork_2.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:CourseWork_2.Converters"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <converters:Created_LastRecord_DateTimeToStringConverter x:Key="DateTimeConverter" />
+        <converters:DatesVisibilityConverter x:Key="DatesVisibilityConverter" />
+        <converters:CountUsersRecordsToStringConverter x:Key="countURConverter" />
+        <converters:ObjectToPrototypeConverter x:Key="itemConverter" />
+    </Page.Resources>
 
     <Grid Background="#2b3346">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="60" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Border BorderThickness="0,0,0,1" BorderBrush="Gray">
+        <Border BorderThickness="0,0,0,1" BorderBrush="DarkGray">
             <Grid>
                 <TextBlock Text="Prototypes" VerticalAlignment="Center" HorizontalAlignment="Center"
                        FontSize="20" Foreground="White" FontWeight="Medium" />
-                <Button Background="Transparent" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+                <Button Background="Transparent" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"
+                        Margin="0,0,5,0" Command="{x:Bind ViewModel.AddCommand}">
                     <SymbolIcon Symbol="Add" />
                 </Button>
             </Grid>
         </Border>
 
         <Grid Grid.Row="1">
-            <ListView ItemsSource="{Binding}">
+            <ListView ItemsSource="{x:Bind ViewModel.Prototypes}" 
+                      SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay, Converter={StaticResource itemConverter}}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding}" />
-                            <TextBlock Text="{Binding}" />
-                            <TextBlock Text="{Binding}" />
-                        </StackPanel>
+                        <Grid Margin="10,10,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.25*" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Viewbox>
+                                <SymbolIcon Foreground="DarkGray" Symbol="CellPhone" />
+                            </Viewbox>
+                            <Grid Grid.Column="1" Margin="5,0,0,0">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}" Foreground="White" FontSize="18" />
+                                    <TextBlock Text="{Binding PrototypeId, Converter={StaticResource countURConverter}, ConverterParameter=prototype}" Foreground="DarkGray" FontSize="14" />
+                                    <Grid Margin="0,5,0,0">
+                                        <Border BorderBrush="DarkGray" BorderThickness="0,0,0,1"
+                                        Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=lastRecord}">
+                                            <TextBlock Text="{Binding LastRecordingDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=lastRecord}"
+                                               Foreground="DarkGray" FontSize="12" VerticalAlignment="Bottom" Margin="0,0,0,5" />
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" BorderThickness="0,0,0,1" 
+                                        Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=created}">
+                                            <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=created}" 
+                                               Foreground="DarkGray" FontSize="12" VerticalAlignment="Bottom" Margin="0,0,0,5" />
+                                        </Border>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Setter Property="Padding" Value="0" />
+                    </Style>
+                </ListView.ItemContainerStyle>
             </ListView>
         </Grid>
     </Grid>

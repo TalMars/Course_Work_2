@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseWork_2.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,11 @@ namespace CourseWork_2.Pages
         public AddPrototypePage()
         {
             this.InitializeComponent();
+
+            ViewModel = new AddPrototypeViewModel();
         }
+
+        public AddPrototypeViewModel ViewModel { get; private set; }
+
     }
 }

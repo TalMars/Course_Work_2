@@ -5,9 +5,16 @@
     xmlns:local="using:CourseWork_2.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:CourseWork_2.Converters"
     mc:Ignorable="d">
 
-    <Grid Background="#2b3346">
+    <Page.Resources>
+        <converters:Created_LastRecord_DateTimeToStringConverter x:Key="DateTimeConverter" />
+        <converters:DatesVisibilityConverter x:Key="DatesVisibilityConverter" />
+        <converters:CountUsersRecordsToStringConverter x:Key="countURConverter" />
+    </Page.Resources>
+
+    <Grid Background="#2b3346"  DataContext="{x:Bind ViewModel.PrototypeModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="60" />
             <RowDefinition Height="0.15*" />
@@ -20,21 +27,23 @@
             <ColumnDefinition Width="0.2*" />
         </Grid.ColumnDefinitions>
 
-        <Border Grid.ColumnSpan="3" BorderThickness="0,0,0,1" BorderBrush="Gray">
+        <Border Grid.ColumnSpan="3" BorderThickness="0,0,0,1" BorderBrush="DarkGray">
             <Grid>
-                <Button Background="Transparent" Foreground="White">
+                <Button Background="Transparent" Foreground="White" Command="{x:Bind ViewModel.GoBackCommand}">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Margin="0,0,5,0" Symbol="Back" />
-                        <TextBlock Text="Prototypes" FontSize="18" FontWeight="Medium" />
+                        <TextBlock Text="Prototypes" FontSize="16" FontWeight="Medium" />
                     </StackPanel>
                 </Button>
                 <TextBlock Text="Details" FontSize="20" FontWeight="Medium"
                            Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Background="Transparent" Foreground="White" HorizontalAlignment="Right" Margin="0,0,10,0">
+                    <Button Background="Transparent" Foreground="White" HorizontalAlignment="Right" Margin="0,0,10,0"
+                            Command="{x:Bind ViewModel.EditCommand}">
                         <SymbolIcon Symbol="Edit" />
                     </Button>
-                    <Button Background="Transparent" HorizontalAlignment="Right" Foreground="White" Margin="0,0,5,0">
+                    <Button Background="Transparent" HorizontalAlignment="Right" Foreground="White" Margin="0,0,5,0"
+                            Command="{x:Bind ViewModel.AddCommand}">
                         <SymbolIcon Symbol="Add" />
                     </Button>
                 </StackPanel>
@@ -42,7 +51,7 @@
         </Border>
 
         <Viewbox x:Name="VBSymbol" Grid.Row="1" VerticalAlignment="Center">
-            <SymbolIcon Symbol="CellPhone" RequestedTheme="Dark" />
+            <SymbolIcon Symbol="CellPhone" Foreground="DarkGray" />
         </Viewbox>
         <Grid Grid.Row="1" Grid.Column="1" Height="{Binding ElementName=VBSymbol, Path=ActualHeight}">
             <Grid.RowDefinitions>
@@ -50,12 +59,20 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <StackPanel>
-                <TextBlock Text="NamePrototype" Foreground="White" FontSize="18" />
-                <TextBlock Text="6 users, 5 records" Foreground="White" FontSize="14" />
+                <TextBlock Text="{Binding Name}" Foreground="White" FontSize="18" />
+                <TextBlock Text="{Binding PrototypeId, Converter={StaticResource countURConverter}, ConverterParameter=prototype}" Foreground="DarkGray" FontSize="14" />
             </StackPanel>
-            <TextBlock Grid.Row="1" VerticalAlignment="Bottom" Text="Record Status" Foreground="White" FontSize="12" />
+            <Grid Grid.Row="1">
+                <TextBlock Text="{Binding LastRecordingDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=lastRecord}"
+                               Foreground="DarkGray" FontSize="12" VerticalAlignment="Bottom" Margin="0,0,0,5"
+                               Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=lastRecord}"/>
+                <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=created}" 
+                           Foreground="DarkGray" FontSize="12" VerticalAlignment="Bottom" Margin="0,0,0,5"
+                           Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=created}"/>
+            </Grid>
         </Grid>
-        <Button Grid.Row="1" Grid.Column="2" Foreground="White" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Button Grid.Row="1" Grid.Column="2" Foreground="DarkGray" Background="Transparent" 
+                HorizontalAlignment="Center" VerticalAlignment="Center" Command="{x:Bind ViewModel.ResultScreensCommand}">
             <Viewbox>
                 <SymbolIcon Symbol="SelectAll" />
             </Viewbox>
@@ -66,12 +83,12 @@
                 <RowDefinition Height="0.5*" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <TextBlock Text="Url" Foreground="White" FontSize="12" Margin="15,0,15,0" />
-            <TextBlock Grid.Row="1" Text="Description" Foreground="White" FontSize="12" Margin="15,0,15,5" />
+            <TextBlock Text="{Binding Url}" Foreground="White" FontSize="12" Margin="15,0,15,0" />
+            <TextBlock Grid.Row="1" Text="{Binding Description}" Foreground="White" FontSize="12" Margin="15,0,15,5" />
         </Grid>
 
         <Grid Grid.Row="3" Grid.ColumnSpan="3">
-            <ListView ItemsSource="{x:Bind ViewModel.UserList}">
+            <ListView ItemsSource="{x:Bind ViewModel.Users}" SelectedItem="{x:Bind ViewModel.SelectedItem}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="10,5,0,0">
@@ -80,16 +97,25 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Viewbox>
-                                <SymbolIcon RequestedTheme="Dark" Symbol="Contact2" />
+                                <SymbolIcon Foreground="DarkGray" Symbol="Contact2" />
                             </Viewbox>
-                            <Grid Grid.Column="1" Margin="10,0,0,0">
+                            <Grid Grid.Column="1" Margin="5,0,0,0">
                                 <StackPanel>
-                                    <TextBlock Text="NameUser" Foreground="White" FontSize="18" />
-                                    <TextBlock Text="5 records" Foreground="White" FontSize="14" />
+                                    <TextBlock Text="{Binding Name}" Foreground="White" FontSize="18" />
+                                    <TextBlock Text="{Binding UserPrototypeId, Converter={StaticResource countURConverter}, ConverterParameter=user}" Foreground="DarkGray" FontSize="14" />
+                                    <Grid Margin="0,5,0,0">
+                                        <Border BorderBrush="DarkGray" BorderThickness="0,0,0,1"
+                                        Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=lastRecord}">
+                                            <TextBlock Text="{Binding LastRecordingDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=lastRecord}"
+                                               Foreground="DarkGray" FontSize="12" VerticalAlignment="Bottom" Margin="0,0,0,5" />
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" BorderThickness="0,0,0,1" 
+                                        Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=created}">
+                                            <TextBlock Text="{Binding AddedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=added}" 
+                                               Foreground="DarkGray" FontSize="12" VerticalAlignment="Bottom" Margin="0,0,0,5" />
+                                        </Border>
+                                    </Grid>
                                 </StackPanel>
-                                <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="0,0,0,1" >
-                                    <TextBlock VerticalAlignment="Bottom" Text="Record Status" Foreground="White" FontSize="12" />
-                                </Border>
                             </Grid>
                         </Grid>
                     </DataTemplate>

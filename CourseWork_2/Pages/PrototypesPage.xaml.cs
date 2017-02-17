@@ -30,11 +30,6 @@ namespace CourseWork_2.Pages
             ViewModel = new PrototypesViewModel();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            
-        }
-
         public PrototypesViewModel ViewModel { get; private set; }
     }
 }
