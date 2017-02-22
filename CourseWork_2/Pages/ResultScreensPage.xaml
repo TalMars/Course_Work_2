@@ -8,11 +8,12 @@
     xmlns:converters_Folder="using:CourseWork_2.Converters"
     mc:Ignorable="d">
     <Page.Resources>
-        <converters_Folder:RingConverter x:Key="ringConverter" />
+        <converters_Folder:BoolToVisibilityConverter x:Key="ringConverter" />
+        <converters_Folder:ByteArrayToImageConverter x:Key="byteImageConverter" />
     </Page.Resources>
     <Grid Background="#2b3346">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.1*" MaxHeight="60" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -24,15 +25,15 @@
         </Border>
 
         <Grid Grid.Row="1">
-            <Image Source="{x:Bind ViewModel.SelectedScreen, Mode=OneWay}" Height="Auto" Width="Auto"
-                   Visibility="{x:Bind ViewModel.SelectVisibility, Mode=OneWay, Converter={StaticResource ringConverter}}"
+            <Image Source="{x:Bind ViewModel.SelectedScreen, Mode=OneWay, Converter={StaticResource byteImageConverter}}" Height="Auto" Width="Auto"
+                   Visibility="{x:Bind ViewModel.SelectVisibility, Mode=OneWay, Converter={StaticResource ringConverter}, ConverterParameter=inverse}"
                    DoubleTapped="{x:Bind ViewModel.SelectScreen_DoubleTapped, Mode=OneWay}" />
 
-            <GridView ItemsSource="{x:Bind ViewModel.Screens, Mode=OneWay}" Visibility="{x:Bind ViewModel.SelectVisibility, Mode=OneWay, Converter={StaticResource ringConverter}, ConverterParameter=content}" 
+            <GridView ItemsSource="{x:Bind ViewModel.Screens, Mode=OneWay}" Visibility="{x:Bind ViewModel.SelectVisibility, Mode=OneWay, Converter={StaticResource ringConverter}, ConverterParameter=right}" 
                       SelectionChanged="{x:Bind ViewModel.GridView_SelectionChanged, Mode=OneWay}">
                 <GridView.ItemTemplate>
                     <DataTemplate>
-                        <Image Source="{Binding HeatMapScreen}"
+                        <Image Source="{Binding HeatMapScreen, Converter={StaticResource byteImageConverter}}"
                                Width="{Binding WidthImage}"  Height="{Binding HeightImage}" />
                     </DataTemplate>
                 </GridView.ItemTemplate>
@@ -44,7 +45,7 @@
             </GridView>
 
             <ProgressRing Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"
-                          Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource ringConverter}}"
+                          Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource ringConverter}, ConverterParameter=inverse}"
                                   IsActive="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay}"/>
         </Grid>
     </Grid>

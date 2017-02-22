@@ -298,3 +298,9 @@ C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\bin\x86\Debug\Pages\AddUserPage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\bin\x86\Debug\Pages\DetailsPrototypePage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\bin\x86\Debug\Pages\DetailsUserPage.xbf
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\bin\x86\Debug\Templates\SplitViewStyle.xbf
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\obj\x86\Debug\Templates\SplitViewStyle.xaml
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\obj\x86\Debug\Templates\SplitViewStyle.xbf
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\obj\x86\Debug\Templates\AppBarStyle.xaml
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\obj\x86\Debug\Templates\AppBarStyle.xbf
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\bin\x86\Debug\Templates\AppBarStyle.xbf

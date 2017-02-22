@@ -8,11 +8,12 @@
     xmlns:converters_Folder="using:CourseWork_2.Converters"
     mc:Ignorable="d">
     <Page.Resources>
-        <converters_Folder:RingConverter x:Key="ringConverter" />
+        <converters_Folder:BoolToVisibilityConverter x:Key="ringConverter" />
+        <converters_Folder:ByteArrayToImageConverter x:Key="byteImageConverter" />
     </Page.Resources>
     <Grid Background="#2b3346">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.1*" MaxHeight="60" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -24,15 +25,15 @@
         </Border>
 
         <Grid Grid.Row="1">
-            <Image x:ConnectionId='2'                                                         Height="Auto" Width="Auto"
-                                                                                                                          
+            <Image x:ConnectionId='2'                                                                                                        Height="Auto" Width="Auto"
+                                                                                                                                                      
                                                                                             />
 
-            <GridView x:ConnectionId='3'                                                                                                                                                                                           
+            <GridView x:ConnectionId='3'                                                                                                                                                                                         
                                                                                                   >
                 <GridView.ItemTemplate>
                     <DataTemplate>
-                        <Image Source="{Binding HeatMapScreen}"
+                        <Image Source="{Binding HeatMapScreen, Converter={StaticResource byteImageConverter}}"
                                Width="{Binding WidthImage}"  Height="{Binding HeightImage}" />
                     </DataTemplate>
                 </GridView.ItemTemplate>
@@ -44,7 +45,7 @@
             </GridView>
 
             <ProgressRing x:ConnectionId='4' Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"
-                                                                                                                                      
+                                                                                                                                                                  
                                                                                                   />
         </Grid>
     </Grid>

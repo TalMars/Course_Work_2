@@ -1,4 +1,6 @@
-﻿using CourseWork_2.Extensions_Folder;
+﻿using CourseWork_2.DataBase;
+using CourseWork_2.DataBase.DBModels;
+using CourseWork_2.Extensions_Folder;
 using CourseWork_2.HeatMap;
 using CourseWork_2.Model;
 using CourseWork_2.Pages;
@@ -16,9 +18,6 @@ namespace CourseWork_2.ViewModel
 {
     public class ReviewPrototypeViewModel : NotifyPropertyChanged
     {
-        private string uri7_2 = "https://marvelapp.com/2e6cj49";
-
-
         private bool isSplitViewPaneOpen;
         private string _sourceWebView = null;
         private bool _isOnStart;
@@ -43,12 +42,21 @@ namespace CourseWork_2.ViewModel
         }
         #endregion
 
-        public ReviewPrototypeViewModel()
+        public ReviewPrototypeViewModel(int userId)
         {
             ChangeUserAgent(androidASUS);
 
             _screens = new ObservableCollection<ReviewPrototypeModel>();
             IsOnStart = true;
+
+            using (var db = new PrototypingContext())
+            {
+                db.RecordsPrototype.Add(new RecordPrototype() { CreatedDate = DateTime.Now, UserPrototypeId = userId, UserPrototype = db.Users.Single(u => u.UserPrototypeId == userId) });
+                db.SaveChanges();
+                UserPrototype user = db.Users.Single(u => u.UserPrototypeId == userId);
+                db.Entry(user).Reference(u => u.Prototype).Load();
+                SourceWebView = user.Prototype.Url;
+            }
         }
 
         #region properties
@@ -57,7 +65,6 @@ namespace CourseWork_2.ViewModel
             get { return _sourceWebView; }
             set { Set(ref _sourceWebView, value); }
         }
-
 
         public bool IsSplitViewPaneOpen
         {
@@ -89,7 +96,6 @@ namespace CourseWork_2.ViewModel
         {
             if (_isOnStart)
             {
-                SourceWebView = uri7_2;
                 IsOnStart = false;
                 IsSplitViewPaneOpen = false;
             }
@@ -226,7 +232,7 @@ namespace CourseWork_2.ViewModel
 
             int screenHeight = (int)webview.ActualHeight;
             int screenWidth = (int)webview.ActualWidth;
-            
+
             InMemoryRandomAccessStream ms = new InMemoryRandomAccessStream();
             await webview.CapturePreviewToStreamAsync(ms);
 

@@ -1,6 +1,7 @@
 ﻿using CourseWork_2.DataBase;
 using CourseWork_2.DataBase.DBModels;
 using CourseWork_2.Pages;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Popups;
 
 namespace CourseWork_2.ViewModel
 {
@@ -16,28 +18,18 @@ namespace CourseWork_2.ViewModel
         private ObservableCollection<UserPrototype> _users;
         private Prototype _prototypeModel;
         private UserPrototype _selectedItem;
+        private bool _isOpenCommandBar;
+
+        private ICommand _goBackCommand;
+        private ICommand _openAppBarCommand;
+        private ICommand _resultScreensCommand;
+        private ICommand _addCommand;
+        private ICommand _editCommand;
+        private ICommand _removeCommad;
 
         public DetailsPrototypeViewModel(int prototypeId)
         {
-            GoBackCommand = new Command(() => 
-            {
-                ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(PrototypesPage));
-            });
-
-            EditCommand = new Command(() => 
-            {
-                //((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(AddPrototypePage), prototype);
-            });
-
-            AddCommand = new Command(() =>
-            {
-                ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(AddUserPage), prototypeId);
-            });
-
-            ResultScreensCommand = new Command(() => 
-            {
-                //((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(ResultScreensPage), prototype);
-            });
+            IsOpenCommandBar = false;
 
             using (var db = new PrototypingContext())
             {
@@ -50,13 +42,13 @@ namespace CourseWork_2.ViewModel
         public ObservableCollection<UserPrototype> Users
         {
             get { return _users; }
-            set { _users = value; OnPropertyChanged("Users"); }
+            set { Set(ref _users, value); }
         }
 
         public Prototype PrototypeModel
         {
             get { return _prototypeModel; }
-            set { _prototypeModel = value; OnPropertyChanged("PrototypeModel"); }
+            set { Set(ref _prototypeModel, value); }
         }
 
         public UserPrototype SelectedItem
@@ -64,24 +56,88 @@ namespace CourseWork_2.ViewModel
             get { return _selectedItem; }
             set
             {
-                if(_selectedItem != value)
+                if (_selectedItem != value)
                 {
-                    _selectedItem = value;
-                    OnPropertyChanged("SelectedItem");
-                    ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(DetailsUserPage), value);
+                    Set(ref _selectedItem, value);
+                    ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(DetailsUserPage), value.UserPrototypeId);
                 }
             }
+        }
+
+        public bool IsOpenCommandBar
+        {
+            get { return _isOpenCommandBar; }
+            set { Set(ref _isOpenCommandBar, value); }
         }
         #endregion
 
         #region events
-        public ICommand GoBackCommand { get; private set; }
-        
-        public ICommand EditCommand { get; private set; }
+        public ICommand GoBackCommand
+        {
+            get
+            {
+                return _goBackCommand ?? (_goBackCommand = new Command(() => GoBackFunc()));
+            }
+        }
+        private void GoBackFunc()
+        {
+            ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(PrototypesPage));
+        }
 
-        public ICommand AddCommand { get; private set; }
+        public ICommand OpenAppBarCommand
+        {
+            get
+            {
+                return _openAppBarCommand ?? (_openAppBarCommand = new Command(() => IsOpenCommandBar = true));
+            }
+        }
+
+        public ICommand AddCommand
+        {
+            get
+            {
+                return _addCommand ?? (_addCommand = new Command(() => AddUserFunc()));
+            }
+        }
+
+        private void AddUserFunc()
+        {
+            ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(AddUserPage), PrototypeModel.PrototypeId);
+        }
+
+        public ICommand EditCommand
+        {
+            get
+            {
+                return _editCommand ?? (_editCommand = new Command(() => EditFunc()));
+            }
+        }
+        private void EditFunc()
+        {
+            ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(AddPrototypePage), PrototypeModel);
+        }
+
+        public ICommand RemoveCommand
+        {
+            get
+            {
+                return _removeCommad ?? (_removeCommad = new Command(() => RemoveFunc()));
+            }
+        }
+        private void RemoveFunc()
+        {
+            using (var db = new PrototypingContext())
+            {
+                db.Prototypes.Remove(PrototypeModel);
+                db.SaveChanges();
+            }
+            ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(PrototypesPage));
+        }
 
         public ICommand ResultScreensCommand { get; private set; }
+
+
+
         #endregion
     }
 }

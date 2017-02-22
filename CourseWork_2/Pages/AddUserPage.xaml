@@ -5,26 +5,32 @@
     xmlns:local="using:CourseWork_2.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:CourseWork_2.Converters"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="boolVisConverter" />
+    </Page.Resources>
 
     <Grid Background="#2b3346">
         <Grid.RowDefinitions>
-            <RowDefinition Height="60" />
+            <RowDefinition Height="0.1*" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
         <Border Grid.ColumnSpan="3" BorderThickness="0,0,0,1" BorderBrush="DarkGray">
             <Grid>
-                <Button Background="Transparent" Foreground="White" Command="{x:Bind ViewModel.GoBackCommand}">
-                    <StackPanel Orientation="Horizontal">
-                        <SymbolIcon Margin="0,0,5,0" Symbol="Back" />
-                        <TextBlock Text="Prototype" FontSize="16" FontWeight="Medium" />
-                    </StackPanel>
-                </Button>
+                <Button Background="Transparent" Content="Cancel" FontSize="16" FontWeight="Medium" Foreground="White" Command="{x:Bind ViewModel.GoBackCommand}" />
+
                 <TextBlock Text="Add User" FontSize="20" FontWeight="Medium"
                            Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                
                 <Button Background="Transparent" Content="Create" HorizontalAlignment="Right" FontSize="16" FontWeight="Medium"
-                        Foreground="White" Command="{x:Bind ViewModel.CreateCommand}" />
+                        Foreground="White" Command="{x:Bind ViewModel.CreateCommand}"
+                        Visibility="{x:Bind ViewModel.IsEdit, Converter={StaticResource boolVisConverter}, ConverterParameter=right}"/>
+                <Button Background="Transparent" Content="Save" HorizontalAlignment="Right" FontSize="16" FontWeight="Medium"
+                        Foreground="White" Command="{x:Bind ViewModel.SaveCommand}"
+                        Visibility="{x:Bind ViewModel.IsEdit, Converter={StaticResource boolVisConverter}, ConverterParameter=inverse}"/>
             </Grid>
         </Border>
 
@@ -35,7 +41,7 @@
                          Text="{x:Bind ViewModel.NameText, Mode=TwoWay}" />
                 <TextBox PlaceholderText="Biography" Background="Transparent"  BorderBrush="DarkGray"
                          Margin="0,10,0,0" BorderThickness="0,1" Height="Auto" Foreground="White"
-                         Text="{x:Bind ViewModel.BiographyText, Mode=TwoWay}" />
+                         Text="{x:Bind ViewModel.BiographyText, Mode=TwoWay}" TextWrapping="Wrap" MaxLength="200" />
             </StackPanel>
         </Grid>
 

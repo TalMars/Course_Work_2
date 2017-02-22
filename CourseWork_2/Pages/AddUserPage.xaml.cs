@@ -31,7 +31,10 @@ namespace CourseWork_2.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            ViewModel = new AddUserViewModel((int)e.Parameter);
+            if (e.Parameter is int)
+                ViewModel = new AddUserViewModel((int)e.Parameter);
+            if (e.Parameter is UserPrototype)
+                ViewModel = new AddUserViewModel((UserPrototype)e.Parameter);
         }
 
         public AddUserViewModel ViewModel { get; private set; }

@@ -9,14 +9,33 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <converters:Created_LastRecord_DateTimeToStringConverter x:Key="DateTimeConverter" />
-        <converters:DatesVisibilityConverter x:Key="DatesVisibilityConverter" />
-        <converters:CountUsersRecordsToStringConverter x:Key="countURConverter" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Templates/AppBarStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:DateTimeToStringConverter x:Key="DateTimeConverter" />
+            <converters:DatesVisibilityConverter x:Key="DatesVisibilityConverter" />
+            <converters:CountUsersRecordsToStringConverter x:Key="countURConverter" />
+            <converters:ReturnModelConverter x:Key="itemConverter" />
+        </ResourceDictionary>
     </Page.Resources>
 
-    <Grid x:ConnectionId='2' Background="#2b3346"                                                 >
+    <Page.BottomAppBar>
+        <AppBar x:ConnectionId='2' ClosedDisplayMode="Hidden"                                                          
+                Style="{StaticResource AppBarStyle1}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <AppBarButton x:ConnectionId='3' Icon="Add"                                         Label="Add" />
+                <AppBarSeparator />
+                <AppBarButton x:ConnectionId='4' Icon="Edit"                                          Label="Edit" />
+                <AppBarSeparator />
+                <AppBarButton x:ConnectionId='5' Icon="Delete"                                            Label="Delete" />
+            </StackPanel>
+        </AppBar>
+    </Page.BottomAppBar>
+
+    <Grid x:ConnectionId='6' Background="#2b3346"                                                 >
         <Grid.RowDefinitions>
-            <RowDefinition Height="60" />
+            <RowDefinition Height="0.1*" MaxHeight="60" />
             <RowDefinition Height="0.15*" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="0.65*"/>
@@ -28,35 +47,31 @@
         </Grid.ColumnDefinitions>
 
         <Border Grid.ColumnSpan="3" BorderThickness="0,0,0,1" BorderBrush="DarkGray">
-            <Grid>
-                <Button x:ConnectionId='6' Background="Transparent" Foreground="White"                                           >
+            <Grid x:ConnectionId='10' x:Name="Header">
+                <Button x:ConnectionId='11' Background="Transparent" Foreground="White"                                           >
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Margin="0,0,5,0" Symbol="Back" />
-                        <TextBlock Text="Prototypes" FontSize="16" FontWeight="Medium" />
+                        <TextBlock Text="Prototypes" FontSize="14" FontWeight="Medium" />
                     </StackPanel>
                 </Button>
-                <TextBlock Text="Details" FontSize="20" FontWeight="Medium"
+                <TextBlock Text="Prototype" FontSize="20" FontWeight="Medium"
                            Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:ConnectionId='7' Background="Transparent" Foreground="White" HorizontalAlignment="Right" Margin="0,0,10,0"
-                                                                    >
-                        <SymbolIcon Symbol="Edit" />
-                    </Button>
-                    <Button x:ConnectionId='8' Background="Transparent" HorizontalAlignment="Right" Foreground="White" Margin="0,0,5,0"
-                                                                   >
-                        <SymbolIcon Symbol="Add" />
+                    <Button x:ConnectionId='12' Background="Transparent" Foreground="White" HorizontalAlignment="Right" Margin="0,0,10,0"
+                                                                          >
+                        <SymbolIcon Symbol="More" />
                     </Button>
                 </StackPanel>
             </Grid>
         </Border>
 
-        <Viewbox x:ConnectionId='3' x:Name="VBSymbol" Grid.Row="1" VerticalAlignment="Center">
+        <Viewbox x:ConnectionId='7' x:Name="VBSymbol" Grid.Row="1" VerticalAlignment="Center">
             <SymbolIcon Symbol="CellPhone" Foreground="DarkGray" />
         </Viewbox>
         <Grid Grid.Row="1" Grid.Column="1" Height="{Binding ElementName=VBSymbol, Path=ActualHeight}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="1.3*" />
-                <RowDefinition />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <StackPanel>
                 <TextBlock Text="{Binding Name}" Foreground="White" FontSize="18" />
@@ -64,31 +79,32 @@
             </StackPanel>
             <Grid Grid.Row="1">
                 <TextBlock Text="{Binding LastRecordingDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=lastRecord}"
-                               Foreground="DarkGray" FontSize="12" VerticalAlignment="Bottom" Margin="0,0,0,5"
+                               Foreground="DarkGray" FontSize="12" Margin="0,0,0,5"
                                Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=lastRecord}"/>
                 <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=created}" 
-                           Foreground="DarkGray" FontSize="12" VerticalAlignment="Bottom" Margin="0,0,0,5"
+                           Foreground="DarkGray" FontSize="12" Margin="0,0,0,5"
                            Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=created}"/>
             </Grid>
         </Grid>
-        <Button x:ConnectionId='4' Grid.Row="1" Grid.Column="2" Foreground="DarkGray" Background="Transparent" 
+        <Button x:ConnectionId='8' Grid.Row="1" Grid.Column="2" Foreground="DarkGray" Background="Transparent" 
                 HorizontalAlignment="Center" VerticalAlignment="Center"                                                  >
             <Viewbox>
                 <SymbolIcon Symbol="SelectAll" />
             </Viewbox>
         </Button>
 
-        <Grid Grid.Row="2" Grid.ColumnSpan="3" BorderBrush="Gray" BorderThickness="0,0,0,1">
+        <Grid Grid.Row="2" Grid.ColumnSpan="3" BorderBrush="DarkGray" BorderThickness="0,0,0,1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.5*" />
                 <RowDefinition />
             </Grid.RowDefinitions>
             <TextBlock Text="{Binding Url}" Foreground="White" FontSize="12" Margin="15,0,15,0" />
-            <TextBlock Grid.Row="1" Text="{Binding Description}" Foreground="White" FontSize="12" Margin="15,0,15,5" />
+            <TextBlock Grid.Row="1" Text="{Binding Description}" TextWrapping="Wrap" Height="Auto" Foreground="White" FontSize="12" Margin="15,0,15,5" />
         </Grid>
 
         <Grid Grid.Row="3" Grid.ColumnSpan="3">
-            <ListView x:ConnectionId='5'                                                                                      >
+            <ListView x:ConnectionId='9'                                        
+                                                                                                                           >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="10,5,0,0">
@@ -128,6 +144,7 @@
                 </ListView.ItemContainerStyle>
             </ListView>
         </Grid>
+
     </Grid>
 </Page>
 

@@ -5,8 +5,13 @@
     xmlns:local="using:CourseWork_2.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:CourseWork_2.Converters"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="boolVisConverter" />
+    </Page.Resources>    
+    
     <Grid Background="#2b3346">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*" />
@@ -20,7 +25,11 @@
                 <TextBlock Text="Add Prototype" FontSize="20" FontWeight="Medium"
                            Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 <Button Background="Transparent" Content="Create" Foreground="White" FontWeight="Medium"
-                        FontSize="18" HorizontalAlignment="Right" Command="{x:Bind ViewModel.CreateCommand}" />
+                        FontSize="18" HorizontalAlignment="Right" Command="{x:Bind ViewModel.CreateCommand}"
+                        Visibility="{x:Bind ViewModel.IsEdit,Converter={StaticResource boolVisConverter}, ConverterParameter=right}"/>
+                <Button Background="Transparent" Content="Save" Foreground="White" FontWeight="Medium"
+                        FontSize="18" HorizontalAlignment="Right" Command="{x:Bind ViewModel.SaveCommand}"
+                        Visibility="{x:Bind ViewModel.IsEdit, Converter={StaticResource boolVisConverter}, ConverterParameter=inverse}" />
             </Grid>
         </Border>
 
@@ -31,7 +40,8 @@
                 <TextBox PlaceholderText="Name" Background="Transparent"  Foreground="White" BorderBrush="DarkGray"
                          Margin="0,10,0,0" BorderThickness="0,1" Text="{x:Bind ViewModel.NameText, Mode=TwoWay}" />
                 <TextBox PlaceholderText="Description" Height="Auto" Text="{x:Bind ViewModel.DescriptionText, Mode=TwoWay}"
-                         Background="Transparent" Margin="0,10,0,0" BorderThickness="0,1" Foreground="White" BorderBrush="DarkGray" />
+                         Background="Transparent" Margin="0,10,0,0" BorderThickness="0,1" Foreground="White" BorderBrush="DarkGray"
+                         TextWrapping="Wrap" MaxLength="200"/>
             </StackPanel>
         </Grid>
     </Grid>

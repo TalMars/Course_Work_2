@@ -1,4 +1,5 @@
-﻿using CourseWork_2.ViewModel;
+﻿using CourseWork_2.DataBase.DBModels;
+using CourseWork_2.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -55,15 +56,13 @@ namespace CourseWork_2.Pages
         public ReviewPrototypePage()
         {
             this.InitializeComponent();
-
-            var vm = new ReviewPrototypeViewModel();
-            this.ViewModel = vm;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             //await Windows.UI.ViewManagement.StatusBar.GetForCurrentView().HideAsync();
            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
+           ViewModel = new ReviewPrototypeViewModel((int)e.Parameter);
         }
 
         public ReviewPrototypeViewModel ViewModel { get; private set; }

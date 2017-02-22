@@ -1,4 +1,5 @@
-﻿using CourseWork_2.HeatMap;
+﻿using CourseWork_2.DataBase.DBModels;
+using CourseWork_2.HeatMap;
 using CourseWork_2.Model;
 using System;
 using System.Collections.Generic;
@@ -11,17 +12,17 @@ namespace CourseWork_2.ViewModel
 {
     public class ResultScreensViewModel : NotifyPropertyChanged
     {
-        private ObservableCollection<ReviewPrototypeModel> _screens;
+        private ObservableCollection<RecordsScreen> _screens;
         private bool _ringContentVisibility;
         private bool _selectVisibility;
-        private Windows.UI.Xaml.Media.Imaging.WriteableBitmap _selectedScreen;
+        private byte[] _selectedScreen;
 
         public ResultScreensViewModel()
         {
         }
 
         #region properties
-        public ObservableCollection<ReviewPrototypeModel> Screens
+        public ObservableCollection<RecordsScreen> Screens
         {
             get { return _screens; }
             set { Set(ref _screens, value); }
@@ -39,7 +40,7 @@ namespace CourseWork_2.ViewModel
             set { Set(ref _selectVisibility, value); }
         }
 
-        public Windows.UI.Xaml.Media.Imaging.WriteableBitmap SelectedScreen
+        public byte[] SelectedScreen
         {
             get { return _selectedScreen; }
             set { Set(ref _selectedScreen, value); }
@@ -52,7 +53,7 @@ namespace CourseWork_2.ViewModel
             if (screensGridView.SelectedItem == null)
                 return;
 
-            SelectedScreen = ((ReviewPrototypeModel)screensGridView.SelectedItem).HeatMapScreen;
+            SelectedScreen = ((RecordsScreen)screensGridView.SelectedItem).HeatMapScreen;
             SelectVisibility = true;
 
             screensGridView.SelectedItem = null;

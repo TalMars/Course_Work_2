@@ -1,4 +1,5 @@
-﻿using CourseWork_2.ViewModel;
+﻿using CourseWork_2.DataBase.DBModels;
+using CourseWork_2.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,7 +28,14 @@ namespace CourseWork_2.Pages
         {
             this.InitializeComponent();
 
-            ViewModel = new AddPrototypeViewModel();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if(e.Parameter == null)
+                ViewModel = new AddPrototypeViewModel();
+            else
+                ViewModel = new AddPrototypeViewModel((Prototype)e.Parameter);
         }
 
         public AddPrototypeViewModel ViewModel { get; private set; }

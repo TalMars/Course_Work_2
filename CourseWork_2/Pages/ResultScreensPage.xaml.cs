@@ -1,4 +1,6 @@
-﻿using CourseWork_2.HeatMap;
+﻿using CourseWork_2.DataBase;
+using CourseWork_2.DataBase.DBModels;
+using CourseWork_2.HeatMap;
 using CourseWork_2.Model;
 using CourseWork_2.ViewModel;
 using System;
@@ -29,7 +31,7 @@ namespace CourseWork_2.Pages
     public sealed partial class ResultScreensPage : Page
     {
         private ResultScreensViewModel vm;
-        
+
         public ResultScreensPage()
         {
             this.InitializeComponent();
@@ -51,14 +53,32 @@ namespace CourseWork_2.Pages
             private set { vm = value; }
         }
 
-        private async Task<ObservableCollection<ReviewPrototypeModel>> HeatingScreens(ObservableCollection<ReviewPrototypeModel> screenPoints)
+        private async Task<ObservableCollection<RecordsScreen>> HeatingScreens(ObservableCollection<ReviewPrototypeModel> screenPoints)
         {
-            foreach (ReviewPrototypeModel picturePoints in screenPoints)
+            ObservableCollection<RecordsScreen> result = new ObservableCollection<RecordsScreen>();
+            using (var db = new PrototypingContext())
             {
-                WriteableBitmap screenHeatMap = await HeatMapFunctions.CreateProcessHeatMap(picturePoints.ScreenPage, picturePoints.ListPoints);
-                picturePoints.HeatMapScreen = screenHeatMap;
+                int recordId = db.RecordsPrototype.Last().RecordPrototypeId;
+                foreach (ReviewPrototypeModel picturePoints in screenPoints)
+                {
+                    picturePoints.HeatMapScreen = await HeatMapFunctions.CreateProcessHeatMap(picturePoints.ScreenPage, picturePoints.ListPoints);
+
+                    RecordsScreen rScreen = new RecordsScreen()
+                    {
+                        RecordPrototypeId = recordId,
+                        Points = picturePoints.ListPoints,
+                        UriPage = picturePoints.UriPage,
+                        HeightImage = picturePoints.HeightImage,
+                        WidthImage = picturePoints.WidthImage,
+                        OriginalScreen = HeatMapFunctions.AsByteArray(picturePoints.ScreenPage),
+                        HeatMapScreen = HeatMapFunctions.AsByteArray(picturePoints.HeatMapScreen)
+                    };
+                    db.RecordsScreens.Add(rScreen);
+                    result.Add(rScreen);
+                }
+                db.SaveChanges();
             }
-            return screenPoints;
+            return result;
         }
     }
 }

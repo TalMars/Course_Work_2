@@ -78,6 +78,32 @@ namespace CourseWork_2.Migrations
                     b.ToTable("RecordsPrototype");
                 });
 
+            modelBuilder.Entity("CourseWork_2.DataBase.DBModels.RecordsScreen", b =>
+                {
+                    b.Property<int>("RecordsScreenId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<byte[]>("HeatMapScreen");
+
+                    b.Property<double>("HeightImage");
+
+                    b.Property<byte[]>("OriginalScreen");
+
+                    b.Property<string>("PointsText");
+
+                    b.Property<int>("RecordPrototypeId");
+
+                    b.Property<string>("UriPage");
+
+                    b.Property<double>("WidthImage");
+
+                    b.HasKey("RecordsScreenId");
+
+                    b.HasIndex("RecordPrototypeId");
+
+                    b.ToTable("RecordsScreens");
+                });
+
             modelBuilder.Entity("CourseWork_2.DataBase.DBModels.UserPrototype", b =>
                 {
                     b.Property<int>("UserPrototypeId")
@@ -113,6 +139,14 @@ namespace CourseWork_2.Migrations
                     b.HasOne("CourseWork_2.DataBase.DBModels.UserPrototype", "UserPrototype")
                         .WithMany("Records")
                         .HasForeignKey("UserPrototypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CourseWork_2.DataBase.DBModels.RecordsScreen", b =>
+                {
+                    b.HasOne("CourseWork_2.DataBase.DBModels.RecordPrototype", "RecordPrototype")
+                        .WithMany("Screens")
+                        .HasForeignKey("RecordPrototypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -8,3 +8,5 @@ Pages\DetailsUserPage.xbf
 Pages\PrototypesPage.xbf
 Pages\ResultScreensPage.xbf
 Pages\ReviewPrototypePage.xbf
+Templates\AppBarStyle.xbf
+Templates\SplitViewStyle.xbf

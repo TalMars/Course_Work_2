@@ -211,5 +211,53 @@ namespace CourseWork_2.HeatMap
             pixelData.DetachPixelData().CopyTo(small.PixelBuffer);
             return small;
         }
+
+        public static byte[] AsByteArray(WriteableBitmap bitmap)
+        {
+            using (Stream stream = bitmap.PixelBuffer.AsStream())
+            {
+                MemoryStream memoryStream = new MemoryStream();
+                stream.CopyTo(memoryStream);
+                return memoryStream.ToArray();
+            }
+        }
+
+        public static BitmapImage AsBitmapImage(byte[] byteArray)
+        {
+            if (byteArray != null)
+            {
+                using (var stream = new InMemoryRandomAccessStream())
+                {
+                    stream.WriteAsync(byteArray.AsBuffer()).GetResults();
+                    var image = new BitmapImage();
+                    stream.Seek(0);
+                    image.SetSource(stream);
+                    return image;
+                }
+            }
+
+            return null;
+        }
+
+        public static async Task<byte[]> AsByteArrayFromStream(IRandomAccessStream stream)
+        {
+            var reader = new DataReader(stream.GetInputStreamAt(0));
+            var bytes = new byte[stream.Size];
+            await reader.LoadAsync((uint)stream.Size);
+            reader.ReadBytes(bytes);
+
+            return bytes;
+        }
+
+        public static async Task<WriteableBitmap> AsWrBitmapImage(byte[] byteArray, int width, int height)
+        {
+            var wb = new WriteableBitmap(width, height);
+            using (Stream stream = wb.PixelBuffer.AsStream())
+            {
+                await stream.WriteAsync(byteArray, 0, byteArray.Length);
+            }
+
+            return wb;
+        }
     }
 }

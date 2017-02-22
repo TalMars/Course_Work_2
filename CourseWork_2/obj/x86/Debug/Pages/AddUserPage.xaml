@@ -5,26 +5,32 @@
     xmlns:local="using:CourseWork_2.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:CourseWork_2.Converters"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="boolVisConverter" />
+    </Page.Resources>
 
     <Grid Background="#2b3346">
         <Grid.RowDefinitions>
-            <RowDefinition Height="60" />
+            <RowDefinition Height="0.1*" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
         <Border Grid.ColumnSpan="3" BorderThickness="0,0,0,1" BorderBrush="DarkGray">
             <Grid>
-                <Button x:ConnectionId='4' Background="Transparent" Foreground="White"                                           >
-                    <StackPanel Orientation="Horizontal">
-                        <SymbolIcon Margin="0,0,5,0" Symbol="Back" />
-                        <TextBlock Text="Prototype" FontSize="16" FontWeight="Medium" />
-                    </StackPanel>
-                </Button>
+                <Button x:ConnectionId='4' Background="Transparent" Content="Cancel" FontSize="16" FontWeight="Medium" Foreground="White"                                            />
+
                 <TextBlock Text="Add User" FontSize="20" FontWeight="Medium"
                            Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                
                 <Button x:ConnectionId='5' Background="Transparent" Content="Create" HorizontalAlignment="Right" FontSize="16" FontWeight="Medium"
-                        Foreground="White"                                            />
+                        Foreground="White"                                           
+                                                                                                                                     />
+                <Button x:ConnectionId='6' Background="Transparent" Content="Save" HorizontalAlignment="Right" FontSize="16" FontWeight="Medium"
+                        Foreground="White"                                         
+                                                                                                                                       />
             </Grid>
         </Border>
 
@@ -35,7 +41,7 @@
                                                                          />
                 <TextBox x:ConnectionId='3' PlaceholderText="Biography" Background="Transparent"  BorderBrush="DarkGray"
                          Margin="0,10,0,0" BorderThickness="0,1" Height="Auto" Foreground="White"
-                                                                              />
+                                                                              TextWrapping="Wrap" MaxLength="200" />
             </StackPanel>
         </Grid>
 

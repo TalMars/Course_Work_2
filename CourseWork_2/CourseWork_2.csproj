@@ -96,12 +96,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ByteArrayToImageConverter.cs" />
     <Compile Include="Converters\CountUsersRecordsToStringConverter.cs" />
-    <Compile Include="Converters\Created_LastRecord_DateTimeToStringConverter.cs" />
+    <Compile Include="Converters\DateTimeToStringConverter.cs" />
     <Compile Include="Converters\DatesVisibilityConverter.cs" />
     <Compile Include="Converters\IconStartStopConverter.cs" />
-    <Compile Include="Converters\ObjectToPrototypeConverter.cs" />
-    <Compile Include="Converters\RingConverter.cs" />
+    <Compile Include="Converters\ReturnModelConverter.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="DataBase\DBModels\RecordsScreen.cs" />
     <Compile Include="DataBase\PrototypingContext.cs" />
     <Compile Include="DataBase\DBModels\Prototype.cs" />
     <Compile Include="DataBase\DBModels\RecordingSettings.cs" />
@@ -112,9 +114,9 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20170213180029_InitMigration.cs" />
-    <Compile Include="Migrations\20170213180029_InitMigration.designer.cs">
-      <DependentUpon>20170213180029_InitMigration.cs</DependentUpon>
+    <Compile Include="Migrations\20170222152134_InitMigration.cs" />
+    <Compile Include="Migrations\20170222152134_InitMigration.designer.cs">
+      <DependentUpon>20170222152134_InitMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\PrototypingContextModelSnapshot.cs" />
     <Compile Include="Model\ReviewPrototypeModel.cs" />
@@ -148,9 +150,11 @@
     <Compile Include="ViewModel\AddUserViewModel.cs" />
     <Compile Include="ViewModel\Command.cs" />
     <Compile Include="ViewModel\DetailsPrototypeViewModel.cs" />
+    <Compile Include="ViewModel\DetailsUserViewModel.cs" />
     <Compile Include="ViewModel\NotifyPropertyChanged.cs" />
     <Compile Include="SwipeableSplitViewControl_Folder\SwipeableSplitView.cs" />
     <Compile Include="ViewModel\PrototypesViewModel.cs" />
+    <Compile Include="ViewModel\RecordPrototypeViewModel.cs" />
     <Compile Include="ViewModel\ResultScreensViewModel.cs" />
     <Compile Include="ViewModel\ReviewPrototypeViewModel.cs" />
     <Compile Include="Extensions_Folder\WebViewExtensions.cs" />
@@ -213,6 +217,16 @@
     <Page Include="Pages\ReviewPrototypePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\AppBarStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Templates\SplitViewStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
   </ItemGroup>
   <ItemGroup>
