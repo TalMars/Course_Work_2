@@ -22,12 +22,14 @@ namespace CourseWork_2.ViewModel
         private string _sourceWebView = null;
         private bool _isOnStart;
         private bool _ringContentVisibility;
+        private ICommand _startStopCommand;
+        private ICommand _cancelCommand;
 
         private Windows.UI.Xaml.DispatcherTimer timer;
         private string _timerText;
         private int timerSeconds;
 
-        private ObservableCollection<ReviewPrototypeModel> _screens;
+        private List<RecordScreenPrototypeModel> _screens;
 
         #region ChangeUSerAgent
         private string androidASUS = "Mozilla/5.0 (Linux; Android 6.0.1; ASUS_Z00ED Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.68 Mobile Safari/537.36";
@@ -46,7 +48,7 @@ namespace CourseWork_2.ViewModel
         {
             ChangeUserAgent(androidASUS);
 
-            _screens = new ObservableCollection<ReviewPrototypeModel>();
+            _screens = new List<RecordScreenPrototypeModel>();
             IsOnStart = true;
 
             using (var db = new PrototypingContext())
@@ -92,7 +94,15 @@ namespace CourseWork_2.ViewModel
         #endregion
 
         #region pane controls events
-        public void StartStop_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        public ICommand StartStopCommand
+        {
+            get
+            {
+                return _startStopCommand ?? (_startStopCommand = new Command(() => StartStopFunc()));
+            }
+        }
+
+        private void StartStopFunc()
         {
             if (_isOnStart)
             {
@@ -104,6 +114,19 @@ namespace CourseWork_2.ViewModel
                 timer.Stop();
                 ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(ResultScreensPage), _screens);
             }
+        }
+
+        public ICommand CancelCommand
+        {
+            get
+            {
+                return _cancelCommand ?? (_cancelCommand = new Command(() => CancelFunc()));
+            }
+        }
+
+        private void CancelFunc()
+        {
+            ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).GoBack();
         }
         #endregion
 
@@ -238,7 +261,7 @@ namespace CourseWork_2.ViewModel
 
             Windows.UI.Xaml.Media.Imaging.WriteableBitmap wb = await HeatMapFunctions.Resize(screenWidth, screenHeight, ms);
 
-            _screens.Add(new ReviewPrototypeModel(webview.Source.AbsoluteUri, wb));
+            _screens.Add(new RecordScreenPrototypeModel(webview.Source.AbsoluteUri, wb));
             _screens[_screens.Count - 1].ListPoints.Add(hp);
 
             RingContentVisibility = false;

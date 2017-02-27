@@ -12,10 +12,8 @@ namespace CourseWork_2.DataBase.DBModels
     {
         public int RecordsScreenId { get; set; }
         public string UriPage { get; set; }
-        public byte[] OriginalScreen { get; set; }
-        public byte[] HeatMapScreen { get; set; }
-        public double WidthImage { get; set; }
-        public double HeightImage { get; set; }
+        public string PathToOriginalScreen { get; set; }
+        public string PathToHeatMapScreen { get; set; }
         public string PointsText { get; set; }
         public List<HeatPoint> Points
         {

@@ -25,13 +25,13 @@
                                         Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource ringConverter}, ConverterParameter=right}">
             <SplitView.Pane>
                 <StackPanel VerticalAlignment="Center">
-                    <Button Click="{x:Bind ViewModel.StartStop_Click}" Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
+                    <Button Command="{x:Bind ViewModel.StartStopCommand}" Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
                         <StackPanel>
                             <SymbolIcon Symbol="{x:Bind ViewModel.IsOnStart, Mode=OneWay, Converter={StaticResource iconConverter}}" />
                             <TextBlock Text="{x:Bind ViewModel.TimerText, Mode=OneWay}" TextAlignment="Center" FontSize="10" />
                         </StackPanel>
                     </Button>
-                    <Button Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
+                    <Button Command="{x:Bind ViewModel.CancelCommand}" Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
                         <SymbolIcon Symbol="Cancel" />
                     </Button>
                 </StackPanel>
@@ -48,26 +48,5 @@
         </swipeableSV:SwipeableSplitView>
         <ProgressRing Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource ringConverter}, ConverterParameter=inverse}"
                                   IsActive="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay}" Width="50" Height="50" />
-
-        <!--<VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="WindowStates">
-                <VisualState x:Name="WideState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="720" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="SplitView.DisplayMode" Value="CompactOverlay" />
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="NarrowState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="SplitView.DisplayMode" Value="Overlay" />
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>-->
     </Grid>
 </Page>

@@ -96,7 +96,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\ByteArrayToImageConverter.cs" />
     <Compile Include="Converters\CountUsersRecordsToStringConverter.cs" />
     <Compile Include="Converters\DateTimeToStringConverter.cs" />
     <Compile Include="Converters\DatesVisibilityConverter.cs" />
@@ -114,12 +113,12 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20170222152134_InitMigration.cs" />
-    <Compile Include="Migrations\20170222152134_InitMigration.designer.cs">
-      <DependentUpon>20170222152134_InitMigration.cs</DependentUpon>
+    <Compile Include="Migrations\20170227115753_InitMigration.cs" />
+    <Compile Include="Migrations\20170227115753_InitMigration.designer.cs">
+      <DependentUpon>20170227115753_InitMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\PrototypingContextModelSnapshot.cs" />
-    <Compile Include="Model\ReviewPrototypeModel.cs" />
+    <Compile Include="Model\RecordScreenPrototypeModel.cs" />
     <Compile Include="Pages\AddPrototypePage.xaml.cs">
       <DependentUpon>AddPrototypePage.xaml</DependentUpon>
     </Compile>
@@ -154,7 +153,6 @@
     <Compile Include="ViewModel\NotifyPropertyChanged.cs" />
     <Compile Include="SwipeableSplitViewControl_Folder\SwipeableSplitView.cs" />
     <Compile Include="ViewModel\PrototypesViewModel.cs" />
-    <Compile Include="ViewModel\RecordPrototypeViewModel.cs" />
     <Compile Include="ViewModel\ResultScreensViewModel.cs" />
     <Compile Include="ViewModel\ReviewPrototypeViewModel.cs" />
     <Compile Include="Extensions_Folder\WebViewExtensions.cs" />

@@ -83,19 +83,15 @@ namespace CourseWork_2.Migrations
                     b.Property<int>("RecordsScreenId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<byte[]>("HeatMapScreen");
+                    b.Property<string>("PathToHeatMapScreen");
 
-                    b.Property<double>("HeightImage");
-
-                    b.Property<byte[]>("OriginalScreen");
+                    b.Property<string>("PathToOriginalScreen");
 
                     b.Property<string>("PointsText");
 
                     b.Property<int>("RecordPrototypeId");
 
                     b.Property<string>("UriPage");
-
-                    b.Property<double>("WidthImage");
 
                     b.HasKey("RecordsScreenId");
 

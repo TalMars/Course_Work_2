@@ -99,13 +99,11 @@ namespace CourseWork_2.Migrations
                 {
                     RecordsScreenId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    HeatMapScreen = table.Column<byte[]>(nullable: true),
-                    HeightImage = table.Column<double>(nullable: false),
-                    OriginalScreen = table.Column<byte[]>(nullable: true),
+                    PathToHeatMapScreen = table.Column<string>(nullable: true),
+                    PathToOriginalScreen = table.Column<string>(nullable: true),
                     PointsText = table.Column<string>(nullable: true),
                     RecordPrototypeId = table.Column<int>(nullable: false),
-                    UriPage = table.Column<string>(nullable: true),
-                    WidthImage = table.Column<double>(nullable: false)
+                    UriPage = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

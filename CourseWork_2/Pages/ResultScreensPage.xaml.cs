@@ -12,6 +12,8 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Imaging;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -41,9 +43,8 @@ namespace CourseWork_2.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            ObservableCollection<ReviewPrototypeModel> screensPoints = (ObservableCollection<ReviewPrototypeModel>)e.Parameter;
             ViewModel.RingContentVisibility = true;
-            ViewModel.Screens = await HeatingScreens(screensPoints);
+            ViewModel.Screens = await HeatingScreens((List<RecordScreenPrototypeModel>)e.Parameter);
             ViewModel.RingContentVisibility = false;
         }
 
@@ -53,32 +54,63 @@ namespace CourseWork_2.Pages
             private set { vm = value; }
         }
 
-        private async Task<ObservableCollection<RecordsScreen>> HeatingScreens(ObservableCollection<ReviewPrototypeModel> screenPoints)
+        private async Task<ObservableCollection<RecordScreenPrototypeModel>> HeatingScreens(List<RecordScreenPrototypeModel> screens)
         {
-            ObservableCollection<RecordsScreen> result = new ObservableCollection<RecordsScreen>();
+            ObservableCollection<RecordScreenPrototypeModel> result = new ObservableCollection<RecordScreenPrototypeModel>();
             using (var db = new PrototypingContext())
             {
-                int recordId = db.RecordsPrototype.Last().RecordPrototypeId;
-                foreach (ReviewPrototypeModel picturePoints in screenPoints)
+                RecordPrototype record = db.RecordsPrototype.Last();
+                foreach (RecordScreenPrototypeModel screen in screens)
                 {
-                    picturePoints.HeatMapScreen = await HeatMapFunctions.CreateProcessHeatMap(picturePoints.ScreenPage, picturePoints.ListPoints);
+                    screen.HeatMapScreen = await HeatMapFunctions.CreateProcessHeatMap(screen.OriginalScreen, screen.ListPoints);
+
+                    UserPrototype user = db.Users.Single(u => u.UserPrototypeId == record.UserPrototypeId);
+                    await db.Entry(user)
+                            .Reference(u => u.Prototype)
+                            .LoadAsync();
+
+                    string prototypeName = user.Prototype.Name + "_" + user.PrototypeId;
+                    string userName = user.Name + "_" + user.UserPrototypeId;
+                    string originalPath = await SaveImageInStorage(screen.OriginalScreen, false, prototypeName, userName);
+                    string heatMapPath = await SaveImageInStorage(screen.HeatMapScreen, true, prototypeName, userName);
 
                     RecordsScreen rScreen = new RecordsScreen()
                     {
-                        RecordPrototypeId = recordId,
-                        Points = picturePoints.ListPoints,
-                        UriPage = picturePoints.UriPage,
-                        HeightImage = picturePoints.HeightImage,
-                        WidthImage = picturePoints.WidthImage,
-                        OriginalScreen = HeatMapFunctions.AsByteArray(picturePoints.ScreenPage),
-                        HeatMapScreen = HeatMapFunctions.AsByteArray(picturePoints.HeatMapScreen)
+                        RecordPrototypeId = record.RecordPrototypeId,
+                        Points = screen.ListPoints,
+                        UriPage = screen.UriPage,
+                        PathToOriginalScreen = originalPath,
+                        PathToHeatMapScreen = heatMapPath
                     };
                     db.RecordsScreens.Add(rScreen);
-                    result.Add(rScreen);
+                    result.Add(screen);
                 }
                 db.SaveChanges();
             }
             return result;
+        }
+
+        private async Task<string> SaveImageInStorage(WriteableBitmap image, bool isHeat, string prototypeName, string userName)
+        {
+            StorageFolder prototypeFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(prototypeName, CreationCollisionOption.OpenIfExists); //PrototypeName + Id
+            StorageFolder userFolder = await prototypeFolder.CreateFolderAsync(userName, CreationCollisionOption.OpenIfExists); //UserName + Id
+            StorageFolder screensFolder = await userFolder.CreateFolderAsync("Screens", CreationCollisionOption.OpenIfExists);
+            StorageFile file = await screensFolder.CreateFileAsync("Screen" + (isHeat ? "_heat" : "") + " (1).jpg", CreationCollisionOption.GenerateUniqueName); //Screen.jpg = originalScreen, Screen + _heat + .jpg = heatmap screen
+
+            using (var stream = await file.OpenStreamForWriteAsync())
+            {
+                BitmapEncoder encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.JpegEncoderId, stream.AsRandomAccessStream());
+                var pixelStream = image.PixelBuffer.AsStream();
+                byte[] pixels = new byte[image.PixelBuffer.Length];
+
+                await pixelStream.ReadAsync(pixels, 0, pixels.Length);
+
+                encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Ignore, (uint)image.PixelWidth, (uint)image.PixelHeight, 96, 96, pixels);
+
+                await encoder.FlushAsync();
+            }
+
+            return file.Path;
         }
     }
 }

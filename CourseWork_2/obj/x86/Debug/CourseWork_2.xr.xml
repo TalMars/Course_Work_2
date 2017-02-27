@@ -226,7 +226,6 @@
     <RootType FullName="CourseWork_2.Pages.DetailsPrototypePage" />
     <RootType FullName="CourseWork_2.Pages.DetailsUserPage" />
     <RootType FullName="CourseWork_2.Pages.PrototypesPage" />
-    <RootType FullName="CourseWork_2.Converters.ByteArrayToImageConverter" />
     <RootType FullName="Windows.UI.Xaml.Controls.Image">
       <RootProperty Name="Source" />
       <RootProperty Name="Height" />
@@ -237,9 +236,9 @@
     <RootType FullName="Windows.UI.Xaml.Controls.GridView">
       <RootProperty Name="ItemsSource" />
       <RootProperty Name="Visibility" />
+      <RootProperty Name="SelectedItem" />
       <RootProperty Name="ItemTemplate" />
       <RootProperty Name="ItemContainerStyle" />
-      <RootEvent Name="SelectionChanged" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
       <RootProperty Name="Width" />

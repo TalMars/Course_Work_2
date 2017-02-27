@@ -25,20 +25,20 @@
                                                                                                                                                                               >
             <SplitView.Pane>
                 <StackPanel VerticalAlignment="Center">
-                    <Button x:ConnectionId='4'                                            Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
+                    <Button x:ConnectionId='4'                                               Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
                         <StackPanel>
-                            <SymbolIcon x:ConnectionId='5'                                                                                              />
-                            <TextBlock x:ConnectionId='6'                                                  TextAlignment="Center" FontSize="10" />
+                            <SymbolIcon x:ConnectionId='6'                                                                                              />
+                            <TextBlock x:ConnectionId='7'                                                  TextAlignment="Center" FontSize="10" />
                         </StackPanel>
                     </Button>
-                    <Button Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
+                    <Button x:ConnectionId='5'                                            Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
                         <SymbolIcon Symbol="Cancel" />
                     </Button>
                 </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>
                 <Grid>
-                    <WebView x:ConnectionId='7'                                                                                        
+                    <WebView x:ConnectionId='8'                                                                                        
                                                                                                 
                                                                                                             
                                                                                                               
@@ -48,27 +48,6 @@
         </swipeableSV:SwipeableSplitView>
         <ProgressRing x:ConnectionId='3'                                                                                                                                         
                                                                                                    Width="50" Height="50" />
-
-        <!--<VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="WindowStates">
-                <VisualState x:Name="WideState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="720" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="SplitView.DisplayMode" Value="CompactOverlay" />
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="NarrowState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="SplitView.DisplayMode" Value="Overlay" />
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>-->
     </Grid>
 </Page>
 

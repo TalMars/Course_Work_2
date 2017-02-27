@@ -26,10 +26,15 @@ namespace CourseWork_2.Pages
         public DetailsUserPage()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Enabled;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            //if(e.NavigationMode == NavigationMode.Back)
+            //{
+            //    this.NavigationCacheMode = NavigationCacheMode.Disabled;
+            //}
             ViewModel = new DetailsUserViewModel((int)e.Parameter);
         }
 

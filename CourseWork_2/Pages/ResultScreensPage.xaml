@@ -5,11 +5,11 @@
     xmlns:local="using:CourseWork_2.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:converters_Folder="using:CourseWork_2.Converters"
+    xmlns:converters="using:CourseWork_2.Converters"
     mc:Ignorable="d">
     <Page.Resources>
-        <converters_Folder:BoolToVisibilityConverter x:Key="ringConverter" />
-        <converters_Folder:ByteArrayToImageConverter x:Key="byteImageConverter" />
+        <converters:BoolToVisibilityConverter x:Key="ringConverter" />
+        <converters:ReturnModelConverter x:Key="itemConverter" />
     </Page.Resources>
     <Grid Background="#2b3346">
         <Grid.RowDefinitions>
@@ -25,15 +25,15 @@
         </Border>
 
         <Grid Grid.Row="1">
-            <Image Source="{x:Bind ViewModel.SelectedScreen, Mode=OneWay, Converter={StaticResource byteImageConverter}}" Height="Auto" Width="Auto"
+            <Image Source="{x:Bind ViewModel.SelectedItem.HeatMapScreen}" Height="Auto" Width="Auto"
                    Visibility="{x:Bind ViewModel.SelectVisibility, Mode=OneWay, Converter={StaticResource ringConverter}, ConverterParameter=inverse}"
                    DoubleTapped="{x:Bind ViewModel.SelectScreen_DoubleTapped, Mode=OneWay}" />
 
             <GridView ItemsSource="{x:Bind ViewModel.Screens, Mode=OneWay}" Visibility="{x:Bind ViewModel.SelectVisibility, Mode=OneWay, Converter={StaticResource ringConverter}, ConverterParameter=right}" 
-                      SelectionChanged="{x:Bind ViewModel.GridView_SelectionChanged, Mode=OneWay}">
+                      SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay, Converter={StaticResource itemConverter}}">
                 <GridView.ItemTemplate>
                     <DataTemplate>
-                        <Image Source="{Binding HeatMapScreen, Converter={StaticResource byteImageConverter}}"
+                        <Image Source="{Binding HeatMapScreen}"
                                Width="{Binding WidthImage}"  Height="{Binding HeightImage}" />
                     </DataTemplate>
                 </GridView.ItemTemplate>

@@ -8,7 +8,7 @@ using CourseWork_2.DataBase;
 namespace CourseWork_2.Migrations
 {
     [DbContext(typeof(PrototypingContext))]
-    [Migration("20170222152134_InitMigration")]
+    [Migration("20170227115753_InitMigration")]
     partial class InitMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,19 +84,15 @@ namespace CourseWork_2.Migrations
                     b.Property<int>("RecordsScreenId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<byte[]>("HeatMapScreen");
+                    b.Property<string>("PathToHeatMapScreen");
 
-                    b.Property<double>("HeightImage");
-
-                    b.Property<byte[]>("OriginalScreen");
+                    b.Property<string>("PathToOriginalScreen");
 
                     b.Property<string>("PointsText");
 
                     b.Property<int>("RecordPrototypeId");
 
                     b.Property<string>("UriPage");
-
-                    b.Property<double>("WidthImage");
 
                     b.HasKey("RecordsScreenId");
 

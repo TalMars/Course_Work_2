@@ -12,17 +12,17 @@ namespace CourseWork_2.ViewModel
 {
     public class ResultScreensViewModel : NotifyPropertyChanged
     {
-        private ObservableCollection<RecordsScreen> _screens;
+        private ObservableCollection<RecordScreenPrototypeModel> _screens;
         private bool _ringContentVisibility;
         private bool _selectVisibility;
-        private byte[] _selectedScreen;
+        private RecordScreenPrototypeModel _selectedItem;
 
         public ResultScreensViewModel()
         {
         }
 
         #region properties
-        public ObservableCollection<RecordsScreen> Screens
+        public ObservableCollection<RecordScreenPrototypeModel> Screens
         {
             get { return _screens; }
             set { Set(ref _screens, value); }
@@ -40,28 +40,16 @@ namespace CourseWork_2.ViewModel
             set { Set(ref _selectVisibility, value); }
         }
 
-        public byte[] SelectedScreen
+        public RecordScreenPrototypeModel SelectedItem
         {
-            get { return _selectedScreen; }
-            set { Set(ref _selectedScreen, value); }
+            get { return _selectedItem; }
+            set { Set(ref _selectedItem, value); SelectVisibility = true; }
         }
         #endregion
-
-        public void GridView_SelectionChanged(object sender, Windows.UI.Xaml.Controls.SelectionChangedEventArgs e)
-        {
-            Windows.UI.Xaml.Controls.GridView screensGridView = (Windows.UI.Xaml.Controls.GridView)sender;
-            if (screensGridView.SelectedItem == null)
-                return;
-
-            SelectedScreen = ((RecordsScreen)screensGridView.SelectedItem).HeatMapScreen;
-            SelectVisibility = true;
-
-            screensGridView.SelectedItem = null;
-        }
         
         public void SelectScreen_DoubleTapped(object sender, Windows.UI.Xaml.Input.DoubleTappedRoutedEventArgs e)
         {
-            SelectedScreen = null;
+            SelectedItem = null;
             SelectVisibility = false;
         }
     }

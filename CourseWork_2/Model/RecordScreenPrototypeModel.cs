@@ -8,14 +8,14 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace CourseWork_2.Model
 {
-    public class ReviewPrototypeModel
+    public class RecordScreenPrototypeModel
     {
         private const double scaleNumber = 0.3333;
 
-        public ReviewPrototypeModel(string uriPage, WriteableBitmap screenshot)
+        public RecordScreenPrototypeModel(string uriPage, WriteableBitmap screenshot)
         {
             UriPage = uriPage;
-            ScreenPage = screenshot;
+            OriginalScreen = screenshot;
             ListPoints = new List<HeatPoint>();
 
             WidthImage = screenshot.PixelWidth * scaleNumber;
@@ -24,15 +24,15 @@ namespace CourseWork_2.Model
 
         public string UriPage { get; private set; }
 
-        public WriteableBitmap ScreenPage { get; private set; }
+        public WriteableBitmap OriginalScreen { get; private set; }
 
         public WriteableBitmap HeatMapScreen { get; set; }
 
         public List<HeatPoint> ListPoints { get; set; }
 
-        public double WidthImage { get; set; }
+        public double WidthImage { get; private set; }
 
-        public double HeightImage { get; set; }
+        public double HeightImage { get; private set; }
 
     }
 }
