@@ -8,10 +8,12 @@
     xmlns:converters="using:CourseWork_2.Converters"
     mc:Ignorable="d">
     <Page.Resources>
-        <converters:BoolToVisibilityConverter x:Key="ringConverter" />
+        <converters:BoolToVisibilityConverter x:Key="boolToVisConverter" />
         <converters:ReturnModelConverter x:Key="itemConverter" />
+        <converters:InverseBoolConverter x:Key="inverseBoolConverter" />
     </Page.Resources>
-    <Grid Background="#2b3346">
+
+    <Grid Background="#2b3346" Opacity="{x:Bind ViewModel.OpacityGrid, Mode=OneWay}">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*" MaxHeight="60" />
             <RowDefinition />
@@ -19,17 +21,19 @@
 
         <Border BorderThickness="0,0,0,1" BorderBrush="Gray">
             <Grid>
+                <Button Background="Transparent" Foreground="White" Command="{x:Bind ViewModel.DoneCommand}"
+                        Content="Done" IsHitTestVisible="{x:Bind ViewModel.RingContentVisibility, Converter={StaticResource inverseBoolConverter}, Mode=OneWay}" />
                 <TextBlock Text="Result Screens" VerticalAlignment="Center" HorizontalAlignment="Center"
                        FontSize="20" Foreground="White" FontWeight="Medium" />
             </Grid>
         </Border>
 
         <Grid Grid.Row="1">
-            <Image Source="{x:Bind ViewModel.SelectedItem.HeatMapScreen}" Height="Auto" Width="Auto"
-                   Visibility="{x:Bind ViewModel.SelectVisibility, Mode=OneWay, Converter={StaticResource ringConverter}, ConverterParameter=inverse}"
-                   DoubleTapped="{x:Bind ViewModel.SelectScreen_DoubleTapped, Mode=OneWay}" />
+            <Image Source="{x:Bind ViewModel.SelectedItem.HeatMapScreen, Mode=OneWay}" Height="Auto" Width="Auto"
+                   Visibility="{x:Bind ViewModel.SelectVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}"
+                   DoubleTapped="{x:Bind ViewModel.SelectScreen_DoubleTapped}" />
 
-            <GridView ItemsSource="{x:Bind ViewModel.Screens, Mode=OneWay}" Visibility="{x:Bind ViewModel.SelectVisibility, Mode=OneWay, Converter={StaticResource ringConverter}, ConverterParameter=right}" 
+            <GridView ItemsSource="{x:Bind ViewModel.Screens, Mode=OneWay}" Visibility="{x:Bind ViewModel.SelectVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=right}" 
                       SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay, Converter={StaticResource itemConverter}}">
                 <GridView.ItemTemplate>
                     <DataTemplate>
@@ -45,7 +49,7 @@
             </GridView>
 
             <ProgressRing Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"
-                          Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource ringConverter}, ConverterParameter=inverse}"
+                          Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}"
                                   IsActive="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay}"/>
         </Grid>
     </Grid>

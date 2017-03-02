@@ -58,8 +58,8 @@
       <RootProperty Name="HorizontalAlignment" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Button">
-      <RootProperty Name="Content" />
       <RootProperty Name="Background" />
+      <RootProperty Name="Content" />
       <RootProperty Name="Foreground" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="Margin" />
@@ -68,11 +68,11 @@
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Visibility" />
       <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="IsHitTestVisible" />
       <RootProperty Name="Height" />
       <RootProperty Name="MinHeight" />
       <RootProperty Name="Padding" />
       <RootProperty Name="Style" />
-      <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Control">
       <RootProperty Name="FontFamily" />
@@ -92,20 +92,22 @@
     </RootType>
     <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.StaticResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.Page">
-      <RootProperty Name="Content" />
       <RootProperty Name="Resources" />
+      <RootProperty Name="Content" />
       <RootProperty Name="BottomAppBar" />
     </RootType>
+    <RootType FullName="CourseWork_2.Converters.BoolToVisibilityConverter" />
     <RootType FullName="Windows.UI.Xaml.Controls.Grid">
       <RootProperty Name="Background" />
-      <RootProperty Name="Children" />
       <RootProperty Name="RowDefinitions" />
+      <RootProperty Name="Children" />
       <RootProperty Name="ColumnDefinitions" />
       <RootProperty Name="DataContext" />
       <RootProperty Name="Height" />
       <RootProperty Name="BorderBrush" />
       <RootProperty Name="BorderThickness" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="Opacity" />
       <RootProperty Name="Resources" />
       <RootProperty Name="Clip" />
       <RootProperty Name="VerticalAlignment" />
@@ -120,9 +122,6 @@
       <RootMethod Name="GetColumn" />
       <RootMethod Name="SetColumn" />
     </RootType>
-    <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.ThemeResourceExtension" />
-    <RootType FullName="CourseWork_2.MainPage" />
-    <RootType FullName="CourseWork_2.Converters.BoolToVisibilityConverter" />
     <RootType FullName="Windows.UI.Xaml.Controls.RowDefinition">
       <RootProperty Name="Height" />
       <RootProperty Name="MaxHeight" />
@@ -226,6 +225,7 @@
     <RootType FullName="CourseWork_2.Pages.DetailsPrototypePage" />
     <RootType FullName="CourseWork_2.Pages.DetailsUserPage" />
     <RootType FullName="CourseWork_2.Pages.PrototypesPage" />
+    <RootType FullName="CourseWork_2.Converters.InverseBoolConverter" />
     <RootType FullName="Windows.UI.Xaml.Controls.Image">
       <RootProperty Name="Source" />
       <RootProperty Name="Height" />
@@ -250,6 +250,7 @@
     </RootType>
     <RootType FullName="CourseWork_2.Pages.ResultScreensPage" />
     <RootType FullName="CourseWork_2.Converters.IconStartStopConverter" />
+    <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.ThemeResourceExtension" />
     <RootType FullName="CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView">
       <RootProperty Name="OpenPaneLength" />
       <RootProperty Name="IsSwipeablePaneOpen" />

@@ -27,7 +27,7 @@ namespace CourseWork_2.Pages
         public DetailsPrototypePage()
         {
             this.InitializeComponent();
-
+            this.NavigationCacheMode = NavigationCacheMode.Disabled;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

@@ -81,7 +81,12 @@ namespace CourseWork_2.ViewModel
         }
         private void GoBackFunc()
         {
-            ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(PrototypesPage));
+            Windows.UI.Xaml.Controls.Frame frame = (Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content;
+            for (int i = frame.BackStack.Count - 1; i >= 0; i--)
+                if (frame.BackStack[i].SourcePageType != typeof(PrototypesPage))
+                    frame.BackStack.RemoveAt(i);
+
+            frame.GoBack(); //.Navigate(typeof(PrototypesPage));
         }
 
         public ICommand OpenAppBarCommand
@@ -134,10 +139,18 @@ namespace CourseWork_2.ViewModel
             ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(PrototypesPage));
         }
 
-        public ICommand ResultScreensCommand { get; private set; }
+        public ICommand ResultScreensCommand
+        {
+            get
+            {
+                return _resultScreensCommand ?? (_resultScreensCommand = new Command(() => ResultScreensFunc()));
+            }
+        }
 
-
-
+        private void ResultScreensFunc()
+        {
+            ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(ResultScreensPage), PrototypeModel);
+        }
         #endregion
     }
 }

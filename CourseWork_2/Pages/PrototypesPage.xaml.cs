@@ -26,6 +26,7 @@ namespace CourseWork_2.Pages
         public PrototypesPage()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Disabled;
 
             ViewModel = new PrototypesViewModel();
         }

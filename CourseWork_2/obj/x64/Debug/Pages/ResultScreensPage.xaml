@@ -1,0 +1,53 @@
+﻿<Page x:ConnectionId='1'
+    x:Class="CourseWork_2.Pages.ResultScreensPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CourseWork_2.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:CourseWork_2.Converters"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="ringConverter" />
+        <converters:ReturnModelConverter x:Key="itemConverter" />
+    </Page.Resources>
+    <Grid Background="#2b3346">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*" MaxHeight="60" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Border BorderThickness="0,0,0,1" BorderBrush="Gray">
+            <Grid>
+                <TextBlock Text="Result Screens" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       FontSize="20" Foreground="White" FontWeight="Medium" />
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Image x:ConnectionId='2'                                                        Height="Auto" Width="Auto"
+                                                                                                                                                      
+                                                                                            />
+
+            <GridView x:ConnectionId='3'                                                                                                                                                                                         
+                                                                                                                           >
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding HeatMapScreen}"
+                               Width="{Binding WidthImage}"  Height="{Binding HeightImage}" />
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+                <GridView.ItemContainerStyle>
+                    <Style TargetType="FrameworkElement">
+                        <Setter Property="Margin" Value="0 0 0 0"/>
+                    </Style>
+                </GridView.ItemContainerStyle>
+            </GridView>
+
+            <ProgressRing x:ConnectionId='4' Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                                                                                                                                  
+                                                                                                  />
+        </Grid>
+    </Grid>
+</Page>
+

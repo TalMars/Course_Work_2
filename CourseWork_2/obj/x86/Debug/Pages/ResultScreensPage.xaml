@@ -8,10 +8,12 @@
     xmlns:converters="using:CourseWork_2.Converters"
     mc:Ignorable="d">
     <Page.Resources>
-        <converters:BoolToVisibilityConverter x:Key="ringConverter" />
+        <converters:BoolToVisibilityConverter x:Key="boolToVisConverter" />
         <converters:ReturnModelConverter x:Key="itemConverter" />
+        <converters:InverseBoolConverter x:Key="inverseBoolConverter" />
     </Page.Resources>
-    <Grid Background="#2b3346">
+
+    <Grid x:ConnectionId='2' Background="#2b3346"                                                      >
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*" MaxHeight="60" />
             <RowDefinition />
@@ -19,17 +21,19 @@
 
         <Border BorderThickness="0,0,0,1" BorderBrush="Gray">
             <Grid>
+                <Button x:ConnectionId='6' Background="Transparent" Foreground="White"                                         
+                        Content="Done"                                                                                                                           />
                 <TextBlock Text="Result Screens" VerticalAlignment="Center" HorizontalAlignment="Center"
                        FontSize="20" Foreground="White" FontWeight="Medium" />
             </Grid>
         </Border>
 
         <Grid Grid.Row="1">
-            <Image x:ConnectionId='2'                                                        Height="Auto" Width="Auto"
-                                                                                                                                                      
-                                                                                            />
+            <Image x:ConnectionId='3'                                                                     Height="Auto" Width="Auto"
+                                                                                                                                                           
+                                                                               />
 
-            <GridView x:ConnectionId='3'                                                                                                                                                                                         
+            <GridView x:ConnectionId='4'                                                                                                                                                                                              
                                                                                                                            >
                 <GridView.ItemTemplate>
                     <DataTemplate>
@@ -44,8 +48,8 @@
                 </GridView.ItemContainerStyle>
             </GridView>
 
-            <ProgressRing x:ConnectionId='4' Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"
-                                                                                                                                                                  
+            <ProgressRing x:ConnectionId='5' Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                                                                                                                                       
                                                                                                   />
         </Grid>
     </Grid>

@@ -21,7 +21,7 @@
     </Page.Resources>
 
     <Page.BottomAppBar>
-        <AppBar ClosedDisplayMode="Hidden" IsOpen="{x:Bind ViewModel.IsOpenCommandBar, Mode=OneWay}"
+        <AppBar ClosedDisplayMode="Hidden" IsOpen="{x:Bind ViewModel.IsOpenCommandBar, Mode=TwoWay}"
                 Style="{StaticResource AppBarStyle1}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <AppBarButton Icon="Add" Command="{x:Bind ViewModel.AddCommand}" Label="Add" />
@@ -51,7 +51,7 @@
                 <Button Background="Transparent" Foreground="White" Command="{x:Bind ViewModel.GoBackCommand}">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Margin="0,0,5,0" Symbol="Back" />
-                        <TextBlock Text="Prototypes" FontSize="14" FontWeight="Medium" />
+                        <!--<TextBlock Text="Prototypes" FontSize="14" FontWeight="Medium" />-->
                     </StackPanel>
                 </Button>
                 <TextBlock Text="Prototype" FontSize="20" FontWeight="Medium"

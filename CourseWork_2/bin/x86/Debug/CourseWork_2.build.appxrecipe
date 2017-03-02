@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Machine>BRAIN</Machine>
+    <Machine>DESKTOP-CBTFNVM</Machine>
     <WindowsUser>TalMars</WindowsUser>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetOsVersion>10.0</TargetOsVersion>
@@ -10,22 +10,22 @@
     <PackageArchitecture>x86</PackageArchitecture>
     <PackageIdentityName>f0c646ce-9c75-496e-bfcb-7ff3c867b489</PackageIdentityName>
     <PackageIdentityPublisher>CN=TalMars</PackageIdentityPublisher>
-    <IntermediateOutputPath>C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\obj\x86\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x86\Debug\</IntermediateOutputPath>
     <RemoteDeploymentType></RemoteDeploymentType>
     <PackageRegistrationPath></PackageRegistrationPath>
     <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\bin\x86\Debug\Core\AppxManifest.xml">
+    <AppXManifest Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\bin\x86\Debug\CourseWork_2.exe">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x86\Debug\CourseWork_2.exe">
       <PackagePath>entrypoint\CourseWork_2.exe</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\bin\x86\Debug\CourseWork_2.exe.config">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x86\Debug\CourseWork_2.exe.config">
       <PackagePath>CourseWork_2.exe.config</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\TalMars\.nuget\packages\Microsoft.AspNetCore.Hosting.Abstractions\1.1.0\lib\netstandard1.3\Microsoft.AspNetCore.Hosting.Abstractions.dll">
@@ -454,53 +454,53 @@
     <AppxPackagedFile Include="C:\Users\TalMars\.nuget\packages\WriteableBitmapEx\1.5.0\lib\NetCore45\WriteableBitmapEx.WinRT.dll">
       <PackagePath>WriteableBitmapEx.WinRT.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\Properties\Default.rd.xml">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\Assets\LockScreenLogo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\Assets\Wide310x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\Resources\HeatPointIntensive.png">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Resources\HeatPointIntensive.png">
       <PackagePath>Resources\HeatPointIntensive.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\Resources\intensity-mask.jpg">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Resources\intensity-mask.jpg">
       <PackagePath>Resources\intensity-mask.jpg</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\bin\x86\Debug\CourseWork_2.xr.xml">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x86\Debug\CourseWork_2.xr.xml">
       <PackagePath>CourseWork_2.xr.xml</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\bin\x86\Debug\resources.pri">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\bin\x86\Debug\Core\CourseWork_2.exe">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x86\Debug\Core\CourseWork_2.exe">
       <PackagePath>CourseWork_2.exe</PackagePath>
     </AppxPackagedFile>
   </ItemGroup>

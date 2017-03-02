@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Machine>BRAIN</Machine>
+    <Machine>DESKTOP-CBTFNVM</Machine>
     <WindowsUser>TalMars</WindowsUser>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetOsVersion>10.0</TargetOsVersion>
@@ -10,7 +10,7 @@
     <PackageArchitecture>x86</PackageArchitecture>
     <PackageIdentityName>f0c646ce-9c75-496e-bfcb-7ff3c867b489</PackageIdentityName>
     <PackageIdentityPublisher>CN=TalMars</PackageIdentityPublisher>
-    <IntermediateOutputPath>C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\obj\x86\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x86\Debug\</IntermediateOutputPath>
     <RemoteDeploymentType>
     </RemoteDeploymentType>
     <PackageRegistrationPath>
@@ -25,20 +25,20 @@
     <JitOptimizationSuppressed>True</JitOptimizationSuppressed>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\bin\x86\Debug\Core\AppxManifest.xml">
+    <AppXManifest Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-02-20T19:24:05.711</Modified>
+      <Modified>2017-03-01T11:13:51.340</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\bin\x86\Debug\CourseWork_2.exe">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x86\Debug\CourseWork_2.exe">
       <PackagePath>entrypoint\CourseWork_2.exe</PackagePath>
-      <Modified>2017-02-20T19:23:58.150</Modified>
+      <Modified>2017-03-01T11:13:49.264</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\bin\x86\Debug\CourseWork_2.exe.config">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x86\Debug\CourseWork_2.exe.config">
       <PackagePath>CourseWork_2.exe.config</PackagePath>
-      <Modified>2017-02-13T15:13:33.085</Modified>
+      <Modified>2017-03-01T10:34:29.742</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\TalMars\.nuget\packages\Microsoft.AspNetCore.Hosting.Abstractions\1.1.0\lib\netstandard1.3\Microsoft.AspNetCore.Hosting.Abstractions.dll">
       <PackagePath>Microsoft.AspNetCore.Hosting.Abstractions.dll</PackagePath>
@@ -288,9 +288,9 @@
       <PackagePath>System.Private.Uri.dll</PackagePath>
       <Modified>2016-11-05T01:56:36.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\.nuget\packages\SQLite\3.13.0\runtimes\win10-x86\nativeassets\uap10.0\sqlite3.dll">
+    <AppxPackagedFile Include="C:\Users\TalMars\.nuget\packages\SQLite\3.13.0\runtimes\win7-x86\native\sqlite3.dll">
       <PackagePath>sqlite3.dll</PackagePath>
-      <Modified>2016-10-18T18:37:00.000</Modified>
+      <Modified>2016-10-18T18:36:58.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\TalMars\.nuget\packages\System.AppContext\4.3.0\lib\netcore50\System.AppContext.dll">
       <PackagePath>System.AppContext.dll</PackagePath>
@@ -608,68 +608,68 @@
       <PackagePath>WriteableBitmapEx.WinRT.dll</PackagePath>
       <Modified>2015-03-31T13:28:46.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\Properties\Default.rd.xml">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
-      <Modified>2017-01-27T11:22:57.719</Modified>
+      <Modified>2017-03-01T10:34:25.162</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\Assets\LockScreenLogo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
-      <Modified>2015-09-20T14:30:08.000</Modified>
+      <Modified>2017-03-01T10:34:24.930</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2015-09-20T14:30:08.000</Modified>
+      <Modified>2017-03-01T10:34:24.930</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2015-09-20T14:30:08.000</Modified>
+      <Modified>2017-03-01T10:34:24.930</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2015-09-20T14:30:08.000</Modified>
+      <Modified>2017-03-01T10:34:24.946</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2015-09-20T14:30:08.000</Modified>
+      <Modified>2017-03-01T10:34:24.946</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2015-09-20T14:30:08.000</Modified>
+      <Modified>2017-03-01T10:34:24.946</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\Assets\Wide310x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2015-09-20T14:30:08.000</Modified>
+      <Modified>2017-03-01T10:34:24.946</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\Resources\HeatPointIntensive.png">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Resources\HeatPointIntensive.png">
       <PackagePath>Resources\HeatPointIntensive.png</PackagePath>
-      <Modified>2017-02-05T10:22:29.696</Modified>
+      <Modified>2017-03-01T10:34:25.178</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\Resources\intensity-mask.jpg">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Resources\intensity-mask.jpg">
       <PackagePath>Resources\intensity-mask.jpg</PackagePath>
-      <Modified>2017-02-05T10:26:48.250</Modified>
+      <Modified>2017-03-01T10:34:25.178</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\bin\x86\Debug\CourseWork_2.xr.xml">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x86\Debug\CourseWork_2.xr.xml">
       <PackagePath>CourseWork_2.xr.xml</PackagePath>
-      <Modified>2017-02-20T16:54:51.458</Modified>
+      <Modified>2017-03-01T10:34:34.354</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
-      <Modified>2016-08-17T12:31:20.699</Modified>
+      <Modified>2017-02-28T12:42:17.853</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\bin\x86\Debug\resources.pri">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-02-20T19:24:03.383</Modified>
+      <Modified>2017-03-01T11:13:50.805</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\CourseWork_2\CourseWork_2\bin\x86\Debug\Core\CourseWork_2.exe">
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x86\Debug\Core\CourseWork_2.exe">
       <PackagePath>CourseWork_2.exe</PackagePath>
-      <Modified>2017-02-20T19:24:05.703</Modified>
+      <Modified>2017-03-01T11:13:51.340</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

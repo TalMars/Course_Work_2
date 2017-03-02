@@ -1,12 +1,10 @@
 ﻿using CourseWork_2.DataBase;
 using CourseWork_2.DataBase.DBModels;
-using CourseWork_2.Extensions_Folder;
 using CourseWork_2.HeatMap;
 using CourseWork_2.Model;
 using CourseWork_2.Pages;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -24,6 +22,9 @@ namespace CourseWork_2.ViewModel
         private bool _ringContentVisibility;
         private ICommand _startStopCommand;
         private ICommand _cancelCommand;
+        private int userId;
+        private string recordId;
+        private bool isLastUri;
 
         private Windows.UI.Xaml.DispatcherTimer timer;
         private string _timerText;
@@ -44,17 +45,17 @@ namespace CourseWork_2.ViewModel
         }
         #endregion
 
-        public ReviewPrototypeViewModel(int userId)
+        public ReviewPrototypeViewModel(int _userId)
         {
             ChangeUserAgent(androidASUS);
 
             _screens = new List<RecordScreenPrototypeModel>();
             IsOnStart = true;
+            isLastUri = false;
+            userId = _userId;
 
             using (var db = new PrototypingContext())
             {
-                db.RecordsPrototype.Add(new RecordPrototype() { CreatedDate = DateTime.Now, UserPrototypeId = userId, UserPrototype = db.Users.Single(u => u.UserPrototypeId == userId) });
-                db.SaveChanges();
                 UserPrototype user = db.Users.Single(u => u.UserPrototypeId == userId);
                 db.Entry(user).Reference(u => u.Prototype).Load();
                 SourceWebView = user.Prototype.Url;
@@ -106,8 +107,16 @@ namespace CourseWork_2.ViewModel
         {
             if (_isOnStart)
             {
+                TimerInit();
                 IsOnStart = false;
                 IsSplitViewPaneOpen = false;
+
+                using (var db = new PrototypingContext())
+                {
+                    db.RecordsPrototype.Add(new RecordPrototype() { CreatedDate = DateTime.Now, UserPrototypeId = userId });
+                    db.SaveChanges();
+                    recordId = db.RecordsPrototype.Last().RecordPrototypeId.ToString();
+                }
             }
             else
             {
@@ -126,6 +135,15 @@ namespace CourseWork_2.ViewModel
 
         private void CancelFunc()
         {
+            if(recordId != null)
+            {
+                using (var db = new PrototypingContext())
+                {
+                    db.RecordsPrototype.Remove(db.RecordsPrototype.Single(r => r.RecordPrototypeId == int.Parse(recordId)));
+                    db.SaveChanges();
+                }
+            }
+
             ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).GoBack();
         }
         #endregion
@@ -168,16 +186,14 @@ namespace CourseWork_2.ViewModel
                     "var pointY = event.clientY;" +
                     " window.external.notify('tap:' + pointX + ':' + pointY);" +
                  "}";
-            await sender.InvokeScriptAsync("eval", new string[] { docClickScript });
+            await sender.InvokeScriptAsync("eval", new string[] { docClickScript }); //set event 'click' on page
 
             RingContentVisibility = false;
-
-            TimerInit();
         }
 
         public async void WebView_ScriptNotify(object sender, Windows.UI.Xaml.Controls.NotifyEventArgs e)
         {
-            if (e.Value.Contains("tap"))
+            if (e.Value.Contains("tap") && !IsOnStart)
             {
                 Windows.UI.Xaml.Controls.WebView webView = (Windows.UI.Xaml.Controls.WebView)sender;
 
@@ -219,8 +235,17 @@ namespace CourseWork_2.ViewModel
                 }
                 else
                 {
-                    //screenshot
-                    await DoCaptureWebView(webView, hp);
+                    if (isLastUri)
+                    {
+                        isLastUri = false;
+                        _screens[indexUri - 1].ListPoints.Add(hp);
+                    }
+                    else
+                    {
+                        isLastUri = true;
+                        //screenshot
+                        await DoCaptureWebView(webView, hp);
+                    }
                 }
             }
         }

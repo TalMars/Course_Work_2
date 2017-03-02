@@ -5,6 +5,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
+using Windows.Storage.FileProperties;
 using Windows.Storage.Streams;
 using Windows.UI;
 using Windows.UI.Xaml.Media.Imaging;
@@ -210,6 +211,19 @@ namespace CourseWork_2.HeatMap
                 ColorManagementMode.DoNotColorManage);
             pixelData.DetachPixelData().CopyTo(small.PixelBuffer);
             return small;
+        }
+
+        public async static Task<WriteableBitmap> AsWrBitmapFromFile(string pathToFile)
+        {
+            StorageFile file = await StorageFile.GetFileFromPathAsync(pathToFile);
+            ImageProperties properties = await file.Properties.GetImagePropertiesAsync();
+            WriteableBitmap result = new WriteableBitmap((int)properties.Width, (int)properties.Height);
+            using (var stream = await file.OpenReadAsync())
+            {
+                await result.SetSourceAsync(stream);
+            }
+
+            return result;
         }
 
         //public static byte[] AsByteArray(WriteableBitmap bitmap)

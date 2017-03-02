@@ -23,8 +23,11 @@ namespace CourseWork_2.DataBase.DBModels
                 string[] pointsArr = PointsText.Split(';');
                 foreach (string point in pointsArr)
                 {
-                    string[] p = point.Split(',');
-                    list.Add(new HeatPoint(int.Parse(p[0]), int.Parse(p[1])));
+                    if (!point.Equals(""))
+                    {
+                        string[] p = point.Split(',');
+                        list.Add(new HeatPoint(int.Parse(p[0]), int.Parse(p[1])));
+                    }
                 }
                 return list;
             }

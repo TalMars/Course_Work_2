@@ -17,22 +17,23 @@ namespace CourseWork_2.Model
             UriPage = uriPage;
             OriginalScreen = screenshot;
             ListPoints = new List<HeatPoint>();
-
-            WidthImage = screenshot.PixelWidth * scaleNumber;
-            HeightImage = screenshot.PixelHeight * scaleNumber;
         }
 
-        public string UriPage { get; private set; }
+        public RecordScreenPrototypeModel()
+        {
+        }
 
-        public WriteableBitmap OriginalScreen { get; private set; }
+        public string UriPage { get; set; }
+
+        public WriteableBitmap OriginalScreen { get; set; }
 
         public WriteableBitmap HeatMapScreen { get; set; }
 
         public List<HeatPoint> ListPoints { get; set; }
 
-        public double WidthImage { get; private set; }
+        public double WidthImage { get { return OriginalScreen.PixelWidth * scaleNumber; } }
 
-        public double HeightImage { get; private set; }
+        public double HeightImage { get { return OriginalScreen.PixelHeight * scaleNumber; } }
 
     }
 }
