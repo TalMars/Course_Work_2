@@ -48,9 +48,11 @@
                 </GridView.ItemContainerStyle>
             </GridView>
 
-            <ProgressRing Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"
-                          Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}"
-                                  IsActive="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay}"/>
+            <StackPanel Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}"
+                        VerticalAlignment="Center" HorizontalAlignment="Center">
+                <ProgressRing Width="50" Height="50" IsActive="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay}"/>
+                <TextBlock Text="Rendering..." TextAlignment="Center" />
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

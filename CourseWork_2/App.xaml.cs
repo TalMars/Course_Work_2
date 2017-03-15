@@ -77,16 +77,16 @@ namespace CourseWork_2
                 Window.Current.Content = rootFrame;
 
                 //// listen for back button clicks (both soft- and hardware)
-                //SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+                SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
 
                 ////SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
                 ////    shell.RootFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
 
-                //if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
-                //{
+                if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+                {
 
-                //    HardwareButtons.BackPressed += OnBackPressed;
-                //}
+                    HardwareButtons.BackPressed += OnBackPressed;
+                }
 
                 //UpdateBackButtonVisibility();
             }
@@ -103,67 +103,26 @@ namespace CourseWork_2
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
-
-            //var shell = Window.Current.Content as Shell;
-
-            //// Do not repeat app initialization when the Window already has content,
-            //// just ensure that the window is active
-            //if (shell == null)
-            //{
-            //    // Create a Shell which navigates to the first page
-            //    shell = new Shell();
-
-            //    // hook-up shell root frame navigation events
-            //    shell.RootFrame.NavigationFailed += OnNavigationFailed;
-            //    shell.RootFrame.Navigated += OnNavigated;
-
-            //    if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-            //    {
-            //        //TODO: Load state from previously suspended application
-            //    }
-
-            //    // set the Shell as content
-            //    Window.Current.Content = shell;
-
-            //// listen for back button clicks (both soft- and hardware)
-            //SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
-
-            ////SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-            ////    shell.RootFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
-
-            //if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
-            //{
-
-            //    HardwareButtons.BackPressed += OnBackPressed;
-            //}
-
-            //UpdateBackButtonVisibility();
-            //    }
-
-            //    // Ensure the current window is active
-            //    Window.Current.Activate();
         }
 
         // handle hardware back button press
         void OnBackPressed(object sender, BackPressedEventArgs e)
         {
-            //var shell = (Shell)Window.Current.Content;
-            //if (shell.RootFrame.CanGoBack)
-            //{
-            //    e.Handled = true;
-            //    shell.RootFrame.GoBack();
-            //}
+            if((Window.Current.Content as Frame).SourcePageType == typeof(PrototypesPage))
+            {
+                e.Handled = true;
+                Current.Exit();
+            }
         }
 
         // handle software back button press
         void OnBackRequested(object sender, BackRequestedEventArgs e)
         {
-            //var shell = (Shell)Window.Current.Content;
-            //if (shell.RootFrame.CanGoBack)
-            //{
-            //    e.Handled = true;
-            //    shell.RootFrame.GoBack();
-            //}
+            if ((Window.Current.Content as Frame).SourcePageType == typeof(PrototypesPage))
+            {
+                e.Handled = true;
+                Current.Exit();
+            }
         }
 
         void OnNavigated(object sender, NavigationEventArgs e)

@@ -1,6 +1,5 @@
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\CourseWork_2.exe.config
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\App.xbf
-C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\MainPage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\Pages\AddPrototypePage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\Pages\AddSettingsPage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\Pages\AddUserPage.xbf
@@ -164,8 +163,6 @@ C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\WriteableBitmapEx.WinRT.pdb
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\App.g.i.cs
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\App.g.cs
-C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\MainPage.g.i.cs
-C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\MainPage.g.cs
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\AddPrototypePage.g.i.cs
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\AddPrototypePage.g.cs
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\AddSettingsPage.g.i.cs
@@ -184,7 +181,6 @@ C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\ReviewPrototypePage.g.cs
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\XamlTypeInfo.g.cs
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\App.xaml
-C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\MainPage.xaml
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\AddPrototypePage.xaml
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\AddSettingsPage.xaml
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\AddUserPage.xaml
@@ -196,7 +192,6 @@ C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Templates\AppBarStyle.xaml
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Templates\SplitViewStyle.xaml
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\App.xbf
-C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\MainPage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\AddPrototypePage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\AddSettingsPage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\AddUserPage.xbf
@@ -300,7 +295,5 @@ C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\qualifiers.txt
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\qualifiers.txt.intermediate
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\MultipleQualifiersPerDimensionFound.txt
-C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\resources.en-us.resfiles
-C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\resources.en-us.resfiles.intermediate
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\ProjectArchitectures.txt
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\CourseWork_2.csprojResolveAssemblyReference.cache

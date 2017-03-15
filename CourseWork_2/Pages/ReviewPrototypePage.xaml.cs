@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -52,17 +53,19 @@ namespace CourseWork_2.Pages
         //private string ios = "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1";
         //#endregion
 
-        
+
         public ReviewPrototypePage()
         {
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             //await Windows.UI.ViewManagement.StatusBar.GetForCurrentView().HideAsync();
-           Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
-           ViewModel = new ReviewPrototypeViewModel((int)e.Parameter);
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
+            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
+            ViewModel = new ReviewPrototypeViewModel((int)e.Parameter);
+            await ViewModel.MediaCaptureInitialization();
         }
 
         public ReviewPrototypeViewModel ViewModel { get; private set; }

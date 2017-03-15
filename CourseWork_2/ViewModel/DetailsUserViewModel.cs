@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.Storage;
 
 namespace CourseWork_2.ViewModel
 {
@@ -25,9 +26,15 @@ namespace CourseWork_2.ViewModel
         private ICommand _editCommand;
         private ICommand _removeCommad;
 
+        private EventHandler<Windows.UI.Core.BackRequestedEventArgs> requestHandler;
+        private EventHandler<Windows.Phone.UI.Input.BackPressedEventArgs> pressedHandler;
+
         public DetailsUserViewModel(int userId)
         {
             IsOpenCommandBar = false;
+
+            //GoBack Navigation
+            RegisterGoBackEventHandlers();
 
             using (var db = new PrototypingContext())
             {
@@ -35,6 +42,46 @@ namespace CourseWork_2.ViewModel
                 Records = new ObservableCollection<RecordPrototype>(db.RecordsPrototype.Where(r => r.UserPrototypeId == userId));
             }
         }
+
+        #region back event
+        private void RegisterGoBackEventHandlers()
+        {
+            requestHandler = (o, ea) =>
+            {
+                UnregisterRequestEventHander();
+                GoBackFunc();
+                ea.Handled = true;
+            };
+            Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += requestHandler;
+
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+            {
+                pressedHandler = (o, ea) =>
+                {
+                    UnregisterPressedEventHadler();
+                    GoBackFunc();
+                    ea.Handled = true;
+                };
+                Windows.Phone.UI.Input.HardwareButtons.BackPressed += pressedHandler;
+            }
+        }
+
+        public void UnregisterRequestEventHander()
+        {
+            if (requestHandler != null)
+            {
+                Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested -= requestHandler;
+            }
+        }
+
+        public void UnregisterPressedEventHadler()
+        {
+            if (pressedHandler != null)
+            {
+                Windows.Phone.UI.Input.HardwareButtons.BackPressed -= pressedHandler;
+            }
+        }
+        #endregion
 
         #region properties
         public ObservableCollection<RecordPrototype> Records
@@ -80,11 +127,8 @@ namespace CourseWork_2.ViewModel
         private void GoBackFunc()
         {
             Windows.UI.Xaml.Controls.Frame frame = (Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content;
-            for (int i = frame.BackStack.Count - 1; i >= 0; i--)
-                if (frame.BackStack[i].SourcePageType != typeof(DetailsPrototypePage))
-                    frame.BackStack.RemoveAt(i);
-
-            frame.GoBack(); //.Navigate(typeof(DetailsPrototypePage), UserModel.PrototypeId);
+            frame.BackStack.Clear();
+            frame.Navigate(typeof(DetailsPrototypePage), UserModel.PrototypeId);
         }
 
         public ICommand OpenAppBarCommand
@@ -127,11 +171,25 @@ namespace CourseWork_2.ViewModel
                 return _removeCommad ?? (_removeCommad = new Command(() => RemoveFunc()));
             }
         }
-        private void RemoveFunc()
+        private async void RemoveFunc()
         {
             using (var db = new PrototypingContext())
             {
-                db.Users.Remove(UserModel);
+                UserPrototype user = db.Users.Single(u => u.UserPrototypeId == UserModel.UserPrototypeId);
+                await db.Entry(user).Reference(u => u.Prototype).LoadAsync();
+
+                try
+                {
+                    StorageFolder prototypeFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(user.Prototype.Name + "_" + user.PrototypeId);
+                    StorageFolder userFolder = await prototypeFolder.GetFolderAsync(user.Name + "_" + user.UserPrototypeId);
+                    await userFolder.DeleteAsync();
+                }
+                catch (System.IO.FileNotFoundException)
+                {
+                    System.Diagnostics.Debug.WriteLine("User folder not found");
+                }
+
+                db.Users.Remove(user);
                 db.SaveChanges();
             }
             ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(DetailsPrototypePage), UserModel.PrototypeId);

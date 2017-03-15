@@ -42,10 +42,10 @@
                                 <ColumnDefinition Width="0.25*" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Viewbox>
+                            <Viewbox x:Name="VBSymbol" VerticalAlignment="Center">
                                 <SymbolIcon Foreground="DarkGray" Symbol="CellPhone" />
                             </Viewbox>
-                            <Grid Grid.Column="1" Margin="5,0,0,0">
+                            <Grid Grid.Column="1" Margin="5,0,0,0" Height="{Binding ElementName=VBSymbol, Path=ActualHeight}">
                                 <StackPanel>
                                     <TextBlock Text="{Binding Name}" Foreground="White" FontSize="18" />
                                     <TextBlock Text="{Binding PrototypeId, Converter={StaticResource countURConverter}, ConverterParameter=prototype}" Foreground="DarkGray" FontSize="14" />
@@ -58,7 +58,7 @@
                                         <Border BorderBrush="DarkGray" BorderThickness="0,0,0,1" 
                                         Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=created}">
                                             <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=created}" 
-                                               Foreground="DarkGray" FontSize="12" VerticalAlignment="Bottom" Margin="0,0,0,5" />
+                                               Foreground="DarkGray" FontSize="12" VerticalAlignment="Bottom" />
                                         </Border>
                                     </Grid>
                                 </StackPanel>

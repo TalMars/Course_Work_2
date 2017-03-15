@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.Storage;
 using Windows.UI.Popups;
 
 namespace CourseWork_2.ViewModel
@@ -27,9 +28,15 @@ namespace CourseWork_2.ViewModel
         private ICommand _editCommand;
         private ICommand _removeCommad;
 
+        private EventHandler<Windows.UI.Core.BackRequestedEventArgs> requestHandler;
+        private EventHandler<Windows.Phone.UI.Input.BackPressedEventArgs> pressedHandler;
+
         public DetailsPrototypeViewModel(int prototypeId)
         {
             IsOpenCommandBar = false;
+
+            //GoBack Navigation
+            RegisterGoBackEventHandlers();
 
             using (var db = new PrototypingContext())
             {
@@ -37,6 +44,44 @@ namespace CourseWork_2.ViewModel
                 Users = new ObservableCollection<UserPrototype>(db.Users.Where(u => u.PrototypeId == prototypeId));
             }
         }
+
+        #region back event
+        private void RegisterGoBackEventHandlers()
+        {
+            requestHandler = (o, ea) =>
+            {
+                GoBackFunc();
+                ea.Handled = true;
+            };
+            Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += requestHandler;
+
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+            {
+                pressedHandler = (o, ea) =>
+                {
+                    GoBackFunc();
+                    ea.Handled = true;
+                };
+                Windows.Phone.UI.Input.HardwareButtons.BackPressed += pressedHandler;
+            }
+        }
+
+        public void UnregisterRequestEventHander()
+        {
+            if (requestHandler != null)
+            {
+                Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested -= requestHandler;
+            }
+        }
+
+        public void UnregisterPressedEventHadler()
+        {
+            if (pressedHandler != null)
+            {
+                Windows.Phone.UI.Input.HardwareButtons.BackPressed -= pressedHandler;
+            }
+        }
+        #endregion
 
         #region properties
         public ObservableCollection<UserPrototype> Users
@@ -82,11 +127,8 @@ namespace CourseWork_2.ViewModel
         private void GoBackFunc()
         {
             Windows.UI.Xaml.Controls.Frame frame = (Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content;
-            for (int i = frame.BackStack.Count - 1; i >= 0; i--)
-                if (frame.BackStack[i].SourcePageType != typeof(PrototypesPage))
-                    frame.BackStack.RemoveAt(i);
-
-            frame.GoBack(); //.Navigate(typeof(PrototypesPage));
+            frame.BackStack.Clear();
+            frame.Navigate(typeof(PrototypesPage));
         }
 
         public ICommand OpenAppBarCommand
@@ -129,10 +171,20 @@ namespace CourseWork_2.ViewModel
                 return _removeCommad ?? (_removeCommad = new Command(() => RemoveFunc()));
             }
         }
-        private void RemoveFunc()
+        private async void RemoveFunc()
         {
             using (var db = new PrototypingContext())
             {
+                try
+                {
+                    StorageFolder prototypeFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(PrototypeModel.Name + "_" + PrototypeModel.PrototypeId);
+                    await prototypeFolder.DeleteAsync();
+                }
+                catch (System.IO.FileNotFoundException)
+                {
+                    System.Diagnostics.Debug.WriteLine("Prototype folder not found");
+                }
+
                 db.Prototypes.Remove(PrototypeModel);
                 db.SaveChanges();
             }

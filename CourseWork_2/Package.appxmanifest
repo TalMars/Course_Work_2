@@ -3,7 +3,7 @@
   <Identity Name="f0c646ce-9c75-496e-bfcb-7ff3c867b489" Publisher="CN=TalMars" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="f0c646ce-9c75-496e-bfcb-7ff3c867b489" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>CourseWork_2</DisplayName>
+    <DisplayName>Habco on WP</DisplayName>
     <PublisherDisplayName>TalMars</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -36,5 +36,7 @@
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
+    <DeviceCapability Name="webcam" />
+    <DeviceCapability Name="microphone" />
   </Capabilities>
 </Package>

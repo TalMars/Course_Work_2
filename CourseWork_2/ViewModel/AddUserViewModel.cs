@@ -103,7 +103,7 @@ namespace CourseWork_2.ViewModel
                     db.Users.Update(user);
                     db.SaveChanges();
                 }
-                ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(DetailsUserPage), user.UserPrototypeId);
+                GoBackFunc();
             }
         }
 
@@ -111,8 +111,15 @@ namespace CourseWork_2.ViewModel
         {
             get
             {
-                return _cancelCommand ?? (_cancelCommand = new Command(() => ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).GoBack()));
+                return _cancelCommand ?? (_cancelCommand = new Command(() => GoBackFunc()));
             }
+        }
+
+        private void GoBackFunc()
+        {
+            Windows.UI.Xaml.Controls.Frame frame = (Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content;
+            frame.BackStack.Clear();
+            frame.Navigate(typeof(DetailsUserPage), user.PrototypeId);
         }
         #endregion
     }

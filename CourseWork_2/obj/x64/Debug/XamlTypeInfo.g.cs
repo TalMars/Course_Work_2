@@ -133,27 +133,27 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
         private void InitTypeTables()
         {
             _typeNameTable = new string[33];
-            _typeNameTable[0] = "CourseWork_2.MainPage";
-            _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
-            _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
-            _typeNameTable[3] = "CourseWork_2.Converters.BoolToVisibilityConverter";
-            _typeNameTable[4] = "Object";
-            _typeNameTable[5] = "CourseWork_2.Pages.AddPrototypePage";
-            _typeNameTable[6] = "CourseWork_2.ViewModel.AddPrototypeViewModel";
-            _typeNameTable[7] = "CourseWork_2.ViewModel.NotifyPropertyChanged";
-            _typeNameTable[8] = "CourseWork_2.Pages.AddSettingsPage";
-            _typeNameTable[9] = "CourseWork_2.Pages.AddUserPage";
-            _typeNameTable[10] = "CourseWork_2.ViewModel.AddUserViewModel";
-            _typeNameTable[11] = "CourseWork_2.Converters.DateTimeToStringConverter";
-            _typeNameTable[12] = "CourseWork_2.Converters.DatesVisibilityConverter";
-            _typeNameTable[13] = "CourseWork_2.Converters.CountUsersRecordsToStringConverter";
-            _typeNameTable[14] = "CourseWork_2.Converters.ReturnModelConverter";
-            _typeNameTable[15] = "CourseWork_2.Pages.DetailsPrototypePage";
-            _typeNameTable[16] = "CourseWork_2.ViewModel.DetailsPrototypeViewModel";
-            _typeNameTable[17] = "CourseWork_2.Pages.DetailsUserPage";
-            _typeNameTable[18] = "CourseWork_2.ViewModel.DetailsUserViewModel";
-            _typeNameTable[19] = "CourseWork_2.Pages.PrototypesPage";
-            _typeNameTable[20] = "CourseWork_2.ViewModel.PrototypesViewModel";
+            _typeNameTable[0] = "CourseWork_2.Converters.BoolToVisibilityConverter";
+            _typeNameTable[1] = "Object";
+            _typeNameTable[2] = "CourseWork_2.Pages.AddPrototypePage";
+            _typeNameTable[3] = "Windows.UI.Xaml.Controls.Page";
+            _typeNameTable[4] = "Windows.UI.Xaml.Controls.UserControl";
+            _typeNameTable[5] = "CourseWork_2.ViewModel.AddPrototypeViewModel";
+            _typeNameTable[6] = "CourseWork_2.ViewModel.NotifyPropertyChanged";
+            _typeNameTable[7] = "CourseWork_2.Pages.AddSettingsPage";
+            _typeNameTable[8] = "CourseWork_2.Pages.AddUserPage";
+            _typeNameTable[9] = "CourseWork_2.ViewModel.AddUserViewModel";
+            _typeNameTable[10] = "CourseWork_2.Converters.DateTimeToStringConverter";
+            _typeNameTable[11] = "CourseWork_2.Converters.DatesVisibilityConverter";
+            _typeNameTable[12] = "CourseWork_2.Converters.CountUsersRecordsToStringConverter";
+            _typeNameTable[13] = "CourseWork_2.Converters.ReturnModelConverter";
+            _typeNameTable[14] = "CourseWork_2.Pages.DetailsPrototypePage";
+            _typeNameTable[15] = "CourseWork_2.ViewModel.DetailsPrototypeViewModel";
+            _typeNameTable[16] = "CourseWork_2.Pages.DetailsUserPage";
+            _typeNameTable[17] = "CourseWork_2.ViewModel.DetailsUserViewModel";
+            _typeNameTable[18] = "CourseWork_2.Pages.PrototypesPage";
+            _typeNameTable[19] = "CourseWork_2.ViewModel.PrototypesViewModel";
+            _typeNameTable[20] = "CourseWork_2.Converters.InverseBoolConverter";
             _typeNameTable[21] = "CourseWork_2.Pages.ResultScreensPage";
             _typeNameTable[22] = "CourseWork_2.ViewModel.ResultScreensViewModel";
             _typeNameTable[23] = "CourseWork_2.Converters.IconStartStopConverter";
@@ -168,27 +168,27 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
             _typeNameTable[32] = "CourseWork_2.ViewModel.ReviewPrototypeViewModel";
 
             _typeTable = new global::System.Type[33];
-            _typeTable[0] = typeof(global::CourseWork_2.MainPage);
-            _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
-            _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
-            _typeTable[3] = typeof(global::CourseWork_2.Converters.BoolToVisibilityConverter);
-            _typeTable[4] = typeof(global::System.Object);
-            _typeTable[5] = typeof(global::CourseWork_2.Pages.AddPrototypePage);
-            _typeTable[6] = typeof(global::CourseWork_2.ViewModel.AddPrototypeViewModel);
-            _typeTable[7] = typeof(global::CourseWork_2.ViewModel.NotifyPropertyChanged);
-            _typeTable[8] = typeof(global::CourseWork_2.Pages.AddSettingsPage);
-            _typeTable[9] = typeof(global::CourseWork_2.Pages.AddUserPage);
-            _typeTable[10] = typeof(global::CourseWork_2.ViewModel.AddUserViewModel);
-            _typeTable[11] = typeof(global::CourseWork_2.Converters.DateTimeToStringConverter);
-            _typeTable[12] = typeof(global::CourseWork_2.Converters.DatesVisibilityConverter);
-            _typeTable[13] = typeof(global::CourseWork_2.Converters.CountUsersRecordsToStringConverter);
-            _typeTable[14] = typeof(global::CourseWork_2.Converters.ReturnModelConverter);
-            _typeTable[15] = typeof(global::CourseWork_2.Pages.DetailsPrototypePage);
-            _typeTable[16] = typeof(global::CourseWork_2.ViewModel.DetailsPrototypeViewModel);
-            _typeTable[17] = typeof(global::CourseWork_2.Pages.DetailsUserPage);
-            _typeTable[18] = typeof(global::CourseWork_2.ViewModel.DetailsUserViewModel);
-            _typeTable[19] = typeof(global::CourseWork_2.Pages.PrototypesPage);
-            _typeTable[20] = typeof(global::CourseWork_2.ViewModel.PrototypesViewModel);
+            _typeTable[0] = typeof(global::CourseWork_2.Converters.BoolToVisibilityConverter);
+            _typeTable[1] = typeof(global::System.Object);
+            _typeTable[2] = typeof(global::CourseWork_2.Pages.AddPrototypePage);
+            _typeTable[3] = typeof(global::Windows.UI.Xaml.Controls.Page);
+            _typeTable[4] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
+            _typeTable[5] = typeof(global::CourseWork_2.ViewModel.AddPrototypeViewModel);
+            _typeTable[6] = typeof(global::CourseWork_2.ViewModel.NotifyPropertyChanged);
+            _typeTable[7] = typeof(global::CourseWork_2.Pages.AddSettingsPage);
+            _typeTable[8] = typeof(global::CourseWork_2.Pages.AddUserPage);
+            _typeTable[9] = typeof(global::CourseWork_2.ViewModel.AddUserViewModel);
+            _typeTable[10] = typeof(global::CourseWork_2.Converters.DateTimeToStringConverter);
+            _typeTable[11] = typeof(global::CourseWork_2.Converters.DatesVisibilityConverter);
+            _typeTable[12] = typeof(global::CourseWork_2.Converters.CountUsersRecordsToStringConverter);
+            _typeTable[13] = typeof(global::CourseWork_2.Converters.ReturnModelConverter);
+            _typeTable[14] = typeof(global::CourseWork_2.Pages.DetailsPrototypePage);
+            _typeTable[15] = typeof(global::CourseWork_2.ViewModel.DetailsPrototypeViewModel);
+            _typeTable[16] = typeof(global::CourseWork_2.Pages.DetailsUserPage);
+            _typeTable[17] = typeof(global::CourseWork_2.ViewModel.DetailsUserViewModel);
+            _typeTable[18] = typeof(global::CourseWork_2.Pages.PrototypesPage);
+            _typeTable[19] = typeof(global::CourseWork_2.ViewModel.PrototypesViewModel);
+            _typeTable[20] = typeof(global::CourseWork_2.Converters.InverseBoolConverter);
             _typeTable[21] = typeof(global::CourseWork_2.Pages.ResultScreensPage);
             _typeTable[22] = typeof(global::CourseWork_2.ViewModel.ResultScreensViewModel);
             _typeTable[23] = typeof(global::CourseWork_2.Converters.IconStartStopConverter);
@@ -235,20 +235,20 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
             return -1;
         }
 
-        private object Activate_0_MainPage() { return new global::CourseWork_2.MainPage(); }
-        private object Activate_3_BoolToVisibilityConverter() { return new global::CourseWork_2.Converters.BoolToVisibilityConverter(); }
-        private object Activate_5_AddPrototypePage() { return new global::CourseWork_2.Pages.AddPrototypePage(); }
-        private object Activate_6_AddPrototypeViewModel() { return new global::CourseWork_2.ViewModel.AddPrototypeViewModel(); }
-        private object Activate_8_AddSettingsPage() { return new global::CourseWork_2.Pages.AddSettingsPage(); }
-        private object Activate_9_AddUserPage() { return new global::CourseWork_2.Pages.AddUserPage(); }
-        private object Activate_11_DateTimeToStringConverter() { return new global::CourseWork_2.Converters.DateTimeToStringConverter(); }
-        private object Activate_12_DatesVisibilityConverter() { return new global::CourseWork_2.Converters.DatesVisibilityConverter(); }
-        private object Activate_13_CountUsersRecordsToStringConverter() { return new global::CourseWork_2.Converters.CountUsersRecordsToStringConverter(); }
-        private object Activate_14_ReturnModelConverter() { return new global::CourseWork_2.Converters.ReturnModelConverter(); }
-        private object Activate_15_DetailsPrototypePage() { return new global::CourseWork_2.Pages.DetailsPrototypePage(); }
-        private object Activate_17_DetailsUserPage() { return new global::CourseWork_2.Pages.DetailsUserPage(); }
-        private object Activate_19_PrototypesPage() { return new global::CourseWork_2.Pages.PrototypesPage(); }
-        private object Activate_20_PrototypesViewModel() { return new global::CourseWork_2.ViewModel.PrototypesViewModel(); }
+        private object Activate_0_BoolToVisibilityConverter() { return new global::CourseWork_2.Converters.BoolToVisibilityConverter(); }
+        private object Activate_2_AddPrototypePage() { return new global::CourseWork_2.Pages.AddPrototypePage(); }
+        private object Activate_5_AddPrototypeViewModel() { return new global::CourseWork_2.ViewModel.AddPrototypeViewModel(); }
+        private object Activate_7_AddSettingsPage() { return new global::CourseWork_2.Pages.AddSettingsPage(); }
+        private object Activate_8_AddUserPage() { return new global::CourseWork_2.Pages.AddUserPage(); }
+        private object Activate_10_DateTimeToStringConverter() { return new global::CourseWork_2.Converters.DateTimeToStringConverter(); }
+        private object Activate_11_DatesVisibilityConverter() { return new global::CourseWork_2.Converters.DatesVisibilityConverter(); }
+        private object Activate_12_CountUsersRecordsToStringConverter() { return new global::CourseWork_2.Converters.CountUsersRecordsToStringConverter(); }
+        private object Activate_13_ReturnModelConverter() { return new global::CourseWork_2.Converters.ReturnModelConverter(); }
+        private object Activate_14_DetailsPrototypePage() { return new global::CourseWork_2.Pages.DetailsPrototypePage(); }
+        private object Activate_16_DetailsUserPage() { return new global::CourseWork_2.Pages.DetailsUserPage(); }
+        private object Activate_18_PrototypesPage() { return new global::CourseWork_2.Pages.PrototypesPage(); }
+        private object Activate_19_PrototypesViewModel() { return new global::CourseWork_2.ViewModel.PrototypesViewModel(); }
+        private object Activate_20_InverseBoolConverter() { return new global::CourseWork_2.Converters.InverseBoolConverter(); }
         private object Activate_21_ResultScreensPage() { return new global::CourseWork_2.Pages.ResultScreensPage(); }
         private object Activate_22_ResultScreensViewModel() { return new global::CourseWork_2.ViewModel.ResultScreensViewModel(); }
         private object Activate_23_IconStartStopConverter() { return new global::CourseWork_2.Converters.IconStartStopConverter(); }
@@ -265,144 +265,144 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
             switch (typeIndex)
             {
 
-            case 0:   //  CourseWork_2.MainPage
-                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_0_MainPage;
+            case 0:   //  CourseWork_2.Converters.BoolToVisibilityConverter
+                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_0_BoolToVisibilityConverter;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 1:   //  Windows.UI.Xaml.Controls.Page
+            case 1:   //  Object
                 xamlType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 2:   //  Windows.UI.Xaml.Controls.UserControl
+            case 2:   //  CourseWork_2.Pages.AddPrototypePage
+                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_2_AddPrototypePage;
+                userType.AddMemberName("ViewModel");
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 3:   //  Windows.UI.Xaml.Controls.Page
                 xamlType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 3:   //  CourseWork_2.Converters.BoolToVisibilityConverter
-                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_3_BoolToVisibilityConverter;
-                userType.SetIsLocalType();
-                xamlType = userType;
-                break;
-
-            case 4:   //  Object
+            case 4:   //  Windows.UI.Xaml.Controls.UserControl
                 xamlType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 5:   //  CourseWork_2.Pages.AddPrototypePage
-                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_5_AddPrototypePage;
-                userType.AddMemberName("ViewModel");
-                userType.SetIsLocalType();
-                xamlType = userType;
-                break;
-
-            case 6:   //  CourseWork_2.ViewModel.AddPrototypeViewModel
+            case 5:   //  CourseWork_2.ViewModel.AddPrototypeViewModel
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CourseWork_2.ViewModel.NotifyPropertyChanged"));
                 userType.SetIsReturnTypeStub();
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 7:   //  CourseWork_2.ViewModel.NotifyPropertyChanged
+            case 6:   //  CourseWork_2.ViewModel.NotifyPropertyChanged
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 8:   //  CourseWork_2.Pages.AddSettingsPage
+            case 7:   //  CourseWork_2.Pages.AddSettingsPage
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_8_AddSettingsPage;
+                userType.Activator = Activate_7_AddSettingsPage;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 9:   //  CourseWork_2.Pages.AddUserPage
+            case 8:   //  CourseWork_2.Pages.AddUserPage
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_9_AddUserPage;
+                userType.Activator = Activate_8_AddUserPage;
                 userType.AddMemberName("ViewModel");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 10:   //  CourseWork_2.ViewModel.AddUserViewModel
+            case 9:   //  CourseWork_2.ViewModel.AddUserViewModel
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CourseWork_2.ViewModel.NotifyPropertyChanged"));
                 userType.SetIsReturnTypeStub();
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 11:   //  CourseWork_2.Converters.DateTimeToStringConverter
+            case 10:   //  CourseWork_2.Converters.DateTimeToStringConverter
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_11_DateTimeToStringConverter;
+                userType.Activator = Activate_10_DateTimeToStringConverter;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 12:   //  CourseWork_2.Converters.DatesVisibilityConverter
+            case 11:   //  CourseWork_2.Converters.DatesVisibilityConverter
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_12_DatesVisibilityConverter;
+                userType.Activator = Activate_11_DatesVisibilityConverter;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 13:   //  CourseWork_2.Converters.CountUsersRecordsToStringConverter
+            case 12:   //  CourseWork_2.Converters.CountUsersRecordsToStringConverter
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_13_CountUsersRecordsToStringConverter;
+                userType.Activator = Activate_12_CountUsersRecordsToStringConverter;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 14:   //  CourseWork_2.Converters.ReturnModelConverter
+            case 13:   //  CourseWork_2.Converters.ReturnModelConverter
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_14_ReturnModelConverter;
+                userType.Activator = Activate_13_ReturnModelConverter;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 15:   //  CourseWork_2.Pages.DetailsPrototypePage
+            case 14:   //  CourseWork_2.Pages.DetailsPrototypePage
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_15_DetailsPrototypePage;
+                userType.Activator = Activate_14_DetailsPrototypePage;
                 userType.AddMemberName("ViewModel");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 16:   //  CourseWork_2.ViewModel.DetailsPrototypeViewModel
+            case 15:   //  CourseWork_2.ViewModel.DetailsPrototypeViewModel
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CourseWork_2.ViewModel.NotifyPropertyChanged"));
                 userType.SetIsReturnTypeStub();
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 17:   //  CourseWork_2.Pages.DetailsUserPage
+            case 16:   //  CourseWork_2.Pages.DetailsUserPage
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_17_DetailsUserPage;
+                userType.Activator = Activate_16_DetailsUserPage;
                 userType.AddMemberName("ViewModel");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 18:   //  CourseWork_2.ViewModel.DetailsUserViewModel
+            case 17:   //  CourseWork_2.ViewModel.DetailsUserViewModel
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CourseWork_2.ViewModel.NotifyPropertyChanged"));
                 userType.SetIsReturnTypeStub();
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 19:   //  CourseWork_2.Pages.PrototypesPage
+            case 18:   //  CourseWork_2.Pages.PrototypesPage
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_19_PrototypesPage;
+                userType.Activator = Activate_18_PrototypesPage;
                 userType.AddMemberName("ViewModel");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 20:   //  CourseWork_2.ViewModel.PrototypesViewModel
+            case 19:   //  CourseWork_2.ViewModel.PrototypesViewModel
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CourseWork_2.ViewModel.NotifyPropertyChanged"));
                 userType.SetIsReturnTypeStub();
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 20:   //  CourseWork_2.Converters.InverseBoolConverter
+                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_20_InverseBoolConverter;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -515,6 +515,11 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
             var that = (global::CourseWork_2.Pages.ResultScreensPage)instance;
             return that.ViewModel;
         }
+        private void set_5_ResultScreensPage_ViewModel(object instance, object Value)
+        {
+            var that = (global::CourseWork_2.Pages.ResultScreensPage)instance;
+            that.ViewModel = (global::CourseWork_2.ViewModel.ResultScreensViewModel)Value;
+        }
         private object get_6_SwipeableSplitView_IsSwipeablePaneOpen(object instance)
         {
             var that = (global::CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView)instance;
@@ -600,7 +605,7 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CourseWork_2.Pages.ResultScreensPage");
                 xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "ViewModel", "CourseWork_2.ViewModel.ResultScreensViewModel");
                 xamlMember.Getter = get_5_ResultScreensPage_ViewModel;
-                xamlMember.SetIsReadOnly();
+                xamlMember.Setter = set_5_ResultScreensPage_ViewModel;
                 break;
             case "CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView.IsSwipeablePaneOpen":
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView");

@@ -1,5 +1,6 @@
 ﻿using CourseWork_2.DataBase;
 using CourseWork_2.DataBase.DBModels;
+using CourseWork_2.Extensions_Folder;
 using CourseWork_2.HeatMap;
 using CourseWork_2.Model;
 using CourseWork_2.Pages;
@@ -10,21 +11,47 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.Devices.Enumeration;
+using Windows.Foundation;
+using Windows.Media.Capture;
+using Windows.Media.MediaProperties;
+using Windows.Storage;
 using Windows.Storage.Streams;
+using Windows.System.Display;
 
 namespace CourseWork_2.ViewModel
 {
     public class ReviewPrototypeViewModel : NotifyPropertyChanged
     {
         private bool isSplitViewPaneOpen;
-        private string _sourceWebView = null;
         private bool _isOnStart;
         private bool _ringContentVisibility;
-        private ICommand _startStopCommand;
-        private ICommand _cancelCommand;
-        private int userId;
-        private string recordId;
         private bool isLastUri;
+        private bool _previewVisibility;
+
+        private string loadingPageText = "Loading Page...";
+        private string screeningText = "Screenshoting...";
+        private string _ringText;
+
+        private ICommand _startStopCommand;
+        private ICommand _previewVideoCommand;
+        private ICommand _cancelCommand;
+
+        private EventHandler<Windows.UI.Core.BackRequestedEventArgs> requestHandler;
+        private EventHandler<Windows.Phone.UI.Input.BackPressedEventArgs> pressedHandler;
+
+        private int userId;
+        private int recordId;
+        private string _sourceWebView = null;
+
+        private Windows.UI.Xaml.Controls.CaptureElement _captureElement;
+        private MediaCapture _mediaCapture;
+        private bool _isPreviewing;
+        private DisplayRequest _displayRequest;
+        private CameraRotationHelper _rotationHelper;
+        private static readonly Guid RotationKey = new Guid("C380465D-2271-428C-9B83-ECEA3B4A85C1");
+
+        private StorageFile videoFile;
 
         private Windows.UI.Xaml.DispatcherTimer timer;
         private string _timerText;
@@ -51,8 +78,13 @@ namespace CourseWork_2.ViewModel
 
             _screens = new List<RecordScreenPrototypeModel>();
             IsOnStart = true;
+            PreviewVisibility = false;
             isLastUri = false;
             userId = _userId;
+            recordId = -1;
+
+            //GoBack Navigation
+            RegisterGoBackEventHandlers();
 
             using (var db = new PrototypingContext())
             {
@@ -61,6 +93,171 @@ namespace CourseWork_2.ViewModel
                 SourceWebView = user.Prototype.Url;
             }
         }
+
+        #region back event
+        private void RegisterGoBackEventHandlers()
+        {
+            requestHandler = (o, ea) =>
+            {
+                UnregisterRequestEventHander();
+                CancelFunc();
+                ea.Handled = true;
+            };
+            Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += requestHandler;
+
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+            {
+                pressedHandler = (o, ea) =>
+                {
+                    UnregisterPressedEventHadler();
+                    CancelFunc();
+                    ea.Handled = true;
+                };
+                Windows.Phone.UI.Input.HardwareButtons.BackPressed += pressedHandler;
+            }
+        }
+
+        private void UnregisterRequestEventHander()
+        {
+            if (requestHandler != null)
+            {
+                Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested -= requestHandler;
+            }
+        }
+
+        private void UnregisterPressedEventHadler()
+        {
+            if (pressedHandler != null)
+            {
+                Windows.Phone.UI.Input.HardwareButtons.BackPressed -= pressedHandler;
+            }
+        }
+        #endregion
+
+        #region media capture methods
+        public async Task MediaCaptureInitialization()
+        {
+            _mediaCapture = new MediaCapture();
+            _displayRequest = new DisplayRequest();
+            DeviceInformation cameraDevice = await GetFrontalCameraDevice();
+            MediaCaptureInitializationSettings mediaInitSettings = new MediaCaptureInitializationSettings { VideoDeviceId = cameraDevice.Id };
+            await _mediaCapture.InitializeAsync(mediaInitSettings);
+
+            _rotationHelper = new CameraRotationHelper(cameraDevice.EnclosureLocation);
+            _rotationHelper.OrientationChanged += RotationHelper_OrientationChanged;
+
+            CaptureElement.Source = _mediaCapture;
+            CaptureElement.FlowDirection = Windows.UI.Xaml.FlowDirection.RightToLeft;
+            await _mediaCapture.StartPreviewAsync();
+            await SetPreviewRotationAsync();
+
+            _isPreviewing = true;
+            PreviewVisibility = true;
+
+            _displayRequest.RequestActive();
+
+            _mediaCapture.RecordLimitationExceeded += MediaCapture_RecordLimitationExceeded;
+            _mediaCapture.Failed += MediaCapture_Failed;
+        }
+
+        private async void RotationHelper_OrientationChanged(object sender, bool updatePreview)
+        {
+            if (updatePreview)
+            {
+                await SetPreviewRotationAsync();
+            }
+        }
+
+        private async void MediaCapture_RecordLimitationExceeded(MediaCapture sender)
+        {
+            UnregisterRequestEventHander();
+            UnregisterPressedEventHadler();
+            await StartStopFunc();
+
+            //message record limit!!!
+        }
+
+        private void MediaCapture_Failed(MediaCapture sender, MediaCaptureFailedEventArgs errorEventArgs)
+        {
+            UnregisterRequestEventHander();
+            UnregisterPressedEventHadler();
+            CancelFunc();
+
+            //message error dialog!!!
+        }
+
+        private async Task SetPreviewRotationAsync()
+        {
+            // Add rotation metadata to the preview stream to make sure the aspect ratio / dimensions match when rendering and getting preview frames
+            var rotation = _rotationHelper.GetCameraPreviewOrientation();
+            var props = _mediaCapture.VideoDeviceController.GetMediaStreamProperties(MediaStreamType.VideoPreview);
+            props.Properties.Add(RotationKey, CameraRotationHelper.ConvertSimpleOrientationToClockwiseDegrees(rotation));
+            await _mediaCapture.SetEncodingPropertiesAsync(MediaStreamType.VideoPreview, props, null);
+        }
+
+        private async Task<string> CreateVideoFile(int recordId)
+        {
+            string pathToVideo = string.Empty;
+            using (var db = new PrototypingContext())
+            {
+                UserPrototype user = db.Users.Single(u => u.UserPrototypeId == userId);
+                await db.Entry(user).Reference(u => u.Prototype).LoadAsync();
+
+                string prototypeName = user.Prototype.Name + "_" + user.PrototypeId;
+                string userName = user.Name + "_" + user.UserPrototypeId;
+                string recordName = "Record_" + recordId;
+
+                StorageFolder prototypeFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(prototypeName, CreationCollisionOption.OpenIfExists); //PrototypeName + Id
+                StorageFolder userFolder = await prototypeFolder.CreateFolderAsync(userName, CreationCollisionOption.OpenIfExists); //UserName + Id
+                StorageFolder recordFolder = await userFolder.CreateFolderAsync(recordName, CreationCollisionOption.OpenIfExists);
+                videoFile = await recordFolder.CreateFileAsync("videoRecord.mp4", CreationCollisionOption.GenerateUniqueName);
+
+                pathToVideo = videoFile.Path;
+            }
+            return pathToVideo;
+        }
+
+        private async void CleanupCameraAsync()
+        {
+            if (_mediaCapture != null)
+            {
+                if (_isPreviewing)
+                {
+                    PreviewVisibility = false;
+                    await _mediaCapture.StopPreviewAsync();
+                }
+                CaptureElement.Source = null;
+                //await CoreDispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                //{
+                if (_displayRequest != null)
+                {
+                    _displayRequest.RequestRelease();
+                }
+
+                _mediaCapture.Dispose();
+                //});
+            }
+
+        }
+
+        public async Task<DeviceInformation> GetFrontalCameraDevice()
+        {
+            DeviceInformation deviceReturn = null;
+
+            DeviceInformationCollection devices = await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);
+
+            foreach (var device in devices)
+            {
+                if (device.EnclosureLocation.Panel == Panel.Front) //MediaCapture.IsVideoProfileSupported(device.Id) && 
+                {
+                    deviceReturn = device;
+                    break;
+                }
+            }
+
+            return deviceReturn;
+        }
+        #endregion
 
         #region properties
         public string SourceWebView
@@ -87,6 +284,31 @@ namespace CourseWork_2.ViewModel
             set { Set(ref _ringContentVisibility, value); }
         }
 
+        public Windows.UI.Xaml.Controls.CaptureElement CaptureElement
+        {
+            get
+            {
+                if (_captureElement == null) _captureElement = new Windows.UI.Xaml.Controls.CaptureElement();
+                return _captureElement;
+            }
+            set
+            {
+                Set(ref _captureElement, value);
+            }
+        }
+
+        public bool PreviewVisibility
+        {
+            get { return _previewVisibility; }
+            set { Set(ref _previewVisibility, value); }
+        }
+
+        public string RingText
+        {
+            get { return _ringText; }
+            set { Set(ref _ringText, value); }
+        }
+
         public string TimerText
         {
             get { return _timerText; }
@@ -99,11 +321,11 @@ namespace CourseWork_2.ViewModel
         {
             get
             {
-                return _startStopCommand ?? (_startStopCommand = new Command(() => StartStopFunc()));
+                return _startStopCommand ?? (_startStopCommand = new Command(async () => await StartStopFunc()));
             }
         }
 
-        private void StartStopFunc()
+        private async Task StartStopFunc()
         {
             if (_isOnStart)
             {
@@ -113,16 +335,41 @@ namespace CourseWork_2.ViewModel
 
                 using (var db = new PrototypingContext())
                 {
-                    db.RecordsPrototype.Add(new RecordPrototype() { CreatedDate = DateTime.Now, UserPrototypeId = userId });
+                    RecordPrototype record = db.RecordsPrototype.Add(new RecordPrototype() { CreatedDate = DateTime.Now, UserPrototypeId = userId }).Entity;
                     db.SaveChanges();
-                    recordId = db.RecordsPrototype.Last().RecordPrototypeId.ToString();
+                    string pathtoVideo = await CreateVideoFile(record.RecordPrototypeId);
+                    record.PathToVideo = pathtoVideo;
+                    db.RecordsPrototype.Update(record);
+                    recordId = record.RecordPrototypeId;
+                    db.SaveChanges();
                 }
+
+                var encodingProfile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto);
+                var rotationAngle = CameraRotationHelper.ConvertSimpleOrientationToClockwiseDegrees(_rotationHelper.GetCameraCaptureOrientation());
+                encodingProfile.Video.Properties.Add(RotationKey, PropertyValue.CreateInt32(rotationAngle));
+                await _mediaCapture.StartRecordToStorageFileAsync(encodingProfile, videoFile);
             }
             else
             {
                 timer.Stop();
+                CleanupCameraAsync();
+                UnregisterPressedEventHadler();
+                UnregisterRequestEventHander();
                 ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(ResultScreensPage), _screens);
             }
+        }
+
+        public ICommand PreviewVideoCommand
+        {
+            get
+            {
+                return _previewVideoCommand ?? (_previewVideoCommand = new Command(() => PreviewVideoFunc()));
+            }
+        }
+
+        private void PreviewVideoFunc()
+        {
+            PreviewVisibility = !_previewVisibility;
         }
 
         public ICommand CancelCommand
@@ -135,16 +382,34 @@ namespace CourseWork_2.ViewModel
 
         private void CancelFunc()
         {
-            if(recordId != null)
+            if (recordId >= 0)
             {
                 using (var db = new PrototypingContext())
                 {
-                    db.RecordsPrototype.Remove(db.RecordsPrototype.Single(r => r.RecordPrototypeId == int.Parse(recordId)));
+                    UserPrototype user = db.Users.Single(u => u.UserPrototypeId == userId);
+                    RecordPrototype record = db.RecordsPrototype.Last();
+                    db.Entry(user).Reference(u => u.Prototype).Load();
+
+                    try
+                    {
+
+                    }
+                    catch (System.IO.FileNotFoundException)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Record folder not found");
+                    }
+
+                    db.RecordsPrototype.Remove(record);
                     db.SaveChanges();
                 }
             }
 
-            ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).GoBack();
+            UnregisterRequestEventHander();
+            UnregisterPressedEventHadler();
+
+            Windows.UI.Xaml.Controls.Frame frame = (Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content;
+            frame.BackStack.Clear();
+            frame.Navigate(typeof(DetailsUserPage), userId);
         }
         #endregion
 
@@ -171,6 +436,7 @@ namespace CourseWork_2.ViewModel
         #region WebView events
         public void WebView_NavigationStarting(Windows.UI.Xaml.Controls.WebView sender, Windows.UI.Xaml.Controls.WebViewNavigationStartingEventArgs args)
         {
+            RingText = loadingPageText;
             RingContentVisibility = true;
         }
 
@@ -189,6 +455,7 @@ namespace CourseWork_2.ViewModel
             await sender.InvokeScriptAsync("eval", new string[] { docClickScript }); //set event 'click' on page
 
             RingContentVisibility = false;
+            RingText = screeningText;
         }
 
         public async void WebView_ScriptNotify(object sender, Windows.UI.Xaml.Controls.NotifyEventArgs e)
@@ -199,8 +466,8 @@ namespace CourseWork_2.ViewModel
 
                 float x;
                 float y;
-                string[] arr = e.Value.Replace('.', ',').Split(new char[] { ':' });
-
+                string[] arr = e.Value.Split(new char[] { ':' });
+                
                 if (!float.TryParse(arr[1], out x))
                 {
                     System.Diagnostics.Debug.WriteLine("ErrorX");
@@ -213,10 +480,6 @@ namespace CourseWork_2.ViewModel
 
                 int iX = (int)Math.Round(x);
                 int iY = (int)Math.Round(y);
-
-                System.Diagnostics.Debug.WriteLine(e.CallingUri.AbsoluteUri);
-                System.Diagnostics.Debug.WriteLine(iX + "   " + iY);
-
                 HeatPoint hp = new HeatPoint(iX, iY);
 
                 int indexUri;
@@ -255,28 +518,6 @@ namespace CourseWork_2.ViewModel
             bool isOk = true;
 
             RingContentVisibility = true;
-
-            #region comments maybe help
-            //string scrollHeight = await webview.InvokeScriptAsync("eval", new string[] { "screen.height.toString();" });
-            //string scrollWidth = await webview.InvokeScriptAsync("eval", new string[] { "screen.width.toString();" });
-            //string scrollHeight = await webview.InvokeScriptAsync("eval", new string[] { "document.body.scrollHeight.toString();" });
-            //string scrollWidth = await webview.InvokeScriptAsync("eval", new string[] { "document.body.scrollWidth.toString();" });
-            //float height;
-            //float width;
-            //if (!float.TryParse(scrollWidth, out width))
-            //{
-            //    System.Diagnostics.Debug.WriteLine("ErrorWidth");
-            //    isOk = false;
-            //}
-            //if (!float.TryParse(scrollHeight, out height))
-            //{
-            //    System.Diagnostics.Debug.WriteLine("ErrorHeight");
-            //    isOk = false;
-            //}
-
-            //int screenHeight = (int)height;
-            //int screenWidth = (int)width;
-            #endregion
 
             int screenHeight = (int)webview.ActualHeight;
             int screenWidth = (int)webview.ActualWidth;

@@ -7,6 +7,9 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Foundation.Metadata;
+using Windows.Phone.UI.Input;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -27,12 +30,17 @@ namespace CourseWork_2.Pages
         public DetailsPrototypePage()
         {
             this.InitializeComponent();
-            this.NavigationCacheMode = NavigationCacheMode.Disabled;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             ViewModel = new DetailsPrototypeViewModel((int)e.Parameter);
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            ViewModel.UnregisterPressedEventHadler();
+            ViewModel.UnregisterRequestEventHander();
         }
 
         public DetailsPrototypeViewModel ViewModel { get; private set; }

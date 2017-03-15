@@ -24,11 +24,11 @@
         <AppBar ClosedDisplayMode="Hidden" IsOpen="{x:Bind ViewModel.IsOpenCommandBar, Mode=TwoWay}"
                 Style="{StaticResource AppBarStyle1}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <AppBarButton Icon="Add" Command="{x:Bind ViewModel.AddCommand}" Label="Add" />
+                <AppBarButton Icon="Add" Command="{x:Bind ViewModel.AddCommand}" Label="Add" Style="{StaticResource AppBarButtonStyle1}" />
                 <AppBarSeparator />
-                <AppBarButton Icon="Edit" Command="{x:Bind ViewModel.EditCommand}" Label="Edit" />
+                <AppBarButton Icon="Edit" Command="{x:Bind ViewModel.EditCommand}" Label="Edit" Style="{StaticResource AppBarButtonStyle1}" />
                 <AppBarSeparator />
-                <AppBarButton Icon="Delete" Command="{x:Bind ViewModel.RemoveCommand}" Label="Delete" />
+                <AppBarButton Icon="Delete" Command="{x:Bind ViewModel.RemoveCommand}" Label="Delete" Style="{StaticResource AppBarButtonStyle1}" />
             </StackPanel>
         </AppBar>
     </Page.BottomAppBar>
@@ -107,10 +107,10 @@
                                 <ColumnDefinition Width="0.2*" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Viewbox>
+                            <Viewbox x:Name="PlaySymbol">
                                 <SymbolIcon Foreground="DarkGray" Symbol="Play" />
                             </Viewbox>
-                            <Grid Grid.Column="1" Margin="10,0,0,0" BorderBrush="DarkGray" BorderThickness="0,0,0,1">
+                            <Grid Grid.Column="1" Margin="10,0,0,0" BorderBrush="DarkGray" BorderThickness="0,0,0,1" Height="{Binding ElementName=PlaySymbol, Path=ActualHeight}">
                                 <StackPanel VerticalAlignment="Center">
                                     <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=recordDate}" Foreground="White" FontSize="16" />
                                     <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=recordTime}" Foreground="White" FontSize="16" />

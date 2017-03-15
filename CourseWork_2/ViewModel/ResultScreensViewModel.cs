@@ -28,11 +28,55 @@ namespace CourseWork_2.ViewModel
         private RecordScreenPrototypeModel _selectedItem;
         private ICommand _doneCommand;
         private RecordPrototype RecordModel;
+        
+        private EventHandler<Windows.UI.Core.BackRequestedEventArgs> requestHandler;
+        private EventHandler<Windows.Phone.UI.Input.BackPressedEventArgs> pressedHandler;
 
         public ResultScreensViewModel()
         {
-
+            //GoBack Navigation
+            RegisterGoBackEventHandlers();
         }
+
+        #region back event
+        private void RegisterGoBackEventHandlers()
+        {
+            requestHandler = (o, ea) =>
+            {
+                UnregisterRequestEventHander();
+                GoBackFunc();
+                ea.Handled = true;
+            };
+            Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += requestHandler;
+
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+            {
+                pressedHandler = (o, ea) =>
+                {
+                    UnregisterPressedEventHadler();
+                    GoBackFunc();
+                    ea.Handled = true;
+                };
+                Windows.Phone.UI.Input.HardwareButtons.BackPressed += pressedHandler;
+            }
+        }
+
+        private void UnregisterRequestEventHander()
+        {
+            if (requestHandler != null)
+            {
+                Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested -= requestHandler;
+            }
+        }
+
+        private void UnregisterPressedEventHadler()
+        {
+            if (pressedHandler != null)
+            {
+                Windows.Phone.UI.Input.HardwareButtons.BackPressed -= pressedHandler;
+            }
+        }
+        #endregion
 
         #region properties
         public ObservableCollection<RecordScreenPrototypeModel> Screens
@@ -67,7 +111,7 @@ namespace CourseWork_2.ViewModel
         #endregion
 
         #region events
-        public void SelectScreen_DoubleTapped()
+        public void SelectScreen_DoubleTapped(object sender, Windows.UI.Xaml.Input.DoubleTappedRoutedEventArgs e)
         {
             SelectedItem = null;
             SelectVisibility = false;
@@ -84,6 +128,13 @@ namespace CourseWork_2.ViewModel
         private void DoneFunc()
         {
             ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(PrototypesPage));
+        }
+
+        private void GoBackFunc()
+        {
+            Windows.UI.Xaml.Controls.Frame frame = (Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content;
+            frame.BackStack.Clear();
+            //frame.Navigate(typeof(DetailsPrototypePage), UserModel.PrototypeId);
         }
         #endregion
 
@@ -103,19 +154,25 @@ namespace CourseWork_2.ViewModel
             using (var db = new PrototypingContext())
             {
                 RecordModel = db.RecordsPrototype.Last();
+                UserPrototype user = db.Users.Single(u => u.UserPrototypeId == RecordModel.UserPrototypeId);
+                await db.Entry(user)
+                        .Reference(u => u.Prototype)
+                        .LoadAsync();
+
+                string prototypeName = user.Prototype.Name + "_" + user.PrototypeId;
+                string userName = user.Name + "_" + user.UserPrototypeId;
+                string recordName = "Record_" + RecordModel.RecordPrototypeId;
+
+                StorageFolder prototypeFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(prototypeName, CreationCollisionOption.OpenIfExists); //PrototypeName + Id
+                StorageFolder userFolder = await prototypeFolder.CreateFolderAsync(userName, CreationCollisionOption.OpenIfExists); //UserName + Id
+                StorageFolder recordFolder = await userFolder.CreateFolderAsync(recordName, CreationCollisionOption.OpenIfExists);
+
                 foreach (RecordScreenPrototypeModel screen in screens)
                 {
                     screen.HeatMapScreen = await HeatMapFunctions.CreateProcessHeatMap(screen.OriginalScreen, screen.ListPoints);
+                    result.Add(screen);
 
-                    UserPrototype user = db.Users.Single(u => u.UserPrototypeId == RecordModel.UserPrototypeId);
-                    await db.Entry(user)
-                            .Reference(u => u.Prototype)
-                            .LoadAsync();
-
-                    string prototypeName = user.Prototype.Name + "_" + user.PrototypeId;
-                    string userName = user.Name + "_" + user.UserPrototypeId;
-                    string recordName = "Record_" + RecordModel.RecordPrototypeId;
-                    string[] screenPaths = await SaveImagesInStorage(screen.OriginalScreen, screen.HeatMapScreen, prototypeName, userName, recordName); //saving images in prototype -> user -> record path
+                    string[] screenPaths = await SaveImagesInStorage(screen.OriginalScreen, screen.HeatMapScreen, recordFolder); //saving images in prototype -> user -> record path
 
                     RecordsScreen rScreen = new RecordsScreen()
                     {
@@ -126,19 +183,14 @@ namespace CourseWork_2.ViewModel
                         PathToHeatMapScreen = screenPaths[1]
                     };
                     db.RecordsScreens.Add(rScreen);
-                    result.Add(screen);
                     db.SaveChanges();
                 }
             }
             return result;
         }
 
-        private async Task<string[]> SaveImagesInStorage(WriteableBitmap imageOriginal, WriteableBitmap imageHeat, string prototypeName, string userName, string recordName)
+        private async Task<string[]> SaveImagesInStorage(WriteableBitmap imageOriginal, WriteableBitmap imageHeat, StorageFolder recordFolder)
         {
-            StorageFolder prototypeFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(prototypeName, CreationCollisionOption.OpenIfExists); //PrototypeName + Id
-            StorageFolder userFolder = await prototypeFolder.CreateFolderAsync(userName, CreationCollisionOption.OpenIfExists); //UserName + Id
-            StorageFolder recordFolder = await userFolder.CreateFolderAsync(recordName, CreationCollisionOption.OpenIfExists);
-
             //Saving Original ImageScreen
             StorageFile fileOriginal = await recordFolder.CreateFileAsync("Screen (1).jpg", CreationCollisionOption.GenerateUniqueName); //Screen.jpg = originalScreen, Screen + _heat + .jpg = heatmap screen
             using (var stream = await fileOriginal.OpenStreamForWriteAsync())
@@ -169,7 +221,7 @@ namespace CourseWork_2.ViewModel
                 await encoder.FlushAsync();
             }
 
-
+            //return Original And Heat screens paths
             return new string[] { fileOriginal.Path, fileHeat.Path };
         }
         #endregion
@@ -213,7 +265,7 @@ namespace CourseWork_2.ViewModel
         private async Task<ObservableCollection<RecordScreenPrototypeModel>> HeatingRecordScreens(List<RecordsScreen> allScreen)
         {
             ObservableCollection<RecordScreenPrototypeModel> result = new ObservableCollection<RecordScreenPrototypeModel>();
-            while(allScreen.Count != 0)
+            while (allScreen.Count != 0)
             {
                 List<HeatPoint> points = allScreen.FindAll(s => s.UriPage.Equals(allScreen[0].UriPage)).SelectMany(s => s.Points).ToList();
                 WriteableBitmap original = await HeatMapFunctions.AsWrBitmapFromFile(allScreen[0].PathToOriginalScreen);

@@ -15,14 +15,11 @@ namespace CourseWork_2.ViewModel
     {
         private ObservableCollection<Prototype> _prototypes;
         private Prototype _selectedItem;
+        private ICommand _addCommand;
+
         public PrototypesViewModel()
         {
-            AddCommand = new Command(() => 
-            {
-                ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(AddPrototypePage));
-            });
-
-            using(var db = new PrototypingContext())
+            using (var db = new PrototypingContext())
             {
                 Prototypes = new ObservableCollection<Prototype>(db.Prototypes.ToList());
             }
@@ -51,7 +48,18 @@ namespace CourseWork_2.ViewModel
         #endregion
 
         #region events
-        public ICommand AddCommand { get; private set; }
+        public ICommand AddCommand
+        {
+            get
+            {
+                return _addCommand ?? (_addCommand = new Command(() => AddFunc()));
+            }
+        }
+
+        private void AddFunc()
+        {
+            ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(AddPrototypePage));
+        }
         #endregion
     }
 }

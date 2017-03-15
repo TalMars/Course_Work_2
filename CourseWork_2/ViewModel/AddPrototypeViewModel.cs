@@ -112,7 +112,7 @@ namespace CourseWork_2.ViewModel
                     db.Prototypes.Update(prototype);
                     db.SaveChanges();
                 }
-                ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(DetailsPrototypePage), prototype.PrototypeId);
+                GoBackFunc();
             }
         }
 
@@ -120,8 +120,15 @@ namespace CourseWork_2.ViewModel
         {
             get
             {
-                return _cancelCommand ?? (_cancelCommand = new Command(() => ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).GoBack()));
+                return _cancelCommand ?? (_cancelCommand = new Command(() => GoBackFunc()));
             }
+        }
+
+        private void GoBackFunc()
+        {
+            Windows.UI.Xaml.Controls.Frame frame = (Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content;
+            frame.BackStack.Clear();
+            frame.Navigate(typeof(DetailsPrototypePage), prototype.PrototypeId);
         }
         #endregion
     }

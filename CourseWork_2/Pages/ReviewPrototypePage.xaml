@@ -15,14 +15,14 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ms-appx:///Templates/SplitViewStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <convertersFolder:BoolToVisibilityConverter x:Key="ringConverter" />
+            <convertersFolder:BoolToVisibilityConverter x:Key="boolToVisConverter" />
             <convertersFolder:IconStartStopConverter x:Key="iconConverter" />
         </ResourceDictionary>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <swipeableSV:SwipeableSplitView x:Name="SplitView" OpenPaneLength="60" IsSwipeablePaneOpen="{x:Bind ViewModel.IsSplitViewPaneOpen, Mode=TwoWay}"
-                                        Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource ringConverter}, ConverterParameter=right}">
+                                        Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=right}">
             <SplitView.Pane>
                 <StackPanel VerticalAlignment="Center">
                     <Button Command="{x:Bind ViewModel.StartStopCommand}" Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
@@ -31,6 +31,9 @@
                             <TextBlock Text="{x:Bind ViewModel.TimerText, Mode=OneWay}" TextAlignment="Center" FontSize="10" />
                         </StackPanel>
                     </Button>
+                    <Button Command="{x:Bind ViewModel.PreviewVideoCommand}"  Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
+                        <SymbolIcon Symbol="Video" />
+                    </Button>
                     <Button Command="{x:Bind ViewModel.CancelCommand}" Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
                         <SymbolIcon Symbol="Cancel" />
                     </Button>
@@ -38,15 +41,34 @@
             </SplitView.Pane>
             <SplitView.Content>
                 <Grid>
-                    <WebView webviewExts:WebViewExtensions.UriSource="{x:Bind ViewModel.SourceWebView, Mode=OneWay}"
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <WebView Grid.ColumnSpan="3" Grid.RowSpan="3" webviewExts:WebViewExtensions.UriSource="{x:Bind ViewModel.SourceWebView, Mode=OneWay}"
                              ScriptNotify="{x:Bind ViewModel.WebView_ScriptNotify, Mode=OneWay}"
                              NavigationStarting="{x:Bind ViewModel.WebView_NavigationStarting, Mode=OneWay}"
                              NavigationCompleted="{x:Bind ViewModel.WebView_NavigationCompleted, Mode=OneWay}"
                              />
+                    
+                    <ContentControl Name="PreviewElement" Grid.Column="2" Content="{x:Bind ViewModel.CaptureElement, Mode=OneWay}"
+                                    Visibility="{x:Bind ViewModel.PreviewVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}"/>
                 </Grid>
             </SplitView.Content>
         </swipeableSV:SwipeableSplitView>
-        <ProgressRing Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource ringConverter}, ConverterParameter=inverse}"
-                                  IsActive="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay}" Width="50" Height="50" />
+
+
+        <StackPanel Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}"
+                    VerticalAlignment="Center" HorizontalAlignment="Center">
+            <ProgressRing IsActive="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay}" Width="50" Height="50" />
+            <TextBlock Text="{x:Bind ViewModel.RingText, Mode=OneWay}" />
+        </StackPanel>
     </Grid>
 </Page>
