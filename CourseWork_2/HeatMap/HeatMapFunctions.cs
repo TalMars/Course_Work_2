@@ -29,17 +29,15 @@ namespace CourseWork_2.HeatMap
             WriteableBitmap whiteBitmap = new WriteableBitmap(width, height); //creating transparent bitmap
             whiteBitmap.Clear(Colors.Transparent);
 
-            Uri heatPoint1 = new Uri("ms-appx:///Resources/HeatPointIntensive.png");
+            Uri heatPoint1 = new Uri("ms-appx:///Resources/HeatPoint60x60_30.png");
 
             WriteableBitmap heatDot = await BitmapFactory.New(0, 0).FromContent(heatPoint1);
             var file = await StorageFile.GetFileFromApplicationUriAsync(heatPoint1);
             var streamFile = await file.OpenReadAsync();
-            double scale = 1.5;
-            WriteableBitmap scaleHeatDot = await Resize((int)(heatDot.PixelWidth * scale), (int)(heatDot.PixelHeight * scale), streamFile); //get heatDot from picture in "Resource" folder
 
             foreach (HeatPoint point in heatPoints)
             {
-                whiteBitmap = await BlitHeatPoints(point.X, point.Y, whiteBitmap, scaleHeatDot); //drawing heatDots
+                whiteBitmap = await BlitHeatPoints(point.X, point.Y, whiteBitmap, heatDot); //drawing heatDots
             }
 
             return whiteBitmap;

@@ -14,7 +14,6 @@ namespace CourseWork_2.ViewModel
 {
     public class PrototypesViewModel : NotifyPropertyChanged
     {
-        private ObservableCollection<Prototype> _prototypes;
         private ObservableCollection<PrototypeGroup> _prototypesGroup;
         private Prototype _selectedItem;
         private ICommand _addCommand;
@@ -33,10 +32,7 @@ namespace CourseWork_2.ViewModel
         {
             using (var db = new PrototypingContext())
             {
-                List<Prototype> prototypes = db.Prototypes.ToList();//(from p in db.Prototypes.ToList()
-                                              //orderby p.Name[0]
-                                              //select p).ToList();
-                Prototypes = new ObservableCollection<Prototype>(prototypes);
+                List<Prototype> prototypes = db.Prototypes.ToList();
 
                 List<PrototypeGroup> protGroups = prototypes.GroupBy(p => p.Name[0], (key, items) => new PrototypeGroup() { Name = key.ToString(),
                                                                                                                             Items = items.ToList(),
@@ -55,12 +51,6 @@ namespace CourseWork_2.ViewModel
         }
 
         #region properties
-        public ObservableCollection<Prototype> Prototypes
-        {
-            get { return _prototypes; }
-            set { Set(ref _prototypes, value); }
-        }
-
         public ObservableCollection<PrototypeGroup> PrototypesGroup
         {
             get { return _prototypesGroup; }

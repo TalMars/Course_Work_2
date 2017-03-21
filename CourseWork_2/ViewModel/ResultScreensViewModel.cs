@@ -24,27 +24,33 @@ namespace CourseWork_2.ViewModel
     {
         private bool _ringContentVisibility;
         private bool _selectVisibility;
-        private double _opacityGrid;
 
         private ObservableCollection<RecordScreenPrototypeModel> _screens;
         private ObservableCollection<RecordPrototype> _records;
         private RecordScreenPrototypeModel _selectedItem;
         private RecordPrototype _selectedRecord;
         private RecordPrototype RecordModel;
-        private MediaSource _recordVideo;
+        private Windows.UI.Xaml.Controls.MediaPlayerElement _recordVideo;
         private bool _videoIconVisibility;
         private bool _videoGridVisibility;
+        private Windows.UI.Xaml.Controls.Symbol _showScreenVideoIcon;
 
         private List<StorageFile> videoList;
 
         private EventHandler<Windows.UI.Core.BackRequestedEventArgs> requestHandler;
         private EventHandler<Windows.Phone.UI.Input.BackPressedEventArgs> pressedHandler;
+        private int prototypeId;
+        private int userId;
 
         private ICommand _doneCommand;
         private ICommand _showVideoCommand;
 
         public ResultScreensViewModel()
         {
+            ShowScreenVideoIcon = Windows.UI.Xaml.Controls.Symbol.Video;
+            prototypeId = -1;
+            userId = -1;
+
             //GoBack Navigation
             RegisterGoBackEventHandlers();
         }
@@ -109,7 +115,13 @@ namespace CourseWork_2.ViewModel
                 StorageFile video = (from v in videoList
                                      where v.Path.Equals(_selectedRecord.PathToVideo)
                                      select v).ToList()[0];
-                RecordVideo = MediaSource.CreateFromStorageFile(video);
+                if (RecordVideo == null)
+                {
+                    Windows.UI.Xaml.Controls.MediaPlayerElement player = new Windows.UI.Xaml.Controls.MediaPlayerElement();
+                    player.AreTransportControlsEnabled = true;
+                    RecordVideo = player;
+                }
+                RecordVideo.Source = MediaSource.CreateFromStorageFile(video);
             }
         }
 
@@ -125,19 +137,13 @@ namespace CourseWork_2.ViewModel
             set { Set(ref _selectVisibility, value); }
         }
 
-        public double OpacityGrid
-        {
-            get { return _opacityGrid; }
-            set { Set(ref _opacityGrid, value); }
-        }
-
         public RecordScreenPrototypeModel SelectedItem
         {
             get { return _selectedItem; }
             set { Set(ref _selectedItem, value); SelectVisibility = true; }
         }
 
-        public MediaSource RecordVideo
+        public Windows.UI.Xaml.Controls.MediaPlayerElement RecordVideo
         {
             get { return _recordVideo; }
             set { Set(ref _recordVideo, value); }
@@ -153,6 +159,12 @@ namespace CourseWork_2.ViewModel
         {
             get { return _videoGridVisibility; }
             set { Set(ref _videoGridVisibility, value); }
+        }
+
+        public Windows.UI.Xaml.Controls.Symbol ShowScreenVideoIcon
+        {
+            get { return _showScreenVideoIcon; }
+            set { Set(ref _showScreenVideoIcon, value); }
         }
         #endregion
 
@@ -175,7 +187,12 @@ namespace CourseWork_2.ViewModel
         {
             Windows.UI.Xaml.Controls.Frame frame = (Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content;
             frame.BackStack.Clear();
-            frame.Navigate(typeof(PrototypesPage));
+            if (prototypeId >= 0)
+                frame.Navigate(typeof(DetailsPrototypePage), prototypeId);
+            if (userId >= 0)
+                frame.Navigate(typeof(DetailsUserPage), userId);
+            if (RecordModel != null)
+                frame.Navigate(typeof(DetailsUserPage), RecordModel.UserPrototypeId);
         }
 
         public ICommand ShowVideoCommand
@@ -185,6 +202,10 @@ namespace CourseWork_2.ViewModel
 
         private void ShowVideFunc()
         {
+            if (_videoGridVisibility && RecordVideo != null)
+                RecordVideo.MediaPlayer.Pause();
+
+            ShowScreenVideoIcon = _videoGridVisibility ? Windows.UI.Xaml.Controls.Symbol.Video : Windows.UI.Xaml.Controls.Symbol.BrowsePhotos;
             VideoGridVisibility = !_videoGridVisibility;
         }
         #endregion
@@ -193,7 +214,6 @@ namespace CourseWork_2.ViewModel
         public async Task HeatSaveScreens(List<RecordScreenPrototypeModel> reviewModels)
         {
             RingContentVisibility = true;
-            OpacityGrid = 20;
             using (var db = new PrototypingContext())
             {
                 RecordModel = db.RecordsPrototype.Last();
@@ -201,7 +221,11 @@ namespace CourseWork_2.ViewModel
                 {
                     StorageFile videoFile = await StorageFile.GetFileFromPathAsync(RecordModel.PathToVideo);
                     await Task.Delay(1000);
-                    RecordVideo = MediaSource.CreateFromStorageFile(videoFile);//await StorageFile.GetFileFromPathAsync(RecordModel.PathToVideo);
+                    Windows.UI.Xaml.Controls.MediaPlayerElement player = new Windows.UI.Xaml.Controls.MediaPlayerElement();
+                    player.AreTransportControlsEnabled = true;
+                    player.Source = MediaSource.CreateFromStorageFile(videoFile);
+                    RecordVideo = player;
+                    //RecordVideo = MediaSource.CreateFromStorageFile(videoFile);
                     VideoIconVisibility = true;
                 }
                 else
@@ -210,7 +234,6 @@ namespace CourseWork_2.ViewModel
                 }
             }
             Screens = await HeatingScreens(reviewModels);
-            OpacityGrid = 100;
             RingContentVisibility = false;
         }
 
@@ -294,8 +317,8 @@ namespace CourseWork_2.ViewModel
         #region select all screens
         public async Task HeatingAllRecordScreens(Prototype prototype)
         {
+            prototypeId = prototype.PrototypeId;
             RingContentVisibility = true;
-            OpacityGrid = 20;
             using (var db = new PrototypingContext())
             {
                 List<RecordsScreen> allScreen = db.RecordsScreens
@@ -318,16 +341,16 @@ namespace CourseWork_2.ViewModel
                                              select r.PathToVideo).ToArray();
                     videoList = new List<StorageFile>();
                     await LoadigVideoFiles(pathsToFiles);
+                    SelectedRecord = Records.First();
                     VideoIconVisibility = true;
                 }
             }
-            OpacityGrid = 100;
             RingContentVisibility = false;
         }
 
         private async Task LoadigVideoFiles(string[] pathsToFiles)
         {
-            foreach(string path in pathsToFiles)
+            foreach (string path in pathsToFiles)
             {
                 StorageFile video = await StorageFile.GetFileFromPathAsync(path);
                 videoList.Add(video);
@@ -336,8 +359,8 @@ namespace CourseWork_2.ViewModel
 
         public async Task HeatingAllRecordScreens(UserPrototype user)
         {
+            userId = user.UserPrototypeId;
             RingContentVisibility = true;
-            OpacityGrid = 50;
             using (var db = new PrototypingContext())
             {
                 List<RecordsScreen> allScreen = db.RecordsScreens
@@ -358,10 +381,10 @@ namespace CourseWork_2.ViewModel
                                              select r.PathToVideo).ToArray();
                     videoList = new List<StorageFile>();
                     await LoadigVideoFiles(pathsToFiles);
+                    SelectedRecord = Records.First();
                     VideoIconVisibility = true;
                 }
             }
-            OpacityGrid = 100;
             RingContentVisibility = false;
         }
 
@@ -392,24 +415,25 @@ namespace CourseWork_2.ViewModel
         public async Task GetRecordScreens(RecordPrototype record)
         {
             RingContentVisibility = true;
-            OpacityGrid = 20;
             using (var db = new PrototypingContext())
             {
-                RecordPrototype findRecord = db.RecordsPrototype.Single(r => r.RecordPrototypeId == record.RecordPrototypeId);
-                await db.Entry(findRecord).Collection(r => r.Screens).LoadAsync();
-                if (!string.IsNullOrEmpty(findRecord.PathToVideo))
+                RecordModel = db.RecordsPrototype.Single(r => r.RecordPrototypeId == record.RecordPrototypeId);
+                await db.Entry(RecordModel).Collection(r => r.Screens).LoadAsync();
+                if (!string.IsNullOrEmpty(RecordModel.PathToVideo))
                 {
-                    StorageFile videoFile = await StorageFile.GetFileFromPathAsync(findRecord.PathToVideo);
-                    RecordVideo = MediaSource.CreateFromStorageFile(videoFile);//await StorageFile.GetFileFromPathAsync(findRecord.PathToVideo);
+                    StorageFile videoFile = await StorageFile.GetFileFromPathAsync(RecordModel.PathToVideo);
+                    Windows.UI.Xaml.Controls.MediaPlayerElement player = new Windows.UI.Xaml.Controls.MediaPlayerElement();
+                    player.AreTransportControlsEnabled = true;
+                    player.Source = MediaSource.CreateFromStorageFile(videoFile);
+                    RecordVideo = player;
                     VideoIconVisibility = true;
                 }
                 else
                 {
                     VideoIconVisibility = false;
                 }
-                Screens = await FileToImageTransform(findRecord.Screens);
+                Screens = await FileToImageTransform(RecordModel.Screens);
             }
-            OpacityGrid = 100;
             RingContentVisibility = false;
         }
 

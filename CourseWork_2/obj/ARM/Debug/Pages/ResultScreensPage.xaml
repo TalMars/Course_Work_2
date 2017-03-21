@@ -14,7 +14,7 @@
         <converters:DateTimeToStringConverter x:Key="DateTimeConverter" />
     </Page.Resources>
 
-    <Grid x:ConnectionId='2' Background="#2b3346"                                                      >
+    <Grid Background="#2b3346">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*" MaxHeight="60" />
             <RowDefinition />
@@ -22,26 +22,23 @@
 
         <Border BorderThickness="0,0,0,1" BorderBrush="Gray">
             <Grid>
-                <Button x:ConnectionId='11' x:Name="DoneButton" Background="Transparent" Foreground="White"                                         
+                <Button x:ConnectionId='10' x:Name="DoneButton" Background="Transparent" Foreground="White"                                         
                         Content="Done"                                                                                                                           />
                 <TextBlock Text="Result Screens" VerticalAlignment="Center" HorizontalAlignment="Center"
                        FontSize="20" Foreground="White" FontWeight="Medium" />
-                <Button x:ConnectionId='12' Background="Transparent" Foreground="White"                                               HorizontalAlignment="Right"
+                <Button x:ConnectionId='11' Background="Transparent" Foreground="White"                                               HorizontalAlignment="Right"
                                                                                                                                                  
                         Margin="0,0,5,0"                                                                                                                                            >
                     <Viewbox Height="{Binding ElementName=DoneButton, Path=ActualHeight}">
-                        <SymbolIcon Symbol="Video" />
+                        <SymbolIcon x:ConnectionId='12'                                                              />
                     </Viewbox>
                 </Button>
             </Grid>
         </Border>
 
-        <Grid x:ConnectionId='3' Grid.Row="1"                                                                                                                                          >
-            <Image x:ConnectionId='7'                                                                     Height="Auto" Width="Auto"
-                                                                                                                                                           
-                                                                               />
+        <Grid x:ConnectionId='2' Grid.Row="1"                                                                                                                                          >
 
-            <GridView x:ConnectionId='8'                                                                                                                                                                                              
+            <GridView x:ConnectionId='6'                                                                                                                                                                                              
                                                                                                                            >
                 <GridView.ItemTemplate>
                     <DataTemplate>
@@ -56,29 +53,46 @@
                 </GridView.ItemContainerStyle>
             </GridView>
 
-            <StackPanel x:ConnectionId='9'                                                                                                                                              
+            <FlipView x:ConnectionId='7'                                                      
+                                                                                 
+                                                                                                                                                              
+                                                                                 >
+                <FlipView.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding HeatMapScreen}" Stretch="UniformToFill" />
+                    </DataTemplate>
+                </FlipView.ItemTemplate>
+                <!--<FlipView.ItemContainerStyle>
+                    <Style TargetType="FrameworkElement">
+                        <Setter Property="Margin" Value="0 0 0 0"/>
+                    </Style>
+                </FlipView.ItemContainerStyle>-->
+            </FlipView>
+
+            <StackPanel x:ConnectionId='8'                                                                                                                                              
                         VerticalAlignment="Center" HorizontalAlignment="Center">
-                <ProgressRing x:ConnectionId='10' Width="50" Height="50"                                                                 />
+                <ProgressRing x:ConnectionId='9' Width="50" Height="50"                                                                 />
                 <TextBlock Text="Rendering..." TextAlignment="Center" />
             </StackPanel>
         </Grid>
         
-        <Grid x:ConnectionId='4' Grid.Row="1"                                                                                                                                           >
+        <Grid x:ConnectionId='3' Grid.Row="1"                                                                                                                                           >
             <Grid.RowDefinitions>
-                <RowDefinition Height="5*" />
-                <RowDefinition />
-                <RowDefinition Height="2*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <MediaPlayerElement x:ConnectionId='5' x:Name="Player"                                                      AreTransportControlsEnabled="True" />
-            <ListView x:ConnectionId='6' Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+            <ContentControl x:ConnectionId='4'                                                       
+                            HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+            
+            <ListView x:ConnectionId='5' Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto"
                       ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled"
                                                                                                                                                                                    >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=recordDate}" HorizontalAlignment="Center" Foreground="White" FontSize="16" />
-                            <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=recordTime}" HorizontalAlignment="Center" Foreground="White" FontSize="16" />
+                        <StackPanel VerticalAlignment="Center" Margin="5">
+                            <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=recordDate}" HorizontalAlignment="Center" Foreground="White" FontSize="20" />
+                            <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=recordTime}" HorizontalAlignment="Center" Foreground="White" FontSize="20" />
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

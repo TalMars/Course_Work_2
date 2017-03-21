@@ -11,7 +11,6 @@
     <Page.Resources>
         <CollectionViewSource  x:Name="CollectionItems" IsSourceGrouped="true" 
                                ItemsPath="Items" Source="{x:Bind ViewModel.PrototypesGroup, Mode=OneWay}" />
-        <CollectionViewSource  x:Name="Collection" IsSourceGrouped="True" Source="{x:Bind ViewModel.PrototypesGroup, Mode=OneWay}" />
         <converters:DateTimeToStringConverter x:Key="DateTimeConverter" />
         <converters:DatesVisibilityConverter x:Key="DatesVisibilityConverter" />
         <converters:CountUsersRecordsToStringConverter x:Key="countURConverter" />

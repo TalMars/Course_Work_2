@@ -481,8 +481,8 @@
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Resources\HeatPointIntensive.png">
-      <PackagePath>Resources\HeatPointIntensive.png</PackagePath>
+    <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Resources\HeatPoint60x60_30.png">
+      <PackagePath>Resources\HeatPoint60x60_30.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\Resources\intensity-mask.jpg">
       <PackagePath>Resources\intensity-mask.jpg</PackagePath>

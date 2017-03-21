@@ -38,7 +38,7 @@ namespace CourseWork_2.Pages
         {
             this.InitializeComponent();
 
-            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait | DisplayOrientations.Landscape | DisplayOrientations.LandscapeFlipped;
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -57,17 +57,21 @@ namespace CourseWork_2.Pages
             if (e.Parameter is RecordPrototype)
             {
                 await ViewModel.GetRecordScreens((RecordPrototype)e.Parameter);
-                //Player.Source = MediaSource.CreateFromStorageFile(ViewModel.RecordVideo);
             }
             if (e.Parameter is List<RecordScreenPrototypeModel>)
             {
                 await ViewModel.HeatSaveScreens((List<RecordScreenPrototypeModel>)e.Parameter); //ObjectDisposeException when list empty!!!
-                //Player.Source = MediaSource.CreateFromStorageFile(ViewModel.RecordVideo);
             }
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            if (ViewModel.RecordVideo != null)
+            {
+                ViewModel.RecordVideo.MediaPlayer.Pause();
+                ViewModel.RecordVideo.MediaPlayer.Dispose();
+            }
+
             ViewModel.UnregisterPressedEventHadler();
             ViewModel.UnregisterRequestEventHander();
         }

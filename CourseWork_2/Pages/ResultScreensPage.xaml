@@ -14,7 +14,7 @@
         <converters:DateTimeToStringConverter x:Key="DateTimeConverter" />
     </Page.Resources>
 
-    <Grid Background="#2b3346" Opacity="{x:Bind ViewModel.OpacityGrid, Mode=OneWay}">
+    <Grid Background="#2b3346">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*" MaxHeight="60" />
             <RowDefinition />
@@ -30,16 +30,13 @@
                         IsHitTestVisible="{x:Bind ViewModel.RingContentVisibility, Converter={StaticResource inverseBoolConverter}, Mode=OneWay}"
                         Margin="0,0,5,0" Visibility="{x:Bind ViewModel.VideoIconVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}">
                     <Viewbox Height="{Binding ElementName=DoneButton, Path=ActualHeight}">
-                        <SymbolIcon Symbol="Video" />
+                        <SymbolIcon Symbol="{x:Bind ViewModel.ShowScreenVideoIcon, Mode=OneWay}" />
                     </Viewbox>
                 </Button>
             </Grid>
         </Border>
 
         <Grid Grid.Row="1" Visibility="{x:Bind ViewModel.VideoGridVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=right}">
-            <Image Source="{x:Bind ViewModel.SelectedItem.HeatMapScreen, Mode=OneWay}" Height="Auto" Width="Auto"
-                   Visibility="{x:Bind ViewModel.SelectVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}"
-                   DoubleTapped="{x:Bind ViewModel.SelectScreen_DoubleTapped}" />
 
             <GridView ItemsSource="{x:Bind ViewModel.Screens, Mode=OneWay}" Visibility="{x:Bind ViewModel.SelectVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=right}" 
                       SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay, Converter={StaticResource itemConverter}}">
@@ -56,6 +53,22 @@
                 </GridView.ItemContainerStyle>
             </GridView>
 
+            <FlipView ItemsSource="{x:Bind ViewModel.Screens, Mode=OneWay}"
+                      SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=OneWay}"
+                      Visibility="{x:Bind ViewModel.SelectVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}"
+                      DoubleTapped="{x:Bind ViewModel.SelectScreen_DoubleTapped}">
+                <FlipView.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding HeatMapScreen}" Stretch="UniformToFill" />
+                    </DataTemplate>
+                </FlipView.ItemTemplate>
+                <!--<FlipView.ItemContainerStyle>
+                    <Style TargetType="FrameworkElement">
+                        <Setter Property="Margin" Value="0 0 0 0"/>
+                    </Style>
+                </FlipView.ItemContainerStyle>-->
+            </FlipView>
+
             <StackPanel Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}"
                         VerticalAlignment="Center" HorizontalAlignment="Center">
                 <ProgressRing Width="50" Height="50" IsActive="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay}"/>
@@ -65,20 +78,21 @@
         
         <Grid Grid.Row="1" Visibility="{x:Bind ViewModel.VideoGridVisibility, Mode=OneWay,Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="5*" />
-                <RowDefinition />
-                <RowDefinition Height="2*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <MediaPlayerElement x:Name="Player" Source="{x:Bind ViewModel.RecordVideo, Mode=OneWay}" AreTransportControlsEnabled="True" />
+            <ContentControl Content="{x:Bind ViewModel.RecordVideo, Mode=OneWay}" 
+                            HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+            
             <ListView Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto"
                       ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled"
                       ItemsSource="{x:Bind ViewModel.Records, Mode=OneWay}" SelectedItem="{x:Bind ViewModel.SelectedRecord, Mode=TwoWay, Converter={StaticResource itemConverter}}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=recordDate}" HorizontalAlignment="Center" Foreground="White" FontSize="16" />
-                            <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=recordTime}" HorizontalAlignment="Center" Foreground="White" FontSize="16" />
+                        <StackPanel VerticalAlignment="Center" Margin="5">
+                            <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=recordDate}" HorizontalAlignment="Center" Foreground="White" FontSize="20" />
+                            <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=recordTime}" HorizontalAlignment="Center" Foreground="White" FontSize="20" />
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

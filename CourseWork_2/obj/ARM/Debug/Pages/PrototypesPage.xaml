@@ -11,7 +11,6 @@
     <Page.Resources>
         <CollectionViewSource x:ConnectionId='2'  x:Name="CollectionItems" IsSourceGrouped="true" 
                                ItemsPath="Items"                                                          />
-        <CollectionViewSource x:ConnectionId='3'  x:Name="Collection" IsSourceGrouped="True"                                                          />
         <converters:DateTimeToStringConverter x:Key="DateTimeConverter" />
         <converters:DatesVisibilityConverter x:Key="DatesVisibilityConverter" />
         <converters:CountUsersRecordsToStringConverter x:Key="countURConverter" />
@@ -29,7 +28,7 @@
             <Grid>
                 <TextBlock Text="Prototypes" VerticalAlignment="Center" HorizontalAlignment="Center"
                        FontSize="20" Foreground="White" FontWeight="Medium" />
-                <Button x:ConnectionId='6' Background="Transparent" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"
+                <Button x:ConnectionId='5' Background="Transparent" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"
                         Margin="0,0,5,0"                                        >
                     <SymbolIcon Symbol="Add" />
                 </Button>
@@ -85,7 +84,7 @@
         <Grid Grid.Row="1">
             <SemanticZoom ScrollViewer.ZoomMode="Enabled">
                 <SemanticZoom.ZoomedOutView>
-                    <GridView x:ConnectionId='4'                                                                          >
+                    <GridView x:ConnectionId='3'                                                                          >
                         <GridView.ItemTemplate>
                             <DataTemplate>
                                 <Grid Margin="5" BorderThickness="0">
@@ -108,7 +107,7 @@
                     </GridView>
                 </SemanticZoom.ZoomedOutView>
                 <SemanticZoom.ZoomedInView>
-                    <ListView x:ConnectionId='5' ItemsSource="{Binding Source={StaticResource CollectionItems}}" 
+                    <ListView x:ConnectionId='4' ItemsSource="{Binding Source={StaticResource CollectionItems}}" 
                                                                                                                                    >
                         <ListView.ItemTemplate>
                             <DataTemplate>
