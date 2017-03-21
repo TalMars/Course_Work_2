@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Graphics.Imaging;
+using Windows.Media.Core;
 using Windows.Storage;
 using Windows.UI.Xaml.Media.Imaging;
 
@@ -21,16 +22,26 @@ namespace CourseWork_2.ViewModel
 {
     public class ResultScreensViewModel : NotifyPropertyChanged
     {
-        private ObservableCollection<RecordScreenPrototypeModel> _screens;
         private bool _ringContentVisibility;
         private bool _selectVisibility;
         private double _opacityGrid;
+
+        private ObservableCollection<RecordScreenPrototypeModel> _screens;
+        private ObservableCollection<RecordPrototype> _records;
         private RecordScreenPrototypeModel _selectedItem;
-        private ICommand _doneCommand;
+        private RecordPrototype _selectedRecord;
         private RecordPrototype RecordModel;
-        
+        private MediaSource _recordVideo;
+        private bool _videoIconVisibility;
+        private bool _videoGridVisibility;
+
+        private List<StorageFile> videoList;
+
         private EventHandler<Windows.UI.Core.BackRequestedEventArgs> requestHandler;
         private EventHandler<Windows.Phone.UI.Input.BackPressedEventArgs> pressedHandler;
+
+        private ICommand _doneCommand;
+        private ICommand _showVideoCommand;
 
         public ResultScreensViewModel()
         {
@@ -43,7 +54,6 @@ namespace CourseWork_2.ViewModel
         {
             requestHandler = (o, ea) =>
             {
-                UnregisterRequestEventHander();
                 GoBackFunc();
                 ea.Handled = true;
             };
@@ -53,7 +63,6 @@ namespace CourseWork_2.ViewModel
             {
                 pressedHandler = (o, ea) =>
                 {
-                    UnregisterPressedEventHadler();
                     GoBackFunc();
                     ea.Handled = true;
                 };
@@ -61,7 +70,7 @@ namespace CourseWork_2.ViewModel
             }
         }
 
-        private void UnregisterRequestEventHander()
+        public void UnregisterRequestEventHander()
         {
             if (requestHandler != null)
             {
@@ -69,7 +78,7 @@ namespace CourseWork_2.ViewModel
             }
         }
 
-        private void UnregisterPressedEventHadler()
+        public void UnregisterPressedEventHadler()
         {
             if (pressedHandler != null)
             {
@@ -83,6 +92,25 @@ namespace CourseWork_2.ViewModel
         {
             get { return _screens; }
             set { Set(ref _screens, value); }
+        }
+
+        public ObservableCollection<RecordPrototype> Records
+        {
+            get { return _records; }
+            set { Set(ref _records, value); }
+        }
+
+        public RecordPrototype SelectedRecord
+        {
+            get { return _selectedRecord; }
+            set
+            {
+                Set(ref _selectedRecord, value);
+                StorageFile video = (from v in videoList
+                                     where v.Path.Equals(_selectedRecord.PathToVideo)
+                                     select v).ToList()[0];
+                RecordVideo = MediaSource.CreateFromStorageFile(video);
+            }
         }
 
         public bool RingContentVisibility
@@ -108,6 +136,24 @@ namespace CourseWork_2.ViewModel
             get { return _selectedItem; }
             set { Set(ref _selectedItem, value); SelectVisibility = true; }
         }
+
+        public MediaSource RecordVideo
+        {
+            get { return _recordVideo; }
+            set { Set(ref _recordVideo, value); }
+        }
+
+        public bool VideoIconVisibility
+        {
+            get { return _videoIconVisibility; }
+            set { Set(ref _videoIconVisibility, value); }
+        }
+
+        public bool VideoGridVisibility
+        {
+            get { return _videoGridVisibility; }
+            set { Set(ref _videoGridVisibility, value); }
+        }
         #endregion
 
         #region events
@@ -121,20 +167,25 @@ namespace CourseWork_2.ViewModel
         {
             get
             {
-                return _doneCommand ?? (_doneCommand = new Command(() => DoneFunc()));
+                return _doneCommand ?? (_doneCommand = new Command(() => GoBackFunc()));
             }
-        }
-
-        private void DoneFunc()
-        {
-            ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(PrototypesPage));
         }
 
         private void GoBackFunc()
         {
             Windows.UI.Xaml.Controls.Frame frame = (Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content;
             frame.BackStack.Clear();
-            //frame.Navigate(typeof(DetailsPrototypePage), UserModel.PrototypeId);
+            frame.Navigate(typeof(PrototypesPage));
+        }
+
+        public ICommand ShowVideoCommand
+        {
+            get { return _showVideoCommand ?? (_showVideoCommand = new Command(() => ShowVideFunc())); }
+        }
+
+        private void ShowVideFunc()
+        {
+            VideoGridVisibility = !_videoGridVisibility;
         }
         #endregion
 
@@ -142,7 +193,22 @@ namespace CourseWork_2.ViewModel
         public async Task HeatSaveScreens(List<RecordScreenPrototypeModel> reviewModels)
         {
             RingContentVisibility = true;
-            OpacityGrid = 50;
+            OpacityGrid = 20;
+            using (var db = new PrototypingContext())
+            {
+                RecordModel = db.RecordsPrototype.Last();
+                if (!string.IsNullOrEmpty(RecordModel.PathToVideo))
+                {
+                    StorageFile videoFile = await StorageFile.GetFileFromPathAsync(RecordModel.PathToVideo);
+                    await Task.Delay(1000);
+                    RecordVideo = MediaSource.CreateFromStorageFile(videoFile);//await StorageFile.GetFileFromPathAsync(RecordModel.PathToVideo);
+                    VideoIconVisibility = true;
+                }
+                else
+                {
+                    VideoIconVisibility = false;
+                }
+            }
             Screens = await HeatingScreens(reviewModels);
             OpacityGrid = 100;
             RingContentVisibility = false;
@@ -153,7 +219,6 @@ namespace CourseWork_2.ViewModel
             ObservableCollection<RecordScreenPrototypeModel> result = new ObservableCollection<RecordScreenPrototypeModel>();
             using (var db = new PrototypingContext())
             {
-                RecordModel = db.RecordsPrototype.Last();
                 UserPrototype user = db.Users.Single(u => u.UserPrototypeId == RecordModel.UserPrototypeId);
                 await db.Entry(user)
                         .Reference(u => u.Prototype)
@@ -230,19 +295,43 @@ namespace CourseWork_2.ViewModel
         public async Task HeatingAllRecordScreens(Prototype prototype)
         {
             RingContentVisibility = true;
-            OpacityGrid = 50;
+            OpacityGrid = 20;
             using (var db = new PrototypingContext())
             {
-                List<RecordsScreen> records = db.RecordsScreens
+                List<RecordsScreen> allScreen = db.RecordsScreens
                                                 .Include(r => r.RecordPrototype)
                                                     .ThenInclude(rp => rp.UserPrototype)
                                                 .Where(rs => rs.RecordPrototype.UserPrototype.PrototypeId == prototype.PrototypeId)
                                                 .OrderByDescending(rs => rs.UriPage)
                                                 .ToList();
-                Screens = await HeatingRecordScreens(records);
+                Screens = await HeatingRecordScreens(allScreen);
+
+                List<RecordPrototype> records = db.RecordsPrototype
+                            .Include(rp => rp.UserPrototype)
+                            .Where(rp => rp.UserPrototype.PrototypeId == prototype.PrototypeId)
+                            .OrderBy(rp => rp.CreatedDate)
+                            .ToList();
+                Records = new ObservableCollection<RecordPrototype>(records);
+                if (records.Count != 0)
+                {
+                    string[] pathsToFiles = (from r in records
+                                             select r.PathToVideo).ToArray();
+                    videoList = new List<StorageFile>();
+                    await LoadigVideoFiles(pathsToFiles);
+                    VideoIconVisibility = true;
+                }
             }
             OpacityGrid = 100;
             RingContentVisibility = false;
+        }
+
+        private async Task LoadigVideoFiles(string[] pathsToFiles)
+        {
+            foreach(string path in pathsToFiles)
+            {
+                StorageFile video = await StorageFile.GetFileFromPathAsync(path);
+                videoList.Add(video);
+            }
         }
 
         public async Task HeatingAllRecordScreens(UserPrototype user)
@@ -257,6 +346,20 @@ namespace CourseWork_2.ViewModel
                                                   .OrderByDescending(rs => rs.UriPage)
                                                   .ToList();
                 Screens = await HeatingRecordScreens(allScreen);
+
+                List<RecordPrototype> records = db.RecordsPrototype
+                            .Where(rp => rp.UserPrototype.UserPrototypeId == user.UserPrototypeId)
+                            .OrderBy(rp => rp.CreatedDate)
+                            .ToList();
+                Records = new ObservableCollection<RecordPrototype>(records);
+                if (records.Count != 0)
+                {
+                    string[] pathsToFiles = (from r in records
+                                             select r.PathToVideo).ToArray();
+                    videoList = new List<StorageFile>();
+                    await LoadigVideoFiles(pathsToFiles);
+                    VideoIconVisibility = true;
+                }
             }
             OpacityGrid = 100;
             RingContentVisibility = false;
@@ -289,11 +392,21 @@ namespace CourseWork_2.ViewModel
         public async Task GetRecordScreens(RecordPrototype record)
         {
             RingContentVisibility = true;
-            OpacityGrid = 50;
+            OpacityGrid = 20;
             using (var db = new PrototypingContext())
             {
                 RecordPrototype findRecord = db.RecordsPrototype.Single(r => r.RecordPrototypeId == record.RecordPrototypeId);
                 await db.Entry(findRecord).Collection(r => r.Screens).LoadAsync();
+                if (!string.IsNullOrEmpty(findRecord.PathToVideo))
+                {
+                    StorageFile videoFile = await StorageFile.GetFileFromPathAsync(findRecord.PathToVideo);
+                    RecordVideo = MediaSource.CreateFromStorageFile(videoFile);//await StorageFile.GetFileFromPathAsync(findRecord.PathToVideo);
+                    VideoIconVisibility = true;
+                }
+                else
+                {
+                    VideoIconVisibility = false;
+                }
                 Screens = await FileToImageTransform(findRecord.Screens);
             }
             OpacityGrid = 100;

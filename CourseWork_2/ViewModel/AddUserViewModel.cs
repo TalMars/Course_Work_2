@@ -21,11 +21,17 @@ namespace CourseWork_2.ViewModel
         private bool _isEdit;
         private UserPrototype user;
 
+        private EventHandler<Windows.UI.Core.BackRequestedEventArgs> requestHandler;
+        private EventHandler<Windows.Phone.UI.Input.BackPressedEventArgs> pressedHandler;
+
         public AddUserViewModel(int _prototypeId)
         {
             _nameText = "";
             _biographyText = "";
             prototypeId = _prototypeId;
+
+            //GoBack Navigation
+            RegisterGoBackEventHandlers();
         }
 
         public AddUserViewModel(UserPrototype _user)
@@ -34,7 +40,48 @@ namespace CourseWork_2.ViewModel
             user = _user;
             NameText = user.Name;
             BiographyText = user.Biography;
+
+            //GoBack Navigation
+            RegisterGoBackEventHandlers();
         }
+
+        #region back event
+        private void RegisterGoBackEventHandlers()
+        {
+            requestHandler = (o, ea) =>
+            {
+                GoBackFunc();
+                ea.Handled = true;
+            };
+            Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += requestHandler;
+
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+            {
+                pressedHandler = (o, ea) =>
+                {
+                    GoBackFunc();
+                    ea.Handled = true;
+                };
+                Windows.Phone.UI.Input.HardwareButtons.BackPressed += pressedHandler;
+            }
+        }
+
+        public void UnregisterRequestEventHander()
+        {
+            if (requestHandler != null)
+            {
+                Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested -= requestHandler;
+            }
+        }
+
+        public void UnregisterPressedEventHadler()
+        {
+            if (pressedHandler != null)
+            {
+                Windows.Phone.UI.Input.HardwareButtons.BackPressed -= pressedHandler;
+            }
+        }
+        #endregion
 
         #region properties
         public string NameText
@@ -119,7 +166,10 @@ namespace CourseWork_2.ViewModel
         {
             Windows.UI.Xaml.Controls.Frame frame = (Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content;
             frame.BackStack.Clear();
-            frame.Navigate(typeof(DetailsUserPage), user.PrototypeId);
+            if (user != null)
+                frame.Navigate(typeof(DetailsUserPage), user.PrototypeId);
+            else
+                frame.Navigate(typeof(DetailsPrototypePage), prototypeId);
         }
         #endregion
     }

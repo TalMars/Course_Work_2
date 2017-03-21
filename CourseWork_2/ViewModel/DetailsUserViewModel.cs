@@ -48,7 +48,6 @@ namespace CourseWork_2.ViewModel
         {
             requestHandler = (o, ea) =>
             {
-                UnregisterRequestEventHander();
                 GoBackFunc();
                 ea.Handled = true;
             };
@@ -58,7 +57,6 @@ namespace CourseWork_2.ViewModel
             {
                 pressedHandler = (o, ea) =>
                 {
-                    UnregisterPressedEventHadler();
                     GoBackFunc();
                     ea.Handled = true;
                 };

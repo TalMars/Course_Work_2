@@ -12,7 +12,9 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
 using Windows.Graphics.Imaging;
+using Windows.Media.Core;
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -35,24 +37,39 @@ namespace CourseWork_2.Pages
         public ResultScreensPage()
         {
             this.InitializeComponent();
+
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait | DisplayOrientations.Landscape | DisplayOrientations.LandscapeFlipped;
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-           Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().ExitFullScreenMode();
-           ViewModel = new ResultScreensViewModel();
+            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().ExitFullScreenMode();
+            ViewModel = new ResultScreensViewModel();
 
             if (e.Parameter is Prototype)
+            {
                 await ViewModel.HeatingAllRecordScreens((Prototype)e.Parameter);
-
+            }
             if (e.Parameter is UserPrototype)
+            {
                 await ViewModel.HeatingAllRecordScreens((UserPrototype)e.Parameter);
-
+            }
             if (e.Parameter is RecordPrototype)
+            {
                 await ViewModel.GetRecordScreens((RecordPrototype)e.Parameter);
-
+                //Player.Source = MediaSource.CreateFromStorageFile(ViewModel.RecordVideo);
+            }
             if (e.Parameter is List<RecordScreenPrototypeModel>)
-                await ViewModel.HeatSaveScreens((List<RecordScreenPrototypeModel>)e.Parameter);
+            {
+                await ViewModel.HeatSaveScreens((List<RecordScreenPrototypeModel>)e.Parameter); //ObjectDisposeException when list empty!!!
+                //Player.Source = MediaSource.CreateFromStorageFile(ViewModel.RecordVideo);
+            }
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            ViewModel.UnregisterPressedEventHadler();
+            ViewModel.UnregisterRequestEventHander();
         }
 
         public ResultScreensViewModel ViewModel { get; set; }

@@ -99,7 +99,6 @@ namespace CourseWork_2.ViewModel
         {
             requestHandler = (o, ea) =>
             {
-                UnregisterRequestEventHander();
                 CancelFunc();
                 ea.Handled = true;
             };
@@ -109,7 +108,6 @@ namespace CourseWork_2.ViewModel
             {
                 pressedHandler = (o, ea) =>
                 {
-                    UnregisterPressedEventHadler();
                     CancelFunc();
                     ea.Handled = true;
                 };
@@ -117,7 +115,7 @@ namespace CourseWork_2.ViewModel
             }
         }
 
-        private void UnregisterRequestEventHander()
+        public void UnregisterRequestEventHander()
         {
             if (requestHandler != null)
             {
@@ -125,7 +123,7 @@ namespace CourseWork_2.ViewModel
             }
         }
 
-        private void UnregisterPressedEventHadler()
+        public void UnregisterPressedEventHadler()
         {
             if (pressedHandler != null)
             {
@@ -170,8 +168,6 @@ namespace CourseWork_2.ViewModel
 
         private async void MediaCapture_RecordLimitationExceeded(MediaCapture sender)
         {
-            UnregisterRequestEventHander();
-            UnregisterPressedEventHadler();
             await StartStopFunc();
 
             //message record limit!!!
@@ -179,8 +175,6 @@ namespace CourseWork_2.ViewModel
 
         private void MediaCapture_Failed(MediaCapture sender, MediaCaptureFailedEventArgs errorEventArgs)
         {
-            UnregisterRequestEventHander();
-            UnregisterPressedEventHadler();
             CancelFunc();
 
             //message error dialog!!!
@@ -234,6 +228,7 @@ namespace CourseWork_2.ViewModel
                     _displayRequest.RequestRelease();
                 }
 
+                await _mediaCapture.StopRecordAsync();
                 _mediaCapture.Dispose();
                 //});
             }
@@ -347,14 +342,14 @@ namespace CourseWork_2.ViewModel
                 var encodingProfile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto);
                 var rotationAngle = CameraRotationHelper.ConvertSimpleOrientationToClockwiseDegrees(_rotationHelper.GetCameraCaptureOrientation());
                 encodingProfile.Video.Properties.Add(RotationKey, PropertyValue.CreateInt32(rotationAngle));
+                //_mediaRecording = await _mediaCapture.PrepareLowLagRecordToStorageFileAsync(encodingProfile, videoFile);
                 await _mediaCapture.StartRecordToStorageFileAsync(encodingProfile, videoFile);
+                //await _mediaRecording.StartAsync();
             }
             else
             {
                 timer.Stop();
                 CleanupCameraAsync();
-                UnregisterPressedEventHadler();
-                UnregisterRequestEventHander();
                 ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(ResultScreensPage), _screens);
             }
         }
@@ -380,7 +375,7 @@ namespace CourseWork_2.ViewModel
             }
         }
 
-        private void CancelFunc()
+        private async void CancelFunc()
         {
             if (recordId >= 0)
             {
@@ -390,22 +385,15 @@ namespace CourseWork_2.ViewModel
                     RecordPrototype record = db.RecordsPrototype.Last();
                     db.Entry(user).Reference(u => u.Prototype).Load();
 
-                    try
-                    {
-
-                    }
-                    catch (System.IO.FileNotFoundException)
-                    {
-                        System.Diagnostics.Debug.WriteLine("Record folder not found");
-                    }
+                    StorageFolder prototypeFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(user.Prototype.Name + "_" + user.PrototypeId);
+                    StorageFolder userFolder = await prototypeFolder.GetFolderAsync(user.Name + "_" + user.UserPrototypeId);
+                    StorageFolder recordFolder = await userFolder.GetFolderAsync("Record_" + recordId);
+                    await recordFolder.DeleteAsync();
 
                     db.RecordsPrototype.Remove(record);
                     db.SaveChanges();
                 }
             }
-
-            UnregisterRequestEventHander();
-            UnregisterPressedEventHadler();
 
             Windows.UI.Xaml.Controls.Frame frame = (Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content;
             frame.BackStack.Clear();

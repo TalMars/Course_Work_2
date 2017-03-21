@@ -57,15 +57,22 @@ namespace CourseWork_2.Pages
         public ReviewPrototypePage()
         {
             this.InitializeComponent();
+
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             //await Windows.UI.ViewManagement.StatusBar.GetForCurrentView().HideAsync();
-            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
             Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
             ViewModel = new ReviewPrototypeViewModel((int)e.Parameter);
             await ViewModel.MediaCaptureInitialization();
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            ViewModel.UnregisterPressedEventHadler();
+            ViewModel.UnregisterRequestEventHander();
         }
 
         public ReviewPrototypeViewModel ViewModel { get; private set; }

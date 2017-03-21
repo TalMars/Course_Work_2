@@ -117,6 +117,7 @@
       <DependentUpon>20170227115753_InitMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\PrototypingContextModelSnapshot.cs" />
+    <Compile Include="Model\PrototypeGroup.cs" />
     <Compile Include="Model\RecordScreenPrototypeModel.cs" />
     <Compile Include="Pages\AddPrototypePage.xaml.cs">
       <DependentUpon>AddPrototypePage.xaml</DependentUpon>

@@ -467,7 +467,6 @@ C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x86\Debug\System.Xml.XmlSerializer.dll
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x86\Debug\WriteableBitmapEx.WinRT.dll
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x86\Debug\WriteableBitmapEx.WinRT.pdb
-C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x86\Debug\CourseWork_2.csprojResolveAssemblyReference.cache
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x86\Debug\App.g.i.cs
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x86\Debug\App.g.cs
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x86\Debug\Pages\AddPrototypePage.g.i.cs
@@ -602,6 +601,5 @@ C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x86\Debug\qualifiers.txt
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x86\Debug\qualifiers.txt.intermediate
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
-C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x86\Debug\resources.en-us.resfiles
-C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x86\Debug\resources.en-us.resfiles.intermediate
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x86\Debug\ProjectArchitectures.txt
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x86\Debug\CourseWork_2.csprojResolveAssemblyReference.cache

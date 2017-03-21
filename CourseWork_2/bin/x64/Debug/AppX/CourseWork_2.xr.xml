@@ -197,6 +197,7 @@
       <RootProperty Name="Path" />
       <RootProperty Name="Converter" />
       <RootProperty Name="ConverterParameter" />
+      <RootProperty Name="Mode" />
       <RootProperty Name="RelativeSource" />
       <RootProperty Name="FallbackValue" />
     </RootType>

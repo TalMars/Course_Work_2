@@ -11,6 +11,7 @@
         <converters:BoolToVisibilityConverter x:Key="boolToVisConverter" />
         <converters:ReturnModelConverter x:Key="itemConverter" />
         <converters:InverseBoolConverter x:Key="inverseBoolConverter" />
+        <converters:DateTimeToStringConverter x:Key="DateTimeConverter" />
     </Page.Resources>
 
     <Grid x:ConnectionId='2' Background="#2b3346"                                                      >
@@ -21,19 +22,26 @@
 
         <Border BorderThickness="0,0,0,1" BorderBrush="Gray">
             <Grid>
-                <Button x:ConnectionId='7' Background="Transparent" Foreground="White"                                         
+                <Button x:ConnectionId='11' x:Name="DoneButton" Background="Transparent" Foreground="White"                                         
                         Content="Done"                                                                                                                           />
                 <TextBlock Text="Result Screens" VerticalAlignment="Center" HorizontalAlignment="Center"
                        FontSize="20" Foreground="White" FontWeight="Medium" />
+                <Button x:ConnectionId='12' Background="Transparent" Foreground="White"                                               HorizontalAlignment="Right"
+                                                                                                                                                 
+                        Margin="0,0,5,0"                                                                                                                                            >
+                    <Viewbox Height="{Binding ElementName=DoneButton, Path=ActualHeight}">
+                        <SymbolIcon Symbol="Video" />
+                    </Viewbox>
+                </Button>
             </Grid>
         </Border>
 
-        <Grid Grid.Row="1">
-            <Image x:ConnectionId='3'                                                                     Height="Auto" Width="Auto"
+        <Grid x:ConnectionId='3' Grid.Row="1"                                                                                                                                          >
+            <Image x:ConnectionId='7'                                                                     Height="Auto" Width="Auto"
                                                                                                                                                            
                                                                                />
 
-            <GridView x:ConnectionId='4'                                                                                                                                                                                              
+            <GridView x:ConnectionId='8'                                                                                                                                                                                              
                                                                                                                            >
                 <GridView.ItemTemplate>
                     <DataTemplate>
@@ -48,11 +56,38 @@
                 </GridView.ItemContainerStyle>
             </GridView>
 
-            <StackPanel x:ConnectionId='5'                                                                                                                                              
+            <StackPanel x:ConnectionId='9'                                                                                                                                              
                         VerticalAlignment="Center" HorizontalAlignment="Center">
-                <ProgressRing x:ConnectionId='6' Width="50" Height="50"                                                                 />
+                <ProgressRing x:ConnectionId='10' Width="50" Height="50"                                                                 />
                 <TextBlock Text="Rendering..." TextAlignment="Center" />
             </StackPanel>
+        </Grid>
+        
+        <Grid x:ConnectionId='4' Grid.Row="1"                                                                                                                                           >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*" />
+                <RowDefinition />
+                <RowDefinition Height="2*" />
+            </Grid.RowDefinitions>
+
+            <MediaPlayerElement x:ConnectionId='5' x:Name="Player"                                                      AreTransportControlsEnabled="True" />
+            <ListView x:ConnectionId='6' Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                      ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled"
+                                                                                                                                                                                   >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=recordDate}" HorizontalAlignment="Center" Foreground="White" FontSize="16" />
+                            <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=recordTime}" HorizontalAlignment="Center" Foreground="White" FontSize="16" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Background="Transparent" Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
         </Grid>
     </Grid>
 </Page>

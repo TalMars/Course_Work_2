@@ -9,10 +9,14 @@
     mc:Ignorable="d">
 
     <Page.Resources>
+        <CollectionViewSource  x:Name="CollectionItems" IsSourceGrouped="true" 
+                               ItemsPath="Items" Source="{x:Bind ViewModel.PrototypesGroup, Mode=OneWay}" />
+        <CollectionViewSource  x:Name="Collection" IsSourceGrouped="True" Source="{x:Bind ViewModel.PrototypesGroup, Mode=OneWay}" />
         <converters:DateTimeToStringConverter x:Key="DateTimeConverter" />
         <converters:DatesVisibilityConverter x:Key="DatesVisibilityConverter" />
         <converters:CountUsersRecordsToStringConverter x:Key="countURConverter" />
         <converters:ReturnModelConverter x:Key="itemConverter" />
+        <converters:BoolToVisibilityConverter x:Key="boolToVisConverter" />
     </Page.Resources>
 
     <Grid Background="#2b3346">
@@ -32,7 +36,7 @@
             </Grid>
         </Border>
 
-        <Grid Grid.Row="1">
+        <!--<Grid Grid.Row="1">
             <ListView ItemsSource="{x:Bind ViewModel.Prototypes}" 
                       SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay, Converter={StaticResource itemConverter}}">
                 <ListView.ItemTemplate>
@@ -45,23 +49,27 @@
                             <Viewbox x:Name="VBSymbol" VerticalAlignment="Center">
                                 <SymbolIcon Foreground="DarkGray" Symbol="CellPhone" />
                             </Viewbox>
-                            <Grid Grid.Column="1" Margin="5,0,0,0" Height="{Binding ElementName=VBSymbol, Path=ActualHeight}">
+                            <Grid Grid.Column="1" Margin="5,0,0,0" Height="{Binding ElementName=VBSymbol, Path=ActualHeight, Mode=OneWay}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1.5*"/>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
                                 <StackPanel>
                                     <TextBlock Text="{Binding Name}" Foreground="White" FontSize="18" />
                                     <TextBlock Text="{Binding PrototypeId, Converter={StaticResource countURConverter}, ConverterParameter=prototype}" Foreground="DarkGray" FontSize="14" />
-                                    <Grid Margin="0,5,0,0">
-                                        <Border BorderBrush="DarkGray" BorderThickness="0,0,0,1"
-                                        Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=lastRecord}">
-                                            <TextBlock Text="{Binding LastRecordingDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=lastRecord}"
-                                               Foreground="DarkGray" FontSize="12" VerticalAlignment="Bottom" Margin="0,0,0,5" />
-                                        </Border>
-                                        <Border BorderBrush="DarkGray" BorderThickness="0,0,0,1" 
-                                        Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=created}">
-                                            <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=created}" 
-                                               Foreground="DarkGray" FontSize="12" VerticalAlignment="Bottom" />
-                                        </Border>
-                                    </Grid>
                                 </StackPanel>
+                                <Grid Margin="0,5,0,0" Grid.Row="1">
+                                    <Border BorderBrush="DarkGray" BorderThickness="0,0,0,1"
+                                        Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=lastRecord}">
+                                        <TextBlock Text="{Binding LastRecordingDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=lastRecord}"
+                                               Foreground="DarkGray" FontSize="12" VerticalAlignment="Bottom" Margin="0,0,0,5" />
+                                    </Border>
+                                    <Border BorderBrush="DarkGray" BorderThickness="0,0,0,1" 
+                                        Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=created}">
+                                        <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=created}" 
+                                               Foreground="DarkGray" FontSize="12" VerticalAlignment="Bottom" Margin="0,0,0,5" />
+                                    </Border>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </DataTemplate>
@@ -73,6 +81,91 @@
                     </Style>
                 </ListView.ItemContainerStyle>
             </ListView>
+        </Grid>-->
+        <Grid Grid.Row="1">
+            <SemanticZoom ScrollViewer.ZoomMode="Enabled">
+                <SemanticZoom.ZoomedOutView>
+                    <GridView ItemsSource="{x:Bind CollectionItems.View.CollectionGroups, Mode=OneWay}">
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="5" BorderThickness="0">
+                                    <TextBlock Text="{Binding Group.Name}" FontSize="30" TextAlignment="Center" Foreground="White" 
+                                               VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" 
+                                               IsTapEnabled="{Binding Group.IsEnable, Mode=OneWay}"
+                                               Visibility="{Binding Group.IsEnable, Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse, Mode=OneWay}"/>
+                                    <TextBlock Text="{Binding Group.Name}" FontSize="30" TextAlignment="Center" Foreground="DarkGray" 
+                                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                                               IsTapEnabled="{Binding Group.IsEnable, Mode=OneWay}"
+                                               Visibility="{Binding Group.IsEnable, Converter={StaticResource boolToVisConverter}, ConverterParameter=right, Mode=OneWay}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid HorizontalAlignment="Center" VerticalAlignment="Stretch" Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+                </SemanticZoom.ZoomedOutView>
+                <SemanticZoom.ZoomedInView>
+                    <ListView ItemsSource="{Binding Source={StaticResource CollectionItems}}" 
+                              SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay, Converter={StaticResource itemConverter}}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="10,10,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.25*" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Viewbox x:Name="VBSymbol" VerticalAlignment="Center">
+                                        <SymbolIcon Foreground="DarkGray" Symbol="CellPhone" />
+                                    </Viewbox>
+                                    <Grid Grid.Column="1" Margin="5,0,0,0" Height="{Binding ElementName=VBSymbol, Path=ActualHeight, Mode=OneWay}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="1.5*"/>
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Name}" Foreground="White" FontSize="18" />
+                                            <TextBlock Text="{Binding PrototypeId, Converter={StaticResource countURConverter}, ConverterParameter=prototype}" Foreground="DarkGray" FontSize="14" />
+                                        </StackPanel>
+                                        <Grid Margin="0,5,0,0" Grid.Row="1">
+                                            <Border BorderBrush="DarkGray" BorderThickness="0,0,0,1"
+                                        Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=lastRecord}">
+                                                <TextBlock Text="{Binding LastRecordingDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=lastRecord}"
+                                               Foreground="DarkGray" FontSize="12" VerticalAlignment="Bottom" Margin="0,0,0,5" />
+                                            </Border>
+                                            <Border BorderBrush="DarkGray" BorderThickness="0,0,0,1" 
+                                        Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=created}">
+                                                <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=created}" 
+                                               Foreground="DarkGray" FontSize="12" VerticalAlignment="Bottom" Margin="0,0,0,5" />
+                                            </Border>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="Padding" Value="0" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.GroupStyle>
+                            <GroupStyle HidesIfEmpty="True">
+                                <GroupStyle.HeaderTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Text='{Binding Name}'
+                                                       Foreground="Gray" FontSize="25" Margin="5" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GroupStyle.HeaderTemplate>
+                            </GroupStyle>
+                        </ListView.GroupStyle>
+                    </ListView>
+                </SemanticZoom.ZoomedInView>
+            </SemanticZoom>
         </Grid>
     </Grid>
 </Page>

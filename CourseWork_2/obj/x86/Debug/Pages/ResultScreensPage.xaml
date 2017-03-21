@@ -21,7 +21,7 @@
 
         <Border BorderThickness="0,0,0,1" BorderBrush="Gray">
             <Grid>
-                <Button x:ConnectionId='6' Background="Transparent" Foreground="White"                                         
+                <Button x:ConnectionId='7' Background="Transparent" Foreground="White"                                         
                         Content="Done"                                                                                                                           />
                 <TextBlock Text="Result Screens" VerticalAlignment="Center" HorizontalAlignment="Center"
                        FontSize="20" Foreground="White" FontWeight="Medium" />
@@ -48,9 +48,11 @@
                 </GridView.ItemContainerStyle>
             </GridView>
 
-            <ProgressRing x:ConnectionId='5' Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"
-                                                                                                                                                                       
-                                                                                                  />
+            <StackPanel x:ConnectionId='5'                                                                                                                                              
+                        VerticalAlignment="Center" HorizontalAlignment="Center">
+                <ProgressRing x:ConnectionId='6' Width="50" Height="50"                                                                 />
+                <TextBlock Text="Rendering..." TextAlignment="Center" />
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

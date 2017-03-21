@@ -28,13 +28,13 @@
     <AppXManifest Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-03-15T08:57:18.655</Modified>
+      <Modified>2017-03-15T09:47:08.602</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\CourseWork_2.exe">
       <PackagePath>entrypoint\CourseWork_2.exe</PackagePath>
-      <Modified>2017-03-15T08:56:57.310</Modified>
+      <Modified>2017-03-15T09:47:07.385</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\CourseWork_2.exe.config">
       <PackagePath>CourseWork_2.exe.config</PackagePath>
@@ -656,7 +656,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\CourseWork_2.xr.xml">
       <PackagePath>CourseWork_2.xr.xml</PackagePath>
-      <Modified>2017-03-15T08:45:59.602</Modified>
+      <Modified>2017-03-15T09:01:53.295</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -665,11 +665,11 @@
     <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-03-15T08:57:12.819</Modified>
+      <Modified>2017-03-15T09:45:44.055</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\Core\CourseWork_2.exe">
       <PackagePath>CourseWork_2.exe</PackagePath>
-      <Modified>2017-03-15T08:57:18.495</Modified>
+      <Modified>2017-03-15T09:47:08.596</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

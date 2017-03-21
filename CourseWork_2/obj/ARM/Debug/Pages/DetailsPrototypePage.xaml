@@ -79,10 +79,10 @@
             </StackPanel>
             <Grid Grid.Row="1">
                 <TextBlock Text="{Binding LastRecordingDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=lastRecord}"
-                               Foreground="DarkGray" FontSize="12" Margin="0,0,0,5"
+                               Foreground="DarkGray" FontSize="12"
                                Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=lastRecord}"/>
                 <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=created}" 
-                           Foreground="DarkGray" FontSize="12" Margin="0,0,0,5"
+                           Foreground="DarkGray" FontSize="12"
                            Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=created}"/>
             </Grid>
         </Grid>
@@ -112,26 +112,30 @@
                                 <ColumnDefinition Width="0.25*" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Viewbox>
+                            <Viewbox x:Name="UserSymbol">
                                 <SymbolIcon Foreground="DarkGray" Symbol="Contact2" />
                             </Viewbox>
-                            <Grid Grid.Column="1" Margin="5,0,0,0">
+                            <Grid Grid.Column="1" Margin="5,0,0,0" Height="{Binding ElementName=UserSymbol, Path=ActualHeight}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1.5*"/>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
                                 <StackPanel>
                                     <TextBlock Text="{Binding Name}" Foreground="White" FontSize="18" />
                                     <TextBlock Text="{Binding UserPrototypeId, Converter={StaticResource countURConverter}, ConverterParameter=user}" Foreground="DarkGray" FontSize="14" />
-                                    <Grid Margin="0,5,0,0">
-                                        <Border BorderBrush="DarkGray" BorderThickness="0,0,0,1"
-                                        Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=lastRecord}">
-                                            <TextBlock Text="{Binding LastRecordingDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=lastRecord}"
-                                               Foreground="DarkGray" FontSize="12" VerticalAlignment="Bottom" Margin="0,0,0,5" />
-                                        </Border>
-                                        <Border BorderBrush="DarkGray" BorderThickness="0,0,0,1" 
-                                        Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=created}">
-                                            <TextBlock Text="{Binding AddedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=added}" 
-                                               Foreground="DarkGray" FontSize="12" VerticalAlignment="Bottom" Margin="0,0,0,5" />
-                                        </Border>
-                                    </Grid>
                                 </StackPanel>
+                                <Grid Margin="0,5,0,0" Grid.Row="1">
+                                    <Border BorderBrush="DarkGray" BorderThickness="0,0,0,1"
+                                        Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=lastRecord}">
+                                        <TextBlock Text="{Binding LastRecordingDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=lastRecord}"
+                                               Foreground="DarkGray" FontSize="12" VerticalAlignment="Bottom" Margin="0,0,0,5" />
+                                    </Border>
+                                    <Border BorderBrush="DarkGray" BorderThickness="0,0,0,1" 
+                                        Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=created}">
+                                        <TextBlock Text="{Binding AddedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=added}" 
+                                               Foreground="DarkGray" FontSize="12" VerticalAlignment="Bottom" Margin="0,0,0,5" />
+                                    </Border>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </DataTemplate>

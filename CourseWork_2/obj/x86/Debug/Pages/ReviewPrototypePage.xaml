@@ -15,39 +15,61 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ms-appx:///Templates/SplitViewStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <convertersFolder:BoolToVisibilityConverter x:Key="ringConverter" />
+            <convertersFolder:BoolToVisibilityConverter x:Key="boolToVisConverter" />
             <convertersFolder:IconStartStopConverter x:Key="iconConverter" />
         </ResourceDictionary>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <swipeableSV:SwipeableSplitView x:ConnectionId='2' x:Name="SplitView" OpenPaneLength="60"                                                                          
-                                                                                                                                                                              >
+                                                                                                                                                                                   >
             <SplitView.Pane>
                 <StackPanel VerticalAlignment="Center">
-                    <Button x:ConnectionId='4'                                               Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
+                    <Button x:ConnectionId='6'                                               Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
                         <StackPanel>
-                            <SymbolIcon x:ConnectionId='6'                                                                                              />
-                            <TextBlock x:ConnectionId='7'                                                  TextAlignment="Center" FontSize="10" />
+                            <SymbolIcon x:ConnectionId='9'                                                                                              />
+                            <TextBlock x:ConnectionId='10'                                                  TextAlignment="Center" FontSize="10" />
                         </StackPanel>
                     </Button>
-                    <Button x:ConnectionId='5'                                            Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
+                    <Button x:ConnectionId='7'                                                   Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
+                        <SymbolIcon Symbol="Video" />
+                    </Button>
+                    <Button x:ConnectionId='8'                                            Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
                         <SymbolIcon Symbol="Cancel" />
                     </Button>
                 </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>
                 <Grid>
-                    <WebView x:ConnectionId='8'                                                                                        
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <WebView x:ConnectionId='11' Grid.ColumnSpan="3" Grid.RowSpan="3"                                                                                        
                                                                                                 
                                                                                                             
                                                                                                               
                              />
+                    
+                    <ContentControl x:ConnectionId='12' Name="PreviewElement" Grid.Column="2"                                                         
+                                                                                                                                                                             />
                 </Grid>
             </SplitView.Content>
         </swipeableSV:SwipeableSplitView>
-        <ProgressRing x:ConnectionId='3'                                                                                                                                         
-                                                                                                   Width="50" Height="50" />
+
+
+        <StackPanel x:ConnectionId='3'                                                                                                                                              
+                    VerticalAlignment="Center" HorizontalAlignment="Center">
+            <ProgressRing x:ConnectionId='4'                                                                  Width="50" Height="50" />
+            <TextBlock x:ConnectionId='5'                                                 />
+        </StackPanel>
     </Grid>
 </Page>
 

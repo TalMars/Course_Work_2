@@ -37,6 +37,12 @@ namespace CourseWork_2.Pages
                 ViewModel = new AddUserViewModel((UserPrototype)e.Parameter);
         }
 
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            ViewModel.UnregisterPressedEventHadler();
+            ViewModel.UnregisterRequestEventHander();
+        }
+
         public AddUserViewModel ViewModel { get; private set; }
     }
 }

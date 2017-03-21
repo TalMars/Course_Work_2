@@ -10,7 +10,7 @@
   <Identity Name="f0c646ce-9c75-496e-bfcb-7ff3c867b489" Publisher="CN=TalMars" Version="1.0.0.0" ProcessorArchitecture="x86" />
   <mp:PhoneIdentity PhoneProductId="f0c646ce-9c75-496e-bfcb-7ff3c867b489" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>CourseWork_2</DisplayName>
+    <DisplayName>Habco on WP</DisplayName>
     <PublisherDisplayName>TalMars</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -18,7 +18,7 @@
     <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10586.0" MaxVersionTested="10.0.14393.0" />
   </Dependencies>
   <Resources>
-    <Resource Language="RU-RU" />
+    <Resource Language="EN-US" />
   </Resources>
   <Applications>
     <Application Id="App" Executable="CourseWork_2.exe" EntryPoint="CourseWork_2.App">
@@ -42,6 +42,8 @@
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
+    <DeviceCapability Name="webcam" />
+    <DeviceCapability Name="microphone" />
   </Capabilities>
   <build:Metadata>
     <build:Item Name="TargetFrameworkMoniker" Value=".NETCore,Version=v5.0" />

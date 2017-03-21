@@ -4,16 +4,19 @@
     <RootInterface FullName="Windows.UI.Xaml.Data.IValueConverter" />
   </Roots.Interfaces>
   <Roots.PropertyPathNames>
+    <RootPropertyPathName Name="ActualHeight" />
     <RootPropertyPathName Name="LastRecordingDate" />
     <RootPropertyPathName Name="AddedDate" />
     <RootPropertyPathName Name="UserPrototypeId" />
     <RootPropertyPathName Name="Name" />
     <RootPropertyPathName Name="Description" />
     <RootPropertyPathName Name="Url" />
-    <RootPropertyPathName Name="ActualHeight" />
     <RootPropertyPathName Name="CreatedDate" />
     <RootPropertyPathName Name="PrototypeId" />
     <RootPropertyPathName Name="Biography" />
+    <RootPropertyPathName Name="Items" />
+    <RootPropertyPathName Name="Group" />
+    <RootPropertyPathName Name="IsEnable" />
     <RootPropertyPathName Name="HeatMapScreen" />
     <RootPropertyPathName Name="WidthImage" />
     <RootPropertyPathName Name="HeightImage" />
@@ -50,6 +53,7 @@
       <RootProperty Name="BorderThickness" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Opacity" />
+      <RootProperty Name="Visibility" />
       <RootProperty Name="MaxWidth" />
       <RootProperty Name="MinWidth" />
       <RootProperty Name="MinHeight" />
@@ -84,6 +88,7 @@
       <RootProperty Name="Orientation" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Background" />
       <RootProperty Name="Visibility" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
@@ -134,6 +139,7 @@
       <RootProperty Name="MaxHeight" />
       <RootProperty Name="TextTrimming" />
       <RootProperty Name="TextAlignment" />
+      <RootProperty Name="IsTapEnabled" />
       <RootProperty Name="FontFamily" />
       <RootProperty Name="Padding" />
     </RootType>
@@ -182,21 +188,26 @@
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Child" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="Height" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ListView">
       <RootProperty Name="ItemsSource" />
       <RootProperty Name="SelectedItem" />
       <RootProperty Name="ItemTemplate" />
       <RootProperty Name="ItemContainerStyle" />
+      <RootProperty Name="GroupStyle" />
+      <RootProperty Name="ItemsPanel" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
       <RootProperty Name="Template" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
-      <RootProperty Name="Converter" />
-      <RootProperty Name="ConverterParameter" />
       <RootProperty Name="ElementName" />
       <RootProperty Name="Path" />
+      <RootProperty Name="Converter" />
+      <RootProperty Name="ConverterParameter" />
+      <RootProperty Name="Mode" />
+      <RootProperty Name="Source" />
       <RootProperty Name="RelativeSource" />
       <RootProperty Name="FallbackValue" />
     </RootType>
@@ -226,21 +237,59 @@
     </RootType>
     <RootType FullName="CourseWork_2.Pages.DetailsPrototypePage" />
     <RootType FullName="CourseWork_2.Pages.DetailsUserPage" />
+    <RootType FullName="Windows.UI.Xaml.Data.CollectionViewSource">
+      <RootProperty Name="IsSourceGrouped" />
+      <RootProperty Name="ItemsPath" />
+      <RootProperty Name="Source" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.SemanticZoom">
+      <RootProperty Name="ZoomedOutView" />
+      <RootProperty Name="ZoomedInView" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
+      <RootMethod Name="GetZoomMode" />
+      <RootMethod Name="SetZoomMode" />
+      <RootMethod Name="GetVerticalScrollBarVisibility" />
+      <RootMethod Name="SetVerticalScrollBarVisibility" />
+      <RootMethod Name="GetHorizontalScrollBarVisibility" />
+      <RootMethod Name="SetHorizontalScrollBarVisibility" />
+      <RootMethod Name="GetHorizontalScrollMode" />
+      <RootMethod Name="SetHorizontalScrollMode" />
+      <RootMethod Name="GetVerticalScrollMode" />
+      <RootMethod Name="SetVerticalScrollMode" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.GridView">
+      <RootProperty Name="ItemsSource" />
+      <RootProperty Name="ItemTemplate" />
+      <RootProperty Name="ItemsPanel" />
+      <RootProperty Name="Visibility" />
+      <RootProperty Name="SelectedItem" />
+      <RootProperty Name="ItemContainerStyle" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ItemsPanelTemplate">
+      <RootProperty Name="Template" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ItemsWrapGrid">
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Orientation" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.GroupStyle">
+      <RootProperty Name="HidesIfEmpty" />
+      <RootProperty Name="HeaderTemplate" />
+    </RootType>
     <RootType FullName="CourseWork_2.Pages.PrototypesPage" />
     <RootType FullName="CourseWork_2.Converters.InverseBoolConverter" />
+    <RootType FullName="Windows.UI.Xaml.Controls.MediaPlayerElement">
+      <RootProperty Name="Source" />
+      <RootProperty Name="AreTransportControlsEnabled" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Image">
       <RootProperty Name="Source" />
       <RootProperty Name="Height" />
       <RootProperty Name="Width" />
       <RootProperty Name="Visibility" />
       <RootEvent Name="DoubleTapped" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.GridView">
-      <RootProperty Name="ItemsSource" />
-      <RootProperty Name="Visibility" />
-      <RootProperty Name="SelectedItem" />
-      <RootProperty Name="ItemTemplate" />
-      <RootProperty Name="ItemContainerStyle" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
       <RootProperty Name="Width" />
