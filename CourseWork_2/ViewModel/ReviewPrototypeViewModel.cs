@@ -26,8 +26,9 @@ namespace CourseWork_2.ViewModel
         private bool isSplitViewPaneOpen;
         private bool _isOnStart;
         private bool _ringContentVisibility;
-        private bool isLastUri;
         private bool _previewVisibility;
+
+        private bool isLastUri;
 
         private string loadingPageText = "Loading Page...";
         private string screeningText = "Screenshoting...";
@@ -438,7 +439,8 @@ namespace CourseWork_2.ViewModel
                 "function PageClicked(event){" +
                     "var pointX = event.clientX;" +
                     "var pointY = event.clientY;" +
-                    " window.external.notify('tap:' + pointX + ':' + pointY);" +
+                    "var uri = document.location.href;" +
+                    " window.external.notify('tap:' + pointX + ':' + pointY + ':' + uri);" +
                  "}";
             await sender.InvokeScriptAsync("eval", new string[] { docClickScript }); //set event 'click' on page
 
@@ -455,7 +457,7 @@ namespace CourseWork_2.ViewModel
                 float x;
                 float y;
                 string[] arr = e.Value.Split(new char[] { ':' });
-                
+
                 if (!float.TryParse(arr[1], out x))
                 {
                     System.Diagnostics.Debug.WriteLine("ErrorX");
@@ -470,26 +472,17 @@ namespace CourseWork_2.ViewModel
                 int iY = (int)Math.Round(y);
                 HeatPoint hp = new HeatPoint(iX, iY);
 
-                int indexUri;
-                bool isFindIndex = false;
-                for (indexUri = 0; !isFindIndex && indexUri < _screens.Count; indexUri++)
+                int indexFind = _screens.FindIndex(s => s.UriPage.Equals(webView.Source.AbsoluteUri));
+                if (indexFind != -1)
                 {
-                    if (_screens[indexUri].UriPage.Equals(webView.Source.AbsoluteUri))
-                    {
-                        isFindIndex = true;
-                    }
-                }
-
-                if (isFindIndex)
-                {
-                    _screens[indexUri - 1].ListPoints.Add(hp);
+                    _screens[indexFind].ListPoints.Add(hp);
                 }
                 else
                 {
                     if (isLastUri)
                     {
                         isLastUri = false;
-                        _screens[indexUri - 1].ListPoints.Add(hp);
+                        _screens[_screens.Count - 1].ListPoints.Add(hp);
                     }
                     else
                     {

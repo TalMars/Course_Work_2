@@ -13,6 +13,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Foundation.Metadata;
 using Windows.Phone.UI.Input;
+using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -38,7 +39,7 @@ namespace CourseWork_2
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
-            using(var db = new PrototypingContext())
+            using (var db = new PrototypingContext())
             {
                 db.Database.Migrate();
             }
@@ -71,24 +72,21 @@ namespace CourseWork_2
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Load state from previously suspended application
+                    var set = ApplicationData.Current.RoamingSettings;
+                    if (set.Values["NavigationState"] != null)
+                        rootFrame.SetNavigationState(set.Values["NavigationState"].ToString());
                 }
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
 
-                //// listen for back button clicks (both soft- and hardware)
+                //listen for back button clicks (both soft- and hardware)
                 SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
-
-                ////SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-                ////    shell.RootFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
 
                 if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
                 {
-
                     HardwareButtons.BackPressed += OnBackPressed;
                 }
-
-                //UpdateBackButtonVisibility();
             }
 
             if (e.PrelaunchActivated == false)
@@ -108,7 +106,7 @@ namespace CourseWork_2
         // handle hardware back button press
         void OnBackPressed(object sender, BackPressedEventArgs e)
         {
-            if((Window.Current.Content as Frame).SourcePageType == typeof(PrototypesPage))
+            if ((Window.Current.Content as Frame).SourcePageType == typeof(PrototypesPage) && !e.Handled)
             {
                 e.Handled = true;
                 Current.Exit();
@@ -118,31 +116,12 @@ namespace CourseWork_2
         // handle software back button press
         void OnBackRequested(object sender, BackRequestedEventArgs e)
         {
-            if ((Window.Current.Content as Frame).SourcePageType == typeof(PrototypesPage))
+            if ((Window.Current.Content as Frame).SourcePageType == typeof(PrototypesPage) && !e.Handled)
             {
                 e.Handled = true;
                 Current.Exit();
             }
         }
-
-        void OnNavigated(object sender, NavigationEventArgs e)
-        {
-            UpdateBackButtonVisibility();
-        }
-
-        private void UpdateBackButtonVisibility()
-        {
-            //var shell = (Shell)Window.Current.Content;
-
-            //var visibility = AppViewBackButtonVisibility.Collapsed;
-            //if (shell.RootFrame.CanGoBack)
-            //{
-            //    visibility = AppViewBackButtonVisibility.Visible;
-            //}
-
-            //SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = visibility;
-        }
-
 
         /// <summary>
         /// Invoked when Navigation to a certain page fails
@@ -165,6 +144,10 @@ namespace CourseWork_2
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
+            Frame f = Window.Current.Content as Frame;
+            if (f.Content is AddPrototypePage)
+                (f.Content as AddPrototypePage).SaveState();
+            ApplicationData.Current.RoamingSettings.Values["NavigationState"] = f.GetNavigationState();
             deferral.Complete();
         }
     }

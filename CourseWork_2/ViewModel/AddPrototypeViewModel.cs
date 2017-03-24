@@ -19,7 +19,8 @@ namespace CourseWork_2.ViewModel
         private ICommand _saveCommand;
         private ICommand _cancelCommand;
         private bool _isEdit;
-        private Prototype prototype;
+        private int prototypeId;
+        //private Prototype prototype;
 
         private EventHandler<Windows.UI.Core.BackRequestedEventArgs> requestHandler;
         private EventHandler<Windows.Phone.UI.Input.BackPressedEventArgs> pressedHandler;
@@ -29,21 +30,19 @@ namespace CourseWork_2.ViewModel
             _urlText = "";
             _nameText = "";
             _descriptionText = "";
+            prototypeId = -1;
 
             //GoBack Navigation
             RegisterGoBackEventHandlers();
         }
 
-        public AddPrototypeViewModel(Prototype _prototype)
+        public void LoadPrototype(Prototype _prototype)
         {
             IsEdit = true;
             UrlText = _prototype.Url;
             NameText = _prototype.Name;
             DescriptionText = _prototype.Description;
-            prototype = _prototype;
-
-            //GoBack Navigation
-            RegisterGoBackEventHandlers();
+            prototypeId = _prototype.PrototypeId;
         }
 
         #region back event
@@ -51,8 +50,8 @@ namespace CourseWork_2.ViewModel
         {
             requestHandler = (o, ea) =>
             {
-                GoBackFunc();
                 ea.Handled = true;
+                GoBackFunc();
             };
             Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += requestHandler;
 
@@ -60,8 +59,8 @@ namespace CourseWork_2.ViewModel
             {
                 pressedHandler = (o, ea) =>
                 {
-                    GoBackFunc();
                     ea.Handled = true;
+                    GoBackFunc();
                 };
                 Windows.Phone.UI.Input.HardwareButtons.BackPressed += pressedHandler;
             }
@@ -153,6 +152,7 @@ namespace CourseWork_2.ViewModel
             {
                 using (var db = new PrototypingContext())
                 {
+                    Prototype prototype = db.Prototypes.Single(p => p.PrototypeId == prototypeId);
                     prototype.Url = UrlText;
                     prototype.Name = NameText;
                     prototype.Description = DescriptionText;
@@ -175,8 +175,8 @@ namespace CourseWork_2.ViewModel
         {
             Windows.UI.Xaml.Controls.Frame frame = (Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content;
             frame.BackStack.Clear();
-            if (prototype != null)
-                frame.Navigate(typeof(DetailsPrototypePage), prototype.PrototypeId);
+            if (prototypeId != -1)
+                frame.Navigate(typeof(DetailsPrototypePage), prototypeId);
             else
                 frame.Navigate(typeof(PrototypesPage));
         }

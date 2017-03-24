@@ -34,9 +34,12 @@ namespace CourseWork_2.ViewModel
             {
                 List<Prototype> prototypes = db.Prototypes.ToList();
 
-                List<PrototypeGroup> protGroups = prototypes.GroupBy(p => p.Name[0], (key, items) => new PrototypeGroup() { Name = key.ToString(),
-                                                                                                                            Items = items.ToList(),
-                                                                                                                            IsEnable = true }).ToList();
+                List<PrototypeGroup> protGroups = prototypes.GroupBy(p => p.Name[0], (key, items) => new PrototypeGroup()
+                {
+                    Name = key.ToString(),
+                    Items = items.ToList(),
+                    IsEnable = true
+                }).ToList();
                 string[] inDB = (from g in protGroups
                                  select g.Name).ToArray();
                 List<PrototypeGroup> notInDB = (from n in semanticZoomNames
@@ -44,8 +47,8 @@ namespace CourseWork_2.ViewModel
                                                 select (new PrototypeGroup() { Name = n })).ToList();
                 protGroups.AddRange(notInDB);
                 protGroups = (from g in protGroups
-                             orderby g.Name
-                             select g).ToList();
+                              orderby g.Name
+                              select g).ToList();
                 PrototypesGroup = new ObservableCollection<PrototypeGroup>(protGroups);
             }
         }

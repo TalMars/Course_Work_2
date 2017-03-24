@@ -56,6 +56,7 @@
                              ScriptNotify="{x:Bind ViewModel.WebView_ScriptNotify, Mode=OneWay}"
                              NavigationStarting="{x:Bind ViewModel.WebView_NavigationStarting, Mode=OneWay}"
                              NavigationCompleted="{x:Bind ViewModel.WebView_NavigationCompleted, Mode=OneWay}"
+                             
                              />
                     
                     <ContentControl Name="PreviewElement" Grid.Column="2" Content="{x:Bind ViewModel.CaptureElement, Mode=OneWay}"

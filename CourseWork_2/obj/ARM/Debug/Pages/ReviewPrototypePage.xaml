@@ -56,6 +56,7 @@
                                                                                                 
                                                                                                             
                                                                                                               
+                             
                              />
                     
                     <ContentControl x:ConnectionId='12' Name="PreviewElement" Grid.Column="2"                                                         
