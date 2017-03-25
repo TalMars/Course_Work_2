@@ -59,7 +59,7 @@
                                                                                  >
                 <FlipView.ItemTemplate>
                     <DataTemplate>
-                        <Image Source="{Binding HeatMapScreen}" Stretch="UniformToFill" />
+                        <Image Source="{Binding HeatMapScreen}" />
                     </DataTemplate>
                 </FlipView.ItemTemplate>
                 <!--<FlipView.ItemContainerStyle>

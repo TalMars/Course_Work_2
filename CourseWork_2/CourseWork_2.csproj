@@ -155,7 +155,6 @@
     <Compile Include="ViewModel\PrototypesViewModel.cs" />
     <Compile Include="ViewModel\ResultScreensViewModel.cs" />
     <Compile Include="ViewModel\ReviewPrototypeViewModel.cs" />
-    <Compile Include="Extensions_Folder\WebViewExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

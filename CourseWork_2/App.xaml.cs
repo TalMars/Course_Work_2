@@ -72,9 +72,6 @@ namespace CourseWork_2
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Load state from previously suspended application
-                    var set = ApplicationData.Current.RoamingSettings;
-                    if (set.Values["NavigationState"] != null)
-                        rootFrame.SetNavigationState(set.Values["NavigationState"].ToString());
                 }
 
                 // Place the frame in the current Window
@@ -144,10 +141,6 @@ namespace CourseWork_2
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
-            Frame f = Window.Current.Content as Frame;
-            if (f.Content is AddPrototypePage)
-                (f.Content as AddPrototypePage).SaveState();
-            ApplicationData.Current.RoamingSettings.Values["NavigationState"] = f.GetNavigationState();
             deferral.Complete();
         }
     }

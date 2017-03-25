@@ -284,7 +284,6 @@
       <RootProperty Name="Content" />
       <RootProperty Name="HorizontalContentAlignment" />
       <RootProperty Name="VerticalContentAlignment" />
-      <RootProperty Name="Name" />
       <RootProperty Name="Visibility" />
       <RootProperty Name="ContentTemplate" />
       <RootProperty Name="ContentTransitions" />
@@ -308,7 +307,6 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Image">
       <RootProperty Name="Source" />
-      <RootProperty Name="Stretch" />
       <RootProperty Name="Width" />
       <RootProperty Name="Height" />
     </RootType>
@@ -328,15 +326,6 @@
       <RootProperty Name="Visibility" />
       <RootProperty Name="Pane" />
       <RootProperty Name="Content" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.WebView">
-      <RootEvent Name="ScriptNotify" />
-      <RootEvent Name="NavigationStarting" />
-      <RootEvent Name="NavigationCompleted" />
-    </RootType>
-    <RootType FullName="CourseWork_2.Extensions_Folder.WebViewExtensions">
-      <RootMethod Name="GetUriSource" />
-      <RootMethod Name="SetUriSource" />
     </RootType>
     <RootType FullName="CourseWork_2.Pages.ReviewPrototypePage" />
     <RootType FullName="Windows.UI.Xaml.Controls.ControlTemplate">

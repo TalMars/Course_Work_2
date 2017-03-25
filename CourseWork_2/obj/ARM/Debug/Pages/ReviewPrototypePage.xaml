@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:swipeableSV="using:CourseWork_2.SwipeableSplitViewControl_Folder"
-    xmlns:webviewExts="using:CourseWork_2.Extensions_Folder"
     xmlns:convertersFolder="using:CourseWork_2.Converters"
     mc:Ignorable="d">
 
@@ -52,14 +51,16 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <WebView x:ConnectionId='11' Grid.ColumnSpan="3" Grid.RowSpan="3"                                                                                        
-                                                                                                
-                                                                                                            
-                                                                                                              
+                    <!--<WebView Grid.ColumnSpan="3" Grid.RowSpan="3" webviewExts:WebViewExtensions.UriSource="{x:Bind ViewModel.SourceWebView, Mode=OneWay}"
+                             ScriptNotify="{x:Bind ViewModel.WebView_ScriptNotify, Mode=OneWay}"
+                             NavigationStarting="{x:Bind ViewModel.WebView_NavigationStarting, Mode=OneWay}"
+                             NavigationCompleted="{x:Bind ViewModel.WebView_NavigationCompleted, Mode=OneWay}"
                              
-                             />
-                    
-                    <ContentControl x:ConnectionId='12' Name="PreviewElement" Grid.Column="2"                                                         
+                             />-->
+                    <ContentControl x:ConnectionId='11' Grid.ColumnSpan="3" Grid.RowSpan="3"                                                   
+                                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+
+                    <ContentControl x:ConnectionId='12' Grid.Column="2"                                                         
                                                                                                                                                                              />
                 </Grid>
             </SplitView.Content>

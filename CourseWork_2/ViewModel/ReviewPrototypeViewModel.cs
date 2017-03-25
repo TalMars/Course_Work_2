@@ -28,7 +28,9 @@ namespace CourseWork_2.ViewModel
         private bool _ringContentVisibility;
         private bool _previewVisibility;
 
-        private bool isLastUri;
+        private Windows.UI.Xaml.Controls.WebView _webview;
+        private RecordScreenPrototypeModel currentRecordScreen;
+        private string previousUrl;
 
         private string loadingPageText = "Loading Page...";
         private string screeningText = "Screenshoting...";
@@ -43,7 +45,6 @@ namespace CourseWork_2.ViewModel
 
         private int userId;
         private int recordId;
-        private string _sourceWebView = null;
 
         private Windows.UI.Xaml.Controls.CaptureElement _captureElement;
         private MediaCapture _mediaCapture;
@@ -80,18 +81,23 @@ namespace CourseWork_2.ViewModel
             _screens = new List<RecordScreenPrototypeModel>();
             IsOnStart = true;
             PreviewVisibility = false;
-            isLastUri = false;
             userId = _userId;
             recordId = -1;
 
             //GoBack Navigation
             RegisterGoBackEventHandlers();
 
+            _webview = new Windows.UI.Xaml.Controls.WebView();
+            _webview.NavigationStarting += WebView_NavigationStarting;
+            _webview.NavigationCompleted += WebView_NavigationCompleted;
+            _webview.ScriptNotify += WebView_ScriptNotify;
+
             using (var db = new PrototypingContext())
             {
                 UserPrototype user = db.Users.Single(u => u.UserPrototypeId == userId);
                 db.Entry(user).Reference(u => u.Prototype).Load();
-                SourceWebView = user.Prototype.Url;
+                //SourceWebView = user.Prototype.Url;
+                WebView.Navigate(new Uri(user.Prototype.Url));
             }
         }
 
@@ -256,10 +262,10 @@ namespace CourseWork_2.ViewModel
         #endregion
 
         #region properties
-        public string SourceWebView
+        public Windows.UI.Xaml.Controls.WebView WebView
         {
-            get { return _sourceWebView; }
-            set { Set(ref _sourceWebView, value); }
+            get { return _webview; }
+            set { Set(ref _webview, value); }
         }
 
         public bool IsSplitViewPaneOpen
@@ -329,6 +335,8 @@ namespace CourseWork_2.ViewModel
                 IsOnStart = false;
                 IsSplitViewPaneOpen = false;
 
+                currentRecordScreen = new RecordScreenPrototypeModel(_webview.Source.AbsoluteUri, await DoCaptureWebView());
+
                 using (var db = new PrototypingContext())
                 {
                     RecordPrototype record = db.RecordsPrototype.Add(new RecordPrototype() { CreatedDate = DateTime.Now, UserPrototypeId = userId }).Entity;
@@ -339,13 +347,10 @@ namespace CourseWork_2.ViewModel
                     recordId = record.RecordPrototypeId;
                     db.SaveChanges();
                 }
-
                 var encodingProfile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto);
                 var rotationAngle = CameraRotationHelper.ConvertSimpleOrientationToClockwiseDegrees(_rotationHelper.GetCameraCaptureOrientation());
                 encodingProfile.Video.Properties.Add(RotationKey, PropertyValue.CreateInt32(rotationAngle));
-                //_mediaRecording = await _mediaCapture.PrepareLowLagRecordToStorageFileAsync(encodingProfile, videoFile);
                 await _mediaCapture.StartRecordToStorageFileAsync(encodingProfile, videoFile);
-                //await _mediaRecording.StartAsync();
             }
             else
             {
@@ -439,8 +444,7 @@ namespace CourseWork_2.ViewModel
                 "function PageClicked(event){" +
                     "var pointX = event.clientX;" +
                     "var pointY = event.clientY;" +
-                    "var uri = document.location.href;" +
-                    " window.external.notify('tap:' + pointX + ':' + pointY + ':' + uri);" +
+                    " window.external.notify('tap:' + pointX + ':' + pointY);" +
                  "}";
             await sender.InvokeScriptAsync("eval", new string[] { docClickScript }); //set event 'click' on page
 
@@ -452,7 +456,8 @@ namespace CourseWork_2.ViewModel
         {
             if (e.Value.Contains("tap") && !IsOnStart)
             {
-                Windows.UI.Xaml.Controls.WebView webView = (Windows.UI.Xaml.Controls.WebView)sender;
+                if (currentRecordScreen == null)
+                    currentRecordScreen = new RecordScreenPrototypeModel(previousUrl, await DoCaptureWebView());
 
                 float x;
                 float y;
@@ -472,48 +477,42 @@ namespace CourseWork_2.ViewModel
                 int iY = (int)Math.Round(y);
                 HeatPoint hp = new HeatPoint(iX, iY);
 
-                int indexFind = _screens.FindIndex(s => s.UriPage.Equals(webView.Source.AbsoluteUri));
-                if (indexFind != -1)
+                currentRecordScreen.ListPoints.Add(hp);
+                if (!_webview.Source.AbsoluteUri.Equals(currentRecordScreen.UriPage))
                 {
-                    _screens[indexFind].ListPoints.Add(hp);
-                }
-                else
-                {
-                    if (isLastUri)
-                    {
-                        isLastUri = false;
-                        _screens[_screens.Count - 1].ListPoints.Add(hp);
-                    }
+                    int indexFind = _screens.FindIndex(s => s.UriPage.Equals(currentRecordScreen.UriPage));
+                    if (indexFind != -1)
+                        _screens[indexFind].ListPoints = currentRecordScreen.ListPoints;
+                    else
+                        _screens.Add(currentRecordScreen);
+
+                    indexFind = _screens.FindIndex(s => s.UriPage.Equals(_webview.Source.AbsoluteUri));
+                    if (indexFind != -1)
+                        currentRecordScreen = _screens[indexFind];
                     else
                     {
-                        isLastUri = true;
-                        //screenshot
-                        await DoCaptureWebView(webView, hp);
+                        currentRecordScreen = null;
+                        previousUrl = _webview.Source.AbsoluteUri;
                     }
                 }
             }
         }
 
-        private async Task<bool> DoCaptureWebView(Windows.UI.Xaml.Controls.WebView webview, HeatPoint hp)
+        private async Task<Windows.UI.Xaml.Media.Imaging.WriteableBitmap> DoCaptureWebView()
         {
-            bool isOk = true;
-
             RingContentVisibility = true;
 
-            int screenHeight = (int)webview.ActualHeight;
-            int screenWidth = (int)webview.ActualWidth;
-
             InMemoryRandomAccessStream ms = new InMemoryRandomAccessStream();
-            await webview.CapturePreviewToStreamAsync(ms);
+            await _webview.CapturePreviewToStreamAsync(ms);
+
+            int screenHeight = (int)_webview.ActualHeight;
+            int screenWidth = (int)_webview.ActualWidth;
 
             Windows.UI.Xaml.Media.Imaging.WriteableBitmap wb = await HeatMapFunctions.Resize(screenWidth, screenHeight, ms);
 
-            _screens.Add(new RecordScreenPrototypeModel(webview.Source.AbsoluteUri, wb));
-            _screens[_screens.Count - 1].ListPoints.Add(hp);
-
             RingContentVisibility = false;
 
-            return isOk;
+            return wb;
         }
 
         #endregion

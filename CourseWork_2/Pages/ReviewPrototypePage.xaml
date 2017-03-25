@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:swipeableSV="using:CourseWork_2.SwipeableSplitViewControl_Folder"
-    xmlns:webviewExts="using:CourseWork_2.Extensions_Folder"
     xmlns:convertersFolder="using:CourseWork_2.Converters"
     mc:Ignorable="d">
 
@@ -52,14 +51,16 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <WebView Grid.ColumnSpan="3" Grid.RowSpan="3" webviewExts:WebViewExtensions.UriSource="{x:Bind ViewModel.SourceWebView, Mode=OneWay}"
+                    <!--<WebView Grid.ColumnSpan="3" Grid.RowSpan="3" webviewExts:WebViewExtensions.UriSource="{x:Bind ViewModel.SourceWebView, Mode=OneWay}"
                              ScriptNotify="{x:Bind ViewModel.WebView_ScriptNotify, Mode=OneWay}"
                              NavigationStarting="{x:Bind ViewModel.WebView_NavigationStarting, Mode=OneWay}"
                              NavigationCompleted="{x:Bind ViewModel.WebView_NavigationCompleted, Mode=OneWay}"
                              
-                             />
-                    
-                    <ContentControl Name="PreviewElement" Grid.Column="2" Content="{x:Bind ViewModel.CaptureElement, Mode=OneWay}"
+                             />-->
+                    <ContentControl Grid.ColumnSpan="3" Grid.RowSpan="3" Content="{x:Bind ViewModel.WebView, Mode=OneWay}" 
+                                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+
+                    <ContentControl Grid.Column="2" Content="{x:Bind ViewModel.CaptureElement, Mode=OneWay}"
                                     Visibility="{x:Bind ViewModel.PreviewVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}"/>
                 </Grid>
             </SplitView.Content>
