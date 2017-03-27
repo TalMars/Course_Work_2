@@ -5,6 +5,7 @@
     xmlns:local="using:CourseWork_2.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:triggers="using:WinRT.Triggers"
     xmlns:converters="using:CourseWork_2.Converters"
     mc:Ignorable="d">
     <Page.Resources>
@@ -55,18 +56,17 @@
 
             <FlipView ItemsSource="{x:Bind ViewModel.Screens, Mode=OneWay}"
                       SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=OneWay}"
-                      Visibility="{x:Bind ViewModel.SelectVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}"
-                      DoubleTapped="{x:Bind ViewModel.SelectScreen_DoubleTapped}">
+                      Visibility="{x:Bind ViewModel.SelectVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}">
+                <triggers:Interactions.Triggers>
+                    <triggers:EventTrigger EventName="DoubleTapped">
+                        <triggers:InvokeCommandAction Command="{x:Bind ViewModel.DoubleTapCommand}" />
+                    </triggers:EventTrigger>
+                </triggers:Interactions.Triggers>
                 <FlipView.ItemTemplate>
                     <DataTemplate>
                         <Image Source="{Binding HeatMapScreen}" />
                     </DataTemplate>
                 </FlipView.ItemTemplate>
-                <!--<FlipView.ItemContainerStyle>
-                    <Style TargetType="FrameworkElement">
-                        <Setter Property="Margin" Value="0 0 0 0"/>
-                    </Style>
-                </FlipView.ItemContainerStyle>-->
             </FlipView>
 
             <StackPanel Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}"
@@ -75,7 +75,7 @@
                 <TextBlock Text="Rendering..." TextAlignment="Center" />
             </StackPanel>
         </Grid>
-        
+
         <Grid Grid.Row="1" Visibility="{x:Bind ViewModel.VideoGridVisibility, Mode=OneWay,Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -84,7 +84,7 @@
 
             <ContentControl Content="{x:Bind ViewModel.RecordVideo, Mode=OneWay}" 
                             HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
-            
+
             <ListView Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto"
                       ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled"
                       ItemsSource="{x:Bind ViewModel.Records, Mode=OneWay}" SelectedItem="{x:Bind ViewModel.SelectedRecord, Mode=TwoWay, Converter={StaticResource itemConverter}}">

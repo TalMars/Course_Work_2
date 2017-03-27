@@ -5,6 +5,7 @@
     xmlns:local="using:CourseWork_2.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:triggers="using:WinRT.Triggers"
     xmlns:converters="using:CourseWork_2.Converters"
     mc:Ignorable="d">
     <Page.Resources>
@@ -22,15 +23,15 @@
 
         <Border BorderThickness="0,0,0,1" BorderBrush="Gray">
             <Grid>
-                <Button x:ConnectionId='10' x:Name="DoneButton" Background="Transparent" Foreground="White"                                         
+                <Button x:ConnectionId='11' x:Name="DoneButton" Background="Transparent" Foreground="White"                                         
                         Content="Done"                                                                                                                           />
                 <TextBlock Text="Result Screens" VerticalAlignment="Center" HorizontalAlignment="Center"
                        FontSize="20" Foreground="White" FontWeight="Medium" />
-                <Button x:ConnectionId='11' Background="Transparent" Foreground="White"                                               HorizontalAlignment="Right"
+                <Button x:ConnectionId='12' Background="Transparent" Foreground="White"                                               HorizontalAlignment="Right"
                                                                                                                                                  
                         Margin="0,0,5,0"                                                                                                                                            >
                     <Viewbox Height="{Binding ElementName=DoneButton, Path=ActualHeight}">
-                        <SymbolIcon x:ConnectionId='12'                                                              />
+                        <SymbolIcon x:ConnectionId='13'                                                              />
                     </Viewbox>
                 </Button>
             </Grid>
@@ -55,18 +56,17 @@
 
             <FlipView x:ConnectionId='7'                                                      
                                                                                  
-                                                                                                                                                              
-                                                                                 >
+                                                                                                                                                              >
+                <triggers:Interactions.Triggers>
+                    <triggers:EventTrigger EventName="DoubleTapped">
+                        <triggers:InvokeCommandAction x:ConnectionId='10'                                               />
+                    </triggers:EventTrigger>
+                </triggers:Interactions.Triggers>
                 <FlipView.ItemTemplate>
                     <DataTemplate>
                         <Image Source="{Binding HeatMapScreen}" />
                     </DataTemplate>
                 </FlipView.ItemTemplate>
-                <!--<FlipView.ItemContainerStyle>
-                    <Style TargetType="FrameworkElement">
-                        <Setter Property="Margin" Value="0 0 0 0"/>
-                    </Style>
-                </FlipView.ItemContainerStyle>-->
             </FlipView>
 
             <StackPanel x:ConnectionId='8'                                                                                                                                              
@@ -75,7 +75,7 @@
                 <TextBlock Text="Rendering..." TextAlignment="Center" />
             </StackPanel>
         </Grid>
-        
+
         <Grid x:ConnectionId='3' Grid.Row="1"                                                                                                                                           >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -84,7 +84,7 @@
 
             <ContentControl x:ConnectionId='4'                                                       
                             HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
-            
+
             <ListView x:ConnectionId='5' Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto"
                       ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled"
                                                                                                                                                                                    >

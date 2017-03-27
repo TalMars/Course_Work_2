@@ -44,5 +44,25 @@ namespace CourseWork_2.Pages
         }
 
         public DetailsPrototypeViewModel ViewModel { get; private set; }
+
+        private void Item_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            FrameworkElement senderElement = sender as FrameworkElement;
+            FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(senderElement);
+
+            flyoutBase.ShowAt(senderElement);
+        }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            var user = (UserPrototype)(e.OriginalSource as FrameworkElement).DataContext;
+            Frame.Navigate(typeof(AddUserPage), user.UserPrototypeId);
+        }
+
+        private async void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            var user = (UserPrototype)(e.OriginalSource as FrameworkElement).DataContext;
+            await ViewModel.DeleteUser(user);
+        }
     }
 }

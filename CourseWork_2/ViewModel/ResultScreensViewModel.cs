@@ -44,6 +44,7 @@ namespace CourseWork_2.ViewModel
 
         private ICommand _doneCommand;
         private ICommand _showVideoCommand;
+        private ICommand _doubleTapCommand;
 
         public ResultScreensViewModel()
         {
@@ -60,8 +61,16 @@ namespace CourseWork_2.ViewModel
         {
             requestHandler = (o, ea) =>
             {
-                GoBackFunc();
                 ea.Handled = true;
+                if (!_selectVisibility)
+                {
+                    GoBackFunc();
+                }
+                else
+                {
+                    SelectedItem = null;
+                    SelectVisibility = false;
+                }
             };
             Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += requestHandler;
 
@@ -69,8 +78,16 @@ namespace CourseWork_2.ViewModel
             {
                 pressedHandler = (o, ea) =>
                 {
-                    GoBackFunc();
                     ea.Handled = true;
+                    if (!_selectVisibility)
+                    {
+                        GoBackFunc();
+                    }
+                    else
+                    {
+                        SelectedItem = null;
+                        SelectVisibility = false;
+                    }
                 };
                 Windows.Phone.UI.Input.HardwareButtons.BackPressed += pressedHandler;
             }
@@ -169,7 +186,15 @@ namespace CourseWork_2.ViewModel
         #endregion
 
         #region events
-        public void SelectScreen_DoubleTapped(object sender, Windows.UI.Xaml.Input.DoubleTappedRoutedEventArgs e)
+        public ICommand DoubleTapCommand
+        {
+            get
+            {
+                return _doubleTapCommand ?? (_doubleTapCommand = new Command(() => DoubleTapFunc()));
+            }
+        }
+
+        private void DoubleTapFunc()
         {
             SelectedItem = null;
             SelectVisibility = false;

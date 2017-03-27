@@ -295,4 +295,11 @@ C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\qualifiers.txt.intermediate
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\ProjectArchitectures.txt
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\ARM\Debug\WinRT.Triggers.dll
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\ARM\Debug\WinRT.Triggers.pdb
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\ARM\Debug\WinRT.Triggers.xml
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\ARM\Debug\Microsoft.Xaml.Interactions.dll
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\ARM\Debug\Microsoft.Xaml.Interactivity.dll
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Microsoft.Xaml.Interactions.pri.xml
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Microsoft.Xaml.Interactivity.pri.xml
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\CourseWork_2.csprojResolveAssemblyReference.cache

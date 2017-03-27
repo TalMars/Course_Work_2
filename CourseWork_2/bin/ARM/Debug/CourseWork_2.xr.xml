@@ -63,6 +63,7 @@
       <RootProperty Name="ManipulationMode" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Width" />
+      <RootEvent Name="Holding" />
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
       <RootMethod Name="GetColumnSpan" />
@@ -195,11 +196,23 @@
       <RootProperty Name="SelectedItem" />
       <RootProperty Name="ItemTemplate" />
       <RootProperty Name="ItemContainerStyle" />
+      <RootProperty Name="IsSynchronizedWithCurrentItem" />
       <RootProperty Name="GroupStyle" />
       <RootProperty Name="ItemsPanel" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
       <RootProperty Name="Template" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Primitives.FlyoutBase">
+      <RootMethod Name="GetAttachedFlyout" />
+      <RootMethod Name="SetAttachedFlyout" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.MenuFlyout">
+      <RootProperty Name="Items" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.MenuFlyoutItem">
+      <RootProperty Name="Text" />
+      <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
       <RootProperty Name="ElementName" />
@@ -298,12 +311,22 @@
       <RootProperty Name="SelectedItem" />
       <RootProperty Name="Visibility" />
       <RootProperty Name="ItemTemplate" />
-      <RootEvent Name="DoubleTapped" />
+    </RootType>
+    <RootType FullName="WinRT.Triggers.Interactions">
+      <RootMethod Name="GetTriggers" />
+      <RootMethod Name="SetTriggers" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
       <RootProperty Name="Width" />
       <RootProperty Name="Height" />
       <RootProperty Name="IsActive" />
+    </RootType>
+    <RootType FullName="WinRT.Triggers.EventTrigger">
+      <RootProperty Name="EventName" />
+      <RootProperty Name="TriggerActions" />
+    </RootType>
+    <RootType FullName="WinRT.Triggers.InvokeCommandAction">
+      <RootProperty Name="Command" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Image">
       <RootProperty Name="Source" />

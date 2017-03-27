@@ -33,7 +33,7 @@
         </AppBar>
     </Page.BottomAppBar>
     
-    <Grid Background="#2b3346" DataContext="{x:Bind ViewModel.UserModel}">
+    <Grid Background="#2b3346" DataContext="{x:Bind ViewModel.UserModel, Mode=OneWay}">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*" MaxHeight="60" />
             <RowDefinition Height="0.15*" />
@@ -51,7 +51,6 @@
                 <Button Background="Transparent" Foreground="White" Command="{x:Bind ViewModel.GoBackCommand}">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Margin="0,0,5,0" Symbol="Back" />
-                        <!--<TextBlock Text="Details" FontSize="16" FontWeight="Medium" />-->
                     </StackPanel>
                 </Button>
                 <TextBlock Text="User" FontSize="20" FontWeight="Medium" TextTrimming="CharacterEllipsis" TextAlignment="Center"
@@ -98,15 +97,22 @@
         </Grid>
 
         <Grid Grid.Row="3" Grid.ColumnSpan="3">
-            <ListView ItemsSource="{x:Bind ViewModel.Records}" 
+            <ListView ItemsSource="{x:Bind ViewModel.Records, Mode=OneWay}" 
                       SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay, Converter={StaticResource itemConverter}}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="0,5,0,0">
+                        <Grid Margin="0,5,0,0" Holding="Item_Holding">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.2*" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
+
+                            <FlyoutBase.AttachedFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem Text="Delete" Click="Delete_Click" />
+                                </MenuFlyout>
+                            </FlyoutBase.AttachedFlyout>
+
                             <Viewbox x:Name="PlaySymbol">
                                 <SymbolIcon Foreground="DarkGray" Symbol="Play" />
                             </Viewbox>

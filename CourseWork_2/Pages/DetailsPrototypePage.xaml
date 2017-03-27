@@ -33,7 +33,7 @@
         </AppBar>
     </Page.BottomAppBar>
 
-    <Grid Background="#2b3346"  DataContext="{x:Bind ViewModel.PrototypeModel}">
+    <Grid Background="#2b3346"  DataContext="{x:Bind ViewModel.PrototypeModel, Mode=OneWay}">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*" MaxHeight="60" />
             <RowDefinition Height="0.15*" />
@@ -51,7 +51,6 @@
                 <Button Background="Transparent" Foreground="White" Command="{x:Bind ViewModel.GoBackCommand}">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Margin="0,0,5,0" Symbol="Back" />
-                        <!--<TextBlock Text="Prototypes" FontSize="14" FontWeight="Medium" />-->
                     </StackPanel>
                 </Button>
                 <TextBlock Text="Prototype" FontSize="20" FontWeight="Medium"
@@ -103,15 +102,23 @@
         </Grid>
 
         <Grid Grid.Row="3" Grid.ColumnSpan="3">
-            <ListView ItemsSource="{x:Bind ViewModel.Users}" 
+            <ListView ItemsSource="{x:Bind ViewModel.Users, Mode=OneWay}" 
                       SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay, Converter={StaticResource itemConverter}}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="10,5,0,0">
+                        <Grid Margin="10,5,0,0" Holding="Item_Holding">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.25*" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
+
+                            <FlyoutBase.AttachedFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem Text="Edit" Click="Edit_Click" />
+                                    <MenuFlyoutItem Text="Delete" Click="Delete_Click" />
+                                </MenuFlyout>
+                            </FlyoutBase.AttachedFlyout>
+
                             <Viewbox x:Name="UserSymbol">
                                 <SymbolIcon Foreground="DarkGray" Symbol="Contact2" />
                             </Viewbox>

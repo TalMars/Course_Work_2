@@ -63,7 +63,6 @@ namespace CourseWork_2.Pages
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //await Windows.UI.ViewManagement.StatusBar.GetForCurrentView().HideAsync();
             Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
             ViewModel = new ReviewPrototypeViewModel((int)e.Parameter);
             await ViewModel.MediaCaptureInitialization();

@@ -27,14 +27,17 @@ namespace CourseWork_2.Pages
         public AddUserPage()
         {
             this.InitializeComponent();
+            ViewModel = new AddUserViewModel();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.Parameter is int)
-                ViewModel = new AddUserViewModel((int)e.Parameter);
+            if (e.Parameter is Prototype)
+                ViewModel.LoadUser((Prototype)e.Parameter);
             if (e.Parameter is UserPrototype)
-                ViewModel = new AddUserViewModel((UserPrototype)e.Parameter);
+                ViewModel.LoadUser((UserPrototype)e.Parameter);
+            if (e.Parameter is int)
+                ViewModel.LoadUser((int)e.Parameter);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

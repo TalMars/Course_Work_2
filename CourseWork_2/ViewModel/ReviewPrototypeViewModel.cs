@@ -96,7 +96,6 @@ namespace CourseWork_2.ViewModel
             {
                 UserPrototype user = db.Users.Single(u => u.UserPrototypeId == userId);
                 db.Entry(user).Reference(u => u.Prototype).Load();
-                //SourceWebView = user.Prototype.Url;
                 WebView.Navigate(new Uri(user.Prototype.Url));
             }
         }

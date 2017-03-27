@@ -38,11 +38,39 @@ namespace CourseWork_2.ViewModel
             //GoBack Navigation
             RegisterGoBackEventHandlers();
 
+            UpdateUserList(prototypeId);
+        }
+
+        private void UpdateUserList(int prototypeId)
+        {
             using (var db = new PrototypingContext())
             {
                 PrototypeModel = db.Prototypes.Single(p => p.PrototypeId == prototypeId);
                 Users = new ObservableCollection<UserPrototype>(db.Users.Where(u => u.PrototypeId == prototypeId));
             }
+        }
+
+        public async Task DeleteUser(UserPrototype user)
+        {
+            using (var db = new PrototypingContext())
+            {
+                UserPrototype findUser = db.Users.Single(u => u.UserPrototypeId == user.UserPrototypeId);
+                await db.Entry(findUser).Reference(u => u.Prototype).LoadAsync();
+                try
+                {
+                    StorageFolder prototypeFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(findUser.Prototype.Name + "_" + findUser.PrototypeId);
+                    StorageFolder userFolder = await prototypeFolder.GetFolderAsync(findUser.Name + "_" + findUser.UserPrototypeId);
+                    await userFolder.DeleteAsync();
+                }
+                catch (System.IO.FileNotFoundException)
+                {
+                    System.Diagnostics.Debug.WriteLine("Prototype/User folder not found");
+                }
+
+                db.Users.Remove(findUser);
+                db.SaveChanges();
+            }
+            UpdateUserList(user.PrototypeId);
         }
 
         #region back event
@@ -101,11 +129,8 @@ namespace CourseWork_2.ViewModel
             get { return _selectedItem; }
             set
             {
-                if (_selectedItem != value)
-                {
-                    Set(ref _selectedItem, value);
-                    ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(DetailsUserPage), value.UserPrototypeId);
-                }
+                Set(ref _selectedItem, value);
+                ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(DetailsUserPage), value.UserPrototypeId);
             }
         }
 
@@ -149,7 +174,7 @@ namespace CourseWork_2.ViewModel
 
         private void AddUserFunc()
         {
-            ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(AddUserPage), PrototypeModel.PrototypeId);
+            ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(AddUserPage), PrototypeModel);
         }
 
         public ICommand EditCommand

@@ -24,25 +24,40 @@ namespace CourseWork_2.ViewModel
         private EventHandler<Windows.UI.Core.BackRequestedEventArgs> requestHandler;
         private EventHandler<Windows.Phone.UI.Input.BackPressedEventArgs> pressedHandler;
 
-        public AddUserViewModel(int _prototypeId)
+        public AddUserViewModel()
         {
             _nameText = "";
             _biographyText = "";
-            prototypeId = _prototypeId;
 
             //GoBack Navigation
             RegisterGoBackEventHandlers();
         }
 
-        public AddUserViewModel(UserPrototype _user)
+        public void LoadUser(Prototype _prototype)
+        {
+            prototypeId = _prototype.PrototypeId;
+        }
+
+        public void LoadUser(UserPrototype _user)
         {
             IsEdit = true;
             user = _user;
             NameText = user.Name;
             BiographyText = user.Biography;
+            prototypeId = -1;
+        }
 
-            //GoBack Navigation
-            RegisterGoBackEventHandlers();
+        public void LoadUser(int _userId)
+        {
+            using(var db = new PrototypingContext())
+            {
+                UserPrototype _user = db.Users.Single(u => u.UserPrototypeId == _userId);
+                IsEdit = true;
+                prototypeId = _user.PrototypeId;
+                user = new UserPrototype() { UserPrototypeId = _userId };
+                NameText = _user.Name;
+                BiographyText = _user.Biography;
+            }
         }
 
         #region back event
@@ -145,9 +160,10 @@ namespace CourseWork_2.ViewModel
             {
                 using (var db = new PrototypingContext())
                 {
-                    user.Name = NameText;
-                    user.Biography = BiographyText;
-                    db.Users.Update(user);
+                    UserPrototype findUser = db.Users.Single(u => u.UserPrototypeId == user.UserPrototypeId);
+                    findUser.Name = NameText;
+                    findUser.Biography = BiographyText;
+                    db.Users.Update(findUser);
                     db.SaveChanges();
                 }
                 GoBackFunc();
@@ -166,8 +182,8 @@ namespace CourseWork_2.ViewModel
         {
             Windows.UI.Xaml.Controls.Frame frame = (Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content;
             frame.BackStack.Clear();
-            if (user != null)
-                frame.Navigate(typeof(DetailsUserPage), user.PrototypeId);
+            if (user != null && user.Name != null)
+                frame.Navigate(typeof(DetailsUserPage), user.UserPrototypeId);
             else
                 frame.Navigate(typeof(DetailsPrototypePage), prototypeId);
         }

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.Storage;
 
 namespace CourseWork_2.ViewModel
 {
@@ -29,6 +30,11 @@ namespace CourseWork_2.ViewModel
                                                             "W", "X", "Y", "Z"};
 
         public PrototypesViewModel()
+        {
+            UpdateGroups();
+        }
+
+        private void UpdateGroups()
         {
             using (var db = new PrototypingContext())
             {
@@ -53,6 +59,27 @@ namespace CourseWork_2.ViewModel
             }
         }
 
+        public async Task DeletePrototype(Prototype prototype)
+        {
+            using (var db = new PrototypingContext())
+            {
+                Prototype findPrototype = db.Prototypes.Single(p => p.PrototypeId == prototype.PrototypeId);
+                try
+                {
+                    StorageFolder prototypeFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(findPrototype.Name + "_" + findPrototype.PrototypeId);
+                    await prototypeFolder.DeleteAsync();
+                }
+                catch (System.IO.FileNotFoundException)
+                {
+                    System.Diagnostics.Debug.WriteLine("Prototype folder not found");
+                }
+
+                db.Prototypes.Remove(findPrototype);
+                db.SaveChanges();
+            }
+            UpdateGroups();
+        }
+
         #region properties
         public ObservableCollection<PrototypeGroup> PrototypesGroup
         {
@@ -65,12 +92,8 @@ namespace CourseWork_2.ViewModel
             get { return _selectedItem; }
             set
             {
-                if (_selectedItem != value)
-                {
-                    _selectedItem = value;
-                    OnPropertyChanged("SelectedItem");
-                    ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(DetailsPrototypePage), value.PrototypeId);
-                }
+                Set(ref _selectedItem, value);
+                ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(DetailsPrototypePage), value.PrototypeId);
             }
         }
         #endregion

@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:converters="using:CourseWork_2.Converters"
+    xmlns:triggers="using:WinRT.Triggers"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -28,59 +29,13 @@
             <Grid>
                 <TextBlock Text="Prototypes" VerticalAlignment="Center" HorizontalAlignment="Center"
                        FontSize="20" Foreground="White" FontWeight="Medium" />
-                <Button x:ConnectionId='5' Background="Transparent" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"
+                <Button x:ConnectionId='8' Background="Transparent" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"
                         Margin="0,0,5,0"                                        >
                     <SymbolIcon Symbol="Add" />
                 </Button>
             </Grid>
         </Border>
 
-        <!--<Grid Grid.Row="1">
-            <ListView ItemsSource="{x:Bind ViewModel.Prototypes}" 
-                      SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay, Converter={StaticResource itemConverter}}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Margin="10,10,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.25*" />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Viewbox x:Name="VBSymbol" VerticalAlignment="Center">
-                                <SymbolIcon Foreground="DarkGray" Symbol="CellPhone" />
-                            </Viewbox>
-                            <Grid Grid.Column="1" Margin="5,0,0,0" Height="{Binding ElementName=VBSymbol, Path=ActualHeight, Mode=OneWay}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1.5*"/>
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Name}" Foreground="White" FontSize="18" />
-                                    <TextBlock Text="{Binding PrototypeId, Converter={StaticResource countURConverter}, ConverterParameter=prototype}" Foreground="DarkGray" FontSize="14" />
-                                </StackPanel>
-                                <Grid Margin="0,5,0,0" Grid.Row="1">
-                                    <Border BorderBrush="DarkGray" BorderThickness="0,0,0,1"
-                                        Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=lastRecord}">
-                                        <TextBlock Text="{Binding LastRecordingDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=lastRecord}"
-                                               Foreground="DarkGray" FontSize="12" VerticalAlignment="Bottom" Margin="0,0,0,5" />
-                                    </Border>
-                                    <Border BorderBrush="DarkGray" BorderThickness="0,0,0,1" 
-                                        Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=created}">
-                                        <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=created}" 
-                                               Foreground="DarkGray" FontSize="12" VerticalAlignment="Bottom" Margin="0,0,0,5" />
-                                    </Border>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        <Setter Property="Padding" Value="0" />
-                    </Style>
-                </ListView.ItemContainerStyle>
-            </ListView>
-        </Grid>-->
         <Grid Grid.Row="1">
             <SemanticZoom ScrollViewer.ZoomMode="Enabled">
                 <SemanticZoom.ZoomedOutView>
@@ -107,15 +62,23 @@
                     </GridView>
                 </SemanticZoom.ZoomedOutView>
                 <SemanticZoom.ZoomedInView>
-                    <ListView x:ConnectionId='4' ItemsSource="{Binding Source={StaticResource CollectionItems}}" 
+                    <ListView x:ConnectionId='4' ItemsSource="{Binding Source={StaticResource CollectionItems}, Mode=OneWay}" IsSynchronizedWithCurrentItem="False"
                                                                                                                                    >
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Grid Margin="10,10,0,0">
+                                <Grid x:ConnectionId='5' Margin="10,10,0,0"                       >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="0.25*" />
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
+
+                                    <FlyoutBase.AttachedFlyout>
+                                        <MenuFlyout>
+                                            <MenuFlyoutItem x:ConnectionId='6' Text="Edit"                    />
+                                            <MenuFlyoutItem x:ConnectionId='7' Text="Delete"                      />
+                                        </MenuFlyout>
+                                    </FlyoutBase.AttachedFlyout>
+
                                     <Viewbox x:Name="VBSymbol" VerticalAlignment="Center">
                                         <SymbolIcon Foreground="DarkGray" Symbol="CellPhone" />
                                     </Viewbox>

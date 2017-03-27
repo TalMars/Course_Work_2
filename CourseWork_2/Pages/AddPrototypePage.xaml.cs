@@ -34,7 +34,12 @@ namespace CourseWork_2.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (e.Parameter != null)
-                ViewModel.LoadPrototype((Prototype)e.Parameter);
+            {
+                if (e.Parameter is Prototype)
+                    ViewModel.LoadPrototype((Prototype)e.Parameter);
+                if (e.Parameter is int)
+                    ViewModel.LoadPrototype((int)e.Parameter);
+            }
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

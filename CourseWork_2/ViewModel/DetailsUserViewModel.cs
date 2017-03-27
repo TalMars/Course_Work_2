@@ -36,11 +36,42 @@ namespace CourseWork_2.ViewModel
             //GoBack Navigation
             RegisterGoBackEventHandlers();
 
+            UpdateRecordList(userId);
+        }
+
+        private void UpdateRecordList(int userId)
+        {
             using (var db = new PrototypingContext())
             {
                 UserModel = db.Users.Single(u => u.UserPrototypeId == userId);
                 Records = new ObservableCollection<RecordPrototype>(db.RecordsPrototype.Where(r => r.UserPrototypeId == userId));
             }
+        }
+
+        public async Task DeleteRecord(RecordPrototype record)
+        {
+            using (var db = new PrototypingContext())
+            {
+                RecordPrototype findRecord = db.RecordsPrototype.Single(r => r.RecordPrototypeId == record.RecordPrototypeId);
+                await db.Entry(findRecord).Reference(r => r.UserPrototype).LoadAsync();
+                UserPrototype userParent = findRecord.UserPrototype;
+                await db.Entry(userParent).Reference(u => u.Prototype).LoadAsync();
+                try
+                {
+                    StorageFolder prototypeFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(userParent.Prototype.Name + "_" + userParent.PrototypeId);
+                    StorageFolder userFolder = await prototypeFolder.GetFolderAsync(userParent.Name + "_" + userParent.UserPrototypeId);
+                    StorageFolder recordFolder = await userFolder.GetFolderAsync("Record_" + findRecord.RecordPrototypeId);
+                    await recordFolder.DeleteAsync();
+                }
+                catch (System.IO.FileNotFoundException)
+                {
+                    System.Diagnostics.Debug.WriteLine("Prototype/User folder not found");
+                }
+
+                db.RecordsPrototype.Remove(findRecord);
+                db.SaveChanges();
+            }
+            UpdateRecordList(record.UserPrototypeId);
         }
 
         #region back event
@@ -99,11 +130,8 @@ namespace CourseWork_2.ViewModel
             get { return _selectedItem; }
             set
             {
-                if (_selectedItem != value)
-                {
-                    Set(ref _selectedItem, value);
-                    ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(ResultScreensPage), value);
-                }
+                Set(ref _selectedItem, value);
+                ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(ResultScreensPage), value);
             }
         }
 

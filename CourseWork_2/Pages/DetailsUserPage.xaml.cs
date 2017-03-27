@@ -1,4 +1,5 @@
-﻿using CourseWork_2.ViewModel;
+﻿using CourseWork_2.DataBase.DBModels;
+using CourseWork_2.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -44,5 +45,19 @@ namespace CourseWork_2.Pages
         }
 
         public DetailsUserViewModel ViewModel { get; private set; }
+
+        private void Item_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            FrameworkElement senderElement = sender as FrameworkElement;
+            FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(senderElement);
+
+            flyoutBase.ShowAt(senderElement);
+        }
+
+        private async void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            var record = (RecordPrototype)(e.OriginalSource as FrameworkElement).DataContext;
+            await ViewModel.DeleteRecord(record);
+        }
     }
 }
