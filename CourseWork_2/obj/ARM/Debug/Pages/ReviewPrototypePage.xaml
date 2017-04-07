@@ -24,13 +24,15 @@
                                                                                                                                                                                    >
             <SplitView.Pane>
                 <StackPanel VerticalAlignment="Center">
-                    <Button x:ConnectionId='6'                                               Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
+                    <Button x:ConnectionId='6'                                               Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch"
+                                                                                                                                                                       >
                         <StackPanel>
                             <SymbolIcon x:ConnectionId='9'                                                                                              />
                             <TextBlock x:ConnectionId='10'                                                  TextAlignment="Center" FontSize="10" />
                         </StackPanel>
                     </Button>
-                    <Button x:ConnectionId='7'                                                   Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
+                    <Button x:ConnectionId='7'                                                   Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch"
+                                                                                                                                                                       >
                         <SymbolIcon Symbol="Video" />
                     </Button>
                     <Button x:ConnectionId='8'                                            Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">

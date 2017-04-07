@@ -112,9 +112,9 @@
     <Compile Include="Extensions_Folder\CameraRotationHelper.cs" />
     <Compile Include="HeatMap\HeatMapFunctions.cs" />
     <Compile Include="HeatMap\HeatPoint.cs" />
-    <Compile Include="Migrations\20170227115753_InitMigration.cs" />
-    <Compile Include="Migrations\20170227115753_InitMigration.designer.cs">
-      <DependentUpon>20170227115753_InitMigration.cs</DependentUpon>
+    <Compile Include="Migrations\20170330181814_InitMigration.cs" />
+    <Compile Include="Migrations\20170330181814_InitMigration.designer.cs">
+      <DependentUpon>20170330181814_InitMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\PrototypingContextModelSnapshot.cs" />
     <Compile Include="Model\PrototypeGroup.cs" />
@@ -146,6 +146,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions_Folder\Extensions.cs" />
     <Compile Include="ViewModel\AddPrototypeViewModel.cs" />
+    <Compile Include="ViewModel\AddSettingsViewModel.cs" />
     <Compile Include="ViewModel\AddUserViewModel.cs" />
     <Compile Include="ViewModel\Command.cs" />
     <Compile Include="ViewModel\DetailsPrototypeViewModel.cs" />
@@ -233,6 +234,7 @@
       <HintPath>..\..\..\..\..\Desktop\WinRTTriggers\WinRT.Triggers.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

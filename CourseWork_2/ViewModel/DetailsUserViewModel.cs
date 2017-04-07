@@ -48,32 +48,6 @@ namespace CourseWork_2.ViewModel
             }
         }
 
-        public async Task DeleteRecord(RecordPrototype record)
-        {
-            using (var db = new PrototypingContext())
-            {
-                RecordPrototype findRecord = db.RecordsPrototype.Single(r => r.RecordPrototypeId == record.RecordPrototypeId);
-                await db.Entry(findRecord).Reference(r => r.UserPrototype).LoadAsync();
-                UserPrototype userParent = findRecord.UserPrototype;
-                await db.Entry(userParent).Reference(u => u.Prototype).LoadAsync();
-                try
-                {
-                    StorageFolder prototypeFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(userParent.Prototype.Name + "_" + userParent.PrototypeId);
-                    StorageFolder userFolder = await prototypeFolder.GetFolderAsync(userParent.Name + "_" + userParent.UserPrototypeId);
-                    StorageFolder recordFolder = await userFolder.GetFolderAsync("Record_" + findRecord.RecordPrototypeId);
-                    await recordFolder.DeleteAsync();
-                }
-                catch (System.IO.FileNotFoundException)
-                {
-                    System.Diagnostics.Debug.WriteLine("Prototype/User folder not found");
-                }
-
-                db.RecordsPrototype.Remove(findRecord);
-                db.SaveChanges();
-            }
-            UpdateRecordList(record.UserPrototypeId);
-        }
-
         #region back event
         private void RegisterGoBackEventHandlers()
         {
@@ -175,7 +149,7 @@ namespace CourseWork_2.ViewModel
 
         private void AddFunc()
         {
-            ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(ReviewPrototypePage), UserModel.UserPrototypeId);
+            ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(AddSettingsPage), UserModel.UserPrototypeId);
         }
 
         public ICommand EditCommand
@@ -231,6 +205,32 @@ namespace CourseWork_2.ViewModel
         private void ResultScreensFunc()
         {
             ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(ResultScreensPage), UserModel);
+        }
+
+        public async Task DeleteRecord(RecordPrototype record)
+        {
+            using (var db = new PrototypingContext())
+            {
+                RecordPrototype findRecord = db.RecordsPrototype.Single(r => r.RecordPrototypeId == record.RecordPrototypeId);
+                await db.Entry(findRecord).Reference(r => r.UserPrototype).LoadAsync();
+                UserPrototype userParent = findRecord.UserPrototype;
+                await db.Entry(userParent).Reference(u => u.Prototype).LoadAsync();
+                try
+                {
+                    StorageFolder prototypeFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(userParent.Prototype.Name + "_" + userParent.PrototypeId);
+                    StorageFolder userFolder = await prototypeFolder.GetFolderAsync(userParent.Name + "_" + userParent.UserPrototypeId);
+                    StorageFolder recordFolder = await userFolder.GetFolderAsync("Record_" + findRecord.RecordPrototypeId);
+                    await recordFolder.DeleteAsync();
+                }
+                catch (System.IO.FileNotFoundException)
+                {
+                    System.Diagnostics.Debug.WriteLine("Prototype/User folder not found");
+                }
+
+                db.RecordsPrototype.Remove(findRecord);
+                db.SaveChanges();
+            }
+            UpdateRecordList(record.UserPrototypeId);
         }
         #endregion
     }

@@ -12,6 +12,7 @@ namespace CourseWork_2.DataBase.DBModels
         public string PathToVideo { get; set; }
         public DateTime CreatedDate { get; set; }
 
+        public RecordingSettings Settings { get; set; }
         public List<RecordsScreen> Screens { get; set; }
 
         public int UserPrototypeId { get; set; }

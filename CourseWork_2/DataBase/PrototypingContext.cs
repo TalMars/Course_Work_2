@@ -12,7 +12,7 @@ namespace CourseWork_2.DataBase
     {
         public DbSet<Prototype> Prototypes { get; set; }
         public DbSet<UserPrototype> Users { get; set; }
-        public DbSet<RecordingSettings> PrototypesSettings { get; set; }
+        public DbSet<RecordingSettings> RecordSettings { get; set; }
         public DbSet<RecordPrototype> RecordsPrototype { get; set; }
         public DbSet<RecordsScreen> RecordsScreens { get; set; }
 
@@ -51,7 +51,7 @@ namespace CourseWork_2.DataBase
 
             //Relationships
             modelBuilder.Entity<RecordingSettings>()
-                .HasOne(rs => rs.Prototype)
+                .HasOne(rs => rs.RecordPrototype)
                 .WithOne(p => p.Settings)
                 .OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Cascade);
 

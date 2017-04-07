@@ -17,17 +17,6 @@ namespace CourseWork_2.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        //public event PropertyChangedEventHandler PropertyChanged = delegate { };
-
-        //protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        //{
-
-        //    if (PropertyChanged != null)
-        //    {
-        //        PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        //    }
-        //}
-
         public bool Set<T>(ref T storage, T value, [CallerMemberName()]string propertyName = null)
         {
             if (!object.Equals(storage, value))

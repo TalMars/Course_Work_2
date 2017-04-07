@@ -14,8 +14,7 @@ namespace CourseWork_2.DataBase.DBModels
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime LastRecordingDate { get; set; }
-
-        public RecordingSettings Settings { get; set; }
+        
         public List<UserPrototype> Users { get; set; }
     }
 }

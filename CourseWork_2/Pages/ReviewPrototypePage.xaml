@@ -24,13 +24,15 @@
                                         Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=right}">
             <SplitView.Pane>
                 <StackPanel VerticalAlignment="Center">
-                    <Button Command="{x:Bind ViewModel.StartStopCommand}" Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
+                    <Button Command="{x:Bind ViewModel.StartStopCommand}" Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch"
+                            Visibility="{x:Bind ViewModel.StartIconVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}">
                         <StackPanel>
                             <SymbolIcon Symbol="{x:Bind ViewModel.IsOnStart, Mode=OneWay, Converter={StaticResource iconConverter}}" />
                             <TextBlock Text="{x:Bind ViewModel.TimerText, Mode=OneWay}" TextAlignment="Center" FontSize="10" />
                         </StackPanel>
                     </Button>
-                    <Button Command="{x:Bind ViewModel.PreviewVideoCommand}"  Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
+                    <Button Command="{x:Bind ViewModel.PreviewVideoCommand}"  Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch"
+                            Visibility="{x:Bind ViewModel.VideoIconVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}">
                         <SymbolIcon Symbol="Video" />
                     </Button>
                     <Button Command="{x:Bind ViewModel.CancelCommand}" Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">

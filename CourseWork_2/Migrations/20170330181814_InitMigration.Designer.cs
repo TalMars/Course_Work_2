@@ -8,7 +8,7 @@ using CourseWork_2.DataBase;
 namespace CourseWork_2.Migrations
 {
     [DbContext(typeof(PrototypingContext))]
-    [Migration("20170227115753_InitMigration")]
+    [Migration("20170330181814_InitMigration")]
     partial class InitMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,24 +41,18 @@ namespace CourseWork_2.Migrations
                     b.Property<int>("RecordingSettingsId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<float>("DownScale");
+                    b.Property<bool>("FrontCamera");
 
-                    b.Property<int>("MaxFPS");
+                    b.Property<int>("RecordPrototypeId");
 
-                    b.Property<int>("PrototypeId");
-
-                    b.Property<bool>("WithFrontCamera");
-
-                    b.Property<bool>("WithTouches");
-
-                    b.Property<bool>("WithTouchesLogging");
+                    b.Property<bool>("Touches");
 
                     b.HasKey("RecordingSettingsId");
 
-                    b.HasIndex("PrototypeId")
+                    b.HasIndex("RecordPrototypeId")
                         .IsUnique();
 
-                    b.ToTable("PrototypesSettings");
+                    b.ToTable("RecordSettings");
                 });
 
             modelBuilder.Entity("CourseWork_2.DataBase.DBModels.RecordPrototype", b =>
@@ -125,9 +119,9 @@ namespace CourseWork_2.Migrations
 
             modelBuilder.Entity("CourseWork_2.DataBase.DBModels.RecordingSettings", b =>
                 {
-                    b.HasOne("CourseWork_2.DataBase.DBModels.Prototype", "Prototype")
+                    b.HasOne("CourseWork_2.DataBase.DBModels.RecordPrototype", "RecordPrototype")
                         .WithOne("Settings")
-                        .HasForeignKey("CourseWork_2.DataBase.DBModels.RecordingSettings", "PrototypeId")
+                        .HasForeignKey("CourseWork_2.DataBase.DBModels.RecordingSettings", "RecordPrototypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

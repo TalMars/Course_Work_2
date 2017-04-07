@@ -26,30 +26,6 @@ namespace CourseWork_2.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PrototypesSettings",
-                columns: table => new
-                {
-                    RecordingSettingsId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    DownScale = table.Column<float>(nullable: false),
-                    MaxFPS = table.Column<int>(nullable: false),
-                    PrototypeId = table.Column<int>(nullable: false),
-                    WithFrontCamera = table.Column<bool>(nullable: false),
-                    WithTouches = table.Column<bool>(nullable: false),
-                    WithTouchesLogging = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PrototypesSettings", x => x.RecordingSettingsId);
-                    table.ForeignKey(
-                        name: "FK_PrototypesSettings_Prototypes_PrototypeId",
-                        column: x => x.PrototypeId,
-                        principalTable: "Prototypes",
-                        principalColumn: "PrototypeId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -94,6 +70,27 @@ namespace CourseWork_2.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RecordSettings",
+                columns: table => new
+                {
+                    RecordingSettingsId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    FrontCamera = table.Column<bool>(nullable: false),
+                    RecordPrototypeId = table.Column<int>(nullable: false),
+                    Touches = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RecordSettings", x => x.RecordingSettingsId);
+                    table.ForeignKey(
+                        name: "FK_RecordSettings_RecordsPrototype_RecordPrototypeId",
+                        column: x => x.RecordPrototypeId,
+                        principalTable: "RecordsPrototype",
+                        principalColumn: "RecordPrototypeId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RecordsScreens",
                 columns: table => new
                 {
@@ -117,9 +114,9 @@ namespace CourseWork_2.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_PrototypesSettings_PrototypeId",
-                table: "PrototypesSettings",
-                column: "PrototypeId",
+                name: "IX_RecordSettings_RecordPrototypeId",
+                table: "RecordSettings",
+                column: "RecordPrototypeId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -141,7 +138,7 @@ namespace CourseWork_2.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "PrototypesSettings");
+                name: "RecordSettings");
 
             migrationBuilder.DropTable(
                 name: "RecordsScreens");

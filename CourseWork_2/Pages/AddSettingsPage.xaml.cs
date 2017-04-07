@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseWork_2.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,5 +27,18 @@ namespace CourseWork_2.Pages
         {
             this.InitializeComponent();
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            ViewModel = new AddSettingsViewModel((int)e.Parameter);
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            ViewModel.UnregisterPressedEventHadler();
+            ViewModel.UnregisterRequestEventHander();
+        }
+
+        public AddSettingsViewModel ViewModel { get; private set; }
     }
 }

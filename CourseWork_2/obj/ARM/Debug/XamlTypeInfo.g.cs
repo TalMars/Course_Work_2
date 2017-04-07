@@ -132,7 +132,7 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[49];
+            _typeNameTable = new string[50];
             _typeNameTable[0] = "CourseWork_2.Converters.BoolToVisibilityConverter";
             _typeNameTable[1] = "Object";
             _typeNameTable[2] = "CourseWork_2.Pages.AddPrototypePage";
@@ -141,49 +141,50 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
             _typeNameTable[5] = "CourseWork_2.ViewModel.AddPrototypeViewModel";
             _typeNameTable[6] = "CourseWork_2.ViewModel.NotifyPropertyChanged";
             _typeNameTable[7] = "CourseWork_2.Pages.AddSettingsPage";
-            _typeNameTable[8] = "CourseWork_2.Pages.AddUserPage";
-            _typeNameTable[9] = "CourseWork_2.ViewModel.AddUserViewModel";
-            _typeNameTable[10] = "CourseWork_2.Converters.DateTimeToStringConverter";
-            _typeNameTable[11] = "CourseWork_2.Converters.DatesVisibilityConverter";
-            _typeNameTable[12] = "CourseWork_2.Converters.CountUsersRecordsToStringConverter";
-            _typeNameTable[13] = "CourseWork_2.Converters.ReturnModelConverter";
-            _typeNameTable[14] = "CourseWork_2.Pages.DetailsPrototypePage";
-            _typeNameTable[15] = "CourseWork_2.ViewModel.DetailsPrototypeViewModel";
-            _typeNameTable[16] = "CourseWork_2.Pages.DetailsUserPage";
-            _typeNameTable[17] = "CourseWork_2.ViewModel.DetailsUserViewModel";
-            _typeNameTable[18] = "CourseWork_2.Pages.PrototypesPage";
-            _typeNameTable[19] = "CourseWork_2.ViewModel.PrototypesViewModel";
-            _typeNameTable[20] = "CourseWork_2.Converters.InverseBoolConverter";
-            _typeNameTable[21] = "WinRT.Triggers.Interactions";
-            _typeNameTable[22] = "WinRT.Triggers.TriggerCollection";
-            _typeNameTable[23] = "WinRT.Triggers.AttachableCollection`1<WinRT.Triggers.Trigger>";
-            _typeNameTable[24] = "Windows.UI.Xaml.FrameworkElement";
-            _typeNameTable[25] = "WinRT.Triggers.Trigger";
-            _typeNameTable[26] = "WinRT.Triggers.AssociatableElement";
-            _typeNameTable[27] = "WinRT.Triggers.AttachableCollection`1<WinRT.Triggers.TriggerAction>";
-            _typeNameTable[28] = "WinRT.Triggers.TriggerAction";
-            _typeNameTable[29] = "WinRT.Triggers.AttachableCollection`1<WinRT.Triggers.Condition>";
-            _typeNameTable[30] = "WinRT.Triggers.Condition";
-            _typeNameTable[31] = "WinRT.Triggers.ConditionOperator";
-            _typeNameTable[32] = "System.Enum";
-            _typeNameTable[33] = "System.ValueType";
-            _typeNameTable[34] = "Windows.UI.Xaml.DependencyObject";
-            _typeNameTable[35] = "WinRT.Triggers.EventTrigger";
-            _typeNameTable[36] = "WinRT.Triggers.EventHookingTrigger";
-            _typeNameTable[37] = "String";
-            _typeNameTable[38] = "WinRT.Triggers.InvokeCommandAction";
-            _typeNameTable[39] = "System.Windows.Input.ICommand";
-            _typeNameTable[40] = "Boolean";
-            _typeNameTable[41] = "CourseWork_2.Pages.ResultScreensPage";
-            _typeNameTable[42] = "CourseWork_2.ViewModel.ResultScreensViewModel";
-            _typeNameTable[43] = "CourseWork_2.Converters.IconStartStopConverter";
-            _typeNameTable[44] = "CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView";
-            _typeNameTable[45] = "Windows.UI.Xaml.Controls.SplitView";
-            _typeNameTable[46] = "Double";
-            _typeNameTable[47] = "CourseWork_2.Pages.ReviewPrototypePage";
-            _typeNameTable[48] = "CourseWork_2.ViewModel.ReviewPrototypeViewModel";
+            _typeNameTable[8] = "CourseWork_2.ViewModel.AddSettingsViewModel";
+            _typeNameTable[9] = "CourseWork_2.Pages.AddUserPage";
+            _typeNameTable[10] = "CourseWork_2.ViewModel.AddUserViewModel";
+            _typeNameTable[11] = "CourseWork_2.Converters.DateTimeToStringConverter";
+            _typeNameTable[12] = "CourseWork_2.Converters.DatesVisibilityConverter";
+            _typeNameTable[13] = "CourseWork_2.Converters.CountUsersRecordsToStringConverter";
+            _typeNameTable[14] = "CourseWork_2.Converters.ReturnModelConverter";
+            _typeNameTable[15] = "CourseWork_2.Pages.DetailsPrototypePage";
+            _typeNameTable[16] = "CourseWork_2.ViewModel.DetailsPrototypeViewModel";
+            _typeNameTable[17] = "CourseWork_2.Pages.DetailsUserPage";
+            _typeNameTable[18] = "CourseWork_2.ViewModel.DetailsUserViewModel";
+            _typeNameTable[19] = "CourseWork_2.Pages.PrototypesPage";
+            _typeNameTable[20] = "CourseWork_2.ViewModel.PrototypesViewModel";
+            _typeNameTable[21] = "CourseWork_2.Converters.InverseBoolConverter";
+            _typeNameTable[22] = "WinRT.Triggers.Interactions";
+            _typeNameTable[23] = "WinRT.Triggers.TriggerCollection";
+            _typeNameTable[24] = "WinRT.Triggers.AttachableCollection`1<WinRT.Triggers.Trigger>";
+            _typeNameTable[25] = "Windows.UI.Xaml.FrameworkElement";
+            _typeNameTable[26] = "WinRT.Triggers.Trigger";
+            _typeNameTable[27] = "WinRT.Triggers.AssociatableElement";
+            _typeNameTable[28] = "WinRT.Triggers.AttachableCollection`1<WinRT.Triggers.TriggerAction>";
+            _typeNameTable[29] = "WinRT.Triggers.TriggerAction";
+            _typeNameTable[30] = "WinRT.Triggers.AttachableCollection`1<WinRT.Triggers.Condition>";
+            _typeNameTable[31] = "WinRT.Triggers.Condition";
+            _typeNameTable[32] = "WinRT.Triggers.ConditionOperator";
+            _typeNameTable[33] = "System.Enum";
+            _typeNameTable[34] = "System.ValueType";
+            _typeNameTable[35] = "Windows.UI.Xaml.DependencyObject";
+            _typeNameTable[36] = "WinRT.Triggers.EventTrigger";
+            _typeNameTable[37] = "WinRT.Triggers.EventHookingTrigger";
+            _typeNameTable[38] = "String";
+            _typeNameTable[39] = "WinRT.Triggers.InvokeCommandAction";
+            _typeNameTable[40] = "System.Windows.Input.ICommand";
+            _typeNameTable[41] = "Boolean";
+            _typeNameTable[42] = "CourseWork_2.Pages.ResultScreensPage";
+            _typeNameTable[43] = "CourseWork_2.ViewModel.ResultScreensViewModel";
+            _typeNameTable[44] = "CourseWork_2.Converters.IconStartStopConverter";
+            _typeNameTable[45] = "CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView";
+            _typeNameTable[46] = "Windows.UI.Xaml.Controls.SplitView";
+            _typeNameTable[47] = "Double";
+            _typeNameTable[48] = "CourseWork_2.Pages.ReviewPrototypePage";
+            _typeNameTable[49] = "CourseWork_2.ViewModel.ReviewPrototypeViewModel";
 
-            _typeTable = new global::System.Type[49];
+            _typeTable = new global::System.Type[50];
             _typeTable[0] = typeof(global::CourseWork_2.Converters.BoolToVisibilityConverter);
             _typeTable[1] = typeof(global::System.Object);
             _typeTable[2] = typeof(global::CourseWork_2.Pages.AddPrototypePage);
@@ -192,47 +193,48 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
             _typeTable[5] = typeof(global::CourseWork_2.ViewModel.AddPrototypeViewModel);
             _typeTable[6] = typeof(global::CourseWork_2.ViewModel.NotifyPropertyChanged);
             _typeTable[7] = typeof(global::CourseWork_2.Pages.AddSettingsPage);
-            _typeTable[8] = typeof(global::CourseWork_2.Pages.AddUserPage);
-            _typeTable[9] = typeof(global::CourseWork_2.ViewModel.AddUserViewModel);
-            _typeTable[10] = typeof(global::CourseWork_2.Converters.DateTimeToStringConverter);
-            _typeTable[11] = typeof(global::CourseWork_2.Converters.DatesVisibilityConverter);
-            _typeTable[12] = typeof(global::CourseWork_2.Converters.CountUsersRecordsToStringConverter);
-            _typeTable[13] = typeof(global::CourseWork_2.Converters.ReturnModelConverter);
-            _typeTable[14] = typeof(global::CourseWork_2.Pages.DetailsPrototypePage);
-            _typeTable[15] = typeof(global::CourseWork_2.ViewModel.DetailsPrototypeViewModel);
-            _typeTable[16] = typeof(global::CourseWork_2.Pages.DetailsUserPage);
-            _typeTable[17] = typeof(global::CourseWork_2.ViewModel.DetailsUserViewModel);
-            _typeTable[18] = typeof(global::CourseWork_2.Pages.PrototypesPage);
-            _typeTable[19] = typeof(global::CourseWork_2.ViewModel.PrototypesViewModel);
-            _typeTable[20] = typeof(global::CourseWork_2.Converters.InverseBoolConverter);
-            _typeTable[21] = typeof(global::WinRT.Triggers.Interactions);
-            _typeTable[22] = typeof(global::WinRT.Triggers.TriggerCollection);
-            _typeTable[23] = typeof(global::WinRT.Triggers.AttachableCollection<global::WinRT.Triggers.Trigger>);
-            _typeTable[24] = typeof(global::Windows.UI.Xaml.FrameworkElement);
-            _typeTable[25] = typeof(global::WinRT.Triggers.Trigger);
-            _typeTable[26] = typeof(global::WinRT.Triggers.AssociatableElement);
-            _typeTable[27] = typeof(global::WinRT.Triggers.AttachableCollection<global::WinRT.Triggers.TriggerAction>);
-            _typeTable[28] = typeof(global::WinRT.Triggers.TriggerAction);
-            _typeTable[29] = typeof(global::WinRT.Triggers.AttachableCollection<global::WinRT.Triggers.Condition>);
-            _typeTable[30] = typeof(global::WinRT.Triggers.Condition);
-            _typeTable[31] = typeof(global::WinRT.Triggers.ConditionOperator);
-            _typeTable[32] = typeof(global::System.Enum);
-            _typeTable[33] = typeof(global::System.ValueType);
-            _typeTable[34] = typeof(global::Windows.UI.Xaml.DependencyObject);
-            _typeTable[35] = typeof(global::WinRT.Triggers.EventTrigger);
-            _typeTable[36] = typeof(global::WinRT.Triggers.EventHookingTrigger);
-            _typeTable[37] = typeof(global::System.String);
-            _typeTable[38] = typeof(global::WinRT.Triggers.InvokeCommandAction);
-            _typeTable[39] = typeof(global::System.Windows.Input.ICommand);
-            _typeTable[40] = typeof(global::System.Boolean);
-            _typeTable[41] = typeof(global::CourseWork_2.Pages.ResultScreensPage);
-            _typeTable[42] = typeof(global::CourseWork_2.ViewModel.ResultScreensViewModel);
-            _typeTable[43] = typeof(global::CourseWork_2.Converters.IconStartStopConverter);
-            _typeTable[44] = typeof(global::CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView);
-            _typeTable[45] = typeof(global::Windows.UI.Xaml.Controls.SplitView);
-            _typeTable[46] = typeof(global::System.Double);
-            _typeTable[47] = typeof(global::CourseWork_2.Pages.ReviewPrototypePage);
-            _typeTable[48] = typeof(global::CourseWork_2.ViewModel.ReviewPrototypeViewModel);
+            _typeTable[8] = typeof(global::CourseWork_2.ViewModel.AddSettingsViewModel);
+            _typeTable[9] = typeof(global::CourseWork_2.Pages.AddUserPage);
+            _typeTable[10] = typeof(global::CourseWork_2.ViewModel.AddUserViewModel);
+            _typeTable[11] = typeof(global::CourseWork_2.Converters.DateTimeToStringConverter);
+            _typeTable[12] = typeof(global::CourseWork_2.Converters.DatesVisibilityConverter);
+            _typeTable[13] = typeof(global::CourseWork_2.Converters.CountUsersRecordsToStringConverter);
+            _typeTable[14] = typeof(global::CourseWork_2.Converters.ReturnModelConverter);
+            _typeTable[15] = typeof(global::CourseWork_2.Pages.DetailsPrototypePage);
+            _typeTable[16] = typeof(global::CourseWork_2.ViewModel.DetailsPrototypeViewModel);
+            _typeTable[17] = typeof(global::CourseWork_2.Pages.DetailsUserPage);
+            _typeTable[18] = typeof(global::CourseWork_2.ViewModel.DetailsUserViewModel);
+            _typeTable[19] = typeof(global::CourseWork_2.Pages.PrototypesPage);
+            _typeTable[20] = typeof(global::CourseWork_2.ViewModel.PrototypesViewModel);
+            _typeTable[21] = typeof(global::CourseWork_2.Converters.InverseBoolConverter);
+            _typeTable[22] = typeof(global::WinRT.Triggers.Interactions);
+            _typeTable[23] = typeof(global::WinRT.Triggers.TriggerCollection);
+            _typeTable[24] = typeof(global::WinRT.Triggers.AttachableCollection<global::WinRT.Triggers.Trigger>);
+            _typeTable[25] = typeof(global::Windows.UI.Xaml.FrameworkElement);
+            _typeTable[26] = typeof(global::WinRT.Triggers.Trigger);
+            _typeTable[27] = typeof(global::WinRT.Triggers.AssociatableElement);
+            _typeTable[28] = typeof(global::WinRT.Triggers.AttachableCollection<global::WinRT.Triggers.TriggerAction>);
+            _typeTable[29] = typeof(global::WinRT.Triggers.TriggerAction);
+            _typeTable[30] = typeof(global::WinRT.Triggers.AttachableCollection<global::WinRT.Triggers.Condition>);
+            _typeTable[31] = typeof(global::WinRT.Triggers.Condition);
+            _typeTable[32] = typeof(global::WinRT.Triggers.ConditionOperator);
+            _typeTable[33] = typeof(global::System.Enum);
+            _typeTable[34] = typeof(global::System.ValueType);
+            _typeTable[35] = typeof(global::Windows.UI.Xaml.DependencyObject);
+            _typeTable[36] = typeof(global::WinRT.Triggers.EventTrigger);
+            _typeTable[37] = typeof(global::WinRT.Triggers.EventHookingTrigger);
+            _typeTable[38] = typeof(global::System.String);
+            _typeTable[39] = typeof(global::WinRT.Triggers.InvokeCommandAction);
+            _typeTable[40] = typeof(global::System.Windows.Input.ICommand);
+            _typeTable[41] = typeof(global::System.Boolean);
+            _typeTable[42] = typeof(global::CourseWork_2.Pages.ResultScreensPage);
+            _typeTable[43] = typeof(global::CourseWork_2.ViewModel.ResultScreensViewModel);
+            _typeTable[44] = typeof(global::CourseWork_2.Converters.IconStartStopConverter);
+            _typeTable[45] = typeof(global::CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView);
+            _typeTable[46] = typeof(global::Windows.UI.Xaml.Controls.SplitView);
+            _typeTable[47] = typeof(global::System.Double);
+            _typeTable[48] = typeof(global::CourseWork_2.Pages.ReviewPrototypePage);
+            _typeTable[49] = typeof(global::CourseWork_2.ViewModel.ReviewPrototypeViewModel);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -271,48 +273,49 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
         private object Activate_2_AddPrototypePage() { return new global::CourseWork_2.Pages.AddPrototypePage(); }
         private object Activate_5_AddPrototypeViewModel() { return new global::CourseWork_2.ViewModel.AddPrototypeViewModel(); }
         private object Activate_7_AddSettingsPage() { return new global::CourseWork_2.Pages.AddSettingsPage(); }
-        private object Activate_8_AddUserPage() { return new global::CourseWork_2.Pages.AddUserPage(); }
-        private object Activate_9_AddUserViewModel() { return new global::CourseWork_2.ViewModel.AddUserViewModel(); }
-        private object Activate_10_DateTimeToStringConverter() { return new global::CourseWork_2.Converters.DateTimeToStringConverter(); }
-        private object Activate_11_DatesVisibilityConverter() { return new global::CourseWork_2.Converters.DatesVisibilityConverter(); }
-        private object Activate_12_CountUsersRecordsToStringConverter() { return new global::CourseWork_2.Converters.CountUsersRecordsToStringConverter(); }
-        private object Activate_13_ReturnModelConverter() { return new global::CourseWork_2.Converters.ReturnModelConverter(); }
-        private object Activate_14_DetailsPrototypePage() { return new global::CourseWork_2.Pages.DetailsPrototypePage(); }
-        private object Activate_16_DetailsUserPage() { return new global::CourseWork_2.Pages.DetailsUserPage(); }
-        private object Activate_18_PrototypesPage() { return new global::CourseWork_2.Pages.PrototypesPage(); }
-        private object Activate_19_PrototypesViewModel() { return new global::CourseWork_2.ViewModel.PrototypesViewModel(); }
-        private object Activate_20_InverseBoolConverter() { return new global::CourseWork_2.Converters.InverseBoolConverter(); }
-        private object Activate_22_TriggerCollection() { return new global::WinRT.Triggers.TriggerCollection(); }
-        private object Activate_23_AttachableCollection() { return new global::WinRT.Triggers.AttachableCollection<global::WinRT.Triggers.Trigger>(); }
-        private object Activate_27_AttachableCollection() { return new global::WinRT.Triggers.AttachableCollection<global::WinRT.Triggers.TriggerAction>(); }
-        private object Activate_29_AttachableCollection() { return new global::WinRT.Triggers.AttachableCollection<global::WinRT.Triggers.Condition>(); }
-        private object Activate_30_Condition() { return new global::WinRT.Triggers.Condition(); }
-        private object Activate_35_EventTrigger() { return new global::WinRT.Triggers.EventTrigger(); }
-        private object Activate_38_InvokeCommandAction() { return new global::WinRT.Triggers.InvokeCommandAction(); }
-        private object Activate_41_ResultScreensPage() { return new global::CourseWork_2.Pages.ResultScreensPage(); }
-        private object Activate_42_ResultScreensViewModel() { return new global::CourseWork_2.ViewModel.ResultScreensViewModel(); }
-        private object Activate_43_IconStartStopConverter() { return new global::CourseWork_2.Converters.IconStartStopConverter(); }
-        private object Activate_44_SwipeableSplitView() { return new global::CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView(); }
-        private object Activate_47_ReviewPrototypePage() { return new global::CourseWork_2.Pages.ReviewPrototypePage(); }
-        private void VectorAdd_22_TriggerCollection(object instance, object item)
+        private object Activate_9_AddUserPage() { return new global::CourseWork_2.Pages.AddUserPage(); }
+        private object Activate_10_AddUserViewModel() { return new global::CourseWork_2.ViewModel.AddUserViewModel(); }
+        private object Activate_11_DateTimeToStringConverter() { return new global::CourseWork_2.Converters.DateTimeToStringConverter(); }
+        private object Activate_12_DatesVisibilityConverter() { return new global::CourseWork_2.Converters.DatesVisibilityConverter(); }
+        private object Activate_13_CountUsersRecordsToStringConverter() { return new global::CourseWork_2.Converters.CountUsersRecordsToStringConverter(); }
+        private object Activate_14_ReturnModelConverter() { return new global::CourseWork_2.Converters.ReturnModelConverter(); }
+        private object Activate_15_DetailsPrototypePage() { return new global::CourseWork_2.Pages.DetailsPrototypePage(); }
+        private object Activate_17_DetailsUserPage() { return new global::CourseWork_2.Pages.DetailsUserPage(); }
+        private object Activate_19_PrototypesPage() { return new global::CourseWork_2.Pages.PrototypesPage(); }
+        private object Activate_20_PrototypesViewModel() { return new global::CourseWork_2.ViewModel.PrototypesViewModel(); }
+        private object Activate_21_InverseBoolConverter() { return new global::CourseWork_2.Converters.InverseBoolConverter(); }
+        private object Activate_23_TriggerCollection() { return new global::WinRT.Triggers.TriggerCollection(); }
+        private object Activate_24_AttachableCollection() { return new global::WinRT.Triggers.AttachableCollection<global::WinRT.Triggers.Trigger>(); }
+        private object Activate_28_AttachableCollection() { return new global::WinRT.Triggers.AttachableCollection<global::WinRT.Triggers.TriggerAction>(); }
+        private object Activate_30_AttachableCollection() { return new global::WinRT.Triggers.AttachableCollection<global::WinRT.Triggers.Condition>(); }
+        private object Activate_31_Condition() { return new global::WinRT.Triggers.Condition(); }
+        private object Activate_36_EventTrigger() { return new global::WinRT.Triggers.EventTrigger(); }
+        private object Activate_39_InvokeCommandAction() { return new global::WinRT.Triggers.InvokeCommandAction(); }
+        private object Activate_42_ResultScreensPage() { return new global::CourseWork_2.Pages.ResultScreensPage(); }
+        private object Activate_43_ResultScreensViewModel() { return new global::CourseWork_2.ViewModel.ResultScreensViewModel(); }
+        private object Activate_44_IconStartStopConverter() { return new global::CourseWork_2.Converters.IconStartStopConverter(); }
+        private object Activate_45_SwipeableSplitView() { return new global::CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView(); }
+        private object Activate_48_ReviewPrototypePage() { return new global::CourseWork_2.Pages.ReviewPrototypePage(); }
+        private object Activate_49_ReviewPrototypeViewModel() { return new global::CourseWork_2.ViewModel.ReviewPrototypeViewModel(); }
+        private void VectorAdd_23_TriggerCollection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::WinRT.Triggers.Trigger>)instance;
             var newItem = (global::WinRT.Triggers.Trigger)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_23_AttachableCollection(object instance, object item)
+        private void VectorAdd_24_AttachableCollection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::WinRT.Triggers.Trigger>)instance;
             var newItem = (global::WinRT.Triggers.Trigger)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_27_AttachableCollection(object instance, object item)
+        private void VectorAdd_28_AttachableCollection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::WinRT.Triggers.TriggerAction>)instance;
             var newItem = (global::WinRT.Triggers.TriggerAction)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_29_AttachableCollection(object instance, object item)
+        private void VectorAdd_30_AttachableCollection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::WinRT.Triggers.Condition>)instance;
             var newItem = (global::WinRT.Triggers.Condition)item;
@@ -372,173 +375,181 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
             case 7:   //  CourseWork_2.Pages.AddSettingsPage
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.Activator = Activate_7_AddSettingsPage;
-                userType.SetIsLocalType();
-                xamlType = userType;
-                break;
-
-            case 8:   //  CourseWork_2.Pages.AddUserPage
-                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_8_AddUserPage;
                 userType.AddMemberName("ViewModel");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 9:   //  CourseWork_2.ViewModel.AddUserViewModel
+            case 8:   //  CourseWork_2.ViewModel.AddSettingsViewModel
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CourseWork_2.ViewModel.NotifyPropertyChanged"));
                 userType.SetIsReturnTypeStub();
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 10:   //  CourseWork_2.Converters.DateTimeToStringConverter
-                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_10_DateTimeToStringConverter;
-                userType.SetIsLocalType();
-                xamlType = userType;
-                break;
-
-            case 11:   //  CourseWork_2.Converters.DatesVisibilityConverter
-                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_11_DatesVisibilityConverter;
-                userType.SetIsLocalType();
-                xamlType = userType;
-                break;
-
-            case 12:   //  CourseWork_2.Converters.CountUsersRecordsToStringConverter
-                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_12_CountUsersRecordsToStringConverter;
-                userType.SetIsLocalType();
-                xamlType = userType;
-                break;
-
-            case 13:   //  CourseWork_2.Converters.ReturnModelConverter
-                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_13_ReturnModelConverter;
-                userType.SetIsLocalType();
-                xamlType = userType;
-                break;
-
-            case 14:   //  CourseWork_2.Pages.DetailsPrototypePage
+            case 9:   //  CourseWork_2.Pages.AddUserPage
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_14_DetailsPrototypePage;
+                userType.Activator = Activate_9_AddUserPage;
                 userType.AddMemberName("ViewModel");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 15:   //  CourseWork_2.ViewModel.DetailsPrototypeViewModel
+            case 10:   //  CourseWork_2.ViewModel.AddUserViewModel
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CourseWork_2.ViewModel.NotifyPropertyChanged"));
                 userType.SetIsReturnTypeStub();
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 16:   //  CourseWork_2.Pages.DetailsUserPage
-                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_16_DetailsUserPage;
-                userType.AddMemberName("ViewModel");
-                userType.SetIsLocalType();
-                xamlType = userType;
-                break;
-
-            case 17:   //  CourseWork_2.ViewModel.DetailsUserViewModel
-                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CourseWork_2.ViewModel.NotifyPropertyChanged"));
-                userType.SetIsReturnTypeStub();
-                userType.SetIsLocalType();
-                xamlType = userType;
-                break;
-
-            case 18:   //  CourseWork_2.Pages.PrototypesPage
-                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_18_PrototypesPage;
-                userType.AddMemberName("ViewModel");
-                userType.SetIsLocalType();
-                xamlType = userType;
-                break;
-
-            case 19:   //  CourseWork_2.ViewModel.PrototypesViewModel
-                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CourseWork_2.ViewModel.NotifyPropertyChanged"));
-                userType.SetIsReturnTypeStub();
-                userType.SetIsLocalType();
-                xamlType = userType;
-                break;
-
-            case 20:   //  CourseWork_2.Converters.InverseBoolConverter
+            case 11:   //  CourseWork_2.Converters.DateTimeToStringConverter
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_20_InverseBoolConverter;
+                userType.Activator = Activate_11_DateTimeToStringConverter;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 21:   //  WinRT.Triggers.Interactions
+            case 12:   //  CourseWork_2.Converters.DatesVisibilityConverter
+                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_12_DatesVisibilityConverter;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 13:   //  CourseWork_2.Converters.CountUsersRecordsToStringConverter
+                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_13_CountUsersRecordsToStringConverter;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 14:   //  CourseWork_2.Converters.ReturnModelConverter
+                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_14_ReturnModelConverter;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 15:   //  CourseWork_2.Pages.DetailsPrototypePage
+                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_15_DetailsPrototypePage;
+                userType.AddMemberName("ViewModel");
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 16:   //  CourseWork_2.ViewModel.DetailsPrototypeViewModel
+                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CourseWork_2.ViewModel.NotifyPropertyChanged"));
+                userType.SetIsReturnTypeStub();
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 17:   //  CourseWork_2.Pages.DetailsUserPage
+                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_17_DetailsUserPage;
+                userType.AddMemberName("ViewModel");
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 18:   //  CourseWork_2.ViewModel.DetailsUserViewModel
+                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CourseWork_2.ViewModel.NotifyPropertyChanged"));
+                userType.SetIsReturnTypeStub();
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 19:   //  CourseWork_2.Pages.PrototypesPage
+                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_19_PrototypesPage;
+                userType.AddMemberName("ViewModel");
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 20:   //  CourseWork_2.ViewModel.PrototypesViewModel
+                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CourseWork_2.ViewModel.NotifyPropertyChanged"));
+                userType.SetIsReturnTypeStub();
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 21:   //  CourseWork_2.Converters.InverseBoolConverter
+                userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_21_InverseBoolConverter;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 22:   //  WinRT.Triggers.Interactions
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
                 userType.AddMemberName("Triggers");
                 xamlType = userType;
                 break;
 
-            case 22:   //  WinRT.Triggers.TriggerCollection
+            case 23:   //  WinRT.Triggers.TriggerCollection
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("WinRT.Triggers.AttachableCollection`1<WinRT.Triggers.Trigger>"));
-                userType.CollectionAdd = VectorAdd_22_TriggerCollection;
+                userType.CollectionAdd = VectorAdd_23_TriggerCollection;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 23:   //  WinRT.Triggers.AttachableCollection`1<WinRT.Triggers.Trigger>
+            case 24:   //  WinRT.Triggers.AttachableCollection`1<WinRT.Triggers.Trigger>
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.FrameworkElement"));
-                userType.Activator = Activate_23_AttachableCollection;
-                userType.CollectionAdd = VectorAdd_23_AttachableCollection;
+                userType.Activator = Activate_24_AttachableCollection;
+                userType.CollectionAdd = VectorAdd_24_AttachableCollection;
                 xamlType = userType;
                 break;
 
-            case 24:   //  Windows.UI.Xaml.FrameworkElement
+            case 25:   //  Windows.UI.Xaml.FrameworkElement
                 xamlType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 25:   //  WinRT.Triggers.Trigger
+            case 26:   //  WinRT.Triggers.Trigger
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("WinRT.Triggers.AssociatableElement"));
                 userType.SetContentPropertyName("WinRT.Triggers.Trigger.TriggerActions");
                 userType.AddMemberName("TriggerActions");
                 xamlType = userType;
                 break;
 
-            case 26:   //  WinRT.Triggers.AssociatableElement
+            case 27:   //  WinRT.Triggers.AssociatableElement
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.FrameworkElement"));
                 userType.AddMemberName("AssociatedObject");
                 xamlType = userType;
                 break;
 
-            case 27:   //  WinRT.Triggers.AttachableCollection`1<WinRT.Triggers.TriggerAction>
+            case 28:   //  WinRT.Triggers.AttachableCollection`1<WinRT.Triggers.TriggerAction>
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.FrameworkElement"));
-                userType.CollectionAdd = VectorAdd_27_AttachableCollection;
+                userType.CollectionAdd = VectorAdd_28_AttachableCollection;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 28:   //  WinRT.Triggers.TriggerAction
+            case 29:   //  WinRT.Triggers.TriggerAction
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("WinRT.Triggers.AssociatableElement"));
                 userType.SetContentPropertyName("WinRT.Triggers.TriggerAction.Conditions");
                 userType.AddMemberName("Conditions");
                 xamlType = userType;
                 break;
 
-            case 29:   //  WinRT.Triggers.AttachableCollection`1<WinRT.Triggers.Condition>
+            case 30:   //  WinRT.Triggers.AttachableCollection`1<WinRT.Triggers.Condition>
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.FrameworkElement"));
-                userType.CollectionAdd = VectorAdd_29_AttachableCollection;
+                userType.CollectionAdd = VectorAdd_30_AttachableCollection;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 30:   //  WinRT.Triggers.Condition
+            case 31:   //  WinRT.Triggers.Condition
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("WinRT.Triggers.AssociatableElement"));
-                userType.Activator = Activate_30_Condition;
+                userType.Activator = Activate_31_Condition;
                 userType.AddMemberName("Operator");
                 userType.AddMemberName("LeftOperand");
                 userType.AddMemberName("RightOperand");
                 xamlType = userType;
                 break;
 
-            case 31:   //  WinRT.Triggers.ConditionOperator
+            case 32:   //  WinRT.Triggers.ConditionOperator
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Enum"));
                 userType.AddEnumValue("Equals", global::WinRT.Triggers.ConditionOperator.Equals);
                 userType.AddEnumValue("NotEquals", global::WinRT.Triggers.ConditionOperator.NotEquals);
@@ -549,42 +560,42 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 32:   //  System.Enum
+            case 33:   //  System.Enum
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.ValueType"));
                 xamlType = userType;
                 break;
 
-            case 33:   //  System.ValueType
+            case 34:   //  System.ValueType
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
                 xamlType = userType;
                 break;
 
-            case 34:   //  Windows.UI.Xaml.DependencyObject
+            case 35:   //  Windows.UI.Xaml.DependencyObject
                 xamlType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 35:   //  WinRT.Triggers.EventTrigger
+            case 36:   //  WinRT.Triggers.EventTrigger
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("WinRT.Triggers.EventHookingTrigger"));
-                userType.Activator = Activate_35_EventTrigger;
+                userType.Activator = Activate_36_EventTrigger;
                 userType.SetContentPropertyName("WinRT.Triggers.Trigger.TriggerActions");
                 userType.AddMemberName("EventName");
                 userType.AddMemberName("SourceObject");
                 xamlType = userType;
                 break;
 
-            case 36:   //  WinRT.Triggers.EventHookingTrigger
+            case 37:   //  WinRT.Triggers.EventHookingTrigger
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("WinRT.Triggers.Trigger"));
                 userType.SetContentPropertyName("WinRT.Triggers.Trigger.TriggerActions");
                 xamlType = userType;
                 break;
 
-            case 37:   //  String
+            case 38:   //  String
                 xamlType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 38:   //  WinRT.Triggers.InvokeCommandAction
+            case 39:   //  WinRT.Triggers.InvokeCommandAction
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("WinRT.Triggers.TriggerAction"));
-                userType.Activator = Activate_38_InvokeCommandAction;
+                userType.Activator = Activate_39_InvokeCommandAction;
                 userType.SetContentPropertyName("WinRT.Triggers.TriggerAction.Conditions");
                 userType.AddMemberName("Command");
                 userType.AddMemberName("CommandParameter");
@@ -592,41 +603,41 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 39:   //  System.Windows.Input.ICommand
+            case 40:   //  System.Windows.Input.ICommand
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, null);
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 40:   //  Boolean
+            case 41:   //  Boolean
                 xamlType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 41:   //  CourseWork_2.Pages.ResultScreensPage
+            case 42:   //  CourseWork_2.Pages.ResultScreensPage
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_41_ResultScreensPage;
+                userType.Activator = Activate_42_ResultScreensPage;
                 userType.AddMemberName("ViewModel");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 42:   //  CourseWork_2.ViewModel.ResultScreensViewModel
+            case 43:   //  CourseWork_2.ViewModel.ResultScreensViewModel
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CourseWork_2.ViewModel.NotifyPropertyChanged"));
                 userType.SetIsReturnTypeStub();
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 43:   //  CourseWork_2.Converters.IconStartStopConverter
+            case 44:   //  CourseWork_2.Converters.IconStartStopConverter
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_43_IconStartStopConverter;
+                userType.Activator = Activate_44_IconStartStopConverter;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 44:   //  CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView
+            case 45:   //  CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.SplitView"));
-                userType.Activator = Activate_44_SwipeableSplitView;
+                userType.Activator = Activate_45_SwipeableSplitView;
                 userType.AddMemberName("IsSwipeablePaneOpen");
                 userType.AddMemberName("PanAreaInitialTranslateX");
                 userType.AddMemberName("PanAreaThreshold");
@@ -634,23 +645,23 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 45:   //  Windows.UI.Xaml.Controls.SplitView
+            case 46:   //  Windows.UI.Xaml.Controls.SplitView
                 xamlType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 46:   //  Double
+            case 47:   //  Double
                 xamlType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 47:   //  CourseWork_2.Pages.ReviewPrototypePage
+            case 48:   //  CourseWork_2.Pages.ReviewPrototypePage
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_47_ReviewPrototypePage;
+                userType.Activator = Activate_48_ReviewPrototypePage;
                 userType.AddMemberName("ViewModel");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 48:   //  CourseWork_2.ViewModel.ReviewPrototypeViewModel
+            case 49:   //  CourseWork_2.ViewModel.ReviewPrototypeViewModel
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CourseWork_2.ViewModel.NotifyPropertyChanged"));
                 userType.SetIsReturnTypeStub();
                 userType.SetIsLocalType();
@@ -666,180 +677,185 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
             var that = (global::CourseWork_2.Pages.AddPrototypePage)instance;
             return that.ViewModel;
         }
-        private object get_1_AddUserPage_ViewModel(object instance)
+        private object get_1_AddSettingsPage_ViewModel(object instance)
+        {
+            var that = (global::CourseWork_2.Pages.AddSettingsPage)instance;
+            return that.ViewModel;
+        }
+        private object get_2_AddUserPage_ViewModel(object instance)
         {
             var that = (global::CourseWork_2.Pages.AddUserPage)instance;
             return that.ViewModel;
         }
-        private object get_2_DetailsPrototypePage_ViewModel(object instance)
+        private object get_3_DetailsPrototypePage_ViewModel(object instance)
         {
             var that = (global::CourseWork_2.Pages.DetailsPrototypePage)instance;
             return that.ViewModel;
         }
-        private object get_3_DetailsUserPage_ViewModel(object instance)
+        private object get_4_DetailsUserPage_ViewModel(object instance)
         {
             var that = (global::CourseWork_2.Pages.DetailsUserPage)instance;
             return that.ViewModel;
         }
-        private object get_4_PrototypesPage_ViewModel(object instance)
+        private object get_5_PrototypesPage_ViewModel(object instance)
         {
             var that = (global::CourseWork_2.Pages.PrototypesPage)instance;
             return that.ViewModel;
         }
-        private object get_5_Interactions_Triggers(object instance)
+        private object get_6_Interactions_Triggers(object instance)
         {
             return global::WinRT.Triggers.Interactions.GetTriggers((global::Windows.UI.Xaml.DependencyObject)instance);
         }
-        private void set_5_Interactions_Triggers(object instance, object Value)
+        private void set_6_Interactions_Triggers(object instance, object Value)
         {
             global::WinRT.Triggers.Interactions.SetTriggers((global::Windows.UI.Xaml.DependencyObject)instance, (global::WinRT.Triggers.TriggerCollection)Value);
         }
-        private object get_6_Trigger_TriggerActions(object instance)
+        private object get_7_Trigger_TriggerActions(object instance)
         {
             var that = (global::WinRT.Triggers.Trigger)instance;
             return that.TriggerActions;
         }
-        private void set_6_Trigger_TriggerActions(object instance, object Value)
+        private void set_7_Trigger_TriggerActions(object instance, object Value)
         {
             var that = (global::WinRT.Triggers.Trigger)instance;
             that.TriggerActions = (global::WinRT.Triggers.AttachableCollection<global::WinRT.Triggers.TriggerAction>)Value;
         }
-        private object get_7_TriggerAction_Conditions(object instance)
+        private object get_8_TriggerAction_Conditions(object instance)
         {
             var that = (global::WinRT.Triggers.TriggerAction)instance;
             return that.Conditions;
         }
-        private void set_7_TriggerAction_Conditions(object instance, object Value)
+        private void set_8_TriggerAction_Conditions(object instance, object Value)
         {
             var that = (global::WinRT.Triggers.TriggerAction)instance;
             that.Conditions = (global::WinRT.Triggers.AttachableCollection<global::WinRT.Triggers.Condition>)Value;
         }
-        private object get_8_Condition_Operator(object instance)
+        private object get_9_Condition_Operator(object instance)
         {
             var that = (global::WinRT.Triggers.Condition)instance;
             return that.Operator;
         }
-        private void set_8_Condition_Operator(object instance, object Value)
+        private void set_9_Condition_Operator(object instance, object Value)
         {
             var that = (global::WinRT.Triggers.Condition)instance;
             that.Operator = (global::WinRT.Triggers.ConditionOperator)Value;
         }
-        private object get_9_Condition_LeftOperand(object instance)
+        private object get_10_Condition_LeftOperand(object instance)
         {
             var that = (global::WinRT.Triggers.Condition)instance;
             return that.LeftOperand;
         }
-        private void set_9_Condition_LeftOperand(object instance, object Value)
+        private void set_10_Condition_LeftOperand(object instance, object Value)
         {
             var that = (global::WinRT.Triggers.Condition)instance;
             that.LeftOperand = (global::System.Object)Value;
         }
-        private object get_10_Condition_RightOperand(object instance)
+        private object get_11_Condition_RightOperand(object instance)
         {
             var that = (global::WinRT.Triggers.Condition)instance;
             return that.RightOperand;
         }
-        private void set_10_Condition_RightOperand(object instance, object Value)
+        private void set_11_Condition_RightOperand(object instance, object Value)
         {
             var that = (global::WinRT.Triggers.Condition)instance;
             that.RightOperand = (global::System.Object)Value;
         }
-        private object get_11_AssociatableElement_AssociatedObject(object instance)
+        private object get_12_AssociatableElement_AssociatedObject(object instance)
         {
             var that = (global::WinRT.Triggers.AssociatableElement)instance;
             return that.AssociatedObject;
         }
-        private object get_12_EventTrigger_EventName(object instance)
+        private object get_13_EventTrigger_EventName(object instance)
         {
             var that = (global::WinRT.Triggers.EventTrigger)instance;
             return that.EventName;
         }
-        private void set_12_EventTrigger_EventName(object instance, object Value)
+        private void set_13_EventTrigger_EventName(object instance, object Value)
         {
             var that = (global::WinRT.Triggers.EventTrigger)instance;
             that.EventName = (global::System.String)Value;
         }
-        private object get_13_EventTrigger_SourceObject(object instance)
+        private object get_14_EventTrigger_SourceObject(object instance)
         {
             var that = (global::WinRT.Triggers.EventTrigger)instance;
             return that.SourceObject;
         }
-        private void set_13_EventTrigger_SourceObject(object instance, object Value)
+        private void set_14_EventTrigger_SourceObject(object instance, object Value)
         {
             var that = (global::WinRT.Triggers.EventTrigger)instance;
             that.SourceObject = (global::System.Object)Value;
         }
-        private object get_14_InvokeCommandAction_Command(object instance)
+        private object get_15_InvokeCommandAction_Command(object instance)
         {
             var that = (global::WinRT.Triggers.InvokeCommandAction)instance;
             return that.Command;
         }
-        private void set_14_InvokeCommandAction_Command(object instance, object Value)
+        private void set_15_InvokeCommandAction_Command(object instance, object Value)
         {
             var that = (global::WinRT.Triggers.InvokeCommandAction)instance;
             that.Command = (global::System.Windows.Input.ICommand)Value;
         }
-        private object get_15_InvokeCommandAction_CommandParameter(object instance)
+        private object get_16_InvokeCommandAction_CommandParameter(object instance)
         {
             var that = (global::WinRT.Triggers.InvokeCommandAction)instance;
             return that.CommandParameter;
         }
-        private void set_15_InvokeCommandAction_CommandParameter(object instance, object Value)
+        private void set_16_InvokeCommandAction_CommandParameter(object instance, object Value)
         {
             var that = (global::WinRT.Triggers.InvokeCommandAction)instance;
             that.CommandParameter = (global::System.Object)Value;
         }
-        private object get_16_InvokeCommandAction_PassEventArgsToCommand(object instance)
+        private object get_17_InvokeCommandAction_PassEventArgsToCommand(object instance)
         {
             var that = (global::WinRT.Triggers.InvokeCommandAction)instance;
             return that.PassEventArgsToCommand;
         }
-        private void set_16_InvokeCommandAction_PassEventArgsToCommand(object instance, object Value)
+        private void set_17_InvokeCommandAction_PassEventArgsToCommand(object instance, object Value)
         {
             var that = (global::WinRT.Triggers.InvokeCommandAction)instance;
             that.PassEventArgsToCommand = (global::System.Boolean)Value;
         }
-        private object get_17_ResultScreensPage_ViewModel(object instance)
+        private object get_18_ResultScreensPage_ViewModel(object instance)
         {
             var that = (global::CourseWork_2.Pages.ResultScreensPage)instance;
             return that.ViewModel;
         }
-        private void set_17_ResultScreensPage_ViewModel(object instance, object Value)
+        private void set_18_ResultScreensPage_ViewModel(object instance, object Value)
         {
             var that = (global::CourseWork_2.Pages.ResultScreensPage)instance;
             that.ViewModel = (global::CourseWork_2.ViewModel.ResultScreensViewModel)Value;
         }
-        private object get_18_SwipeableSplitView_IsSwipeablePaneOpen(object instance)
+        private object get_19_SwipeableSplitView_IsSwipeablePaneOpen(object instance)
         {
             var that = (global::CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView)instance;
             return that.IsSwipeablePaneOpen;
         }
-        private void set_18_SwipeableSplitView_IsSwipeablePaneOpen(object instance, object Value)
+        private void set_19_SwipeableSplitView_IsSwipeablePaneOpen(object instance, object Value)
         {
             var that = (global::CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView)instance;
             that.IsSwipeablePaneOpen = (global::System.Boolean)Value;
         }
-        private object get_19_SwipeableSplitView_PanAreaInitialTranslateX(object instance)
+        private object get_20_SwipeableSplitView_PanAreaInitialTranslateX(object instance)
         {
             var that = (global::CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView)instance;
             return that.PanAreaInitialTranslateX;
         }
-        private void set_19_SwipeableSplitView_PanAreaInitialTranslateX(object instance, object Value)
+        private void set_20_SwipeableSplitView_PanAreaInitialTranslateX(object instance, object Value)
         {
             var that = (global::CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView)instance;
             that.PanAreaInitialTranslateX = (global::System.Double)Value;
         }
-        private object get_20_SwipeableSplitView_PanAreaThreshold(object instance)
+        private object get_21_SwipeableSplitView_PanAreaThreshold(object instance)
         {
             var that = (global::CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView)instance;
             return that.PanAreaThreshold;
         }
-        private void set_20_SwipeableSplitView_PanAreaThreshold(object instance, object Value)
+        private void set_21_SwipeableSplitView_PanAreaThreshold(object instance, object Value)
         {
             var that = (global::CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView)instance;
             that.PanAreaThreshold = (global::System.Double)Value;
         }
-        private object get_21_ReviewPrototypePage_ViewModel(object instance)
+        private object get_22_ReviewPrototypePage_ViewModel(object instance)
         {
             var that = (global::CourseWork_2.Pages.ReviewPrototypePage)instance;
             return that.ViewModel;
@@ -858,28 +874,34 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
                 xamlMember.Getter = get_0_AddPrototypePage_ViewModel;
                 xamlMember.SetIsReadOnly();
                 break;
+            case "CourseWork_2.Pages.AddSettingsPage.ViewModel":
+                userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CourseWork_2.Pages.AddSettingsPage");
+                xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "ViewModel", "CourseWork_2.ViewModel.AddSettingsViewModel");
+                xamlMember.Getter = get_1_AddSettingsPage_ViewModel;
+                xamlMember.SetIsReadOnly();
+                break;
             case "CourseWork_2.Pages.AddUserPage.ViewModel":
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CourseWork_2.Pages.AddUserPage");
                 xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "ViewModel", "CourseWork_2.ViewModel.AddUserViewModel");
-                xamlMember.Getter = get_1_AddUserPage_ViewModel;
+                xamlMember.Getter = get_2_AddUserPage_ViewModel;
                 xamlMember.SetIsReadOnly();
                 break;
             case "CourseWork_2.Pages.DetailsPrototypePage.ViewModel":
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CourseWork_2.Pages.DetailsPrototypePage");
                 xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "ViewModel", "CourseWork_2.ViewModel.DetailsPrototypeViewModel");
-                xamlMember.Getter = get_2_DetailsPrototypePage_ViewModel;
+                xamlMember.Getter = get_3_DetailsPrototypePage_ViewModel;
                 xamlMember.SetIsReadOnly();
                 break;
             case "CourseWork_2.Pages.DetailsUserPage.ViewModel":
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CourseWork_2.Pages.DetailsUserPage");
                 xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "ViewModel", "CourseWork_2.ViewModel.DetailsUserViewModel");
-                xamlMember.Getter = get_3_DetailsUserPage_ViewModel;
+                xamlMember.Getter = get_4_DetailsUserPage_ViewModel;
                 xamlMember.SetIsReadOnly();
                 break;
             case "CourseWork_2.Pages.PrototypesPage.ViewModel":
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CourseWork_2.Pages.PrototypesPage");
                 xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "ViewModel", "CourseWork_2.ViewModel.PrototypesViewModel");
-                xamlMember.Getter = get_4_PrototypesPage_ViewModel;
+                xamlMember.Getter = get_5_PrototypesPage_ViewModel;
                 xamlMember.SetIsReadOnly();
                 break;
             case "WinRT.Triggers.Interactions.Triggers":
@@ -887,116 +909,116 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
                 xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "Triggers", "WinRT.Triggers.TriggerCollection");
                 xamlMember.SetTargetTypeName("Windows.UI.Xaml.DependencyObject");
                 xamlMember.SetIsAttachable();
-                xamlMember.Getter = get_5_Interactions_Triggers;
-                xamlMember.Setter = set_5_Interactions_Triggers;
+                xamlMember.Getter = get_6_Interactions_Triggers;
+                xamlMember.Setter = set_6_Interactions_Triggers;
                 break;
             case "WinRT.Triggers.Trigger.TriggerActions":
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRT.Triggers.Trigger");
                 xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "TriggerActions", "WinRT.Triggers.AttachableCollection`1<WinRT.Triggers.TriggerAction>");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_6_Trigger_TriggerActions;
-                xamlMember.Setter = set_6_Trigger_TriggerActions;
+                xamlMember.Getter = get_7_Trigger_TriggerActions;
+                xamlMember.Setter = set_7_Trigger_TriggerActions;
                 break;
             case "WinRT.Triggers.TriggerAction.Conditions":
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRT.Triggers.TriggerAction");
                 xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "Conditions", "WinRT.Triggers.AttachableCollection`1<WinRT.Triggers.Condition>");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_7_TriggerAction_Conditions;
-                xamlMember.Setter = set_7_TriggerAction_Conditions;
+                xamlMember.Getter = get_8_TriggerAction_Conditions;
+                xamlMember.Setter = set_8_TriggerAction_Conditions;
                 break;
             case "WinRT.Triggers.Condition.Operator":
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRT.Triggers.Condition");
                 xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "Operator", "WinRT.Triggers.ConditionOperator");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_8_Condition_Operator;
-                xamlMember.Setter = set_8_Condition_Operator;
+                xamlMember.Getter = get_9_Condition_Operator;
+                xamlMember.Setter = set_9_Condition_Operator;
                 break;
             case "WinRT.Triggers.Condition.LeftOperand":
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRT.Triggers.Condition");
                 xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "LeftOperand", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_9_Condition_LeftOperand;
-                xamlMember.Setter = set_9_Condition_LeftOperand;
+                xamlMember.Getter = get_10_Condition_LeftOperand;
+                xamlMember.Setter = set_10_Condition_LeftOperand;
                 break;
             case "WinRT.Triggers.Condition.RightOperand":
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRT.Triggers.Condition");
                 xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "RightOperand", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_10_Condition_RightOperand;
-                xamlMember.Setter = set_10_Condition_RightOperand;
+                xamlMember.Getter = get_11_Condition_RightOperand;
+                xamlMember.Setter = set_11_Condition_RightOperand;
                 break;
             case "WinRT.Triggers.AssociatableElement.AssociatedObject":
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRT.Triggers.AssociatableElement");
                 xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "AssociatedObject", "Windows.UI.Xaml.FrameworkElement");
-                xamlMember.Getter = get_11_AssociatableElement_AssociatedObject;
+                xamlMember.Getter = get_12_AssociatableElement_AssociatedObject;
                 xamlMember.SetIsReadOnly();
                 break;
             case "WinRT.Triggers.EventTrigger.EventName":
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRT.Triggers.EventTrigger");
                 xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "EventName", "String");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_12_EventTrigger_EventName;
-                xamlMember.Setter = set_12_EventTrigger_EventName;
+                xamlMember.Getter = get_13_EventTrigger_EventName;
+                xamlMember.Setter = set_13_EventTrigger_EventName;
                 break;
             case "WinRT.Triggers.EventTrigger.SourceObject":
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRT.Triggers.EventTrigger");
                 xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "SourceObject", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_13_EventTrigger_SourceObject;
-                xamlMember.Setter = set_13_EventTrigger_SourceObject;
+                xamlMember.Getter = get_14_EventTrigger_SourceObject;
+                xamlMember.Setter = set_14_EventTrigger_SourceObject;
                 break;
             case "WinRT.Triggers.InvokeCommandAction.Command":
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRT.Triggers.InvokeCommandAction");
                 xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "Command", "System.Windows.Input.ICommand");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_14_InvokeCommandAction_Command;
-                xamlMember.Setter = set_14_InvokeCommandAction_Command;
+                xamlMember.Getter = get_15_InvokeCommandAction_Command;
+                xamlMember.Setter = set_15_InvokeCommandAction_Command;
                 break;
             case "WinRT.Triggers.InvokeCommandAction.CommandParameter":
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRT.Triggers.InvokeCommandAction");
                 xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "CommandParameter", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_15_InvokeCommandAction_CommandParameter;
-                xamlMember.Setter = set_15_InvokeCommandAction_CommandParameter;
+                xamlMember.Getter = get_16_InvokeCommandAction_CommandParameter;
+                xamlMember.Setter = set_16_InvokeCommandAction_CommandParameter;
                 break;
             case "WinRT.Triggers.InvokeCommandAction.PassEventArgsToCommand":
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("WinRT.Triggers.InvokeCommandAction");
                 xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "PassEventArgsToCommand", "Boolean");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_16_InvokeCommandAction_PassEventArgsToCommand;
-                xamlMember.Setter = set_16_InvokeCommandAction_PassEventArgsToCommand;
+                xamlMember.Getter = get_17_InvokeCommandAction_PassEventArgsToCommand;
+                xamlMember.Setter = set_17_InvokeCommandAction_PassEventArgsToCommand;
                 break;
             case "CourseWork_2.Pages.ResultScreensPage.ViewModel":
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CourseWork_2.Pages.ResultScreensPage");
                 xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "ViewModel", "CourseWork_2.ViewModel.ResultScreensViewModel");
-                xamlMember.Getter = get_17_ResultScreensPage_ViewModel;
-                xamlMember.Setter = set_17_ResultScreensPage_ViewModel;
+                xamlMember.Getter = get_18_ResultScreensPage_ViewModel;
+                xamlMember.Setter = set_18_ResultScreensPage_ViewModel;
                 break;
             case "CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView.IsSwipeablePaneOpen":
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView");
                 xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "IsSwipeablePaneOpen", "Boolean");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_18_SwipeableSplitView_IsSwipeablePaneOpen;
-                xamlMember.Setter = set_18_SwipeableSplitView_IsSwipeablePaneOpen;
+                xamlMember.Getter = get_19_SwipeableSplitView_IsSwipeablePaneOpen;
+                xamlMember.Setter = set_19_SwipeableSplitView_IsSwipeablePaneOpen;
                 break;
             case "CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView.PanAreaInitialTranslateX":
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView");
                 xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "PanAreaInitialTranslateX", "Double");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_19_SwipeableSplitView_PanAreaInitialTranslateX;
-                xamlMember.Setter = set_19_SwipeableSplitView_PanAreaInitialTranslateX;
+                xamlMember.Getter = get_20_SwipeableSplitView_PanAreaInitialTranslateX;
+                xamlMember.Setter = set_20_SwipeableSplitView_PanAreaInitialTranslateX;
                 break;
             case "CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView.PanAreaThreshold":
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView");
                 xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "PanAreaThreshold", "Double");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_20_SwipeableSplitView_PanAreaThreshold;
-                xamlMember.Setter = set_20_SwipeableSplitView_PanAreaThreshold;
+                xamlMember.Getter = get_21_SwipeableSplitView_PanAreaThreshold;
+                xamlMember.Setter = set_21_SwipeableSplitView_PanAreaThreshold;
                 break;
             case "CourseWork_2.Pages.ReviewPrototypePage.ViewModel":
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CourseWork_2.Pages.ReviewPrototypePage");
                 xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "ViewModel", "CourseWork_2.ViewModel.ReviewPrototypeViewModel");
-                xamlMember.Getter = get_21_ReviewPrototypePage_ViewModel;
+                xamlMember.Getter = get_22_ReviewPrototypePage_ViewModel;
                 xamlMember.SetIsReadOnly();
                 break;
             }

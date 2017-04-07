@@ -33,7 +33,7 @@
         </AppBar>
     </Page.BottomAppBar>
 
-    <Grid x:ConnectionId='6' Background="#2b3346"                                                 >
+    <Grid x:ConnectionId='6' Background="#2b3346"                                                              >
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*" MaxHeight="60" />
             <RowDefinition Height="0.15*" />
@@ -47,17 +47,16 @@
         </Grid.ColumnDefinitions>
 
         <Border Grid.ColumnSpan="3" BorderThickness="0,0,0,1" BorderBrush="DarkGray">
-            <Grid x:ConnectionId='10' x:Name="Header">
-                <Button x:ConnectionId='11' Background="Transparent" Foreground="White"                                           >
+            <Grid x:ConnectionId='13' x:Name="Header">
+                <Button x:ConnectionId='14' Background="Transparent" Foreground="White"                                           >
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Margin="0,0,5,0" Symbol="Back" />
-                        <!--<TextBlock Text="Prototypes" FontSize="14" FontWeight="Medium" />-->
                     </StackPanel>
                 </Button>
                 <TextBlock Text="Prototype" FontSize="20" FontWeight="Medium"
                            Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:ConnectionId='12' Background="Transparent" Foreground="White" HorizontalAlignment="Right" Margin="0,0,10,0"
+                    <Button x:ConnectionId='15' Background="Transparent" Foreground="White" HorizontalAlignment="Right" Margin="0,0,10,0"
                                                                           >
                         <SymbolIcon Symbol="More" />
                     </Button>
@@ -103,15 +102,23 @@
         </Grid>
 
         <Grid Grid.Row="3" Grid.ColumnSpan="3">
-            <ListView x:ConnectionId='9'                                        
+            <ListView x:ConnectionId='9'                                                     
                                                                                                                            >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="10,5,0,0">
+                        <Grid x:ConnectionId='10' Margin="10,5,0,0"                       >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.25*" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
+
+                            <FlyoutBase.AttachedFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem x:ConnectionId='11' Text="Edit"                    />
+                                    <MenuFlyoutItem x:ConnectionId='12' Text="Delete"                      />
+                                </MenuFlyout>
+                            </FlyoutBase.AttachedFlyout>
+
                             <Viewbox x:Name="UserSymbol">
                                 <SymbolIcon Foreground="DarkGray" Symbol="Contact2" />
                             </Viewbox>
