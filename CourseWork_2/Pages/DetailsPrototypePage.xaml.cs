@@ -55,13 +55,13 @@ namespace CourseWork_2.Pages
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            var user = (UserPrototype)(e.OriginalSource as FrameworkElement).DataContext;
-            Frame.Navigate(typeof(AddUserPage), user.UserPrototypeId);
+            var user = (User)(e.OriginalSource as FrameworkElement).DataContext;
+            Frame.Navigate(typeof(AddUserPage), user.UserId);
         }
 
         private async void Delete_Click(object sender, RoutedEventArgs e)
         {
-            var user = (UserPrototype)(e.OriginalSource as FrameworkElement).DataContext;
+            var user = (User)(e.OriginalSource as FrameworkElement).DataContext;
             await ViewModel.DeleteUser(user);
         }
     }

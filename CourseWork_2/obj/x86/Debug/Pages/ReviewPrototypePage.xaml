@@ -23,22 +23,24 @@
         <swipeableSV:SwipeableSplitView x:ConnectionId='2' x:Name="SplitView" OpenPaneLength="60"                                                                          
                                                                                                                                                                                    >
             <SplitView.Pane>
-                <StackPanel VerticalAlignment="Center">
-                    <Button x:ConnectionId='6'                                               Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch"
+                <Grid Background="#2b3346">
+                    <StackPanel VerticalAlignment="Center">
+                        <Button x:ConnectionId='6'                                               Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch"
                                                                                                                                                                        >
-                        <StackPanel>
-                            <SymbolIcon x:ConnectionId='9'                                                                                              />
-                            <TextBlock x:ConnectionId='10'                                                  TextAlignment="Center" FontSize="10" />
-                        </StackPanel>
-                    </Button>
-                    <Button x:ConnectionId='7'                                                   Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch"
+                            <StackPanel>
+                                <SymbolIcon x:ConnectionId='9'                                                                                              />
+                                <TextBlock x:ConnectionId='10'                                                  TextAlignment="Center" FontSize="10" />
+                            </StackPanel>
+                        </Button>
+                        <Button x:ConnectionId='7'                                                   Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch"
                                                                                                                                                                        >
-                        <SymbolIcon Symbol="Video" />
-                    </Button>
-                    <Button x:ConnectionId='8'                                            Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
-                        <SymbolIcon Symbol="Cancel" />
-                    </Button>
-                </StackPanel>
+                            <SymbolIcon Symbol="Video" />
+                        </Button>
+                        <Button x:ConnectionId='8'                                            Height="{Binding ElementName=SplitView, Path=OpenPaneLength}" Background="Transparent" HorizontalAlignment="Stretch">
+                            <SymbolIcon Symbol="Cancel" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
             </SplitView.Pane>
             <SplitView.Content>
                 <Grid>

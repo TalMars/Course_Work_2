@@ -31,7 +31,7 @@ namespace CourseWork_2.ViewModel
         private bool _startIconVisibility;
 
         private Windows.UI.Xaml.Controls.WebView _webview;
-        private RecordScreenPrototypeModel currentRecordScreen;
+        private RecordScreenModel currentRecordScreen;
         private string previousUrl;
 
         private string loadingPageText = "Loading Page...";
@@ -46,13 +46,14 @@ namespace CourseWork_2.ViewModel
         private EventHandler<Windows.Phone.UI.Input.BackPressedEventArgs> pressedHandler;
 
         private int userId;
-        private RecordingSettings recordSettings;
+        private RecordSettings recordSettings;
 
         private Windows.UI.Xaml.Controls.CaptureElement _captureElement;
         private MediaCapture _mediaCapture;
         private bool _isPreviewing;
+        private bool _isRecording;
         private DisplayRequest _displayRequest;
-        private CameraRotationHelper _rotationHelper;
+        //private CameraRotationHelper _rotationHelper;
         private static readonly Guid RotationKey = new Guid("C380465D-2271-428C-9B83-ECEA3B4A85C1");
 
         private StorageFile videoFile;
@@ -61,7 +62,7 @@ namespace CourseWork_2.ViewModel
         private string _timerText;
         private int timerSeconds;
 
-        private List<RecordScreenPrototypeModel> _screens;
+        private List<RecordScreenModel> _screens;
 
         #region ChangeUSerAgent
         private string androidASUS = "Mozilla/5.0 (Linux; Android 6.0.1; ASUS_Z00ED Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.68 Mobile Safari/537.36";
@@ -80,7 +81,7 @@ namespace CourseWork_2.ViewModel
         {
             ChangeUserAgent(androidASUS);
 
-            _screens = new List<RecordScreenPrototypeModel>();
+            _screens = new List<RecordScreenModel>();
             IsOnStart = true;
             PreviewVisibility = false;
             StartIconVisibility = true;
@@ -99,7 +100,7 @@ namespace CourseWork_2.ViewModel
 
             using (var db = new PrototypingContext())
             {
-                UserPrototype user = db.Users.Single(u => u.UserPrototypeId == userId);
+                User user = db.Users.Single(u => u.UserId == userId);
                 db.Entry(user).Reference(u => u.Prototype).Load();
                 recordSettings = db.RecordSettings.Last();
 
@@ -158,17 +159,18 @@ namespace CourseWork_2.ViewModel
             DeviceInformation cameraDevice = await GetFrontalCameraDevice();
             if (cameraDevice != null)
             {
-                MediaCaptureInitializationSettings mediaInitSettings = new MediaCaptureInitializationSettings { VideoDeviceId = cameraDevice.Id };
+                MediaCaptureInitializationSettings mediaInitSettings = new MediaCaptureInitializationSettings { VideoDeviceId = cameraDevice.Id,  };
                 _mediaCapture = new MediaCapture();
                 _displayRequest = new DisplayRequest();
                 await _mediaCapture.InitializeAsync(mediaInitSettings);
 
-                _rotationHelper = new CameraRotationHelper(cameraDevice.EnclosureLocation);
-                _rotationHelper.OrientationChanged += RotationHelper_OrientationChanged;
+                //_rotationHelper = new CameraRotationHelper(cameraDevice.EnclosureLocation);
+                //_rotationHelper.OrientationChanged += RotationHelper_OrientationChanged;
 
                 CaptureElement.Source = _mediaCapture;
                 CaptureElement.FlowDirection = Windows.UI.Xaml.FlowDirection.RightToLeft;
                 await _mediaCapture.StartPreviewAsync();
+                
                 await SetPreviewRotationAsync();
 
                 _isPreviewing = true;
@@ -185,16 +187,17 @@ namespace CourseWork_2.ViewModel
             }
         }
 
-        private async void RotationHelper_OrientationChanged(object sender, bool updatePreview)
-        {
-            if (updatePreview)
-            {
-                await SetPreviewRotationAsync();
-            }
-        }
+        //private async void RotationHelper_OrientationChanged(object sender, bool updatePreview)
+        //{
+        //    if (updatePreview)
+        //    {
+        //        await SetPreviewRotationAsync();
+        //    }
+        //}
 
         private async void MediaCapture_RecordLimitationExceeded(MediaCapture sender)
         {
+            CleanupCameraAsync();
             await StartStopFunc();
 
             //message record limit!!!
@@ -202,6 +205,7 @@ namespace CourseWork_2.ViewModel
 
         private void MediaCapture_Failed(MediaCapture sender, MediaCaptureFailedEventArgs errorEventArgs)
         {
+            CleanupCameraAsync();
             CancelFunc();
 
             //message error dialog!!!
@@ -209,23 +213,30 @@ namespace CourseWork_2.ViewModel
 
         private async Task SetPreviewRotationAsync()
         {
-            // Add rotation metadata to the preview stream to make sure the aspect ratio / dimensions match when rendering and getting preview frames
-            var rotation = _rotationHelper.GetCameraPreviewOrientation();
             var props = _mediaCapture.VideoDeviceController.GetMediaStreamProperties(MediaStreamType.VideoPreview);
-            props.Properties.Add(RotationKey, CameraRotationHelper.ConvertSimpleOrientationToClockwiseDegrees(rotation));
+            props.Properties.Add(RotationKey, 270);
             await _mediaCapture.SetEncodingPropertiesAsync(MediaStreamType.VideoPreview, props, null);
         }
+
+        //private async Task SetPreviewRotationAsync()
+        //{
+        //    // Add rotation metadata to the preview stream to make sure the aspect ratio / dimensions match when rendering and getting preview frames
+        //    var rotation = _rotationHelper.GetCameraPreviewOrientation();
+        //    var props = _mediaCapture.VideoDeviceController.GetMediaStreamProperties(MediaStreamType.VideoPreview);
+        //    props.Properties.Add(RotationKey, CameraRotationHelper.ConvertSimpleOrientationToClockwiseDegrees(rotation));
+        //    await _mediaCapture.SetEncodingPropertiesAsync(MediaStreamType.VideoPreview, props, null);
+        //}
 
         private async Task<string> CreateVideoFile(int recordId)
         {
             string pathToVideo = string.Empty;
             using (var db = new PrototypingContext())
             {
-                UserPrototype user = db.Users.Single(u => u.UserPrototypeId == userId);
+                User user = db.Users.Single(u => u.UserId == userId);
                 await db.Entry(user).Reference(u => u.Prototype).LoadAsync();
 
                 string prototypeName = user.Prototype.Name + "_" + user.PrototypeId;
-                string userName = user.Name + "_" + user.UserPrototypeId;
+                string userName = user.Name + "_" + user.UserId;
                 string recordName = "Record_" + recordId;
 
                 StorageFolder prototypeFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(prototypeName, CreationCollisionOption.OpenIfExists); //PrototypeName + Id
@@ -254,9 +265,10 @@ namespace CourseWork_2.ViewModel
                 {
                     _displayRequest.RequestRelease();
                 }
-
-                await _mediaCapture.StopRecordAsync();
+                if(_isRecording)
+                    await _mediaCapture.StopRecordAsync();
                 _mediaCapture.Dispose();
+                _mediaCapture = null;
                 //});
             }
 
@@ -367,25 +379,27 @@ namespace CourseWork_2.ViewModel
                 IsOnStart = false;
                 IsSplitViewPaneOpen = false;
 
-                currentRecordScreen = new RecordScreenPrototypeModel(_webview.Source.AbsoluteUri, await DoCaptureWebView());
+                currentRecordScreen = new RecordScreenModel(_webview.Source.AbsoluteUri, await DoCaptureWebView());
+                _screens.Add(currentRecordScreen);
 
                 using (var db = new PrototypingContext())
                 {
-                    RecordPrototype record = db.RecordsPrototype.Single(rp => rp.RecordPrototypeId == recordSettings.RecordPrototypeId);
+                    Record record = db.RecordsPrototype.Single(rp => rp.RecordId == recordSettings.RecordId);
                     record.CreatedDate = DateTime.Now;
                     db.RecordsPrototype.Update(record);
 
                     if (recordSettings.FrontCamera)
                     {
-                        string pathtoVideo = await CreateVideoFile(record.RecordPrototypeId);
+                        string pathtoVideo = await CreateVideoFile(record.RecordId);
                         record.PathToVideo = pathtoVideo;
                         db.RecordsPrototype.Update(record);
 
                         var encodingProfile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto);
-                        var rotationAngle = CameraRotationHelper.ConvertSimpleOrientationToClockwiseDegrees(_rotationHelper.GetCameraCaptureOrientation());
-                        encodingProfile.Video.Properties.Add(RotationKey, PropertyValue.CreateInt32(rotationAngle));
+                        encodingProfile.Video.Properties.Add(RotationKey, 270);
                         await _mediaCapture.StartRecordToStorageFileAsync(encodingProfile, videoFile);
+                        _isRecording = true;
                     }
+                        //var rotationAngle = CameraRotationHelper.ConvertSimpleOrientationToClockwiseDegrees(_rotationHelper.GetCameraCaptureOrientation());
                     db.SaveChanges();
                 }
             }
@@ -393,7 +407,7 @@ namespace CourseWork_2.ViewModel
             {
                 timer.Stop();
                 CleanupCameraAsync();
-                ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(ResultScreensPage), _screens);
+                ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(ResultRecordPage), _screens);
             }
         }
 
@@ -422,14 +436,14 @@ namespace CourseWork_2.ViewModel
         {
             using (var db = new PrototypingContext())
             {
-                UserPrototype user = db.Users.Single(u => u.UserPrototypeId == userId);
-                RecordPrototype record = db.RecordsPrototype.Last();
+                User user = db.Users.Single(u => u.UserId == userId);
+                Record record = db.RecordsPrototype.Last();
                 db.Entry(user).Reference(u => u.Prototype).Load();
                 try
                 {
                     StorageFolder prototypeFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(user.Prototype.Name + "_" + user.PrototypeId);
-                    StorageFolder userFolder = await prototypeFolder.GetFolderAsync(user.Name + "_" + user.UserPrototypeId);
-                    StorageFolder recordFolder = await userFolder.GetFolderAsync("Record_" + recordSettings.RecordPrototypeId);
+                    StorageFolder userFolder = await prototypeFolder.GetFolderAsync(user.Name + "_" + user.UserId);
+                    StorageFolder recordFolder = await userFolder.GetFolderAsync("Record_" + recordSettings.RecordId);
                     await recordFolder.DeleteAsync();
                 }
                 catch (System.IO.FileNotFoundException ex)
@@ -441,7 +455,7 @@ namespace CourseWork_2.ViewModel
                 db.SaveChanges();
             }
 
-
+            CleanupCameraAsync();
             Windows.UI.Xaml.Controls.Frame frame = (Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content;
             frame.BackStack.Clear();
             frame.Navigate(typeof(DetailsUserPage), userId);
@@ -498,27 +512,24 @@ namespace CourseWork_2.ViewModel
             if (e.Value.Contains("tap") && !IsOnStart && recordSettings.Touches)
             {
                 if (currentRecordScreen == null)
-                    currentRecordScreen = new RecordScreenPrototypeModel(previousUrl, await DoCaptureWebView());
+                    currentRecordScreen = new RecordScreenModel(previousUrl, await DoCaptureWebView());
 
                 float x;
                 float y;
                 string[] arr = e.Value.Split(new char[] { ':' });
-
                 if (!float.TryParse(arr[1], out x))
                 {
                     System.Diagnostics.Debug.WriteLine("ErrorX");
                 }
-
                 if (!float.TryParse(arr[2], out y))
                 {
                     System.Diagnostics.Debug.WriteLine("ErrorY");
                 }
-
                 int iX = (int)Math.Round(x);
                 int iY = (int)Math.Round(y);
                 HeatPoint hp = new HeatPoint(iX, iY);
-
                 currentRecordScreen.ListPoints.Add(hp);
+
                 if (!_webview.Source.AbsoluteUri.Equals(currentRecordScreen.UriPage))
                 {
                     int indexFind = _screens.FindIndex(s => s.UriPage.Equals(currentRecordScreen.UriPage));

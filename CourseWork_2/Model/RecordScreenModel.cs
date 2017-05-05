@@ -8,18 +8,18 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace CourseWork_2.Model
 {
-    public class RecordScreenPrototypeModel
+    public class RecordScreenModel
     {
         private const double scaleNumber = 0.3333;
 
-        public RecordScreenPrototypeModel(string uriPage, WriteableBitmap screenshot)
+        public RecordScreenModel(string uriPage, WriteableBitmap screenshot)
         {
             UriPage = uriPage;
             OriginalScreen = screenshot;
             ListPoints = new List<HeatPoint>();
         }
 
-        public RecordScreenPrototypeModel()
+        public RecordScreenModel()
         {
         }
 

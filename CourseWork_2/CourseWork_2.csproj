@@ -103,22 +103,21 @@
     <Compile Include="Converters\InverseBoolConverter.cs" />
     <Compile Include="Converters\ReturnModelConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
-    <Compile Include="DataBase\DBModels\RecordsScreen.cs" />
+    <Compile Include="DataBase\DBModels\RecordScreen.cs" />
     <Compile Include="DataBase\PrototypingContext.cs" />
     <Compile Include="DataBase\DBModels\Prototype.cs" />
     <Compile Include="DataBase\DBModels\RecordingSettings.cs" />
-    <Compile Include="DataBase\DBModels\RecordPrototype.cs" />
-    <Compile Include="DataBase\DBModels\UserPrototype.cs" />
-    <Compile Include="Extensions_Folder\CameraRotationHelper.cs" />
+    <Compile Include="DataBase\DBModels\Record.cs" />
+    <Compile Include="DataBase\DBModels\User.cs" />
     <Compile Include="HeatMap\HeatMapFunctions.cs" />
     <Compile Include="HeatMap\HeatPoint.cs" />
-    <Compile Include="Migrations\20170330181814_InitMigration.cs" />
-    <Compile Include="Migrations\20170330181814_InitMigration.designer.cs">
-      <DependentUpon>20170330181814_InitMigration.cs</DependentUpon>
+    <Compile Include="Migrations\20170503095356_InitMigration.cs" />
+    <Compile Include="Migrations\20170503095356_InitMigration.designer.cs">
+      <DependentUpon>20170503095356_InitMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\PrototypingContextModelSnapshot.cs" />
     <Compile Include="Model\PrototypeGroup.cs" />
-    <Compile Include="Model\RecordScreenPrototypeModel.cs" />
+    <Compile Include="Model\RecordScreenModel.cs" />
     <Compile Include="Pages\AddPrototypePage.xaml.cs">
       <DependentUpon>AddPrototypePage.xaml</DependentUpon>
     </Compile>
@@ -137,8 +136,8 @@
     <Compile Include="Pages\PrototypesPage.xaml.cs">
       <DependentUpon>PrototypesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ResultScreensPage.xaml.cs">
-      <DependentUpon>ResultScreensPage.xaml</DependentUpon>
+    <Compile Include="Pages\ResultRecordPage.xaml.cs">
+      <DependentUpon>ResultRecordPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ReviewPrototypePage.xaml.cs">
       <DependentUpon>ReviewPrototypePage.xaml</DependentUpon>
@@ -154,7 +153,7 @@
     <Compile Include="ViewModel\NotifyPropertyChanged.cs" />
     <Compile Include="SwipeableSplitViewControl_Folder\SwipeableSplitView.cs" />
     <Compile Include="ViewModel\PrototypesViewModel.cs" />
-    <Compile Include="ViewModel\ResultScreensViewModel.cs" />
+    <Compile Include="ViewModel\ResultRecordViewModel.cs" />
     <Compile Include="ViewModel\ReviewPrototypeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -204,7 +203,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\ResultScreensPage.xaml">
+    <Page Include="Pages\ResultRecordPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

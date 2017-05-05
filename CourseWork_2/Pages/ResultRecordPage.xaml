@@ -1,5 +1,5 @@
-﻿<Page x:ConnectionId='1'
-    x:Class="CourseWork_2.Pages.ResultScreensPage"
+﻿<Page
+    x:Class="CourseWork_2.Pages.ResultRecordPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CourseWork_2.Pages"
@@ -8,6 +8,7 @@
     xmlns:triggers="using:WinRT.Triggers"
     xmlns:converters="using:CourseWork_2.Converters"
     mc:Ignorable="d">
+    
     <Page.Resources>
         <converters:BoolToVisibilityConverter x:Key="boolToVisConverter" />
         <converters:ReturnModelConverter x:Key="itemConverter" />
@@ -23,24 +24,28 @@
 
         <Border BorderThickness="0,0,0,1" BorderBrush="Gray">
             <Grid>
-                <Button x:ConnectionId='11' x:Name="DoneButton" Background="Transparent" Foreground="White"                                         
-                        Content="Done"                                                                                                                           />
-                <TextBlock Text="Result Screens" VerticalAlignment="Center" HorizontalAlignment="Center"
+                <Button x:Name="DoneButton" Background="Transparent" Foreground="White" Command="{x:Bind ViewModel.GoBackCommand}"
+                        IsHitTestVisible="{x:Bind ViewModel.RingContentVisibility, Converter={StaticResource inverseBoolConverter}, Mode=OneWay}">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Symbol="Back" />
+                    </StackPanel>
+                </Button>
+                <TextBlock Text="Result Record" VerticalAlignment="Center" HorizontalAlignment="Center"
                        FontSize="20" Foreground="White" FontWeight="Medium" />
-                <Button x:ConnectionId='12' Background="Transparent" Foreground="White"                                               HorizontalAlignment="Right"
-                                                                                                                                                 
-                        Margin="0,0,5,0"                                                                                                                                            >
+                <Button Background="Transparent" Foreground="White" Command="{x:Bind ViewModel.ShowVideoCommand}" HorizontalAlignment="Right"
+                        IsHitTestVisible="{x:Bind ViewModel.RingContentVisibility, Converter={StaticResource inverseBoolConverter}, Mode=OneWay}"
+                        Margin="0,0,5,0" Visibility="{x:Bind ViewModel.VideoIconVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}">
                     <Viewbox Height="{Binding ElementName=DoneButton, Path=ActualHeight}">
-                        <SymbolIcon x:ConnectionId='13'                                                              />
+                        <SymbolIcon Symbol="{x:Bind ViewModel.ShowScreenVideoIcon, Mode=OneWay}" />
                     </Viewbox>
                 </Button>
             </Grid>
         </Border>
 
-        <Grid x:ConnectionId='2' Grid.Row="1"                                                                                                                                          >
+        <Grid Grid.Row="1" Visibility="{x:Bind ViewModel.VideoGridVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=right}">
 
-            <GridView x:ConnectionId='6'                                                                                                                                                                                              
-                                                                                                                           >
+            <GridView ItemsSource="{x:Bind ViewModel.Screens, Mode=OneWay}" Visibility="{x:Bind ViewModel.SelectVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=right}" 
+                      SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay, Converter={StaticResource itemConverter}}">
                 <GridView.ItemTemplate>
                     <DataTemplate>
                         <Image Source="{Binding HeatMapScreen}"
@@ -54,12 +59,12 @@
                 </GridView.ItemContainerStyle>
             </GridView>
 
-            <FlipView x:ConnectionId='7'                                                      
-                                                                                 
-                                                                                                                                                              >
+            <FlipView ItemsSource="{x:Bind ViewModel.Screens, Mode=OneWay}"
+                      SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=OneWay}"
+                      Visibility="{x:Bind ViewModel.SelectVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}">
                 <triggers:Interactions.Triggers>
                     <triggers:EventTrigger EventName="DoubleTapped">
-                        <triggers:InvokeCommandAction x:ConnectionId='10'                                               />
+                        <triggers:InvokeCommandAction Command="{x:Bind ViewModel.DoubleTapCommand}" />
                     </triggers:EventTrigger>
                 </triggers:Interactions.Triggers>
                 <FlipView.ItemTemplate>
@@ -69,25 +74,25 @@
                 </FlipView.ItemTemplate>
             </FlipView>
 
-            <StackPanel x:ConnectionId='8'                                                                                                                                              
+            <StackPanel Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}"
                         VerticalAlignment="Center" HorizontalAlignment="Center">
-                <ProgressRing x:ConnectionId='9' Width="50" Height="50"                                                                 />
+                <ProgressRing Width="50" Height="50" IsActive="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay}"/>
                 <TextBlock Text="Rendering..." TextAlignment="Center" />
             </StackPanel>
         </Grid>
 
-        <Grid x:ConnectionId='3' Grid.Row="1"                                                                                                                                           >
+        <Grid Grid.Row="1" Visibility="{x:Bind ViewModel.VideoGridVisibility, Mode=OneWay,Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <ContentControl x:ConnectionId='4'                                                       
+            <ContentControl Content="{x:Bind ViewModel.RecordVideo, Mode=OneWay}" 
                             HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
 
-            <ListView x:ConnectionId='5' Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+            <ListView Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto"
                       ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled"
-                                                                                                                                                                                   >
+                      ItemsSource="{x:Bind ViewModel.Records, Mode=OneWay}" SelectedItem="{x:Bind ViewModel.SelectedRecord, Mode=TwoWay, Converter={StaticResource itemConverter}}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel VerticalAlignment="Center" Margin="5">
@@ -105,4 +110,3 @@
         </Grid>
     </Grid>
 </Page>
-

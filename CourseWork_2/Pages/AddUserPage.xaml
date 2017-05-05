@@ -21,10 +21,8 @@
         <Border Grid.ColumnSpan="3" BorderThickness="0,0,0,1" BorderBrush="DarkGray">
             <Grid>
                 <Button Background="Transparent" Content="Cancel" FontSize="16" FontWeight="Medium" Foreground="White" Command="{x:Bind ViewModel.GoBackCommand}" />
-
                 <TextBlock Text="Add User" FontSize="20" FontWeight="Medium"
                            Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                
                 <Button Background="Transparent" Content="Create" HorizontalAlignment="Right" FontSize="16" FontWeight="Medium"
                         Foreground="White" Command="{x:Bind ViewModel.CreateCommand}"
                         Visibility="{x:Bind ViewModel.IsEdit, Converter={StaticResource boolVisConverter}, ConverterParameter=right}"/>

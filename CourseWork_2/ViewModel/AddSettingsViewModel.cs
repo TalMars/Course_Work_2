@@ -122,10 +122,10 @@ namespace CourseWork_2.ViewModel
         {
             using (var db = new PrototypingContext())
             {
-                RecordPrototype recod = db.RecordsPrototype.Add(new RecordPrototype() { UserPrototypeId = userId }).Entity;
-                db.RecordSettings.Add(new RecordingSettings()
+                Record recod = db.RecordsPrototype.Add(new Record() { UserId = userId }).Entity;
+                db.RecordSettings.Add(new RecordSettings()
                 {
-                    RecordPrototypeId = recod.RecordPrototypeId,
+                    RecordId = recod.RecordId,
                     FrontCamera = _fronCameraIsOn,
                     //SavingTouches = _saveTouchesIsOn,
                     Touches = _touchesIsOn

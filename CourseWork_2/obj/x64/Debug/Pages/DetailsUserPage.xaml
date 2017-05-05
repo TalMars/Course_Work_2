@@ -24,7 +24,7 @@
         <AppBar x:ConnectionId='2' ClosedDisplayMode="Hidden"                                                          
                 Style="{StaticResource AppBarStyle1}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <AppBarButton x:ConnectionId='3' Icon="Add"                                         Label="Add" Style="{StaticResource AppBarButtonStyle1}" />
+                <AppBarButton x:ConnectionId='3' Icon="Add"                                         Label="Add Record" Style="{StaticResource AppBarButtonStyle1}" />
                 <AppBarSeparator />
                 <AppBarButton x:ConnectionId='4' Icon="Edit"                                          Label="Edit" Style="{StaticResource AppBarButtonStyle1}" />
                 <AppBarSeparator />
@@ -33,7 +33,7 @@
         </AppBar>
     </Page.BottomAppBar>
     
-    <Grid x:ConnectionId='6' Background="#2b3346"                                           >
+    <Grid x:ConnectionId='6' Background="#2b3346"                                                        >
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*" MaxHeight="60" />
             <RowDefinition Height="0.15*" />
@@ -48,16 +48,15 @@
 
         <Border Grid.ColumnSpan="3" BorderThickness="0,0,0,1" BorderBrush="DarkGray">
             <Grid>
-                <Button x:ConnectionId='10' Background="Transparent" Foreground="White"                                           >
+                <Button x:ConnectionId='12' Background="Transparent" Foreground="White"                                           >
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Margin="0,0,5,0" Symbol="Back" />
-                        <!--<TextBlock Text="Details" FontSize="16" FontWeight="Medium" />-->
                     </StackPanel>
                 </Button>
                 <TextBlock Text="User" FontSize="20" FontWeight="Medium" TextTrimming="CharacterEllipsis" TextAlignment="Center"
                            Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:ConnectionId='11' Background="Transparent" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"
+                    <Button x:ConnectionId='13' Background="Transparent" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"
                                                                           >
                         <SymbolIcon Symbol="More" />
                     </Button>
@@ -89,7 +88,7 @@
         <Button x:ConnectionId='8' Grid.Row="1" Grid.Column="2" Foreground="White" Background="Transparent" 
                 HorizontalAlignment="Center" VerticalAlignment="Center"                                                  >
             <Viewbox>
-                <SymbolIcon Symbol="SelectAll" Foreground="DarkGray" />
+                <SymbolIcon Symbol="SelectAll" />
             </Viewbox>
         </Button>
 
@@ -98,15 +97,22 @@
         </Grid>
 
         <Grid Grid.Row="3" Grid.ColumnSpan="3">
-            <ListView x:ConnectionId='9'                                          
+            <ListView x:ConnectionId='9'                                                       
                                                                                                                            >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="0,5,0,0">
+                        <Grid x:ConnectionId='10' Margin="0,5,0,0"                       >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.2*" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
+
+                            <FlyoutBase.AttachedFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem x:ConnectionId='11' Text="Delete"                      />
+                                </MenuFlyout>
+                            </FlyoutBase.AttachedFlyout>
+
                             <Viewbox x:Name="PlaySymbol">
                                 <SymbolIcon Foreground="DarkGray" Symbol="Play" />
                             </Viewbox>

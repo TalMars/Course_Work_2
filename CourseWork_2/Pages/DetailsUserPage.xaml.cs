@@ -56,7 +56,7 @@ namespace CourseWork_2.Pages
 
         private async void Delete_Click(object sender, RoutedEventArgs e)
         {
-            var record = (RecordPrototype)(e.OriginalSource as FrameworkElement).DataContext;
+            var record = (Record)(e.OriginalSource as FrameworkElement).DataContext;
             await ViewModel.DeleteRecord(record);
         }
     }

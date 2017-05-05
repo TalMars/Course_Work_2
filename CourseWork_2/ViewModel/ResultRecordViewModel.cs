@@ -20,16 +20,16 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace CourseWork_2.ViewModel
 {
-    public class ResultScreensViewModel : NotifyPropertyChanged
+    public class ResultRecordViewModel : NotifyPropertyChanged
     {
         private bool _ringContentVisibility;
         private bool _selectVisibility;
 
-        private ObservableCollection<RecordScreenPrototypeModel> _screens;
-        private ObservableCollection<RecordPrototype> _records;
-        private RecordScreenPrototypeModel _selectedItem;
-        private RecordPrototype _selectedRecord;
-        private RecordPrototype RecordModel;
+        private ObservableCollection<RecordScreenModel> _screens;
+        private ObservableCollection<Record> _records;
+        private RecordScreenModel _selectedItem;
+        private Record _selectedRecord;
+        private Record RecordModel;
         private Windows.UI.Xaml.Controls.MediaPlayerElement _recordVideo;
         private bool _videoIconVisibility;
         private bool _videoGridVisibility;
@@ -42,11 +42,11 @@ namespace CourseWork_2.ViewModel
         private int prototypeId;
         private int userId;
 
-        private ICommand _doneCommand;
+        private ICommand _goBackCommand;
         private ICommand _showVideoCommand;
         private ICommand _doubleTapCommand;
 
-        public ResultScreensViewModel()
+        public ResultRecordViewModel()
         {
             ShowScreenVideoIcon = Windows.UI.Xaml.Controls.Symbol.Video;
             prototypeId = -1;
@@ -111,19 +111,19 @@ namespace CourseWork_2.ViewModel
         #endregion
 
         #region properties
-        public ObservableCollection<RecordScreenPrototypeModel> Screens
+        public ObservableCollection<RecordScreenModel> Screens
         {
             get { return _screens; }
             set { Set(ref _screens, value); }
         }
 
-        public ObservableCollection<RecordPrototype> Records
+        public ObservableCollection<Record> Records
         {
             get { return _records; }
             set { Set(ref _records, value); }
         }
 
-        public RecordPrototype SelectedRecord
+        public Record SelectedRecord
         {
             get { return _selectedRecord; }
             set
@@ -154,7 +154,7 @@ namespace CourseWork_2.ViewModel
             set { Set(ref _selectVisibility, value); }
         }
 
-        public RecordScreenPrototypeModel SelectedItem
+        public RecordScreenModel SelectedItem
         {
             get { return _selectedItem; }
             set { Set(ref _selectedItem, value); SelectVisibility = true; }
@@ -200,11 +200,11 @@ namespace CourseWork_2.ViewModel
             SelectVisibility = false;
         }
 
-        public ICommand DoneCommand
+        public ICommand GoBackCommand
         {
             get
             {
-                return _doneCommand ?? (_doneCommand = new Command(() => GoBackFunc()));
+                return _goBackCommand ?? (_goBackCommand = new Command(() => GoBackFunc()));
             }
         }
 
@@ -217,7 +217,7 @@ namespace CourseWork_2.ViewModel
             if (userId >= 0)
                 frame.Navigate(typeof(DetailsUserPage), userId);
             if (RecordModel != null)
-                frame.Navigate(typeof(DetailsUserPage), RecordModel.UserPrototypeId);
+                frame.Navigate(typeof(DetailsUserPage), RecordModel.UserId);
         }
 
         public ICommand ShowVideoCommand
@@ -236,7 +236,7 @@ namespace CourseWork_2.ViewModel
         #endregion
 
         #region from RecordPage
-        public async Task HeatSaveScreens(List<RecordScreenPrototypeModel> reviewModels)
+        public async Task HeatSaveScreens(List<RecordScreenModel> reviewModels)
         {
             RingContentVisibility = true;
             using (var db = new PrototypingContext())
@@ -262,34 +262,34 @@ namespace CourseWork_2.ViewModel
             RingContentVisibility = false;
         }
 
-        private async Task<ObservableCollection<RecordScreenPrototypeModel>> HeatingScreens(List<RecordScreenPrototypeModel> screens)
+        private async Task<ObservableCollection<RecordScreenModel>> HeatingScreens(List<RecordScreenModel> screens)
         {
-            ObservableCollection<RecordScreenPrototypeModel> result = new ObservableCollection<RecordScreenPrototypeModel>();
+            ObservableCollection<RecordScreenModel> result = new ObservableCollection<RecordScreenModel>();
             using (var db = new PrototypingContext())
             {
-                UserPrototype user = db.Users.Single(u => u.UserPrototypeId == RecordModel.UserPrototypeId);
+                User user = db.Users.Single(u => u.UserId == RecordModel.UserId);
                 await db.Entry(user)
                         .Reference(u => u.Prototype)
                         .LoadAsync();
 
                 string prototypeName = user.Prototype.Name + "_" + user.PrototypeId;
-                string userName = user.Name + "_" + user.UserPrototypeId;
-                string recordName = "Record_" + RecordModel.RecordPrototypeId;
+                string userName = user.Name + "_" + user.UserId;
+                string recordName = "Record_" + RecordModel.RecordId;
 
                 StorageFolder prototypeFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(prototypeName, CreationCollisionOption.OpenIfExists); //PrototypeName + Id
                 StorageFolder userFolder = await prototypeFolder.CreateFolderAsync(userName, CreationCollisionOption.OpenIfExists); //UserName + Id
                 StorageFolder recordFolder = await userFolder.CreateFolderAsync(recordName, CreationCollisionOption.OpenIfExists);
 
-                foreach (RecordScreenPrototypeModel screen in screens)
+                foreach (RecordScreenModel screen in screens)
                 {
                     screen.HeatMapScreen = await HeatMapFunctions.CreateProcessHeatMap(screen.OriginalScreen, screen.ListPoints);
                     result.Add(screen);
 
                     string[] screenPaths = await SaveImagesInStorage(screen.OriginalScreen, screen.HeatMapScreen, recordFolder); //saving images in prototype -> user -> record path
 
-                    RecordsScreen rScreen = new RecordsScreen()
+                    RecordScreen rScreen = new RecordScreen()
                     {
-                        RecordPrototypeId = RecordModel.RecordPrototypeId,
+                        RecordId = RecordModel.RecordId,
                         Points = screen.ListPoints,
                         UriPage = screen.UriPage,
                         PathToOriginalScreen = screenPaths[0],
@@ -346,20 +346,20 @@ namespace CourseWork_2.ViewModel
             RingContentVisibility = true;
             using (var db = new PrototypingContext())
             {
-                List<RecordsScreen> allScreen = db.RecordsScreens
-                                                .Include(r => r.RecordPrototype)
-                                                    .ThenInclude(rp => rp.UserPrototype)
-                                                .Where(rs => rs.RecordPrototype.UserPrototype.PrototypeId == prototype.PrototypeId)
+                List<RecordScreen> allScreen = db.RecordsScreens
+                                                .Include(r => r.Record)
+                                                    .ThenInclude(rp => rp.User)
+                                                .Where(rs => rs.Record.User.PrototypeId == prototype.PrototypeId)
                                                 .OrderByDescending(rs => rs.UriPage)
                                                 .ToList();
                 Screens = await HeatingRecordScreens(allScreen);
 
-                List<RecordPrototype> records = db.RecordsPrototype
-                            .Include(rp => rp.UserPrototype)
-                            .Where(rp => rp.UserPrototype.PrototypeId == prototype.PrototypeId)
+                List<Record> records = db.RecordsPrototype
+                            .Include(rp => rp.User)
+                            .Where(rp => rp.User.PrototypeId == prototype.PrototypeId)
                             .OrderBy(rp => rp.CreatedDate)
                             .ToList();
-                Records = new ObservableCollection<RecordPrototype>(records);
+                Records = new ObservableCollection<Record>(records);
                 if (records.Count != 0)
                 {
                     string[] pathsToFiles = (from r in records
@@ -382,24 +382,24 @@ namespace CourseWork_2.ViewModel
             }
         }
 
-        public async Task HeatingAllRecordScreens(UserPrototype user)
+        public async Task HeatingAllRecordScreens(User user)
         {
-            userId = user.UserPrototypeId;
+            userId = user.UserId;
             RingContentVisibility = true;
             using (var db = new PrototypingContext())
             {
-                List<RecordsScreen> allScreen = db.RecordsScreens
-                                                  .Include(rs => rs.RecordPrototype)
-                                                  .Where(rs => rs.RecordPrototype.UserPrototypeId == user.UserPrototypeId)
+                List<RecordScreen> allScreen = db.RecordsScreens
+                                                  .Include(rs => rs.Record)
+                                                  .Where(rs => rs.Record.UserId == user.UserId)
                                                   .OrderByDescending(rs => rs.UriPage)
                                                   .ToList();
                 Screens = await HeatingRecordScreens(allScreen);
 
-                List<RecordPrototype> records = db.RecordsPrototype
-                            .Where(rp => rp.UserPrototype.UserPrototypeId == user.UserPrototypeId)
+                List<Record> records = db.RecordsPrototype
+                            .Where(rp => rp.User.UserId == user.UserId)
                             .OrderBy(rp => rp.CreatedDate)
                             .ToList();
-                Records = new ObservableCollection<RecordPrototype>(records);
+                Records = new ObservableCollection<Record>(records);
                 if (records.Count != 0)
                 {
                     string[] pathsToFiles = (from r in records
@@ -413,15 +413,15 @@ namespace CourseWork_2.ViewModel
             RingContentVisibility = false;
         }
 
-        private async Task<ObservableCollection<RecordScreenPrototypeModel>> HeatingRecordScreens(List<RecordsScreen> allScreen)
+        private async Task<ObservableCollection<RecordScreenModel>> HeatingRecordScreens(List<RecordScreen> allScreen)
         {
-            ObservableCollection<RecordScreenPrototypeModel> result = new ObservableCollection<RecordScreenPrototypeModel>();
+            ObservableCollection<RecordScreenModel> result = new ObservableCollection<RecordScreenModel>();
             while (allScreen.Count != 0)
             {
                 List<HeatPoint> points = allScreen.FindAll(s => s.UriPage.Equals(allScreen[0].UriPage)).SelectMany(s => s.Points).ToList();
                 WriteableBitmap original = await HeatMapFunctions.AsWrBitmapFromFile(allScreen[0].PathToOriginalScreen);
                 WriteableBitmap heatMap = await HeatMapFunctions.CreateProcessHeatMap(original, points);
-                result.Add(new RecordScreenPrototypeModel()
+                result.Add(new RecordScreenModel()
                 {
                     UriPage = allScreen[0].UriPage,
                     OriginalScreen = original,
@@ -437,12 +437,12 @@ namespace CourseWork_2.ViewModel
         #endregion
 
         #region choose Record
-        public async Task GetRecordScreens(RecordPrototype record)
+        public async Task GetRecordScreens(Record record)
         {
             RingContentVisibility = true;
             using (var db = new PrototypingContext())
             {
-                RecordModel = db.RecordsPrototype.Single(r => r.RecordPrototypeId == record.RecordPrototypeId);
+                RecordModel = db.RecordsPrototype.Single(r => r.RecordId == record.RecordId);
                 await db.Entry(RecordModel).Collection(r => r.Screens).LoadAsync();
                 if (!string.IsNullOrEmpty(RecordModel.PathToVideo))
                 {
@@ -462,15 +462,15 @@ namespace CourseWork_2.ViewModel
             RingContentVisibility = false;
         }
 
-        private async Task<ObservableCollection<RecordScreenPrototypeModel>> FileToImageTransform(List<RecordsScreen> dbScreens)
+        private async Task<ObservableCollection<RecordScreenModel>> FileToImageTransform(List<RecordScreen> dbScreens)
         {
-            ObservableCollection<RecordScreenPrototypeModel> result = new ObservableCollection<RecordScreenPrototypeModel>();
-            foreach (RecordsScreen dbScreen in dbScreens)
+            ObservableCollection<RecordScreenModel> result = new ObservableCollection<RecordScreenModel>();
+            foreach (RecordScreen dbScreen in dbScreens)
             {
                 WriteableBitmap heatScreen = await HeatMapFunctions.AsWrBitmapFromFile(dbScreen.PathToHeatMapScreen);
                 WriteableBitmap originalScreen = await HeatMapFunctions.AsWrBitmapFromFile(dbScreen.PathToOriginalScreen);
 
-                result.Add(new RecordScreenPrototypeModel()
+                result.Add(new RecordScreenModel()
                 {
                     OriginalScreen = originalScreen,
                     HeatMapScreen = heatScreen,

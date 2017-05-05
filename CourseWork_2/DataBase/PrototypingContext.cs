@@ -11,10 +11,10 @@ namespace CourseWork_2.DataBase
     public class PrototypingContext : DbContext
     {
         public DbSet<Prototype> Prototypes { get; set; }
-        public DbSet<UserPrototype> Users { get; set; }
-        public DbSet<RecordingSettings> RecordSettings { get; set; }
-        public DbSet<RecordPrototype> RecordsPrototype { get; set; }
-        public DbSet<RecordsScreen> RecordsScreens { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<RecordSettings> RecordSettings { get; set; }
+        public DbSet<Record> RecordsPrototype { get; set; }
+        public DbSet<RecordScreen> RecordsScreens { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -25,7 +25,7 @@ namespace CourseWork_2.DataBase
         {
             base.OnModelCreating(modelBuilder);
             //Ignore
-            modelBuilder.Entity<RecordsScreen>()
+            modelBuilder.Entity<RecordScreen>()
                 .Ignore(r => r.Points);
 
             //Generate Add primary keys
@@ -33,40 +33,40 @@ namespace CourseWork_2.DataBase
                 .Property(p => p.PrototypeId)
                 .ValueGeneratedOnAdd();
 
-            modelBuilder.Entity<UserPrototype>()
-                .Property(u => u.UserPrototypeId)
+            modelBuilder.Entity<User>()
+                .Property(u => u.UserId)
                 .ValueGeneratedOnAdd();
 
-            modelBuilder.Entity<RecordPrototype>()
-                .Property(r => r.RecordPrototypeId)
+            modelBuilder.Entity<Record>()
+                .Property(r => r.RecordId)
                 .ValueGeneratedOnAdd();
 
-            modelBuilder.Entity<RecordingSettings>()
-                .Property(r => r.RecordingSettingsId)
+            modelBuilder.Entity<RecordSettings>()
+                .Property(r => r.RecordSettingsId)
                 .ValueGeneratedOnAdd();
 
-            modelBuilder.Entity<RecordsScreen>()
-                .Property(r => r.RecordsScreenId)
+            modelBuilder.Entity<RecordScreen>()
+                .Property(r => r.RecordScreenId)
                 .ValueGeneratedOnAdd();
 
             //Relationships
-            modelBuilder.Entity<RecordingSettings>()
-                .HasOne(rs => rs.RecordPrototype)
+            modelBuilder.Entity<RecordSettings>()
+                .HasOne(rs => rs.Record)
                 .WithOne(p => p.Settings)
                 .OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<UserPrototype>()
+            modelBuilder.Entity<User>()
                 .HasOne(u => u.Prototype)
                 .WithMany(p => p.Users)
                 .OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<RecordPrototype>()
-                .HasOne(rp => rp.UserPrototype)
+            modelBuilder.Entity<Record>()
+                .HasOne(rp => rp.User)
                 .WithMany(u => u.Records)
                 .OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<RecordsScreen>()
-                .HasOne(rs => rs.RecordPrototype)
+            modelBuilder.Entity<RecordScreen>()
+                .HasOne(rs => rs.Record)
                 .WithMany(rp => rp.Screens)
                 .OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Cascade);
         }

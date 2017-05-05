@@ -98,6 +98,8 @@ namespace CourseWork_2
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
+
+            Windows.UI.ViewManagement.StatusBar.GetForCurrentView().BackgroundColor = Windows.UI.Color.FromArgb(0, 43, 51, 70);
         }
 
         // handle hardware back button press

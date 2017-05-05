@@ -24,7 +24,7 @@
         <AppBar ClosedDisplayMode="Hidden" IsOpen="{x:Bind ViewModel.IsOpenCommandBar, Mode=TwoWay}"
                 Style="{StaticResource AppBarStyle1}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <AppBarButton Icon="Add" Command="{x:Bind ViewModel.AddCommand}" Label="Add" Style="{StaticResource AppBarButtonStyle1}" />
+                <AppBarButton Icon="Add" Command="{x:Bind ViewModel.AddCommand}" Label="Add User" Style="{StaticResource AppBarButtonStyle1}" />
                 <AppBarSeparator />
                 <AppBarButton Icon="Edit" Command="{x:Bind ViewModel.EditCommand}" Label="Edit" Style="{StaticResource AppBarButtonStyle1}" />
                 <AppBarSeparator />
@@ -85,7 +85,7 @@
                            Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=created}"/>
             </Grid>
         </Grid>
-        <Button Grid.Row="1" Grid.Column="2" Foreground="DarkGray" Background="Transparent" 
+        <Button Grid.Row="1" Grid.Column="2" Foreground="White" Background="Transparent" 
                 HorizontalAlignment="Center" VerticalAlignment="Center" Command="{x:Bind ViewModel.ResultScreensCommand}">
             <Viewbox>
                 <SymbolIcon Symbol="SelectAll" />
@@ -111,14 +111,12 @@
                                 <ColumnDefinition Width="0.25*" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-
                             <FlyoutBase.AttachedFlyout>
                                 <MenuFlyout>
                                     <MenuFlyoutItem Text="Edit" Click="Edit_Click" />
                                     <MenuFlyoutItem Text="Delete" Click="Delete_Click" />
                                 </MenuFlyout>
                             </FlyoutBase.AttachedFlyout>
-
                             <Viewbox x:Name="UserSymbol">
                                 <SymbolIcon Foreground="DarkGray" Symbol="Contact2" />
                             </Viewbox>
@@ -129,7 +127,7 @@
                                 </Grid.RowDefinitions>
                                 <StackPanel>
                                     <TextBlock Text="{Binding Name}" Foreground="White" FontSize="18" />
-                                    <TextBlock Text="{Binding UserPrototypeId, Converter={StaticResource countURConverter}, ConverterParameter=user}" Foreground="DarkGray" FontSize="14" />
+                                    <TextBlock Text="{Binding UserId, Converter={StaticResource countURConverter}, ConverterParameter=user}" Foreground="DarkGray" FontSize="14" />
                                 </StackPanel>
                                 <Grid Margin="0,5,0,0" Grid.Row="1">
                                     <Border BorderBrush="DarkGray" BorderThickness="0,0,0,1"
@@ -155,6 +153,5 @@
                 </ListView.ItemContainerStyle>
             </ListView>
         </Grid>
-
     </Grid>
 </Page>

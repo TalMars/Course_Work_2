@@ -296,6 +296,7 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
         private object Activate_44_IconStartStopConverter() { return new global::CourseWork_2.Converters.IconStartStopConverter(); }
         private object Activate_45_SwipeableSplitView() { return new global::CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView(); }
         private object Activate_48_ReviewPrototypePage() { return new global::CourseWork_2.Pages.ReviewPrototypePage(); }
+        private object Activate_49_ReviewPrototypeViewModel() { return new global::CourseWork_2.ViewModel.ReviewPrototypeViewModel(); }
         private void VectorAdd_23_TriggerCollection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::WinRT.Triggers.Trigger>)instance;

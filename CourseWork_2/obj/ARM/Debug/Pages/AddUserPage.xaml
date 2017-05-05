@@ -21,10 +21,8 @@
         <Border Grid.ColumnSpan="3" BorderThickness="0,0,0,1" BorderBrush="DarkGray">
             <Grid>
                 <Button x:ConnectionId='4' Background="Transparent" Content="Cancel" FontSize="16" FontWeight="Medium" Foreground="White"                                            />
-
                 <TextBlock Text="Add User" FontSize="20" FontWeight="Medium"
                            Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                
                 <Button x:ConnectionId='5' Background="Transparent" Content="Create" HorizontalAlignment="Right" FontSize="16" FontWeight="Medium"
                         Foreground="White"                                           
                                                                                                                                      />

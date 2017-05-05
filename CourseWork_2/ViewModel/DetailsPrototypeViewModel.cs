@@ -16,9 +16,9 @@ namespace CourseWork_2.ViewModel
 {
     public class DetailsPrototypeViewModel : NotifyPropertyChanged
     {
-        private ObservableCollection<UserPrototype> _users;
+        private ObservableCollection<User> _users;
         private Prototype _prototypeModel;
-        private UserPrototype _selectedItem;
+        private User _selectedItem;
         private bool _isOpenCommandBar;
 
         private ICommand _goBackCommand;
@@ -46,20 +46,20 @@ namespace CourseWork_2.ViewModel
             using (var db = new PrototypingContext())
             {
                 PrototypeModel = db.Prototypes.Single(p => p.PrototypeId == prototypeId);
-                Users = new ObservableCollection<UserPrototype>(db.Users.Where(u => u.PrototypeId == prototypeId));
+                Users = new ObservableCollection<User>(db.Users.Where(u => u.PrototypeId == prototypeId));
             }
         }
 
-        public async Task DeleteUser(UserPrototype user)
+        public async Task DeleteUser(User user)
         {
             using (var db = new PrototypingContext())
             {
-                UserPrototype findUser = db.Users.Single(u => u.UserPrototypeId == user.UserPrototypeId);
+                User findUser = db.Users.Single(u => u.UserId == user.UserId);
                 await db.Entry(findUser).Reference(u => u.Prototype).LoadAsync();
                 try
                 {
                     StorageFolder prototypeFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(findUser.Prototype.Name + "_" + findUser.PrototypeId);
-                    StorageFolder userFolder = await prototypeFolder.GetFolderAsync(findUser.Name + "_" + findUser.UserPrototypeId);
+                    StorageFolder userFolder = await prototypeFolder.GetFolderAsync(findUser.Name + "_" + findUser.UserId);
                     await userFolder.DeleteAsync();
                 }
                 catch (System.IO.FileNotFoundException)
@@ -112,7 +112,7 @@ namespace CourseWork_2.ViewModel
         #endregion
 
         #region properties
-        public ObservableCollection<UserPrototype> Users
+        public ObservableCollection<User> Users
         {
             get { return _users; }
             set { Set(ref _users, value); }
@@ -124,13 +124,13 @@ namespace CourseWork_2.ViewModel
             set { Set(ref _prototypeModel, value); }
         }
 
-        public UserPrototype SelectedItem
+        public User SelectedItem
         {
             get { return _selectedItem; }
             set
             {
                 Set(ref _selectedItem, value);
-                ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(DetailsUserPage), value.UserPrototypeId);
+                ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(DetailsUserPage), value.UserId);
             }
         }
 
@@ -226,7 +226,7 @@ namespace CourseWork_2.ViewModel
 
         private void ResultScreensFunc()
         {
-            ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(ResultScreensPage), PrototypeModel);
+            ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(ResultRecordPage), PrototypeModel);
         }
         #endregion
     }

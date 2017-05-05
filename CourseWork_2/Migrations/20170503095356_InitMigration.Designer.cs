@@ -8,7 +8,7 @@ using CourseWork_2.DataBase;
 namespace CourseWork_2.Migrations
 {
     [DbContext(typeof(PrototypingContext))]
-    [Migration("20170330181814_InitMigration")]
+    [Migration("20170503095356_InitMigration")]
     partial class InitMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,46 +36,27 @@ namespace CourseWork_2.Migrations
                     b.ToTable("Prototypes");
                 });
 
-            modelBuilder.Entity("CourseWork_2.DataBase.DBModels.RecordingSettings", b =>
+            modelBuilder.Entity("CourseWork_2.DataBase.DBModels.Record", b =>
                 {
-                    b.Property<int>("RecordingSettingsId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("FrontCamera");
-
-                    b.Property<int>("RecordPrototypeId");
-
-                    b.Property<bool>("Touches");
-
-                    b.HasKey("RecordingSettingsId");
-
-                    b.HasIndex("RecordPrototypeId")
-                        .IsUnique();
-
-                    b.ToTable("RecordSettings");
-                });
-
-            modelBuilder.Entity("CourseWork_2.DataBase.DBModels.RecordPrototype", b =>
-                {
-                    b.Property<int>("RecordPrototypeId")
+                    b.Property<int>("RecordId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreatedDate");
 
                     b.Property<string>("PathToVideo");
 
-                    b.Property<int>("UserPrototypeId");
+                    b.Property<int>("UserId");
 
-                    b.HasKey("RecordPrototypeId");
+                    b.HasKey("RecordId");
 
-                    b.HasIndex("UserPrototypeId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("RecordsPrototype");
                 });
 
-            modelBuilder.Entity("CourseWork_2.DataBase.DBModels.RecordsScreen", b =>
+            modelBuilder.Entity("CourseWork_2.DataBase.DBModels.RecordScreen", b =>
                 {
-                    b.Property<int>("RecordsScreenId")
+                    b.Property<int>("RecordScreenId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("PathToHeatMapScreen");
@@ -84,20 +65,39 @@ namespace CourseWork_2.Migrations
 
                     b.Property<string>("PointsText");
 
-                    b.Property<int>("RecordPrototypeId");
+                    b.Property<int>("RecordId");
 
                     b.Property<string>("UriPage");
 
-                    b.HasKey("RecordsScreenId");
+                    b.HasKey("RecordScreenId");
 
-                    b.HasIndex("RecordPrototypeId");
+                    b.HasIndex("RecordId");
 
                     b.ToTable("RecordsScreens");
                 });
 
-            modelBuilder.Entity("CourseWork_2.DataBase.DBModels.UserPrototype", b =>
+            modelBuilder.Entity("CourseWork_2.DataBase.DBModels.RecordSettings", b =>
                 {
-                    b.Property<int>("UserPrototypeId")
+                    b.Property<int>("RecordSettingsId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("FrontCamera");
+
+                    b.Property<int>("RecordId");
+
+                    b.Property<bool>("Touches");
+
+                    b.HasKey("RecordSettingsId");
+
+                    b.HasIndex("RecordId")
+                        .IsUnique();
+
+                    b.ToTable("RecordSettings");
+                });
+
+            modelBuilder.Entity("CourseWork_2.DataBase.DBModels.User", b =>
+                {
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("AddedDate");
@@ -110,38 +110,38 @@ namespace CourseWork_2.Migrations
 
                     b.Property<int>("PrototypeId");
 
-                    b.HasKey("UserPrototypeId");
+                    b.HasKey("UserId");
 
                     b.HasIndex("PrototypeId");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("CourseWork_2.DataBase.DBModels.RecordingSettings", b =>
+            modelBuilder.Entity("CourseWork_2.DataBase.DBModels.Record", b =>
                 {
-                    b.HasOne("CourseWork_2.DataBase.DBModels.RecordPrototype", "RecordPrototype")
-                        .WithOne("Settings")
-                        .HasForeignKey("CourseWork_2.DataBase.DBModels.RecordingSettings", "RecordPrototypeId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("CourseWork_2.DataBase.DBModels.RecordPrototype", b =>
-                {
-                    b.HasOne("CourseWork_2.DataBase.DBModels.UserPrototype", "UserPrototype")
+                    b.HasOne("CourseWork_2.DataBase.DBModels.User", "User")
                         .WithMany("Records")
-                        .HasForeignKey("UserPrototypeId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CourseWork_2.DataBase.DBModels.RecordsScreen", b =>
+            modelBuilder.Entity("CourseWork_2.DataBase.DBModels.RecordScreen", b =>
                 {
-                    b.HasOne("CourseWork_2.DataBase.DBModels.RecordPrototype", "RecordPrototype")
+                    b.HasOne("CourseWork_2.DataBase.DBModels.Record", "Record")
                         .WithMany("Screens")
-                        .HasForeignKey("RecordPrototypeId")
+                        .HasForeignKey("RecordId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CourseWork_2.DataBase.DBModels.UserPrototype", b =>
+            modelBuilder.Entity("CourseWork_2.DataBase.DBModels.RecordSettings", b =>
+                {
+                    b.HasOne("CourseWork_2.DataBase.DBModels.Record", "Record")
+                        .WithOne("Settings")
+                        .HasForeignKey("CourseWork_2.DataBase.DBModels.RecordSettings", "RecordId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CourseWork_2.DataBase.DBModels.User", b =>
                 {
                     b.HasOne("CourseWork_2.DataBase.DBModels.Prototype", "Prototype")
                         .WithMany("Users")

@@ -175,8 +175,8 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
             _typeNameTable[39] = "WinRT.Triggers.InvokeCommandAction";
             _typeNameTable[40] = "System.Windows.Input.ICommand";
             _typeNameTable[41] = "Boolean";
-            _typeNameTable[42] = "CourseWork_2.Pages.ResultScreensPage";
-            _typeNameTable[43] = "CourseWork_2.ViewModel.ResultScreensViewModel";
+            _typeNameTable[42] = "CourseWork_2.Pages.ResultRecordPage";
+            _typeNameTable[43] = "CourseWork_2.ViewModel.ResultRecordViewModel";
             _typeNameTable[44] = "CourseWork_2.Converters.IconStartStopConverter";
             _typeNameTable[45] = "CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView";
             _typeNameTable[46] = "Windows.UI.Xaml.Controls.SplitView";
@@ -227,8 +227,8 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
             _typeTable[39] = typeof(global::WinRT.Triggers.InvokeCommandAction);
             _typeTable[40] = typeof(global::System.Windows.Input.ICommand);
             _typeTable[41] = typeof(global::System.Boolean);
-            _typeTable[42] = typeof(global::CourseWork_2.Pages.ResultScreensPage);
-            _typeTable[43] = typeof(global::CourseWork_2.ViewModel.ResultScreensViewModel);
+            _typeTable[42] = typeof(global::CourseWork_2.Pages.ResultRecordPage);
+            _typeTable[43] = typeof(global::CourseWork_2.ViewModel.ResultRecordViewModel);
             _typeTable[44] = typeof(global::CourseWork_2.Converters.IconStartStopConverter);
             _typeTable[45] = typeof(global::CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView);
             _typeTable[46] = typeof(global::Windows.UI.Xaml.Controls.SplitView);
@@ -291,8 +291,8 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
         private object Activate_31_Condition() { return new global::WinRT.Triggers.Condition(); }
         private object Activate_36_EventTrigger() { return new global::WinRT.Triggers.EventTrigger(); }
         private object Activate_39_InvokeCommandAction() { return new global::WinRT.Triggers.InvokeCommandAction(); }
-        private object Activate_42_ResultScreensPage() { return new global::CourseWork_2.Pages.ResultScreensPage(); }
-        private object Activate_43_ResultScreensViewModel() { return new global::CourseWork_2.ViewModel.ResultScreensViewModel(); }
+        private object Activate_42_ResultRecordPage() { return new global::CourseWork_2.Pages.ResultRecordPage(); }
+        private object Activate_43_ResultRecordViewModel() { return new global::CourseWork_2.ViewModel.ResultRecordViewModel(); }
         private object Activate_44_IconStartStopConverter() { return new global::CourseWork_2.Converters.IconStartStopConverter(); }
         private object Activate_45_SwipeableSplitView() { return new global::CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView(); }
         private object Activate_48_ReviewPrototypePage() { return new global::CourseWork_2.Pages.ReviewPrototypePage(); }
@@ -613,15 +613,15 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
                 xamlType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 42:   //  CourseWork_2.Pages.ResultScreensPage
+            case 42:   //  CourseWork_2.Pages.ResultRecordPage
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_42_ResultScreensPage;
+                userType.Activator = Activate_42_ResultRecordPage;
                 userType.AddMemberName("ViewModel");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 43:   //  CourseWork_2.ViewModel.ResultScreensViewModel
+            case 43:   //  CourseWork_2.ViewModel.ResultRecordViewModel
                 userType = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("CourseWork_2.ViewModel.NotifyPropertyChanged"));
                 userType.SetIsReturnTypeStub();
                 userType.SetIsLocalType();
@@ -815,15 +815,15 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
             var that = (global::WinRT.Triggers.InvokeCommandAction)instance;
             that.PassEventArgsToCommand = (global::System.Boolean)Value;
         }
-        private object get_18_ResultScreensPage_ViewModel(object instance)
+        private object get_18_ResultRecordPage_ViewModel(object instance)
         {
-            var that = (global::CourseWork_2.Pages.ResultScreensPage)instance;
+            var that = (global::CourseWork_2.Pages.ResultRecordPage)instance;
             return that.ViewModel;
         }
-        private void set_18_ResultScreensPage_ViewModel(object instance, object Value)
+        private void set_18_ResultRecordPage_ViewModel(object instance, object Value)
         {
-            var that = (global::CourseWork_2.Pages.ResultScreensPage)instance;
-            that.ViewModel = (global::CourseWork_2.ViewModel.ResultScreensViewModel)Value;
+            var that = (global::CourseWork_2.Pages.ResultRecordPage)instance;
+            that.ViewModel = (global::CourseWork_2.ViewModel.ResultRecordViewModel)Value;
         }
         private object get_19_SwipeableSplitView_IsSwipeablePaneOpen(object instance)
         {
@@ -988,11 +988,11 @@ namespace CourseWork_2.CourseWork_2_XamlTypeInfo
                 xamlMember.Getter = get_17_InvokeCommandAction_PassEventArgsToCommand;
                 xamlMember.Setter = set_17_InvokeCommandAction_PassEventArgsToCommand;
                 break;
-            case "CourseWork_2.Pages.ResultScreensPage.ViewModel":
-                userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CourseWork_2.Pages.ResultScreensPage");
-                xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "ViewModel", "CourseWork_2.ViewModel.ResultScreensViewModel");
-                xamlMember.Getter = get_18_ResultScreensPage_ViewModel;
-                xamlMember.Setter = set_18_ResultScreensPage_ViewModel;
+            case "CourseWork_2.Pages.ResultRecordPage.ViewModel":
+                userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CourseWork_2.Pages.ResultRecordPage");
+                xamlMember = new global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlMember(this, "ViewModel", "CourseWork_2.ViewModel.ResultRecordViewModel");
+                xamlMember.Getter = get_18_ResultRecordPage_ViewModel;
+                xamlMember.Setter = set_18_ResultRecordPage_ViewModel;
                 break;
             case "CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView.IsSwipeablePaneOpen":
                 userType = (global::CourseWork_2.CourseWork_2_XamlTypeInfo.XamlUserType)GetXamlTypeByName("CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView");

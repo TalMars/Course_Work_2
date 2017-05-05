@@ -6,7 +6,6 @@ C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\ARM\Debug\Pages\DetailsPrototypePage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\ARM\Debug\Pages\DetailsUserPage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\ARM\Debug\Pages\PrototypesPage.xbf
-C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\ARM\Debug\Pages\ResultScreensPage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\ARM\Debug\Pages\ReviewPrototypePage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\ARM\Debug\Templates\AppBarStyle.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\ARM\Debug\Templates\SplitViewStyle.xbf
@@ -174,8 +173,6 @@ C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\DetailsUserPage.g.cs
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\PrototypesPage.g.i.cs
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\PrototypesPage.g.cs
-C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\ResultScreensPage.g.i.cs
-C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\ResultScreensPage.g.cs
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\ReviewPrototypePage.g.i.cs
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\ReviewPrototypePage.g.cs
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\XamlTypeInfo.g.cs
@@ -186,7 +183,6 @@ C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\DetailsPrototypePage.xaml
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\DetailsUserPage.xaml
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\PrototypesPage.xaml
-C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\ResultScreensPage.xaml
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\ReviewPrototypePage.xaml
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Templates\AppBarStyle.xaml
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Templates\SplitViewStyle.xaml
@@ -197,7 +193,6 @@ C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\DetailsPrototypePage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\DetailsUserPage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\PrototypesPage.xbf
-C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\ResultScreensPage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\ReviewPrototypePage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Templates\AppBarStyle.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Templates\SplitViewStyle.xbf
@@ -302,4 +297,9 @@ C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\ARM\Debug\Microsoft.Xaml.Interactivity.dll
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Microsoft.Xaml.Interactions.pri.xml
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Microsoft.Xaml.Interactivity.pri.xml
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\ARM\Debug\Pages\ResultRecordPage.xbf
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\ResultRecordPage.g.i.cs
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\ResultRecordPage.g.cs
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\ResultRecordPage.xaml
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\ResultRecordPage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\CourseWork_2.csprojResolveAssemblyReference.cache

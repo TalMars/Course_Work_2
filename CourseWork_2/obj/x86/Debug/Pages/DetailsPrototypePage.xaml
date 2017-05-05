@@ -24,7 +24,7 @@
         <AppBar x:ConnectionId='2' ClosedDisplayMode="Hidden"                                                          
                 Style="{StaticResource AppBarStyle1}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <AppBarButton x:ConnectionId='3' Icon="Add"                                         Label="Add" Style="{StaticResource AppBarButtonStyle1}" />
+                <AppBarButton x:ConnectionId='3' Icon="Add"                                         Label="Add User" Style="{StaticResource AppBarButtonStyle1}" />
                 <AppBarSeparator />
                 <AppBarButton x:ConnectionId='4' Icon="Edit"                                          Label="Edit" Style="{StaticResource AppBarButtonStyle1}" />
                 <AppBarSeparator />
@@ -85,7 +85,7 @@
                            Visibility="{Binding LastRecordingDate, Converter={StaticResource DatesVisibilityConverter}, ConverterParameter=created}"/>
             </Grid>
         </Grid>
-        <Button x:ConnectionId='8' Grid.Row="1" Grid.Column="2" Foreground="DarkGray" Background="Transparent" 
+        <Button x:ConnectionId='8' Grid.Row="1" Grid.Column="2" Foreground="White" Background="Transparent" 
                 HorizontalAlignment="Center" VerticalAlignment="Center"                                                  >
             <Viewbox>
                 <SymbolIcon Symbol="SelectAll" />

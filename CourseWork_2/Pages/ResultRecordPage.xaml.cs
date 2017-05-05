@@ -32,9 +32,9 @@ namespace CourseWork_2.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ResultScreensPage : Page
+    public sealed partial class ResultRecordPage : Page
     {
-        public ResultScreensPage()
+        public ResultRecordPage()
         {
             this.InitializeComponent();
 
@@ -44,23 +44,23 @@ namespace CourseWork_2.Pages
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().ExitFullScreenMode();
-            ViewModel = new ResultScreensViewModel();
+            ViewModel = new ResultRecordViewModel();
 
             if (e.Parameter is Prototype)
             {
                 await ViewModel.HeatingAllRecordScreens((Prototype)e.Parameter);
             }
-            if (e.Parameter is UserPrototype)
+            if (e.Parameter is User)
             {
-                await ViewModel.HeatingAllRecordScreens((UserPrototype)e.Parameter);
+                await ViewModel.HeatingAllRecordScreens((User)e.Parameter);
             }
-            if (e.Parameter is RecordPrototype)
+            if (e.Parameter is Record)
             {
-                await ViewModel.GetRecordScreens((RecordPrototype)e.Parameter);
+                await ViewModel.GetRecordScreens((Record)e.Parameter);
             }
-            if (e.Parameter is List<RecordScreenPrototypeModel>)
+            if (e.Parameter is List<RecordScreenModel>)
             {
-                await ViewModel.HeatSaveScreens((List<RecordScreenPrototypeModel>)e.Parameter); //ObjectDisposeException when list empty!!!
+                await ViewModel.HeatSaveScreens((List<RecordScreenModel>)e.Parameter); //ObjectDisposeException when list empty!!!
             }
         }
 
@@ -76,6 +76,6 @@ namespace CourseWork_2.Pages
             ViewModel.UnregisterRequestEventHander();
         }
 
-        public ResultScreensViewModel ViewModel { get; set; }
+        public ResultRecordViewModel ViewModel { get; set; }
     }
 }

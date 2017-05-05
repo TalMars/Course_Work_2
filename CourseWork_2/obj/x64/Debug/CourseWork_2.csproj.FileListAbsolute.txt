@@ -6,7 +6,6 @@ C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\Pages\DetailsPrototypePage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\Pages\DetailsUserPage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\Pages\PrototypesPage.xbf
-C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\Pages\ResultScreensPage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\Pages\ReviewPrototypePage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\Templates\AppBarStyle.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\Templates\SplitViewStyle.xbf
@@ -175,8 +174,6 @@ C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\DetailsUserPage.g.cs
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\PrototypesPage.g.i.cs
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\PrototypesPage.g.cs
-C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\ResultScreensPage.g.i.cs
-C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\ResultScreensPage.g.cs
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\ReviewPrototypePage.g.i.cs
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\ReviewPrototypePage.g.cs
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\XamlTypeInfo.g.cs
@@ -187,7 +184,6 @@ C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\DetailsPrototypePage.xaml
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\DetailsUserPage.xaml
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\PrototypesPage.xaml
-C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\ResultScreensPage.xaml
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\ReviewPrototypePage.xaml
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Templates\AppBarStyle.xaml
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Templates\SplitViewStyle.xaml
@@ -198,7 +194,6 @@ C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\DetailsPrototypePage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\DetailsUserPage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\PrototypesPage.xbf
-C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\ResultScreensPage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\ReviewPrototypePage.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Templates\AppBarStyle.xbf
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Templates\SplitViewStyle.xbf
@@ -296,4 +291,15 @@ C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\qualifiers.txt.intermediate
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\ProjectArchitectures.txt
-C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\CourseWork_2.csprojResolveAssemblyReference.cache
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\ResultRecordPage.g.i.cs
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\ResultRecordPage.g.cs
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\ResultRecordPage.xaml
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Pages\ResultRecordPage.xbf
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\Pages\ResultRecordPage.xbf
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\Microsoft.Xaml.Interactions.dll
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\Microsoft.Xaml.Interactivity.dll
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\WinRT.Triggers.dll
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\WinRT.Triggers.pdb
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\WinRT.Triggers.xml
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Microsoft.Xaml.Interactions.pri.xml
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\x64\Debug\Microsoft.Xaml.Interactivity.pri.xml

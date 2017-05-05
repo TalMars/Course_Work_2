@@ -14,9 +14,9 @@ namespace CourseWork_2.ViewModel
 {
     public class DetailsUserViewModel : NotifyPropertyChanged
     {
-        private ObservableCollection<RecordPrototype> _records;
-        private UserPrototype _userModel;
-        private RecordPrototype _selectedItem;
+        private ObservableCollection<Record> _records;
+        private User _userModel;
+        private Record _selectedItem;
         private bool _isOpenCommandBar;
 
         private ICommand _goBackCommand;
@@ -43,8 +43,8 @@ namespace CourseWork_2.ViewModel
         {
             using (var db = new PrototypingContext())
             {
-                UserModel = db.Users.Single(u => u.UserPrototypeId == userId);
-                Records = new ObservableCollection<RecordPrototype>(db.RecordsPrototype.Where(r => r.UserPrototypeId == userId));
+                UserModel = db.Users.Single(u => u.UserId == userId);
+                Records = new ObservableCollection<Record>(db.RecordsPrototype.Where(r => r.UserId == userId));
             }
         }
 
@@ -87,25 +87,25 @@ namespace CourseWork_2.ViewModel
         #endregion
 
         #region properties
-        public ObservableCollection<RecordPrototype> Records
+        public ObservableCollection<Record> Records
         {
             get { return _records; }
             set { _records = value; OnPropertyChanged("Records"); }
         }
 
-        public UserPrototype UserModel
+        public User UserModel
         {
             get { return _userModel; }
             set { _userModel = value; OnPropertyChanged("UserModel"); }
         }
 
-        public RecordPrototype SelectedItem
+        public Record SelectedItem
         {
             get { return _selectedItem; }
             set
             {
                 Set(ref _selectedItem, value);
-                ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(ResultScreensPage), value);
+                ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(ResultRecordPage), value);
             }
         }
 
@@ -149,7 +149,7 @@ namespace CourseWork_2.ViewModel
 
         private void AddFunc()
         {
-            ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(AddSettingsPage), UserModel.UserPrototypeId);
+            ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(AddSettingsPage), UserModel.UserId);
         }
 
         public ICommand EditCommand
@@ -175,13 +175,13 @@ namespace CourseWork_2.ViewModel
         {
             using (var db = new PrototypingContext())
             {
-                UserPrototype user = db.Users.Single(u => u.UserPrototypeId == UserModel.UserPrototypeId);
+                User user = db.Users.Single(u => u.UserId == UserModel.UserId);
                 await db.Entry(user).Reference(u => u.Prototype).LoadAsync();
 
                 try
                 {
                     StorageFolder prototypeFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(user.Prototype.Name + "_" + user.PrototypeId);
-                    StorageFolder userFolder = await prototypeFolder.GetFolderAsync(user.Name + "_" + user.UserPrototypeId);
+                    StorageFolder userFolder = await prototypeFolder.GetFolderAsync(user.Name + "_" + user.UserId);
                     await userFolder.DeleteAsync();
                 }
                 catch (System.IO.FileNotFoundException)
@@ -204,22 +204,22 @@ namespace CourseWork_2.ViewModel
         }
         private void ResultScreensFunc()
         {
-            ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(ResultScreensPage), UserModel);
+            ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(ResultRecordPage), UserModel);
         }
 
-        public async Task DeleteRecord(RecordPrototype record)
+        public async Task DeleteRecord(Record record)
         {
             using (var db = new PrototypingContext())
             {
-                RecordPrototype findRecord = db.RecordsPrototype.Single(r => r.RecordPrototypeId == record.RecordPrototypeId);
-                await db.Entry(findRecord).Reference(r => r.UserPrototype).LoadAsync();
-                UserPrototype userParent = findRecord.UserPrototype;
+                Record findRecord = db.RecordsPrototype.Single(r => r.RecordId == record.RecordId);
+                await db.Entry(findRecord).Reference(r => r.User).LoadAsync();
+                User userParent = findRecord.User;
                 await db.Entry(userParent).Reference(u => u.Prototype).LoadAsync();
                 try
                 {
                     StorageFolder prototypeFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync(userParent.Prototype.Name + "_" + userParent.PrototypeId);
-                    StorageFolder userFolder = await prototypeFolder.GetFolderAsync(userParent.Name + "_" + userParent.UserPrototypeId);
-                    StorageFolder recordFolder = await userFolder.GetFolderAsync("Record_" + findRecord.RecordPrototypeId);
+                    StorageFolder userFolder = await prototypeFolder.GetFolderAsync(userParent.Name + "_" + userParent.UserId);
+                    StorageFolder recordFolder = await userFolder.GetFolderAsync("Record_" + findRecord.RecordId);
                     await recordFolder.DeleteAsync();
                 }
                 catch (System.IO.FileNotFoundException)
@@ -230,7 +230,7 @@ namespace CourseWork_2.ViewModel
                 db.RecordsPrototype.Remove(findRecord);
                 db.SaveChanges();
             }
-            UpdateRecordList(record.UserPrototypeId);
+            UpdateRecordList(record.UserId);
         }
         #endregion
     }

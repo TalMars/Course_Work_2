@@ -8,9 +8,9 @@ using Windows.Foundation;
 
 namespace CourseWork_2.DataBase.DBModels
 {
-    public class RecordsScreen
+    public class RecordScreen
     {
-        public int RecordsScreenId { get; set; }
+        public int RecordScreenId { get; set; }
         public string UriPage { get; set; }
         public string PathToOriginalScreen { get; set; }
         public string PathToHeatMapScreen { get; set; }
@@ -40,7 +40,7 @@ namespace CourseWork_2.DataBase.DBModels
             }
         }
 
-        public int RecordPrototypeId { get; set; }
-        public RecordPrototype RecordPrototype { get; set; }
+        public int RecordId { get; set; }
+        public Record Record { get; set; }
     }
 }

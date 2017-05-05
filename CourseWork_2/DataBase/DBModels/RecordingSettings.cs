@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace CourseWork_2.DataBase.DBModels
 {
-    public class RecordingSettings
+    public class RecordSettings
     {
-        public int RecordingSettingsId { get; set; }
+        public int RecordSettingsId { get; set; }
         //public float DownScale { get; set; }
         //public int MaxFPS { get; set; }
         public bool FrontCamera { get; set; }
         public bool Touches { get; set; }
         //public bool SavingTouches { get; set; }
 
-        public int RecordPrototypeId { get; set; }
-        public RecordPrototype RecordPrototype { get; set; }
+        public int RecordId { get; set; }
+        public Record Record { get; set; }
     }
 }

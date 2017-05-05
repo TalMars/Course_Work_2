@@ -7,7 +7,7 @@
     <RootPropertyPathName Name="ActualHeight" />
     <RootPropertyPathName Name="LastRecordingDate" />
     <RootPropertyPathName Name="AddedDate" />
-    <RootPropertyPathName Name="UserPrototypeId" />
+    <RootPropertyPathName Name="UserId" />
     <RootPropertyPathName Name="Name" />
     <RootPropertyPathName Name="Description" />
     <RootPropertyPathName Name="Url" />
@@ -336,7 +336,7 @@
       <RootProperty Name="Width" />
       <RootProperty Name="AllowFocusOnInteraction" />
     </RootType>
-    <RootType FullName="CourseWork_2.Pages.ResultScreensPage" />
+    <RootType FullName="CourseWork_2.Pages.ResultRecordPage" />
     <RootType FullName="CourseWork_2.Converters.IconStartStopConverter" />
     <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.ThemeResourceExtension" />
     <RootType FullName="CourseWork_2.SwipeableSplitViewControl_Folder.SwipeableSplitView">

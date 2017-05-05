@@ -40,7 +40,7 @@
         <TextBlock Grid.Row="2" Text="Max FPS" FontSize="16" FontWeight="Medium" Foreground="White" VerticalAlignment="Center" Margin="15,0,0,0" />
         <Slider Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,0,10,0" />-->
 
-        <TextBlock Grid.Row="1" Text="FrontCamera" FontSize="16" FontWeight="Medium" Foreground="White" VerticalAlignment="Center" Margin="15,0,0,0" />
+        <TextBlock Grid.Row="1" Text="Front Camera" FontSize="16" FontWeight="Medium" Foreground="White" VerticalAlignment="Center" Margin="15,0,0,0" />
         <ToggleSwitch Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2"
                                   OffContent="" OnContent="" RequestedTheme="Dark" MinWidth="50" IsOn="{x:Bind ViewModel.FrontCameraIsOn, Mode=TwoWay}" />
 

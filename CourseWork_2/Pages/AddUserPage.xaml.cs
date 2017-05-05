@@ -34,8 +34,8 @@ namespace CourseWork_2.Pages
         {
             if (e.Parameter is Prototype)
                 ViewModel.LoadUser((Prototype)e.Parameter);
-            if (e.Parameter is UserPrototype)
-                ViewModel.LoadUser((UserPrototype)e.Parameter);
+            if (e.Parameter is User)
+                ViewModel.LoadUser((User)e.Parameter);
             if (e.Parameter is int)
                 ViewModel.LoadUser((int)e.Parameter);
         }

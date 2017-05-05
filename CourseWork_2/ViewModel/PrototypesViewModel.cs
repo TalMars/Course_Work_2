@@ -46,6 +46,7 @@ namespace CourseWork_2.ViewModel
                     Items = items.ToList(),
                     IsEnable = true
                 }).ToList();
+                
                 string[] inDB = (from g in protGroups
                                  select g.Name).ToArray();
                 List<PrototypeGroup> notInDB = (from n in semanticZoomNames

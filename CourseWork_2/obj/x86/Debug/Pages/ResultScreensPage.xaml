@@ -8,6 +8,7 @@
     xmlns:triggers="using:WinRT.Triggers"
     xmlns:converters="using:CourseWork_2.Converters"
     mc:Ignorable="d">
+    
     <Page.Resources>
         <converters:BoolToVisibilityConverter x:Key="boolToVisConverter" />
         <converters:ReturnModelConverter x:Key="itemConverter" />
@@ -23,8 +24,12 @@
 
         <Border BorderThickness="0,0,0,1" BorderBrush="Gray">
             <Grid>
-                <Button x:ConnectionId='11' x:Name="DoneButton" Background="Transparent" Foreground="White"                                         
-                        Content="Done"                                                                                                                           />
+                <Button x:ConnectionId='11' x:Name="DoneButton" Background="Transparent" Foreground="White"                                           
+                                                                                                                                                 >
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Symbol="Back" />
+                    </StackPanel>
+                </Button>
                 <TextBlock Text="Result Screens" VerticalAlignment="Center" HorizontalAlignment="Center"
                        FontSize="20" Foreground="White" FontWeight="Medium" />
                 <Button x:ConnectionId='12' Background="Transparent" Foreground="White"                                               HorizontalAlignment="Right"
