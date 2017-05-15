@@ -42,7 +42,7 @@ namespace CourseWork_2.Converters
                 if (parameter.ToString().Equals("user"))
                 {
                     //int records = db.Users.Single(u => u.UserPrototypeId == Id).Records.Count();
-                    int records = db.RecordsPrototype.Count(r => r.UserId == Id);
+                    int records = db.Records.Count(r => r.UserId == Id);
                     if (records > 0)
                         resultText += records + " records";
                     else

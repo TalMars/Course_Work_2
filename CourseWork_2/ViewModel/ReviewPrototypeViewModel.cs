@@ -1,6 +1,6 @@
 ﻿using CourseWork_2.DataBase;
 using CourseWork_2.DataBase.DBModels;
-using CourseWork_2.Extensions_Folder;
+using CourseWork_2.Extensions;
 using CourseWork_2.HeatMap;
 using CourseWork_2.Model;
 using CourseWork_2.Pages;
@@ -384,15 +384,15 @@ namespace CourseWork_2.ViewModel
 
                 using (var db = new PrototypingContext())
                 {
-                    Record record = db.RecordsPrototype.Single(rp => rp.RecordId == recordSettings.RecordId);
+                    Record record = db.Records.Single(rp => rp.RecordId == recordSettings.RecordId);
                     record.CreatedDate = DateTime.Now;
-                    db.RecordsPrototype.Update(record);
+                    db.Records.Update(record);
 
                     if (recordSettings.FrontCamera)
                     {
                         string pathtoVideo = await CreateVideoFile(record.RecordId);
                         record.PathToVideo = pathtoVideo;
-                        db.RecordsPrototype.Update(record);
+                        db.Records.Update(record);
 
                         var encodingProfile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto);
                         encodingProfile.Video.Properties.Add(RotationKey, 270);
@@ -437,7 +437,7 @@ namespace CourseWork_2.ViewModel
             using (var db = new PrototypingContext())
             {
                 User user = db.Users.Single(u => u.UserId == userId);
-                Record record = db.RecordsPrototype.Last();
+                Record record = db.Records.Last();
                 db.Entry(user).Reference(u => u.Prototype).Load();
                 try
                 {
@@ -451,7 +451,7 @@ namespace CourseWork_2.ViewModel
                     System.Diagnostics.Debug.WriteLine(ex.Message);
                 }
 
-                db.RecordsPrototype.Remove(record);
+                db.Records.Remove(record);
                 db.SaveChanges();
             }
 

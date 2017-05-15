@@ -44,7 +44,7 @@ namespace CourseWork_2.ViewModel
             using (var db = new PrototypingContext())
             {
                 UserModel = db.Users.Single(u => u.UserId == userId);
-                Records = new ObservableCollection<Record>(db.RecordsPrototype.Where(r => r.UserId == userId));
+                Records = new ObservableCollection<Record>(db.Records.Where(r => r.UserId == userId));
             }
         }
 
@@ -211,7 +211,7 @@ namespace CourseWork_2.ViewModel
         {
             using (var db = new PrototypingContext())
             {
-                Record findRecord = db.RecordsPrototype.Single(r => r.RecordId == record.RecordId);
+                Record findRecord = db.Records.Single(r => r.RecordId == record.RecordId);
                 await db.Entry(findRecord).Reference(r => r.User).LoadAsync();
                 User userParent = findRecord.User;
                 await db.Entry(userParent).Reference(u => u.Prototype).LoadAsync();
@@ -227,7 +227,7 @@ namespace CourseWork_2.ViewModel
                     System.Diagnostics.Debug.WriteLine("Prototype/User folder not found");
                 }
 
-                db.RecordsPrototype.Remove(findRecord);
+                db.Records.Remove(findRecord);
                 db.SaveChanges();
             }
             UpdateRecordList(record.UserId);

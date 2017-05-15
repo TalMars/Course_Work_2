@@ -1,6 +1,6 @@
 ﻿using CourseWork_2.DataBase;
 using CourseWork_2.Pages;
-using CourseWork_2.SwipeableSplitViewControl_Folder;
+using CourseWork_2.SwipeableSplitViewControl;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -30,6 +30,7 @@ namespace CourseWork_2
     /// </summary>
     sealed partial class App : Application
     {
+        //public static string SubscriptionKey = "3c9741c55fec4fc8ba1bba2550e494bd";
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().

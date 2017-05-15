@@ -45,6 +45,7 @@ namespace CourseWork_2.ViewModel
         private ICommand _goBackCommand;
         private ICommand _showVideoCommand;
         private ICommand _doubleTapCommand;
+        private ICommand _goToLookEmotions;
 
         public ResultRecordViewModel()
         {
@@ -233,6 +234,17 @@ namespace CourseWork_2.ViewModel
             ShowScreenVideoIcon = _videoGridVisibility ? Windows.UI.Xaml.Controls.Symbol.Video : Windows.UI.Xaml.Controls.Symbol.BrowsePhotos;
             VideoGridVisibility = !_videoGridVisibility;
         }
+
+        public ICommand GoToLookEmotionsCommand
+        {
+            get { return _goToLookEmotions ?? (_goToLookEmotions = new Command(() => GoToLookEmotions())); }
+        }
+
+        private void GoToLookEmotions()
+        {
+            Windows.UI.Xaml.Controls.Frame frame = (Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content;
+            frame.Navigate(typeof(EmotionsPage), RecordModel.RecordId);
+        }
         #endregion
 
         #region from RecordPage
@@ -241,7 +253,7 @@ namespace CourseWork_2.ViewModel
             RingContentVisibility = true;
             using (var db = new PrototypingContext())
             {
-                RecordModel = db.RecordsPrototype.Last();
+                RecordModel = db.Records.Last();
                 if (!string.IsNullOrEmpty(RecordModel.PathToVideo))
                 {
                     StorageFile videoFile = await StorageFile.GetFileFromPathAsync(RecordModel.PathToVideo);
@@ -295,7 +307,7 @@ namespace CourseWork_2.ViewModel
                         PathToOriginalScreen = screenPaths[0],
                         PathToHeatMapScreen = screenPaths[1]
                     };
-                    db.RecordsScreens.Add(rScreen);
+                    db.RecordScreens.Add(rScreen);
                     db.SaveChanges();
                 }
             }
@@ -346,7 +358,7 @@ namespace CourseWork_2.ViewModel
             RingContentVisibility = true;
             using (var db = new PrototypingContext())
             {
-                List<RecordScreen> allScreen = db.RecordsScreens
+                List<RecordScreen> allScreen = db.RecordScreens
                                                 .Include(r => r.Record)
                                                     .ThenInclude(rp => rp.User)
                                                 .Where(rs => rs.Record.User.PrototypeId == prototype.PrototypeId)
@@ -354,7 +366,7 @@ namespace CourseWork_2.ViewModel
                                                 .ToList();
                 Screens = await HeatingRecordScreens(allScreen);
 
-                List<Record> records = db.RecordsPrototype
+                List<Record> records = db.Records
                             .Include(rp => rp.User)
                             .Where(rp => rp.User.PrototypeId == prototype.PrototypeId)
                             .OrderBy(rp => rp.CreatedDate)
@@ -388,14 +400,14 @@ namespace CourseWork_2.ViewModel
             RingContentVisibility = true;
             using (var db = new PrototypingContext())
             {
-                List<RecordScreen> allScreen = db.RecordsScreens
+                List<RecordScreen> allScreen = db.RecordScreens
                                                   .Include(rs => rs.Record)
                                                   .Where(rs => rs.Record.UserId == user.UserId)
                                                   .OrderByDescending(rs => rs.UriPage)
                                                   .ToList();
                 Screens = await HeatingRecordScreens(allScreen);
 
-                List<Record> records = db.RecordsPrototype
+                List<Record> records = db.Records
                             .Where(rp => rp.User.UserId == user.UserId)
                             .OrderBy(rp => rp.CreatedDate)
                             .ToList();
@@ -442,11 +454,12 @@ namespace CourseWork_2.ViewModel
             RingContentVisibility = true;
             using (var db = new PrototypingContext())
             {
-                RecordModel = db.RecordsPrototype.Single(r => r.RecordId == record.RecordId);
+                RecordModel = db.Records.Single(r => r.RecordId == record.RecordId);
                 await db.Entry(RecordModel).Collection(r => r.Screens).LoadAsync();
                 if (!string.IsNullOrEmpty(RecordModel.PathToVideo))
                 {
                     StorageFile videoFile = await StorageFile.GetFileFromPathAsync(RecordModel.PathToVideo);
+                    //await Task.Delay(1000);
                     Windows.UI.Xaml.Controls.MediaPlayerElement player = new Windows.UI.Xaml.Controls.MediaPlayerElement();
                     player.AreTransportControlsEnabled = true;
                     player.Source = MediaSource.CreateFromStorageFile(videoFile);

@@ -33,10 +33,13 @@ namespace CourseWork_2.DataBase.DBModels
             }
             set
             {
-                foreach (HeatPoint point in value)
-                {
-                    PointsText += point.X + "," + point.Y + ";";
-                }
+                if (value.Count != 0)
+                    foreach (HeatPoint point in value)
+                    {
+                        PointsText += point.X + "," + point.Y + ";";
+                    }
+                else
+                    PointsText = "";
             }
         }
 

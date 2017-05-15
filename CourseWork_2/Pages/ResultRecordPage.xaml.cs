@@ -43,9 +43,9 @@ namespace CourseWork_2.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().ExitFullScreenMode();
             ViewModel = new ResultRecordViewModel();
 
+            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().ExitFullScreenMode();
             if (e.Parameter is Prototype)
             {
                 await ViewModel.HeatingAllRecordScreens((Prototype)e.Parameter);

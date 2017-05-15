@@ -15,6 +15,56 @@ namespace CourseWork_2.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752");
 
+            modelBuilder.Entity("CourseWork_2.DataBase.DBModels.EmotionFragment", b =>
+                {
+                    b.Property<int>("EmotionFragmentId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("Duration");
+
+                    b.Property<long?>("Interval");
+
+                    b.Property<int>("RecordId");
+
+                    b.Property<long>("Start");
+
+                    b.HasKey("EmotionFragmentId");
+
+                    b.HasIndex("RecordId");
+
+                    b.ToTable("EmotionFragments");
+                });
+
+            modelBuilder.Entity("CourseWork_2.DataBase.DBModels.EmotionMeanScores", b =>
+                {
+                    b.Property<int>("EmotionMeanScoresId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<float>("AngerScore");
+
+                    b.Property<float>("ContemptScore");
+
+                    b.Property<float>("DisgustScore");
+
+                    b.Property<int>("EmotionFragmentId");
+
+                    b.Property<float>("FearScore");
+
+                    b.Property<float>("HappinessScore");
+
+                    b.Property<float>("NeutralScore");
+
+                    b.Property<float>("SadnessScore");
+
+                    b.Property<float>("SurpriseScore");
+
+                    b.HasKey("EmotionMeanScoresId");
+
+                    b.HasIndex("EmotionFragmentId");
+
+                    b.ToTable("EmotionScores");
+                });
+
             modelBuilder.Entity("CourseWork_2.DataBase.DBModels.Prototype", b =>
                 {
                     b.Property<int>("PrototypeId")
@@ -42,6 +92,10 @@ namespace CourseWork_2.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
+                    b.Property<double>("EmotionVideoTimeScale");
+
+                    b.Property<string>("OperationLocation");
+
                     b.Property<string>("PathToVideo");
 
                     b.Property<int>("UserId");
@@ -50,7 +104,7 @@ namespace CourseWork_2.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RecordsPrototype");
+                    b.ToTable("Records");
                 });
 
             modelBuilder.Entity("CourseWork_2.DataBase.DBModels.RecordScreen", b =>
@@ -72,7 +126,7 @@ namespace CourseWork_2.Migrations
 
                     b.HasIndex("RecordId");
 
-                    b.ToTable("RecordsScreens");
+                    b.ToTable("RecordScreens");
                 });
 
             modelBuilder.Entity("CourseWork_2.DataBase.DBModels.RecordSettings", b =>
@@ -114,6 +168,22 @@ namespace CourseWork_2.Migrations
                     b.HasIndex("PrototypeId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("CourseWork_2.DataBase.DBModels.EmotionFragment", b =>
+                {
+                    b.HasOne("CourseWork_2.DataBase.DBModels.Record", "Record")
+                        .WithMany("ResultEmotion")
+                        .HasForeignKey("RecordId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CourseWork_2.DataBase.DBModels.EmotionMeanScores", b =>
+                {
+                    b.HasOne("CourseWork_2.DataBase.DBModels.EmotionFragment", "EmotionFragment")
+                        .WithMany("Scores")
+                        .HasForeignKey("EmotionFragmentId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("CourseWork_2.DataBase.DBModels.Record", b =>

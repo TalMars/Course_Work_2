@@ -122,7 +122,7 @@ namespace CourseWork_2.ViewModel
         {
             using (var db = new PrototypingContext())
             {
-                Record recod = db.RecordsPrototype.Add(new Record() { UserId = userId }).Entity;
+                Record recod = db.Records.Add(new Record() { UserId = userId }).Entity;
                 db.RecordSettings.Add(new RecordSettings()
                 {
                     RecordId = recod.RecordId,

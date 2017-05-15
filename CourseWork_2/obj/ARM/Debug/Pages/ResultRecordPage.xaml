@@ -1,0 +1,120 @@
+﻿<Page x:ConnectionId='1'
+    x:Class="CourseWork_2.Pages.ResultRecordPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CourseWork_2.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:triggers="using:WinRT.Triggers"
+    xmlns:converters="using:CourseWork_2.Converters"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="boolToVisConverter" />
+        <converters:ReturnModelConverter x:Key="itemConverter" />
+        <converters:InverseBoolConverter x:Key="inverseBoolConverter" />
+        <converters:DateTimeToStringConverter x:Key="DateTimeConverter" />
+    </Page.Resources>
+
+    <Grid Background="#2b3346">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*" MaxHeight="60" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Border BorderThickness="0,0,0,1" BorderBrush="Gray">
+            <Grid>
+                <Button x:ConnectionId='11' x:Name="DoneButton" Background="Transparent" Foreground="White"                                           
+                                                                                                                                                 >
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Symbol="Back" />
+                    </StackPanel>
+                </Button>
+                <TextBlock Text="Result Record" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       FontSize="20" Foreground="White" FontWeight="Medium" />
+                <StackPanel x:ConnectionId='12' Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0"
+                                                                                                                                                                       >
+                    <Button x:ConnectionId='13' Background="Transparent" Foreground="White"                                                                                                                          
+                                                                                >
+                        <Viewbox Height="{Binding ElementName=DoneButton, Path=ActualHeight}">
+                            <SymbolIcon Symbol="Emoji" />
+                        </Viewbox>
+                    </Button>
+                    <Button x:ConnectionId='14' Background="Transparent" Foreground="White"                                              
+                                                                                                                                                 >
+                        <Viewbox Height="{Binding ElementName=DoneButton, Path=ActualHeight}">
+                            <SymbolIcon x:ConnectionId='15'                                                              />
+                        </Viewbox>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid x:ConnectionId='2' Grid.Row="1"                                                                                                                                          >
+            <GridView x:ConnectionId='6'                                                                                                                                                                                              
+                                                                                                                           >
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding HeatMapScreen}"
+                               Width="{Binding WidthImage}"  Height="{Binding HeightImage}" />
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+                <GridView.ItemContainerStyle>
+                    <Style TargetType="FrameworkElement">
+                        <Setter Property="Margin" Value="0 0 0 0"/>
+                    </Style>
+                </GridView.ItemContainerStyle>
+            </GridView>
+
+            <FlipView x:ConnectionId='7'                                                      
+                                                                                 
+                                                                                                                                                              >
+                <triggers:Interactions.Triggers>
+                    <triggers:EventTrigger EventName="DoubleTapped">
+                        <triggers:InvokeCommandAction x:ConnectionId='10'                                               />
+                    </triggers:EventTrigger>
+                </triggers:Interactions.Triggers>
+                <FlipView.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding HeatMapScreen}" />
+                    </DataTemplate>
+                </FlipView.ItemTemplate>
+            </FlipView>
+
+            <StackPanel x:ConnectionId='8'                                                                                                                                              
+                        VerticalAlignment="Center" HorizontalAlignment="Center">
+                <ProgressRing x:ConnectionId='9' Width="50" Height="50"                                                                 />
+                <TextBlock Text="Rendering..." TextAlignment="Center" />
+            </StackPanel>
+        </Grid>
+
+        <Grid x:ConnectionId='3' Grid.Row="1"                                                                                                                                           >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <ContentControl x:ConnectionId='4'                                                       
+                            HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+
+            <ListView x:ConnectionId='5' Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                      ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled"
+                                                                                                                                                                                   >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel VerticalAlignment="Center" Margin="5">
+                            <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=recordDate}" HorizontalAlignment="Center" Foreground="White" FontSize="20" />
+                            <TextBlock Text="{Binding CreatedDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=recordTime}" HorizontalAlignment="Center" Foreground="White" FontSize="20" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Background="Transparent" Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+        </Grid>
+    </Grid>
+</Page>
+

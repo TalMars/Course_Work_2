@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseWork_2.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,24 @@ namespace CourseWork_2.Pages
         public EmotionsPage()
         {
             this.InitializeComponent();
+
         }
+
+        public EmotionsViewModel ViewModel { get; private set; }
+
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            ViewModel = new EmotionsViewModel((int)e.Parameter);
+            await ViewModel.LoadSubKey();
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            ViewModel.Cleaning();
+
+            ViewModel.UnregisterPressedEventHadler();
+            ViewModel.UnregisterRequestEventHander();
+        }
+
     }
 }

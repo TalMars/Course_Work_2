@@ -8,7 +8,7 @@
     xmlns:triggers="using:WinRT.Triggers"
     xmlns:converters="using:CourseWork_2.Converters"
     mc:Ignorable="d">
-    
+
     <Page.Resources>
         <converters:BoolToVisibilityConverter x:Key="boolToVisConverter" />
         <converters:ReturnModelConverter x:Key="itemConverter" />
@@ -32,18 +32,25 @@
                 </Button>
                 <TextBlock Text="Result Record" VerticalAlignment="Center" HorizontalAlignment="Center"
                        FontSize="20" Foreground="White" FontWeight="Medium" />
-                <Button Background="Transparent" Foreground="White" Command="{x:Bind ViewModel.ShowVideoCommand}" HorizontalAlignment="Right"
-                        IsHitTestVisible="{x:Bind ViewModel.RingContentVisibility, Converter={StaticResource inverseBoolConverter}, Mode=OneWay}"
-                        Margin="0,0,5,0" Visibility="{x:Bind ViewModel.VideoIconVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}">
-                    <Viewbox Height="{Binding ElementName=DoneButton, Path=ActualHeight}">
-                        <SymbolIcon Symbol="{x:Bind ViewModel.ShowScreenVideoIcon, Mode=OneWay}" />
-                    </Viewbox>
-                </Button>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0"
+                            Visibility="{x:Bind ViewModel.VideoIconVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=inverse}">
+                    <Button Background="Transparent" Foreground="White" IsHitTestVisible="{x:Bind ViewModel.RingContentVisibility, Converter={StaticResource inverseBoolConverter}, Mode=OneWay}"
+                            Command="{x:Bind ViewModel.GoToLookEmotionsCommand}">
+                        <Viewbox Height="{Binding ElementName=DoneButton, Path=ActualHeight}">
+                            <SymbolIcon Symbol="Emoji" />
+                        </Viewbox>
+                    </Button>
+                    <Button Background="Transparent" Foreground="White" Command="{x:Bind ViewModel.ShowVideoCommand}"
+                        IsHitTestVisible="{x:Bind ViewModel.RingContentVisibility, Converter={StaticResource inverseBoolConverter}, Mode=OneWay}">
+                        <Viewbox Height="{Binding ElementName=DoneButton, Path=ActualHeight}">
+                            <SymbolIcon Symbol="{x:Bind ViewModel.ShowScreenVideoIcon, Mode=OneWay}" />
+                        </Viewbox>
+                    </Button>
+                </StackPanel>
             </Grid>
         </Border>
 
         <Grid Grid.Row="1" Visibility="{x:Bind ViewModel.VideoGridVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=right}">
-
             <GridView ItemsSource="{x:Bind ViewModel.Screens, Mode=OneWay}" Visibility="{x:Bind ViewModel.SelectVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=right}" 
                       SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay, Converter={StaticResource itemConverter}}">
                 <GridView.ItemTemplate>

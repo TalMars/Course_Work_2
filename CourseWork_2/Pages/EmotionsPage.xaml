@@ -5,7 +5,13 @@
     xmlns:local="using:CourseWork_2.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:CourseWork_2.Converters"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <converters:InverseBoolConverter x:Key="inverseBoolConverter" />
+    </Page.Resources>
 
     <Grid Background="#2b3346">
         <Grid.RowDefinitions>
@@ -15,19 +21,89 @@
 
         <Border BorderThickness="0,0,0,1" BorderBrush="DarkGray">
             <Grid>
-                <Button x:Name="DoneButton" Background="Transparent" Foreground="White" Command="{x:Bind ViewModel.GoBackCommand}">
-                    <!--IsHitTestVisible="{x:Bind ViewModel.RingContentVisibility, Converter={StaticResource inverseBoolConverter}, Mode=OneWay}" -->
+                <Button x:Name="DoneButton" Background="Transparent" Foreground="White" Command="{x:Bind ViewModel.GoBackCommand}"
+                    IsHitTestVisible="{x:Bind ViewModel.RingContentVisibility, Converter={StaticResource inverseBoolConverter}, Mode=OneWay}">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Symbol="Back" />
                     </StackPanel>
                 </Button>
                 <TextBlock Text="Emotions" VerticalAlignment="Center" HorizontalAlignment="Center"
                        FontSize="20" Foreground="White" FontWeight="Medium" />
-                <!--<Button Background="Transparent" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"
-                        Margin="0,0,5,0" Command="{x:Bind ViewModel.AddCommand}">
-                    <SymbolIcon Symbol="More" />
-                </Button>-->
+                <Button Background="Transparent" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"
+                        Margin="0,0,5,0" Command="{x:Bind ViewModel.SaveKeyCommand}" Content="Done" FontSize="18"
+                        Visibility="{x:Bind ViewModel.CheckSubKeyVisibility, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=inverse}"/>
             </Grid>
         </Border>
+
+        <Grid Grid.Row="1" Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=right}">
+            <Grid Visibility="{x:Bind ViewModel.CheckSubKeyVisibility, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=right}">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="0.2*" />
+                </Grid.RowDefinitions>
+
+                <ContentControl Content="{x:Bind ViewModel.VideoPlayer, Mode=OneWay}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+                <Grid Grid.Row="1" Background="White">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" DataContext="{x:Bind ViewModel.Emotion1, Mode=OneWay}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Image Source="{Binding CroppedImage}" />
+                        <TextBlock Grid.Row="1" Text="{Binding EmotionString}" FontWeight="Bold" Foreground="Black" />
+                    </Grid>
+                    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" DataContext="{x:Bind ViewModel.Emotion2, Mode=OneWay}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Image Source="{Binding CroppedImage}" />
+                        <TextBlock Grid.Row="1" Text="{Binding EmotionString}" FontWeight="Bold" Foreground="Black" />
+                    </Grid>
+                    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2" DataContext="{x:Bind ViewModel.Emotion3, Mode=OneWay}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Image Source="{Binding CroppedImage}" />
+                        <TextBlock Grid.Row="1" Text="{Binding EmotionString}" FontWeight="Bold" Foreground="Black" />
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <Grid Visibility="{x:Bind ViewModel.CheckSubKeyVisibility, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=inverse}">
+                <StackPanel>
+                    <TextBox PlaceholderText="SubscriptionKey" Foreground="White" Background="Transparent" BorderBrush="DarkGray"
+                         Margin="0,10,0,0" BorderThickness="0,1" Text="{x:Bind ViewModel.SubscriptionKey, Mode=TwoWay}" />
+                    <Grid Background="Transparent" BorderBrush="DarkGray"
+                         Margin="0,10,0,0" BorderThickness="0,1">
+                        <TextBlock Foreground="White" Margin="10,0,5,0" TextWrapping="WrapWholeWords">
+                                <Run>You need to get the subscription key for </Run>
+                                <Hyperlink NavigateUri="https://azure.microsoft.com/en-us/try/cognitive-services/">Emotion API</Hyperlink> 
+                                <Run> to recognize emotions.</Run>
+                                <LineBreak />
+                                <Run>Video must meet the conditions:</Run>
+                                <LineBreak />
+                                <Run>* Video file size should be no larger than 100MB.</Run>
+                                <LineBreak />
+                                <Run>* The detectable face size range is 24x24 to 2048x2048 pixels.</Run>
+                                <LineBreak />
+                                <Run>* Frontal and near-frontal faces have the best results. </Run>
+                        </TextBlock>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                    Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=inverse}">
+            <ProgressRing Width="50" Height="50" IsActive="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay}" />
+            <TextBlock Text="{x:Bind ViewModel.RingText, Mode=OneWay}" TextAlignment="Center" />
+        </StackPanel>
     </Grid>
 </Page>

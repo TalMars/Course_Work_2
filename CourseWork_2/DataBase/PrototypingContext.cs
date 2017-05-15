@@ -13,8 +13,10 @@ namespace CourseWork_2.DataBase
         public DbSet<Prototype> Prototypes { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<RecordSettings> RecordSettings { get; set; }
-        public DbSet<Record> RecordsPrototype { get; set; }
-        public DbSet<RecordScreen> RecordsScreens { get; set; }
+        public DbSet<Record> Records { get; set; }
+        public DbSet<RecordScreen> RecordScreens { get; set; }
+        public DbSet<EmotionFragment> EmotionFragments { get; set; }
+        public DbSet<EmotionMeanScores> EmotionScores { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -49,6 +51,14 @@ namespace CourseWork_2.DataBase
                 .Property(r => r.RecordScreenId)
                 .ValueGeneratedOnAdd();
 
+            modelBuilder.Entity<EmotionFragment>()
+                .Property(r => r.EmotionFragmentId)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<EmotionMeanScores>()
+                .Property(r => r.EmotionMeanScoresId)
+                .ValueGeneratedOnAdd();
+
             //Relationships
             modelBuilder.Entity<RecordSettings>()
                 .HasOne(rs => rs.Record)
@@ -68,6 +78,16 @@ namespace CourseWork_2.DataBase
             modelBuilder.Entity<RecordScreen>()
                 .HasOne(rs => rs.Record)
                 .WithMany(rp => rp.Screens)
+                .OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<EmotionFragment>()
+                .HasOne(rs => rs.Record)
+                .WithMany(rp => rp.ResultEmotion)
+                .OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<EmotionMeanScores>()
+                .HasOne(rs => rs.EmotionFragment)
+                .WithMany(rp => rp.Scores)
                 .OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Cascade);
         }
 
