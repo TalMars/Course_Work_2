@@ -97,7 +97,7 @@ namespace CourseWork_2.Extensions
             // Get the cropped pixels within the bounds of transform.
             PixelDataProvider pix = await decoder.GetPixelDataAsync(
                 BitmapPixelFormat.Bgra8,
-                BitmapAlphaMode.Straight,
+                BitmapAlphaMode.Premultiplied,
                 transform,
                 ExifOrientationMode.IgnoreExifOrientation,
                 ColorManagementMode.ColorManageToSRgb);

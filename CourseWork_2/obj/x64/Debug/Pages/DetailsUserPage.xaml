@@ -74,7 +74,7 @@
             </Grid.RowDefinitions>
             <StackPanel>
                 <TextBlock Text="{Binding Name}" Foreground="White" FontSize="18" />
-                <TextBlock Text="{Binding UserPrototypeId, Converter={StaticResource countURConverter}, ConverterParameter=user}" Foreground="White" FontSize="14" />
+                <TextBlock Text="{Binding UserId, Converter={StaticResource countURConverter}, ConverterParameter=user}" Foreground="White" FontSize="14" />
             </StackPanel>
             <Grid Grid.Row="1">
                 <TextBlock Text="{Binding LastRecordingDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=lastRecord}"

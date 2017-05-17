@@ -18,6 +18,7 @@ using Windows.Media.MediaProperties;
 using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.System.Display;
+using Windows.System.Profile;
 
 namespace CourseWork_2.ViewModel
 {
@@ -159,7 +160,7 @@ namespace CourseWork_2.ViewModel
             DeviceInformation cameraDevice = await GetFrontalCameraDevice();
             if (cameraDevice != null)
             {
-                MediaCaptureInitializationSettings mediaInitSettings = new MediaCaptureInitializationSettings { VideoDeviceId = cameraDevice.Id,  };
+                MediaCaptureInitializationSettings mediaInitSettings = new MediaCaptureInitializationSettings { VideoDeviceId = cameraDevice.Id, };
                 _mediaCapture = new MediaCapture();
                 _displayRequest = new DisplayRequest();
                 await _mediaCapture.InitializeAsync(mediaInitSettings);
@@ -170,8 +171,9 @@ namespace CourseWork_2.ViewModel
                 CaptureElement.Source = _mediaCapture;
                 CaptureElement.FlowDirection = Windows.UI.Xaml.FlowDirection.RightToLeft;
                 await _mediaCapture.StartPreviewAsync();
-                
-                await SetPreviewRotationAsync();
+
+                if (AnalyticsInfo.VersionInfo.DeviceFamily.Equals("Windows.Mobile"))
+                    await SetPreviewRotationAsync();
 
                 _isPreviewing = true;
                 PreviewVisibility = true;
@@ -265,7 +267,7 @@ namespace CourseWork_2.ViewModel
                 {
                     _displayRequest.RequestRelease();
                 }
-                if(_isRecording)
+                if (_isRecording)
                     await _mediaCapture.StopRecordAsync();
                 _mediaCapture.Dispose();
                 _mediaCapture = null;
@@ -395,11 +397,12 @@ namespace CourseWork_2.ViewModel
                         db.Records.Update(record);
 
                         var encodingProfile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto);
-                        encodingProfile.Video.Properties.Add(RotationKey, 270);
+                        if (AnalyticsInfo.VersionInfo.DeviceFamily.Equals("Windows.Mobile"))
+                            encodingProfile.Video.Properties.Add(RotationKey, 270);
                         await _mediaCapture.StartRecordToStorageFileAsync(encodingProfile, videoFile);
                         _isRecording = true;
                     }
-                        //var rotationAngle = CameraRotationHelper.ConvertSimpleOrientationToClockwiseDegrees(_rotationHelper.GetCameraCaptureOrientation());
+                    //var rotationAngle = CameraRotationHelper.ConvertSimpleOrientationToClockwiseDegrees(_rotationHelper.GetCameraCaptureOrientation());
                     db.SaveChanges();
                 }
             }

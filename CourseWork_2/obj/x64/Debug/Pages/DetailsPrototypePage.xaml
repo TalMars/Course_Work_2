@@ -127,7 +127,7 @@
                                 </Grid.RowDefinitions>
                                 <StackPanel>
                                     <TextBlock Text="{Binding Name}" Foreground="White" FontSize="18" />
-                                    <TextBlock Text="{Binding UserPrototypeId, Converter={StaticResource countURConverter}, ConverterParameter=user}" Foreground="DarkGray" FontSize="14" />
+                                    <TextBlock Text="{Binding UserId, Converter={StaticResource countURConverter}, ConverterParameter=user}" Foreground="DarkGray" FontSize="14" />
                                 </StackPanel>
                                 <Grid Margin="0,5,0,0" Grid.Row="1">
                                     <Border BorderBrush="DarkGray" BorderThickness="0,0,0,1"

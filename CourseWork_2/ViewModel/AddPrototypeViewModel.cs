@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Popups;
 
 namespace CourseWork_2.ViewModel
 {
@@ -130,7 +131,7 @@ namespace CourseWork_2.ViewModel
             }
         }
 
-        private void CreateFunc()
+        private async void CreateFunc()
         {
             if (!UrlText.Equals("") && !NameText.Equals("") && !DescriptionText.Equals(""))
             {
@@ -146,6 +147,11 @@ namespace CourseWork_2.ViewModel
                     db.SaveChanges();
                 }
                 ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(PrototypesPage));
+            }
+            else
+            {
+                var message = new MessageDialog("Please fill in all the fields.");
+                await message.ShowAsync();
             }
         }
 

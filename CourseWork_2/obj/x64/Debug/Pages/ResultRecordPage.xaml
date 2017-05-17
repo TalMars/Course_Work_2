@@ -8,7 +8,7 @@
     xmlns:triggers="using:WinRT.Triggers"
     xmlns:converters="using:CourseWork_2.Converters"
     mc:Ignorable="d">
-    
+
     <Page.Resources>
         <converters:BoolToVisibilityConverter x:Key="boolToVisConverter" />
         <converters:ReturnModelConverter x:Key="itemConverter" />
@@ -30,20 +30,27 @@
                         <SymbolIcon Symbol="Back" />
                     </StackPanel>
                 </Button>
-                <TextBlock Text="Result Screens" VerticalAlignment="Center" HorizontalAlignment="Center"
+                <TextBlock Text="Result Record" VerticalAlignment="Center" HorizontalAlignment="Center"
                        FontSize="20" Foreground="White" FontWeight="Medium" />
-                <Button x:ConnectionId='12' Background="Transparent" Foreground="White"                                               HorizontalAlignment="Right"
-                                                                                                                                                 
-                        Margin="0,0,5,0"                                                                                                                                            >
-                    <Viewbox Height="{Binding ElementName=DoneButton, Path=ActualHeight}">
-                        <SymbolIcon x:ConnectionId='13'                                                              />
-                    </Viewbox>
-                </Button>
+                <StackPanel x:ConnectionId='12' Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0"
+                                                                                                                                                                       >
+                    <Button x:ConnectionId='13' Background="Transparent" Foreground="White"                                                                                                                          
+                                                                                >
+                        <Viewbox Height="{Binding ElementName=DoneButton, Path=ActualHeight}">
+                            <SymbolIcon Symbol="Emoji" />
+                        </Viewbox>
+                    </Button>
+                    <Button x:ConnectionId='14' Background="Transparent" Foreground="White"                                              
+                                                                                                                                                 >
+                        <Viewbox Height="{Binding ElementName=DoneButton, Path=ActualHeight}">
+                            <SymbolIcon x:ConnectionId='15'                                                              />
+                        </Viewbox>
+                    </Button>
+                </StackPanel>
             </Grid>
         </Border>
 
         <Grid x:ConnectionId='2' Grid.Row="1"                                                                                                                                          >
-
             <GridView x:ConnectionId='6'                                                                                                                                                                                              
                                                                                                                            >
                 <GridView.ItemTemplate>

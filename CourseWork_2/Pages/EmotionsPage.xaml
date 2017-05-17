@@ -32,6 +32,10 @@
                 <Button Background="Transparent" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"
                         Margin="0,0,5,0" Command="{x:Bind ViewModel.SaveKeyCommand}" Content="Done" FontSize="18"
                         Visibility="{x:Bind ViewModel.CheckSubKeyVisibility, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=inverse}"/>
+                <Button Background="Transparent" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"
+                        Margin="0,0,5,0" Command="{x:Bind ViewModel.GoToSummaryEmotionsCommand}" Content="Summary" FontSize="18"
+                        IsHitTestVisible="{x:Bind ViewModel.RingContentVisibility, Converter={StaticResource inverseBoolConverter}, Mode=OneWay}"
+                        Visibility="{x:Bind ViewModel.CheckSubKeyVisibility, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=right}"/>
             </Grid>
         </Border>
 
@@ -43,7 +47,7 @@
                 </Grid.RowDefinitions>
 
                 <ContentControl Content="{x:Bind ViewModel.VideoPlayer, Mode=OneWay}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
-                <Grid Grid.Row="1" Background="White">
+                <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
@@ -55,7 +59,7 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Image Source="{Binding CroppedImage}" />
-                        <TextBlock Grid.Row="1" Text="{Binding EmotionString}" FontWeight="Bold" Foreground="Black" />
+                        <TextBlock Grid.Row="1" Text="{Binding EmotionString}" FontWeight="Bold" Foreground="DarkGray" />
                     </Grid>
                     <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" DataContext="{x:Bind ViewModel.Emotion2, Mode=OneWay}">
                         <Grid.RowDefinitions>
@@ -63,7 +67,7 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Image Source="{Binding CroppedImage}" />
-                        <TextBlock Grid.Row="1" Text="{Binding EmotionString}" FontWeight="Bold" Foreground="Black" />
+                        <TextBlock Grid.Row="1" Text="{Binding EmotionString}" FontWeight="Bold" Foreground="DarkGray" />
                     </Grid>
                     <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2" DataContext="{x:Bind ViewModel.Emotion3, Mode=OneWay}">
                         <Grid.RowDefinitions>
@@ -71,7 +75,7 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Image Source="{Binding CroppedImage}" />
-                        <TextBlock Grid.Row="1" Text="{Binding EmotionString}" FontWeight="Bold" Foreground="Black" />
+                        <TextBlock Grid.Row="1" Text="{Binding EmotionString}" FontWeight="Bold" Foreground="DarkGray" />
                     </Grid>
                 </Grid>
             </Grid>

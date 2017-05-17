@@ -211,14 +211,17 @@ namespace CourseWork_2.ViewModel
 
         private void GoBackFunc()
         {
-            Windows.UI.Xaml.Controls.Frame frame = (Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content;
-            frame.BackStack.Clear();
-            if (prototypeId >= 0)
-                frame.Navigate(typeof(DetailsPrototypePage), prototypeId);
-            if (userId >= 0)
-                frame.Navigate(typeof(DetailsUserPage), userId);
-            if (RecordModel != null)
-                frame.Navigate(typeof(DetailsUserPage), RecordModel.UserId);
+            if (!_ringContentVisibility)
+            {
+                Windows.UI.Xaml.Controls.Frame frame = (Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content;
+                frame.BackStack.Clear();
+                if (prototypeId >= 0)
+                    frame.Navigate(typeof(DetailsPrototypePage), prototypeId);
+                if (userId >= 0)
+                    frame.Navigate(typeof(DetailsUserPage), userId);
+                if (RecordModel != null)
+                    frame.Navigate(typeof(DetailsUserPage), RecordModel.UserId);
+            }
         }
 
         public ICommand ShowVideoCommand
@@ -243,7 +246,15 @@ namespace CourseWork_2.ViewModel
         private void GoToLookEmotions()
         {
             Windows.UI.Xaml.Controls.Frame frame = (Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content;
-            frame.Navigate(typeof(EmotionsPage), RecordModel.RecordId);
+            using (var db = new PrototypingContext())
+            {
+                if (prototypeId >= 0)
+                    frame.Navigate(typeof(SummaryEmotionsPage), db.Prototypes.Single(p => p.PrototypeId == prototypeId));
+                if (userId >= 0)
+                    frame.Navigate(typeof(SummaryEmotionsPage), db.Users.Single(u => u.UserId == userId));
+                if (RecordModel != null)
+                    frame.Navigate(typeof(EmotionsPage), RecordModel.RecordId);
+            }
         }
         #endregion
 

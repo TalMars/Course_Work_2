@@ -41,11 +41,12 @@ namespace CourseWork_2.ViewModel
 
         private ICommand _goBackCommand;
         private ICommand _saveKeyCommand;
+        private ICommand _goToSummaryEmotionsCommand;
 
         private EventHandler<Windows.UI.Core.BackRequestedEventArgs> requestHandler;
         private EventHandler<Windows.Phone.UI.Input.BackPressedEventArgs> pressedHandler;
 
-        private static readonly TimeSpan QueryWaitTime = TimeSpan.FromSeconds(40);
+        private static readonly TimeSpan QueryWaitTime = TimeSpan.FromSeconds(60);
         private DispatcherTimer _emotionSyncTimer;
         private VideoAggregateRecognitionResult _videoResult;
 
@@ -78,14 +79,22 @@ namespace CourseWork_2.ViewModel
 
         public async Task LoadSubKey()
         {
-            CheckSubKeyVisibility = true;
-            StorageFile subKeyFile = (StorageFile)await ApplicationData.Current.LocalFolder.TryGetItemAsync(subKeyFileName);
-            if (subKeyFile != null)
+            if (recordModel.ResultEmotion.Count == 0)
             {
-                SubscriptionKey = await FileIO.ReadTextAsync(subKeyFile);
+                CheckSubKeyVisibility = true;
+                StorageFile subKeyFile = (StorageFile)await ApplicationData.Current.LocalFolder.TryGetItemAsync(subKeyFileName);
+                if (subKeyFile != null)
+                {
+                    SubscriptionKey = await FileIO.ReadTextAsync(subKeyFile);
+                }
+            }
+            else
+            {
+                await LoadData();
             }
         }
 
+        #region emotion loads
         private async Task LoadData()
         {
             RingText = "Loading data...";
@@ -139,7 +148,6 @@ namespace CourseWork_2.ViewModel
 
             RingContentVisibility = false;
         }
-
 
         private async Task Processing(StorageFile videoFile)
         {
@@ -443,6 +451,8 @@ namespace CourseWork_2.ViewModel
             }
         }
 
+        #endregion
+
         #region back event
         private void RegisterGoBackEventHandlers()
         {
@@ -545,6 +555,16 @@ namespace CourseWork_2.ViewModel
             await LoadData();
         }
 
+        public ICommand GoToSummaryEmotionsCommand
+        {
+            get { return _goToSummaryEmotionsCommand = new Command(() => GoToSummaryEmotions()); }
+        }
+
+        private void GoToSummaryEmotions()
+        {
+            ((Frame)Window.Current.Content).Navigate(typeof(SummaryEmotionsPage), recordModel);
+        }
+
         public ICommand GoBackCommand
         {
             get
@@ -555,11 +575,14 @@ namespace CourseWork_2.ViewModel
 
         private void GoBackFunc()
         {
-            Frame frame = (Frame)Window.Current.Content;
-            frame.BackStack.Clear();
-            if (recordModel != null)
+            if (!_ringContentVisibility)
             {
-                frame.Navigate(typeof(ResultRecordPage), recordModel);
+                Frame frame = (Frame)Window.Current.Content;
+                frame.BackStack.Clear();
+                if (recordModel != null)
+                {
+                    frame.Navigate(typeof(ResultRecordPage), recordModel);
+                }
             }
         }
 

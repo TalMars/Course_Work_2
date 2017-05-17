@@ -319,3 +319,8 @@ C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\FxResources.System.ComponentModel.Primitives.SR.resw
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\FxResources.System.ComponentModel.TypeConverter.SR.resw
 C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\FxResources.System.Runtime.Serialization.Formatters.SR.resw
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\SummaryEmotionsPage.g.i.cs
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\SummaryEmotionsPage.g.cs
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\SummaryEmotionsPage.xaml
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\obj\ARM\Debug\Pages\SummaryEmotionsPage.xbf
+C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\ARM\Debug\Pages\SummaryEmotionsPage.xbf
