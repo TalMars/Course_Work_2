@@ -23,6 +23,7 @@ using Windows.Graphics.Imaging;
 using Windows.Media.Core;
 using Windows.Storage;
 using Windows.Storage.Streams;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
@@ -94,6 +95,12 @@ namespace CourseWork_2.ViewModel
             }
         }
 
+        private async Task ErrorMessageDialog(string message)
+        {
+            var dialog = new MessageDialog(message);
+            await dialog.ShowAsync();
+        }
+
         #region emotion loads
         private async Task LoadData()
         {
@@ -121,7 +128,8 @@ namespace CourseWork_2.ViewModel
                     }
                     else
                     {
-                        //large file
+                        await ErrorMessageDialog("The video file size exceeds 100 MB");
+                        GoBackFunc();
                     }
                 }
                 else
@@ -152,7 +160,6 @@ namespace CourseWork_2.ViewModel
         private async Task Processing(StorageFile videoFile)
         {
             VideoAggregateRecognitionResult operationResult = await UploadAndDetectEmotions(videoFile);
-
             if (operationResult != null)
             {
                 _videoResult = operationResult;
@@ -224,7 +231,6 @@ namespace CourseWork_2.ViewModel
                         await videoFileStream.CopyToAsync(memoryStream);
                         bytesVideo = memoryStream.ToArray();
                     }
-                    //VideoEmotionRecognitionOperation videoOperation = await emotionServiceClient.RecognizeInVideoAsync(bytesVideo);
                     //get operation id on service
                     operationLocation = await UploadEmotion(bytesVideo);
 
@@ -241,9 +247,10 @@ namespace CourseWork_2.ViewModel
 
                 }
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                //message exception
+                await ErrorMessageDialog("Oops, error. Check your internet connection.");
+                GoBackFunc();
             }
 
 
@@ -257,7 +264,6 @@ namespace CourseWork_2.ViewModel
             client.Timeout = TimeSpan.FromMinutes(10);
             client.DefaultRequestHeaders.ExpectContinue = false;
             client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", _subscriptionKey);
-            //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             var uri = "https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognizeinvideo?outputStyle=aggregate";
             HttpResponseMessage response;
 
@@ -276,7 +282,8 @@ namespace CourseWork_2.ViewModel
                 }
                 else
                 {
-                    //ErrorMessage(response, false);
+                    string message = ErrorMessage(response, false);
+                    await ErrorMessageDialog(message);
                 }
             }
 
@@ -316,15 +323,15 @@ namespace CourseWork_2.ViewModel
                 await Task.Delay(QueryWaitTime);
             }
 
-            if (videoResult == null || !string.IsNullOrEmpty(errorMessage))
+            if (!string.IsNullOrEmpty(errorMessage))
             {
-                //message error
+                await ErrorMessageDialog(errorMessage);
             }
             else
             {
                 if (videoResult.Status == VideoOperationStatus.Failed)
                 {
-                    //error message fail
+                    await ErrorMessageDialog("Recognize emotions failed.");
                 }
                 else
                 {
@@ -386,7 +393,7 @@ namespace CourseWork_2.ViewModel
 
         private void UpdateEmotionForTime()
         {
-            if (_player.MediaPlayer.PlaybackSession.PlaybackState == Windows.Media.Playback.MediaPlaybackState.Playing && recordModel.ResultEmotion != null)
+            if (_player.MediaPlayer.PlaybackSession.PlaybackState == Windows.Media.Playback.MediaPlaybackState.Playing && recordModel.ResultEmotion != null && recordModel.ResultEmotion.Count > 0)
             {
                 // get the current position of the video in terms of the timescale
                 var currentTimeInTimescale = _player.MediaPlayer.PlaybackSession.Position.TotalSeconds * recordModel.EmotionVideoTimeScale;

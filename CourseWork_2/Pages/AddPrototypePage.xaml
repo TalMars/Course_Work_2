@@ -22,7 +22,7 @@
             <Grid>
                 <Button Background="Transparent" Content="Cancel" Foreground="White"
                         FontSize="18" Margin="0,0,0,0" FontWeight="Medium" Command="{x:Bind ViewModel.CancelCommand}" />
-                <TextBlock Text="Add Prototype" FontSize="20" FontWeight="Medium"
+                <TextBlock Text="{x:Bind ViewModel.HeaderText}" FontSize="20" FontWeight="Medium"
                            Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 <Button Background="Transparent" Content="Create" Foreground="White" FontWeight="Medium"
                         FontSize="18" HorizontalAlignment="Right" Command="{x:Bind ViewModel.CreateCommand}"

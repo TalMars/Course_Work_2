@@ -69,6 +69,7 @@ namespace CourseWork_2.Pages
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            ViewModel.Cleaning();
             ViewModel.UnregisterPressedEventHadler();
             ViewModel.UnregisterRequestEventHander();
         }

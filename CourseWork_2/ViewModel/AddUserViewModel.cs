@@ -13,6 +13,7 @@ namespace CourseWork_2.ViewModel
 {
     public class AddUserViewModel : NotifyPropertyChanged
     {
+        private string _headerText;
         private string _nameText;
         private string _biographyText;
         private int prototypeId;
@@ -27,6 +28,7 @@ namespace CourseWork_2.ViewModel
 
         public AddUserViewModel()
         {
+            HeaderText = "Add user";
             _nameText = "";
             _biographyText = "";
 
@@ -41,6 +43,7 @@ namespace CourseWork_2.ViewModel
 
         public void LoadUser(User _user)
         {
+            HeaderText = "Edit user";
             IsEdit = true;
             user = _user;
             NameText = user.Name;
@@ -50,14 +53,15 @@ namespace CourseWork_2.ViewModel
 
         public void LoadUser(int _userId)
         {
-            using(var db = new PrototypingContext())
+            HeaderText = "Edit user";
+            IsEdit = true;
+            using (var db = new PrototypingContext())
             {
                 User _user = db.Users.Single(u => u.UserId == _userId);
-                IsEdit = true;
                 prototypeId = _user.PrototypeId;
-                user = new User() { UserId = _userId };
                 NameText = _user.Name;
                 BiographyText = _user.Biography;
+                user = new User() { UserId = _userId };
             }
         }
 
@@ -100,6 +104,12 @@ namespace CourseWork_2.ViewModel
         #endregion
 
         #region properties
+        public string HeaderText
+        {
+            get { return _headerText; }
+            set { Set(ref _headerText, value); }
+        }
+
         public string NameText
         {
             get { return _nameText; }
@@ -143,7 +153,7 @@ namespace CourseWork_2.ViewModel
                     });
                     db.SaveChanges();
                 }
-                ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(DetailsPrototypePage), prototypeId);
+                GoBackFunc();
             }
             else
             {
@@ -160,7 +170,7 @@ namespace CourseWork_2.ViewModel
             }
         }
 
-        private void SaveFunc()
+        private async void SaveFunc()
         {
             if (!NameText.Equals("") && !BiographyText.Equals(""))
             {
@@ -173,6 +183,11 @@ namespace CourseWork_2.ViewModel
                     db.SaveChanges();
                 }
                 GoBackFunc();
+            }
+            else
+            {
+                var message = new MessageDialog("Please fill in all the fields.");
+                await message.ShowAsync();
             }
         }
 

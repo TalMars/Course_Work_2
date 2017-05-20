@@ -22,12 +22,12 @@
             <Grid>
                 <Button x:ConnectionId='5' Background="Transparent" Content="Cancel" Foreground="White"
                         FontSize="18" Margin="0,0,0,0" FontWeight="Medium"                                            />
-                <TextBlock Text="Add Prototype" FontSize="20" FontWeight="Medium"
+                <TextBlock x:ConnectionId='6'                                      FontSize="20" FontWeight="Medium"
                            Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                <Button x:ConnectionId='6' Background="Transparent" Content="Create" Foreground="White" FontWeight="Medium"
+                <Button x:ConnectionId='7' Background="Transparent" Content="Create" Foreground="White" FontWeight="Medium"
                         FontSize="18" HorizontalAlignment="Right"                                           
                                                                                                                                     />
-                <Button x:ConnectionId='7' Background="Transparent" Content="Save" Foreground="White" FontWeight="Medium"
+                <Button x:ConnectionId='8' Background="Transparent" Content="Save" Foreground="White" FontWeight="Medium"
                         FontSize="18" HorizontalAlignment="Right"                                         
                                                                                                                                         />
             </Grid>

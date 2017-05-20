@@ -13,6 +13,7 @@ namespace CourseWork_2.ViewModel
 {
     public class AddPrototypeViewModel : NotifyPropertyChanged
     {
+        private string _headerText;
         private string _urlText;
         private string _nameText;
         private string _descriptionText;
@@ -27,6 +28,7 @@ namespace CourseWork_2.ViewModel
 
         public AddPrototypeViewModel()
         {
+            HeaderText = "Add prototype";
             _urlText = "";
             _nameText = "";
             _descriptionText = "";
@@ -37,6 +39,7 @@ namespace CourseWork_2.ViewModel
 
         public void LoadPrototype(Prototype _prototype)
         {
+            HeaderText = "Edit prototype";
             IsEdit = true;
             UrlText = _prototype.Url;
             NameText = _prototype.Name;
@@ -46,10 +49,11 @@ namespace CourseWork_2.ViewModel
 
         public void LoadPrototype(int _prototypeId)
         {
+            HeaderText = "Edit prototype";
+            IsEdit = true;
             using (var db = new PrototypingContext())
             {
                 Prototype _prototype = db.Prototypes.Single(p => p.PrototypeId == _prototypeId);
-                IsEdit = true;
                 UrlText = _prototype.Url;
                 NameText = _prototype.Name;
                 DescriptionText = _prototype.Description;
@@ -96,6 +100,12 @@ namespace CourseWork_2.ViewModel
         #endregion
 
         #region properties
+        public string HeaderText
+        {
+            get { return _headerText; }
+            set { Set(ref _headerText, value); }
+        }
+
         public string UrlText
         {
             get { return _urlText; }
@@ -146,7 +156,7 @@ namespace CourseWork_2.ViewModel
                     });
                     db.SaveChanges();
                 }
-                ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(PrototypesPage));
+                GoBackFunc();
             }
             else
             {
@@ -163,7 +173,7 @@ namespace CourseWork_2.ViewModel
             }
         }
 
-        private void SaveFunc()
+        private async void SaveFunc()
         {
             if (!UrlText.Equals("") && !NameText.Equals("") && !DescriptionText.Equals(""))
             {
@@ -177,6 +187,11 @@ namespace CourseWork_2.ViewModel
                     db.SaveChanges();
                 }
                 GoBackFunc();
+            }
+            else
+            {
+                var message = new MessageDialog("Please fill in all the fields.");
+                await message.ShowAsync();
             }
         }
 
