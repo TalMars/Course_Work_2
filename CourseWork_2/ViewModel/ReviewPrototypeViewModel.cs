@@ -1,6 +1,5 @@
 ﻿using CourseWork_2.DataBase;
 using CourseWork_2.DataBase.DBModels;
-using CourseWork_2.Extensions;
 using CourseWork_2.HeatMap;
 using CourseWork_2.Model;
 using CourseWork_2.Pages;
@@ -8,11 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Devices.Enumeration;
-using Windows.Foundation;
 using Windows.Media.Capture;
 using Windows.Media.MediaProperties;
 using Windows.Storage;
@@ -49,13 +46,13 @@ namespace CourseWork_2.ViewModel
 
         private int userId;
         private RecordSettings recordSettings;
+        private DateTime createdDate;
 
         private Windows.UI.Xaml.Controls.CaptureElement _captureElement;
         private MediaCapture _mediaCapture;
         private bool _isPreviewing;
         private bool _isRecording;
         private DisplayRequest _displayRequest;
-        //private CameraRotationHelper _rotationHelper;
         private static readonly Guid RotationKey = new Guid("C380465D-2271-428C-9B83-ECEA3B4A85C1");
 
         private StorageFile videoFile;
@@ -98,6 +95,7 @@ namespace CourseWork_2.ViewModel
         {
             userId = _userId;
             _webview = new Windows.UI.Xaml.Controls.WebView();
+            _webview.Settings.IsJavaScriptEnabled = true;
             _webview.NavigationStarting += WebView_NavigationStarting;
             _webview.NavigationFailed += Webview_NavigationFailed;
             _webview.NavigationCompleted += WebView_NavigationCompleted;
@@ -381,7 +379,8 @@ namespace CourseWork_2.ViewModel
                 using (var db = new PrototypingContext())
                 {
                     Record record = db.Records.Single(rp => rp.RecordId == recordSettings.RecordId);
-                    record.CreatedDate = DateTime.Now;
+                    createdDate = DateTime.Now;
+                    record.CreatedDate = createdDate;
                     db.Records.Update(record);
 
                     if (recordSettings.FrontCamera)
@@ -401,8 +400,18 @@ namespace CourseWork_2.ViewModel
             }
             else
             {
-                //timer.Stop();
-                //CleanupCameraAsync();
+                //add lastRecordingDate in user and prototype
+                using (var db = new PrototypingContext())
+                {
+                    Record record = db.Records.Single(rp => rp.RecordId == recordSettings.RecordId);
+                    User user = db.Users.Single(u => u.UserId == record.UserId);
+                    user.LastRecordingDate = createdDate;
+                    db.Users.Update(user);
+                    Prototype prototype = db.Prototypes.Single(p => p.PrototypeId == user.PrototypeId);
+                    prototype.LastRecordingDate = createdDate;
+                    db.Prototypes.Update(prototype);
+                    db.SaveChanges();
+                }
                 ((Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content).Navigate(typeof(ResultRecordPage), _screens);
             }
         }
@@ -449,7 +458,6 @@ namespace CourseWork_2.ViewModel
                     db.Records.Remove(record);
                     db.SaveChanges();
                 }
-                //CleanupCameraAsync();
                 Windows.UI.Xaml.Controls.Frame frame = (Windows.UI.Xaml.Controls.Frame)Windows.UI.Xaml.Window.Current.Content;
                 frame.BackStack.Clear();
                 frame.Navigate(typeof(DetailsUserPage), userId);

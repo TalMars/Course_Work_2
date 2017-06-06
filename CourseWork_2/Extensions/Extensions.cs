@@ -52,23 +52,6 @@ namespace CourseWork_2.Extensions
             return parent;
         }
 
-        //public static T GetChild<T>(this Border element, string message = null) where T : DependencyObject
-        //{
-        //    var child = element.Child as T;
-
-        //    if (child == null)
-        //    {
-        //        if (message == null)
-        //        {
-        //            message = $"{nameof(Border)}'s child should not be null! Check the default Generic.xaml.";
-        //        }
-
-        //        throw new NullReferenceException(message);
-        //    }
-
-        //    return child;
-        //}
-
         public static Storyboard GetStoryboard(this FrameworkElement element, string name, string message = null)
         {
             var storyboard = element.Resources[name] as Storyboard;

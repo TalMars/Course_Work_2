@@ -9,20 +9,15 @@ using Microsoft.ProjectOxford.Emotion;
 using Microsoft.ProjectOxford.Emotion.Contract;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Foundation;
-using Windows.Graphics.Imaging;
 using Windows.Media.Core;
 using Windows.Storage;
-using Windows.Storage.Streams;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -424,8 +419,6 @@ namespace CourseWork_2.ViewModel
             if (scores != null)
             {
                 EmotionResultDisplayItem[] resultDisplay = new EmotionResultDisplayItem[8];
-                //List<EmotionResultDisplayItem> itemSource = new List<EmotionResultDisplayItem>();
-
                 resultDisplay[0] = new EmotionResultDisplayItem { Emotion = "Anger", Score = scores.AngerScore, CroppedImage = cropEmotions[0] };
                 resultDisplay[1] = new EmotionResultDisplayItem { Emotion = "Contempt", Score = scores.ContemptScore, CroppedImage = cropEmotions[1] };
                 resultDisplay[2] = new EmotionResultDisplayItem { Emotion = "Disgust", Score = scores.DisgustScore, CroppedImage = cropEmotions[2] };

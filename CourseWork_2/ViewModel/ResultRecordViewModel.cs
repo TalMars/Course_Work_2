@@ -10,7 +10,6 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Graphics.Imaging;
@@ -273,7 +272,6 @@ namespace CourseWork_2.ViewModel
                     player.AreTransportControlsEnabled = true;
                     player.Source = MediaSource.CreateFromStorageFile(videoFile);
                     RecordVideo = player;
-                    //RecordVideo = MediaSource.CreateFromStorageFile(videoFile);
                     VideoIconVisibility = true;
                 }
                 else
@@ -470,7 +468,6 @@ namespace CourseWork_2.ViewModel
                 if (!string.IsNullOrEmpty(RecordModel.PathToVideo))
                 {
                     StorageFile videoFile = await StorageFile.GetFileFromPathAsync(RecordModel.PathToVideo);
-                    //await Task.Delay(1000);
                     Windows.UI.Xaml.Controls.MediaPlayerElement player = new Windows.UI.Xaml.Controls.MediaPlayerElement();
                     player.AreTransportControlsEnabled = true;
                     player.Source = MediaSource.CreateFromStorageFile(videoFile);

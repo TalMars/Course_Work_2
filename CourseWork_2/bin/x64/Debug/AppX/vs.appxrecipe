@@ -16,7 +16,7 @@
     <PackageRegistrationPath>
     </PackageRegistrationPath>
     <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
-    <RegisteredManifestChecksum>7A6E2618AC73C2588956A8CDECA2C0DB28A5D1B805C35B681115943F697250E3</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>3F363948990D78D83ECC28BEC337B410ED48943099EAC6D00C1A15F84D5CB43F</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>f0c646ce-9c75-496e-bfcb-7ff3c867b489_1.0.0.0_x64__xmzbx3xekjnpa</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>f0c646ce-9c75-496e-bfcb-7ff3c867b489_xmzbx3xekjnpa!App</RegisteredUserModeAppID>
     <RegisteredPackageID>f0c646ce-9c75-496e-bfcb-7ff3c867b489</RegisteredPackageID>
@@ -28,13 +28,13 @@
     <AppXManifest Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-05-19T11:25:44.090</Modified>
+      <Modified>2017-05-29T11:44:44.754</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\CourseWork_2.exe">
       <PackagePath>entrypoint\CourseWork_2.exe</PackagePath>
-      <Modified>2017-05-19T11:25:38.361</Modified>
+      <Modified>2017-05-29T11:04:44.980</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\CourseWork_2.exe.config">
       <PackagePath>CourseWork_2.exe.config</PackagePath>
@@ -908,11 +908,11 @@
     <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-05-19T11:25:43.305</Modified>
+      <Modified>2017-05-29T11:44:42.546</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\TalMars\Documents\Visual Studio 2015\Projects\Course_Work_2\CourseWork_2\bin\x64\Debug\Core\CourseWork_2.exe">
       <PackagePath>CourseWork_2.exe</PackagePath>
-      <Modified>2017-05-19T11:25:44.075</Modified>
+      <Modified>2017-05-29T11:44:44.738</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

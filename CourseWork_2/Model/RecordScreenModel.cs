@@ -1,9 +1,5 @@
 ﻿using CourseWork_2.HeatMap;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml.Media.Imaging;
 
 namespace CourseWork_2.Model

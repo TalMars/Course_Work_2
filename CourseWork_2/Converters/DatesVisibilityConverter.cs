@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
 
 namespace CourseWork_2.Converters
@@ -13,6 +9,8 @@ namespace CourseWork_2.Converters
         {
             Windows.UI.Xaml.Visibility resultVisibility = Windows.UI.Xaml.Visibility.Visible;
             DateTime dateTime = (DateTime)value;
+            if (dateTime != DateTime.MinValue && parameter.ToString().Equals("created"))
+                resultVisibility = Windows.UI.Xaml.Visibility.Collapsed;
             if (dateTime == DateTime.MinValue && parameter.ToString().Equals("lastRecord"))
                 resultVisibility = Windows.UI.Xaml.Visibility.Collapsed;
             return resultVisibility;

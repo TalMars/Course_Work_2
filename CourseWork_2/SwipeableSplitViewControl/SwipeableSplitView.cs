@@ -1,10 +1,7 @@
 ﻿using CourseWork_2.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
@@ -244,11 +241,6 @@ namespace CourseWork_2.SwipeableSplitViewControl
             RegisterPropertyChangedCallback(DisplayModeProperty, OnDisplayModeChanged);
 
             IsSwipeablePaneOpen = true;
-            // disable ScrollViewer as it will prevent finger from panning
-            //if (Pane is ListView || Pane is ListBox)
-            //{
-            //    ScrollViewer.SetVerticalScrollMode(Pane, ScrollMode.Disabled);
-            //}
         }
 
         #region native property change handlers
@@ -293,29 +285,6 @@ namespace CourseWork_2.SwipeableSplitViewControl
 
             // while we are panning the PanArea on X axis, let's sync the PaneRoot's position X too
             _paneRootTransform.TranslateX = _panAreaTransform.TranslateX = x;
-
-            //if (sender == _paneRoot && this.IsPanSelectorEnabled)
-            //{
-            //    // un-highlight everything first
-            //    foreach (var item in _menuItems)
-            //    {
-            //        VisualStateManager.GoToState(item, "Normal", true);
-            //    }
-
-            //    _toBeSelectedIndex = (int)Math.Round((e.Cumulative.Translation.Y + _startingDistance) / _distancePerItem, MidpointRounding.AwayFromZero);
-            //    if (_toBeSelectedIndex < 0)
-            //    {
-            //        _toBeSelectedIndex = 0;
-            //    }
-            //    else if (_toBeSelectedIndex >= _menuItems.Count)
-            //    {
-            //        _toBeSelectedIndex = _menuItems.Count - 1;
-            //    }
-
-            //    // highlight the item that's going to be selected
-            //    var itemContainer = _menuItems[_toBeSelectedIndex];
-            //    VisualStateManager.GoToState(itemContainer, "PointerOver", true);
-            //}
         }
 
         void OnManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
@@ -406,31 +375,6 @@ namespace CourseWork_2.SwipeableSplitViewControl
         }
 
         #endregion
-
-        //#region loaded event handlers
-
-        ////void OnPaneRootLoaded(object sender, RoutedEventArgs e)
-        ////{
-        ////    // fill the local menu items collection for later use
-        ////    if (this.IsPanSelectorEnabled)
-        ////    {
-        ////        var border = (Border)this.PaneRoot.Children[0];
-        ////        _menuHost = border.GetChild<Selector>("For the bottom panning to work, the Pane's Child needs to be of type Selector.");
-
-        ////        foreach (var item in _menuHost.Items)
-        ////        {
-        ////            var container = (SelectorItem)_menuHost.ContainerFromItem(item);
-        ////            _menuItems.Add(container);
-        ////        }
-
-        ////        _distancePerItem = TOTAL_PANNING_DISTANCE / _menuItems.Count;
-
-        ////        // calculate the initial starting distance
-        ////        _startingDistance = _distancePerItem * _menuHost.SelectedIndex;
-        ////    }
-        ////}
-
-        //#endregion
 
         #region private methods
 

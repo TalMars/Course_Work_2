@@ -2,10 +2,7 @@
 using CourseWork_2.DataBase.DBModels;
 using CourseWork_2.Pages;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Popups;
 

@@ -1,10 +1,5 @@
 ﻿using CourseWork_2.HeatMap;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Foundation;
 
 namespace CourseWork_2.DataBase.DBModels
 {

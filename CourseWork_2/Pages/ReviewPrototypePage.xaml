@@ -19,7 +19,7 @@
         </ResourceDictionary>
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="#2b3346">
         <swipeableSV:SwipeableSplitView x:Name="SplitView" OpenPaneLength="60" IsSwipeablePaneOpen="{x:Bind ViewModel.IsSplitViewPaneOpen, Mode=TwoWay}"
                                         Visibility="{x:Bind ViewModel.RingContentVisibility, Mode=OneWay, Converter={StaticResource boolToVisConverter}, ConverterParameter=right}">
             <SplitView.Pane>

@@ -32,6 +32,10 @@
                 <Button x:ConnectionId='14' Background="Transparent" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"
                         Margin="0,0,5,0"                                             Content="Done" FontSize="18"
                                                                                                                                                                             />
+                <Button x:ConnectionId='15' Background="Transparent" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"
+                        Margin="0,0,5,0"                                                         Content="Summary" FontSize="18"
+                                                                                                                                                 
+                                                                                                                                                                          />
             </Grid>
         </Border>
 
@@ -43,7 +47,7 @@
                 </Grid.RowDefinitions>
 
                 <ContentControl x:ConnectionId='9'                                                       HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
-                <Grid Grid.Row="1" Background="White">
+                <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
@@ -55,7 +59,7 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Image Source="{Binding CroppedImage}" />
-                        <TextBlock Grid.Row="1" Text="{Binding EmotionString}" FontWeight="Bold" Foreground="Black" />
+                        <TextBlock Grid.Row="1" Text="{Binding EmotionString}" FontWeight="Bold" Foreground="DarkGray" />
                     </Grid>
                     <Grid x:ConnectionId='11' VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1"                                                       >
                         <Grid.RowDefinitions>
@@ -63,7 +67,7 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Image Source="{Binding CroppedImage}" />
-                        <TextBlock Grid.Row="1" Text="{Binding EmotionString}" FontWeight="Bold" Foreground="Black" />
+                        <TextBlock Grid.Row="1" Text="{Binding EmotionString}" FontWeight="Bold" Foreground="DarkGray" />
                     </Grid>
                     <Grid x:ConnectionId='12' VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2"                                                       >
                         <Grid.RowDefinitions>
@@ -71,7 +75,7 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Image Source="{Binding CroppedImage}" />
-                        <TextBlock Grid.Row="1" Text="{Binding EmotionString}" FontWeight="Bold" Foreground="Black" />
+                        <TextBlock Grid.Row="1" Text="{Binding EmotionString}" FontWeight="Bold" Foreground="DarkGray" />
                     </Grid>
                 </Grid>
             </Grid>

@@ -16,7 +16,6 @@ namespace CourseWork_2.ViewModel
 
         private bool _fronCameraIsOn;
         private bool _touchesIsOn;
-        //private bool _saveTouchesIsOn;
 
         private ICommand _cancelCommand;
         private ICommand _doneCommand;
@@ -31,7 +30,6 @@ namespace CourseWork_2.ViewModel
 
             FrontCameraIsOn = true;
             TouchesIsOn = true;
-            //SaveTouchesIsOn = true;
 
             userId = _userId;
         }
@@ -80,18 +78,9 @@ namespace CourseWork_2.ViewModel
             get { return _touchesIsOn; }
             set
             {
-                //if (!value && _saveTouchesIsOn)
-                //    SaveTouchesIsOn = false;
-
                 Set(ref _touchesIsOn, value);
             }
         }
-
-        //public bool SaveTouchesIsOn
-        //{
-        //    get { return _saveTouchesIsOn; }
-        //    set { Set(ref _saveTouchesIsOn, value); }
-        //}
 
         public bool FrontCameraIsOn
         {
@@ -127,7 +116,6 @@ namespace CourseWork_2.ViewModel
                 {
                     RecordId = recod.RecordId,
                     FrontCamera = _fronCameraIsOn,
-                    //SavingTouches = _saveTouchesIsOn,
                     Touches = _touchesIsOn
                 });
                 db.SaveChanges();

@@ -1,10 +1,6 @@
 ﻿using CourseWork_2.DataBase;
-using CourseWork_2.DataBase.DBModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
 
 namespace CourseWork_2.Converters
@@ -20,8 +16,6 @@ namespace CourseWork_2.Converters
             {
                 if (parameter.ToString().Equals("prototype"))
                 {
-                    //Prototype prototype = db.Prototypes.Single(p => p.PrototypeId == Id);
-                    //List<UserPrototype> users = prototype.Users;
                     int users = db.Users.Count(u => u.PrototypeId == Id);
                     if (users > 0)
                     {
@@ -38,10 +32,8 @@ namespace CourseWork_2.Converters
                         resultText = "No records yet";
                     }
                 }
-
                 if (parameter.ToString().Equals("user"))
                 {
-                    //int records = db.Users.Single(u => u.UserPrototypeId == Id).Records.Count();
                     int records = db.Records.Count(r => r.UserId == Id);
                     if (records > 0)
                         resultText += records + " records";
